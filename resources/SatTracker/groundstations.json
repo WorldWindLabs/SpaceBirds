@@ -1,0 +1,6428 @@
+[
+  {
+    "ORGANIZATION": "ACRES",
+    "NAME": "Alice Springs",
+    "LATITUDE": -23.75881,
+    "LONGITUDE": 133.882599,
+    "ALTITUDE": 576.542
+  },
+  {
+    "ORGANIZATION": "ACRES",
+    "NAME": "Hobart",
+    "LATITUDE": -42.84583,
+    "LONGITUDE": 147.291944,
+    "ALTITUDE": 35.339
+  },
+  {
+    "ORGANIZATION": "CCRS",
+    "NAME": "GSS",
+    "LATITUDE": 45.5813,
+    "LONGITUDE": -75.8062,
+    "ALTITUDE": 330
+  },
+  {
+    "ORGANIZATION": "CCRS",
+    "NAME": "PASS",
+    "LATITUDE": 53.2126,
+    "LONGITUDE": -105.934,
+    "ALTITUDE": 488.8
+  },
+  {
+    "ORGANIZATION": "CCRS",
+    "NAME": "Gatineau",
+    "LATITUDE": 45.5813,
+    "LONGITUDE": -75.8062,
+    "ALTITUDE": 330
+  },
+  {
+    "ORGANIZATION": "CCRS",
+    "NAME": "Prince Albert",
+    "LATITUDE": 53.2126,
+    "LONGITUDE": -105.934,
+    "ALTITUDE": 488.8
+  },
+  {
+    "ORGANIZATION": "CNES",
+    "NAME": "Aussaguel11",
+    "LATITUDE": 43.4286,
+    "LONGITUDE": 1.5,
+    "ALTITUDE": 0
+  },
+  {
+    "ORGANIZATION": "CNES",
+    "NAME": "Esrange",
+    "LATITUDE": 68.483333,
+    "LONGITUDE": 26.1,
+    "ALTITUDE": 386
+  },
+  {
+    "ORGANIZATION": "CNES",
+    "NAME": "Hartebeesthoek-T",
+    "LATITUDE": -25.8867,
+    "LONGITUDE": 27.7122,
+    "ALTITUDE": 0
+  },
+  {
+    "ORGANIZATION": "CNES",
+    "NAME": "Hartesbeesthoek-R",
+    "LATITUDE": -25.8864,
+    "LONGITUDE": 27.7072,
+    "ALTITUDE": 0
+  },
+  {
+    "ORGANIZATION": "CNES",
+    "NAME": "Kourou11",
+    "LATITUDE": 5.9861,
+    "LONGITUDE": -52.6394,
+    "ALTITUDE": 0
+  },
+  {
+    "ORGANIZATION": "CRL",
+    "NAME": "Kashima11",
+    "LATITUDE": 35.9531,
+    "LONGITUDE": 140.6606,
+    "ALTITUDE": 0
+  },
+  {
+    "ORGANIZATION": "CRL",
+    "NAME": "Kashima26",
+    "LATITUDE": 35.9508,
+    "LONGITUDE": 140.6606,
+    "ALTITUDE": 0
+  },
+  {
+    "ORGANIZATION": "CRL",
+    "NAME": "Kashima34",
+    "LATITUDE": 35.9531,
+    "LONGITUDE": 140.6633,
+    "ALTITUDE": 0
+  },
+  {
+    "ORGANIZATION": "CRL",
+    "NAME": "KashimaCS10",
+    "LATITUDE": 35.9531,
+    "LONGITUDE": 140.6667,
+    "ALTITUDE": 0
+  },
+  {
+    "ORGANIZATION": "CRL",
+    "NAME": "KashimiaBS13",
+    "LATITUDE": 35.9531,
+    "LONGITUDE": 140.6658,
+    "ALTITUDE": 0
+  },
+  {
+    "ORGANIZATION": "CSA",
+    "NAME": "SHUB",
+    "LATITUDE": 45.5188357,
+    "LONGITUDE": -73.39675,
+    "ALTITUDE": 7.81
+  },
+  {
+    "ORGANIZATION": "CSA",
+    "NAME": "SASK",
+    "LATITUDE": 52.1394272,
+    "LONGITUDE": -106.62587,
+    "ALTITUDE": 498.84
+  },
+  {
+    "ORGANIZATION": "DataLynx",
+    "NAME": "DXAS",
+    "LATITUDE": 65.11793,
+    "LONGITUDE": -147.4335,
+    "ALTITUDE": 518.9
+  },
+  {
+    "ORGANIZATION": "DLR",
+    "NAME": "Neustrelitz X1",
+    "LATITUDE": 53.32983,
+    "LONGITUDE": 13.0690946,
+    "ALTITUDE": 151.329
+  },
+  {
+    "ORGANIZATION": "DLR",
+    "NAME": "Neustrelitz X2",
+    "LATITUDE": 53.329634,
+    "LONGITUDE": 13.0708396,
+    "ALTITUDE": 155.819
+  },
+  {
+    "ORGANIZATION": "DLR",
+    "NAME": "Neustrelitz X3",
+    "LATITUDE": 53.327811,
+    "LONGITUDE": 13.0734863,
+    "ALTITUDE": 154.12
+  },
+  {
+    "ORGANIZATION": "DLR",
+    "NAME": "Wallops14",
+    "LATITUDE": 37.9467,
+    "LONGITUDE": -75.4442,
+    "ALTITUDE": 0
+  },
+  {
+    "ORGANIZATION": "DLR",
+    "NAME": "Wallops26",
+    "LATITUDE": 37.9467,
+    "LONGITUDE": -75.5936,
+    "ALTITUDE": 0
+  },
+  {
+    "ORGANIZATION": "DLR",
+    "NAME": "Weilheim30",
+    "LATITUDE": 47.8812,
+    "LONGITUDE": 11.095,
+    "ALTITUDE": 0
+  },
+  {
+    "ORGANIZATION": "DLR",
+    "NAME": "WeilheimI",
+    "LATITUDE": 47.8801,
+    "LONGITUDE": 11.102,
+    "ALTITUDE": 0
+  },
+  {
+    "ORGANIZATION": "DLR",
+    "NAME": "WeilheimII",
+    "LATITUDE": 47.8812,
+    "LONGITUDE": 11.102,
+    "ALTITUDE": 0
+  },
+  {
+    "ORGANIZATION": "DLR",
+    "NAME": "WhiteSands",
+    "LATITUDE": 34.5,
+    "LONGITUDE": -105,
+    "ALTITUDE": 0
+  },
+  {
+    "ORGANIZATION": "DOC CRC",
+    "NAME": "Ottawa",
+    "LATITUDE": 45.3486,
+    "LONGITUDE": -75.8908,
+    "ALTITUDE": 0
+  },
+  {
+    "ORGANIZATION": "EO",
+    "NAME": "Esrange",
+    "LATITUDE": 68.4833333,
+    "LONGITUDE": 26.1,
+    "ALTITUDE": 386
+  },
+  {
+    "ORGANIZATION": "EO",
+    "NAME": "Svalbard",
+    "LATITUDE": 78.2166667,
+    "LONGITUDE": 15.38333,
+    "ALTITUDE": 461
+  },
+  {
+    "ORGANIZATION": "EO",
+    "NAME": "Tromso",
+    "LATITUDE": 69.6666667,
+    "LONGITUDE": 18.95,
+    "ALTITUDE": 104
+  },
+  {
+    "ORGANIZATION": "ESA",
+    "NAME": "Kiruna",
+    "LATITUDE": 67.8571252,
+    "LONGITUDE": 20.96434169,
+    "ALTITUDE": 402.275
+  },
+  {
+    "ORGANIZATION": "ESA",
+    "NAME": "Kourou",
+    "LATITUDE": 5.25143694,
+    "LONGITUDE": -52.8046624,
+    "ALTITUDE": 14.561
+  },
+  {
+    "ORGANIZATION": "ESA",
+    "NAME": "Malindi",
+    "LATITUDE": -2.9955576,
+    "LONGITUDE": 40.194505,
+    "ALTITUDE": 12.314
+  },
+  {
+    "ORGANIZATION": "ESA",
+    "NAME": "Maspalomas",
+    "LATITUDE": 27.762892,
+    "LONGITUDE": -15.6338072,
+    "ALTITUDE": 204.9
+  },
+  {
+    "ORGANIZATION": "ESA",
+    "NAME": "Perth",
+    "LATITUDE": -31.802525,
+    "LONGITUDE": 115.8851556,
+    "ALTITUDE": 22.156
+  },
+  {
+    "ORGANIZATION": "ESA",
+    "NAME": "Redu",
+    "LATITUDE": 50.0020552,
+    "LONGITUDE": 5.146231,
+    "ALTITUDE": 385.583
+  },
+  {
+    "ORGANIZATION": "ESA",
+    "NAME": "Villafranca",
+    "LATITUDE": 40.4455932,
+    "LONGITUDE": -3.95260078,
+    "ALTITUDE": 664.425
+  },
+  {
+    "ORGANIZATION": "INPE",
+    "NAME": "ETE Alcantara11",
+    "LATITUDE": -2.4,
+    "LONGITUDE": -44.4167,
+    "ALTITUDE": 0
+  },
+  {
+    "ORGANIZATION": "INPE",
+    "NAME": "ETE Cuiaba11",
+    "LATITUDE": -15.5333,
+    "LONGITUDE": -56.0667,
+    "ALTITUDE": 0
+  },
+  {
+    "ORGANIZATION": "INPE",
+    "NAME": "SRE CachoeiraPaulista",
+    "LATITUDE": -22.6833,
+    "LONGITUDE": -45,
+    "ALTITUDE": 0
+  },
+  {
+    "ORGANIZATION": "INPE",
+    "NAME": "SRE Cuiaba",
+    "LATITUDE": -15.5333,
+    "LONGITUDE": -56.0667,
+    "ALTITUDE": 0
+  },
+  {
+    "ORGANIZATION": "INPE",
+    "NAME": "SRE RemoteSens",
+    "LATITUDE": -15.5333,
+    "LONGITUDE": -56.0667,
+    "ALTITUDE": 0
+  },
+  {
+    "ORGANIZATION": "INPE",
+    "NAME": "SRE SARSAT",
+    "LATITUDE": -22.6833,
+    "LONGITUDE": -45,
+    "ALTITUDE": 0
+  },
+  {
+    "ORGANIZATION": "ISAS",
+    "NAME": "USUDA",
+    "LATITUDE": 36.1325,
+    "LONGITUDE": 138.3627,
+    "ALTITUDE": 0
+  },
+  {
+    "ORGANIZATION": "ISRO",
+    "NAME": "Bangalore",
+    "LATITUDE": 13.0339,
+    "LONGITUDE": 77.51,
+    "ALTITUDE": 0
+  },
+  {
+    "ORGANIZATION": "ISRO",
+    "NAME": "Carnicobar",
+    "LATITUDE": 9.1492,
+    "LONGITUDE": 92.815,
+    "ALTITUDE": 0
+  },
+  {
+    "ORGANIZATION": "ISRO",
+    "NAME": "Lucknow",
+    "LATITUDE": 26.9128,
+    "LONGITUDE": 80.9569,
+    "ALTITUDE": 0
+  },
+  {
+    "ORGANIZATION": "ISRO",
+    "NAME": "Mauritius",
+    "LATITUDE": -20.345,
+    "LONGITUDE": 57.5189,
+    "ALTITUDE": 0
+  },
+  {
+    "ORGANIZATION": "ISRO",
+    "NAME": "Sriharikota-1",
+    "LATITUDE": 13.6731,
+    "LONGITUDE": 80.1961,
+    "ALTITUDE": 0
+  },
+  {
+    "ORGANIZATION": "ISRO",
+    "NAME": "Sriharikota-2",
+    "LATITUDE": 13.6961,
+    "LONGITUDE": 80.2261,
+    "ALTITUDE": 0
+  },
+  {
+    "ORGANIZATION": "ISRO",
+    "NAME": "Trivandrum",
+    "LATITUDE": 8.29,
+    "LONGITUDE": 76.57,
+    "ALTITUDE": 0
+  },
+  {
+    "ORGANIZATION": "Launch",
+    "NAME": "Alcantara Brazil LC",
+    "LATITUDE": -2.3,
+    "LONGITUDE": -44.4,
+    "ALTITUDE": 0
+  },
+  {
+    "ORGANIZATION": "Launch",
+    "NAME": "Cape Canaveral ETR USA LC",
+    "LATITUDE": 28.5,
+    "LONGITUDE": -81,
+    "ALTITUDE": 0
+  },
+  {
+    "ORGANIZATION": "Launch",
+    "NAME": "Cape York Australia LC Planned",
+    "LATITUDE": -12.25,
+    "LONGITUDE": 143,
+    "ALTITUDE": 0
+  },
+  {
+    "ORGANIZATION": "Launch",
+    "NAME": "Edwards AFB USA LC",
+    "LATITUDE": 35,
+    "LONGITUDE": -118,
+    "ALTITUDE": 0
+  },
+  {
+    "ORGANIZATION": "Launch",
+    "NAME": "Hammaguir France LC Not Used",
+    "LATITUDE": 31,
+    "LONGITUDE": -8,
+    "ALTITUDE": 0
+  },
+  {
+    "ORGANIZATION": "Launch",
+    "NAME": "Jiuquan SCT China LC",
+    "LATITUDE": 40.6,
+    "LONGITUDE": 99.9,
+    "ALTITUDE": 0
+  },
+  {
+    "ORGANIZATION": "Launch",
+    "NAME": "Kagoshima Japan LC",
+    "LATITUDE": 31.2,
+    "LONGITUDE": 131.1,
+    "ALTITUDE": 0
+  },
+  {
+    "ORGANIZATION": "Launch",
+    "NAME": "Kapustin Yar CIS LC Not Used",
+    "LATITUDE": 48.4,
+    "LONGITUDE": 45.8,
+    "ALTITUDE": 0
+  },
+  {
+    "ORGANIZATION": "Launch",
+    "NAME": "Kourou France Europe LC",
+    "LATITUDE": 5.2,
+    "LONGITUDE": -52.8,
+    "ALTITUDE": 0
+  },
+  {
+    "ORGANIZATION": "Launch",
+    "NAME": "Kwajalein Atoll ALCOR",
+    "LATITUDE": 9.39861,
+    "LONGITUDE": 167.4829,
+    "ALTITUDE": 42.3
+  },
+  {
+    "ORGANIZATION": "Launch",
+    "NAME": "Palmachim Yavne Israel LC",
+    "LATITUDE": 31.5,
+    "LONGITUDE": 34.5,
+    "ALTITUDE": 0
+  },
+  {
+    "ORGANIZATION": "Launch",
+    "NAME": "Plesetsk CIS LC",
+    "LATITUDE": 62.8,
+    "LONGITUDE": 40.1,
+    "ALTITUDE": 0
+  },
+  {
+    "ORGANIZATION": "Launch",
+    "NAME": "San Marco Italy LC Not Used",
+    "LATITUDE": -2.9,
+    "LONGITUDE": 40.3,
+    "ALTITUDE": 0
+  },
+  {
+    "ORGANIZATION": "Launch",
+    "NAME": "Sriharikota India LC",
+    "LATITUDE": 13.9,
+    "LONGITUDE": 80.4,
+    "ALTITUDE": 0
+  },
+  {
+    "ORGANIZATION": "Launch",
+    "NAME": "Taiyuan Wuzhai China LC",
+    "LATITUDE": 37.5,
+    "LONGITUDE": 112.6,
+    "ALTITUDE": 0
+  },
+  {
+    "ORGANIZATION": "Launch",
+    "NAME": "Tanegashima Japan LC",
+    "LATITUDE": 30.4,
+    "LONGITUDE": 130.966,
+    "ALTITUDE": 0
+  },
+  {
+    "ORGANIZATION": "Launch",
+    "NAME": "Torrejon AB Spain LC",
+    "LATITUDE": 40.488,
+    "LONGITUDE": -3.457,
+    "ALTITUDE": 0
+  },
+  {
+    "ORGANIZATION": "Launch",
+    "NAME": "Tyuratam Baikonur CIS LC",
+    "LATITUDE": 45.6,
+    "LONGITUDE": 63.4,
+    "ALTITUDE": 0
+  },
+  {
+    "ORGANIZATION": "Launch",
+    "NAME": "Vandenberg AFB WTR USA LC",
+    "LATITUDE": 34.4,
+    "LONGITUDE": -120.35,
+    "ALTITUDE": 0
+  },
+  {
+    "ORGANIZATION": "Launch",
+    "NAME": "Wallops Island USA LC",
+    "LATITUDE": 37.8,
+    "LONGITUDE": -75.5,
+    "ALTITUDE": 0
+  },
+  {
+    "ORGANIZATION": "Launch",
+    "NAME": "Woomera Australia LC Not Used",
+    "LATITUDE": -31.1,
+    "LONGITUDE": 136.8,
+    "ALTITUDE": 0
+  },
+  {
+    "ORGANIZATION": "Launch",
+    "NAME": "Xichang China LC",
+    "LATITUDE": 28.25,
+    "LONGITUDE": 102,
+    "ALTITUDE": 0
+  },
+  {
+    "ORGANIZATION": "NASA DSN",
+    "NAME": "Canberra26",
+    "LATITUDE": -35.2236,
+    "LONGITUDE": 148.9831,
+    "ALTITUDE": 0
+  },
+  {
+    "ORGANIZATION": "NASA DSN",
+    "NAME": "Canberra34",
+    "LATITUDE": -35.2192,
+    "LONGITUDE": 148.9814,
+    "ALTITUDE": 0
+  },
+  {
+    "ORGANIZATION": "NASA DSN",
+    "NAME": "Canberra34HEF",
+    "LATITUDE": -35.2169,
+    "LONGITUDE": 148.9778,
+    "ALTITUDE": 0
+  },
+  {
+    "ORGANIZATION": "NASA DSN",
+    "NAME": "Canberra34STD",
+    "LATITUDE": -35.2192,
+    "LONGITUDE": 148.9814,
+    "ALTITUDE": 0
+  },
+  {
+    "ORGANIZATION": "NASA DSN",
+    "NAME": "Canberra70",
+    "LATITUDE": -35.2209,
+    "LONGITUDE": 148.9814,
+    "ALTITUDE": 0
+  },
+  {
+    "ORGANIZATION": "NASA DSN",
+    "NAME": "Goldstone26",
+    "LATITUDE": 35.1603,
+    "LONGITUDE": -116.8736,
+    "ALTITUDE": 0
+  },
+  {
+    "ORGANIZATION": "NASA DSN",
+    "NAME": "Goldstone34HEF",
+    "LATITUDE": 35.2403,
+    "LONGITUDE": -116.8872,
+    "ALTITUDE": 0
+  },
+  {
+    "ORGANIZATION": "NASA DSN",
+    "NAME": "Goldstone34STD",
+    "LATITUDE": 35.1186,
+    "LONGITUDE": -116.8056,
+    "ALTITUDE": 0
+  },
+  {
+    "ORGANIZATION": "NASA DSN",
+    "NAME": "Goldstone70",
+    "LATITUDE": 35.2444,
+    "LONGITUDE": -116.8894,
+    "ALTITUDE": 0
+  },
+  {
+    "ORGANIZATION": "NASA DSN",
+    "NAME": "Guam46",
+    "LATITUDE": 13.6025,
+    "LONGITUDE": 144.8508,
+    "ALTITUDE": 208.8
+  },
+  {
+    "ORGANIZATION": "NASA DSN",
+    "NAME": "Kauai46",
+    "LATITUDE": 21.56694,
+    "LONGITUDE": -158.2519,
+    "ALTITUDE": 317.9
+  },
+  {
+    "ORGANIZATION": "NASA DSN",
+    "NAME": "Madrid26",
+    "LATITUDE": 40.2403,
+    "LONGITUDE": -4.2514,
+    "ALTITUDE": 0
+  },
+  {
+    "ORGANIZATION": "NASA DSN",
+    "NAME": "Madrid34HEF",
+    "LATITUDE": 40.2372,
+    "LONGITUDE": -4.2514,
+    "ALTITUDE": 0
+  },
+  {
+    "ORGANIZATION": "NASA DSN",
+    "NAME": "Madrid34STD",
+    "LATITUDE": 40.2389,
+    "LONGITUDE": -4.2489,
+    "ALTITUDE": 0
+  },
+  {
+    "ORGANIZATION": "NASA DSN",
+    "NAME": "Madrid70",
+    "LATITUDE": 40.2414,
+    "LONGITUDE": -4.2481,
+    "ALTITUDE": 0
+  },
+  {
+    "ORGANIZATION": "NASA DSN",
+    "NAME": "MerrittIsland",
+    "LATITUDE": 28.42466,
+    "LONGITUDE": -80.6646,
+    "ALTITUDE": -18.54
+  },
+  {
+    "ORGANIZATION": "NASA DSN",
+    "NAME": "Santiago",
+    "LATITUDE": -33.15137,
+    "LONGITUDE": -70.6683,
+    "ALTITUDE": 703.2
+  },
+  {
+    "ORGANIZATION": "NASA DSN",
+    "NAME": "WhiteSands",
+    "LATITUDE": 34.5,
+    "LONGITUDE": -105,
+    "ALTITUDE": 0
+  },
+  {
+    "ORGANIZATION": "NASA GNR",
+    "NAME": "AWOTS 8m",
+    "LATITUDE": 37.9197,
+    "LONGITUDE": -75.4736,
+    "ALTITUDE": -16.03
+  },
+  {
+    "ORGANIZATION": "NASA GNR",
+    "NAME": "AWOTS 11_3m",
+    "LATITUDE": 37.925,
+    "LONGITUDE": -75.4764,
+    "ALTITUDE": -16.29
+  },
+  {
+    "ORGANIZATION": "NASA GNR",
+    "NAME": "PFTS 8m",
+    "LATITUDE": 65.1172,
+    "LONGITUDE": -147.4592,
+    "ALTITUDE": 431.44
+  },
+  {
+    "ORGANIZATION": "NASA GNR",
+    "NAME": "PFTS 11_3m",
+    "LATITUDE": 65.1167,
+    "LONGITUDE": -147.4617,
+    "ALTITUDE": 430.34
+  },
+  {
+    "ORGANIZATION": "NASA GNR",
+    "NAME": "ASF 10m",
+    "LATITUDE": 64.86,
+    "LONGITUDE": -147.8472,
+    "ALTITUDE": 194.88
+  },
+  {
+    "ORGANIZATION": "NASA GNR",
+    "NAME": "ASF 11_3m",
+    "LATITUDE": 64.8586,
+    "LONGITUDE": -147.8575,
+    "ALTITUDE": 190.24
+  },
+  {
+    "ORGANIZATION": "NASA GNR",
+    "NAME": "MGS 10m",
+    "LATITUDE": -77.8392,
+    "LONGITUDE": -193.3331,
+    "ALTITUDE": 150
+  },
+  {
+    "ORGANIZATION": "NASA GNR",
+    "NAME": "SGS 11_3m",
+    "LATITUDE": 78.2303,
+    "LONGITUDE": 15.3928,
+    "ALTITUDE": 455
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "A17P",
+    "LATITUDE": 28.447161,
+    "LONGITUDE": -80.564926,
+    "ALTITUDE": -7.21
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "A36P",
+    "LATITUDE": 28.471438,
+    "LONGITUDE": -80.537722,
+    "ALTITUDE": 1.36
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "A39P",
+    "LATITUDE": 28.608275,
+    "LONGITUDE": -80.604117,
+    "ALTITUDE": 34.42
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "A40P",
+    "LATITUDE": 28.561989,
+    "LONGITUDE": -80.577194,
+    "ALTITUDE": -14.51
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "A41P",
+    "LATITUDE": 28.583458,
+    "LONGITUDE": -80.582873,
+    "ALTITUDE": -14.52
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "A46P",
+    "LATITUDE": 28.458492,
+    "LONGITUDE": -80.528403,
+    "ALTITUDE": -17.64
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "AC2J",
+    "LATITUDE": -7.917916,
+    "LONGITUDE": -14.390768,
+    "ALTITUDE": 71.47
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "ACN3",
+    "LATITUDE": -7.954882,
+    "LONGITUDE": -14.327103,
+    "ALTITUDE": 561.403
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "ACNJ",
+    "LATITUDE": -7.917916,
+    "LONGITUDE": -14.390768,
+    "ALTITUDE": 71.47
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "ADRQ",
+    "LATITUDE": 5.209127,
+    "LONGITUDE": -52.748401,
+    "ALTITUDE": -13.808
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "AG1S",
+    "LATITUDE": 65.1167,
+    "LONGITUDE": -147.461204,
+    "ALTITUDE": 436.7
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "AG23",
+    "LATITUDE": -33.151794,
+    "LONGITUDE": -70.667312,
+    "ALTITUDE": 730
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "AG33",
+    "LATITUDE": -33.151479,
+    "LONGITUDE": -70.668308,
+    "ALTITUDE": 730.853
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "AGO3",
+    "LATITUDE": -33.151107,
+    "LONGITUDE": -70.666403,
+    "ALTITUDE": 733.301
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "ALAY",
+    "LATITUDE": 32.872533,
+    "LONGITUDE": -105.812379,
+    "ALTITUDE": 2796.24
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "ALSJ",
+    "LATITUDE": -23.75881,
+    "LONGITUDE": 133.882599,
+    "ALTITUDE": 576.542
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "AMEY",
+    "LATITUDE": 36.183333,
+    "LONGITUDE": -133.383333,
+    "ALTITUDE": 2500
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "AMSJ",
+    "LATITUDE": -14.331444,
+    "LONGITUDE": -170.719417,
+    "ALTITUDE": 55.4
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "AN3S",
+    "LATITUDE": 17.136951,
+    "LONGITUDE": -61.77435,
+    "ALTITUDE": -16.59
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "AN8S",
+    "LATITUDE": 17.136625,
+    "LONGITUDE": -61.77429,
+    "ALTITUDE": -4.56
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "ANPC",
+    "LATITUDE": 36.180524,
+    "LONGITUDE": -121.644345,
+    "ALTITUDE": 1191.78
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "ANTQ",
+    "LATITUDE": 17.143651,
+    "LONGITUDE": -61.792512,
+    "ALTITUDE": 3.63
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "AREL",
+    "LATITUDE": -16.465702,
+    "LONGITUDE": -71.493055,
+    "ALTITUDE": 2502.812
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "AS2Q",
+    "LATITUDE": -7.972806,
+    "LONGITUDE": -14.400951,
+    "ALTITUDE": 143.5
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "ASCQ",
+    "LATITUDE": -7.906635,
+    "LONGITUDE": -14.4025,
+    "ALTITUDE": 56
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "ASNS",
+    "LATITUDE": -7.916667,
+    "LONGITUDE": -14.333333,
+    "ALTITUDE": 23.004
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "ATDQ",
+    "LATITUDE": 33.930884,
+    "LONGITUDE": -84.10863,
+    "ALTITUDE": 282.637
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "ATDS",
+    "LATITUDE": 33.930884,
+    "LONGITUDE": -84.10863,
+    "ALTITUDE": 282.637
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "ATLS",
+    "LATITUDE": 33.930867,
+    "LONGITUDE": -84.108367,
+    "ALTITUDE": 260
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "ATMY",
+    "LATITUDE": 33.73963,
+    "LONGITUDE": -106.364557,
+    "ALTITUDE": 2395.244
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "AUSS",
+    "LATITUDE": 43.428696,
+    "LONGITUDE": 1.499412,
+    "ALTITUDE": 260.479
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "AUWS",
+    "LATITUDE": -29.045768,
+    "LONGITUDE": 115.348668,
+    "ALTITUDE": 250.6
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Alamo Peak",
+    "LATITUDE": 32.872533,
+    "LONGITUDE": -105.812379,
+    "ALTITUDE": 2796.24
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Alice Springs",
+    "LATITUDE": -23.75881,
+    "LONGITUDE": 133.882599,
+    "ALTITUDE": 576.542
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Am Samoa",
+    "LATITUDE": -14.331444,
+    "LONGITUDE": -170.719417,
+    "ALTITUDE": 55.4
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Anderson Peak",
+    "LATITUDE": 36.180524,
+    "LONGITUDE": -121.644345,
+    "ALTITUDE": 1191.78
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Antigua",
+    "LATITUDE": 17.136951,
+    "LONGITUDE": -61.77435,
+    "ALTITUDE": -16.59
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Antigua 2",
+    "LATITUDE": 17.136625,
+    "LONGITUDE": -61.77429,
+    "ALTITUDE": -4.56
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Antigua 3",
+    "LATITUDE": 17.143651,
+    "LONGITUDE": -61.792512,
+    "ALTITUDE": 3.63
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Arequipa",
+    "LATITUDE": -16.465702,
+    "LONGITUDE": -71.493055,
+    "ALTITUDE": 2502.812
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "AscensioN Island",
+    "LATITUDE": -7.916667,
+    "LONGITUDE": -14.333333,
+    "ALTITUDE": 23.004
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Ascension Island",
+    "LATITUDE": -7.917916,
+    "LONGITUDE": -14.390768,
+    "ALTITUDE": 71.47
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Ascension Island 2",
+    "LATITUDE": -7.954882,
+    "LONGITUDE": -14.327103,
+    "ALTITUDE": 561.403
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Ascension Island 3",
+    "LATITUDE": -7.917916,
+    "LONGITUDE": -14.390768,
+    "ALTITUDE": 71.47
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Ascension Island 4",
+    "LATITUDE": -7.972806,
+    "LONGITUDE": -14.400951,
+    "ALTITUDE": 143.5
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Ascension Island 5",
+    "LATITUDE": -7.906635,
+    "LONGITUDE": -14.4025,
+    "ALTITUDE": 56
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Atlanta",
+    "LATITUDE": 33.930884,
+    "LONGITUDE": -84.10863,
+    "ALTITUDE": 282.637
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Atlanta 2",
+    "LATITUDE": 33.930884,
+    "LONGITUDE": -84.10863,
+    "ALTITUDE": 282.637
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Atlanta 3",
+    "LATITUDE": 33.930867,
+    "LONGITUDE": -84.108367,
+    "ALTITUDE": 260
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Atom Peak",
+    "LATITUDE": 33.73963,
+    "LONGITUDE": -106.364557,
+    "ALTITUDE": 2395.244
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Aussaguel",
+    "LATITUDE": 43.428696,
+    "LONGITUDE": 1.499412,
+    "ALTITUDE": 260.479
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "B17P",
+    "LATITUDE": 28.44579,
+    "LONGITUDE": -80.565649,
+    "ALTITUDE": -7.25
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "B36P",
+    "LATITUDE": 28.468368,
+    "LONGITUDE": -80.540954,
+    "ALTITUDE": 0.46
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "B37P",
+    "LATITUDE": 28.531219,
+    "LONGITUDE": -80.564458,
+    "ALTITUDE": -19.97
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "B39P",
+    "LATITUDE": 28.627161,
+    "LONGITUDE": -80.62085,
+    "ALTITUDE": 37.94
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "BANF",
+    "LATITUDE": 13.03,
+    "LONGITUDE": 77.51,
+    "ALTITUDE": 838
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "BDA3",
+    "LATITUDE": 32.351268,
+    "LONGITUDE": -64.657888,
+    "ALTITUDE": -11.38
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "BDAA",
+    "LATITUDE": 32.351153,
+    "LONGITUDE": -64.65879,
+    "ALTITUDE": -7.323
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "BDAL",
+    "LATITUDE": 32.353817,
+    "LONGITUDE": -64.656106,
+    "ALTITUDE": -15.731
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "BDAQ",
+    "LATITUDE": 32.347943,
+    "LONGITUDE": -64.653449,
+    "ALTITUDE": -9.88
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "BDDQ",
+    "LATITUDE": 32.347943,
+    "LONGITUDE": -64.653449,
+    "ALTITUDE": -9.88
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "BLKQ",
+    "LATITUDE": -78.129579,
+    "LONGITUDE": 166.150433,
+    "ALTITUDE": 162.512
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "BLT3",
+    "LATITUDE": 38.998447,
+    "LONGITUDE": -76.842767,
+    "ALTITUDE": 18.333
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "BLTA",
+    "LATITUDE": 38.998247,
+    "LONGITUDE": -76.841939,
+    "ALTITUDE": 24.834
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "BLTD",
+    "LATITUDE": 38.998447,
+    "LONGITUDE": -76.842767,
+    "ALTITUDE": 18.333
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "BLTJ",
+    "LATITUDE": 39.002704,
+    "LONGITUDE": -76.837928,
+    "ALTITUDE": 60.06
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "BREQ",
+    "LATITUDE": 4.948879,
+    "LONGITUDE": -52.309544,
+    "ALTITUDE": 51.96
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "BRKS",
+    "LATITUDE": 37.879431,
+    "LONGITUDE": -122.242744,
+    "ALTITUDE": 380
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Bangalore",
+    "LATITUDE": 13.03,
+    "LONGITUDE": 77.51,
+    "ALTITUDE": 838
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Berkeley",
+    "LATITUDE": 37.879431,
+    "LONGITUDE": -122.242744,
+    "ALTITUDE": 380
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Bermuda",
+    "LATITUDE": 32.351268,
+    "LONGITUDE": -64.657888,
+    "ALTITUDE": -11.38
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Bermuda 2",
+    "LATITUDE": 32.351153,
+    "LONGITUDE": -64.65879,
+    "ALTITUDE": -7.323
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Bermuda 3",
+    "LATITUDE": 32.353817,
+    "LONGITUDE": -64.656106,
+    "ALTITUDE": -15.731
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Bermuda 4",
+    "LATITUDE": 32.347943,
+    "LONGITUDE": -64.653449,
+    "ALTITUDE": -9.88
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Bermuda 5",
+    "LATITUDE": 32.347943,
+    "LONGITUDE": -64.653449,
+    "ALTITUDE": -9.88
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Black Is  Antarctica",
+    "LATITUDE": -78.129579,
+    "LONGITUDE": 166.150433,
+    "ALTITUDE": 162.512
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Bradway Rd",
+    "LATITUDE": 64.804241,
+    "LONGITUDE": -147.500214,
+    "ALTITUDE": 160.58
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "CA2F",
+    "LATITUDE": 34.583028,
+    "LONGITUDE": -120.561115,
+    "ALTITUDE": 627.55
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "CALC",
+    "LATITUDE": 34.582386,
+    "LONGITUDE": -120.562434,
+    "ALTITUDE": 611.03
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "CALF",
+    "LATITUDE": 34.582739,
+    "LONGITUDE": -120.561572,
+    "ALTITUDE": 627.54
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "CALT",
+    "LATITUDE": 34.665844,
+    "LONGITUDE": -120.581447,
+    "ALTITUDE": 88.52
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "CALY",
+    "LATITUDE": 34.565624,
+    "LONGITUDE": -120.501013,
+    "ALTITUDE": 623.91
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "CANS",
+    "LATITUDE": -35.404667,
+    "LONGITUDE": 148.983058,
+    "ALTITUDE": 680
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "CHAS",
+    "LATITUDE": 38.890333,
+    "LONGITUDE": -77.442167,
+    "ALTITUDE": 135
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "CN2F",
+    "LATITUDE": 28.528872,
+    "LONGITUDE": -80.590562,
+    "ALTITUDE": -20.471
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "CN4F",
+    "LATITUDE": 28.463168,
+    "LONGITUDE": -80.583111,
+    "ALTITUDE": -14.81
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "CN5F",
+    "LATITUDE": 28.517024,
+    "LONGITUDE": -80.56342,
+    "ALTITUDE": 13.69
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "CNVF",
+    "LATITUDE": 28.481606,
+    "LONGITUDE": -80.576509,
+    "ALTITUDE": -14.22
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "COCS",
+    "LATITUDE": -12.2,
+    "LONGITUDE": 96.85,
+    "ALTITUDE": 0
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "CT2J",
+    "LATITUDE": 32.500492,
+    "LONGITUDE": -106.608557,
+    "ALTITUDE": 1450.172
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "CTSS",
+    "LATITUDE": 38.805988,
+    "LONGITUDE": -104.528469,
+    "ALTITUDE": 1907.519
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "CTVJ",
+    "LATITUDE": 32.500492,
+    "LONGITUDE": -106.608557,
+    "ALTITUDE": 1450.172
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Canberra",
+    "LATITUDE": -35.404667,
+    "LONGITUDE": 148.983058,
+    "ALTITUDE": 680
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Canberra 2",
+    "LATITUDE": -35.398503,
+    "LONGITUDE": 148.981962,
+    "ALTITUDE": 688.96
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Canberra 3",
+    "LATITUDE": -35.400684,
+    "LONGITUDE": 148.981244,
+    "ALTITUDE": 684.755
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Canberra 4",
+    "LATITUDE": -35.402434,
+    "LONGITUDE": 148.981244,
+    "ALTITUDE": 699.06
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Canberra 5",
+    "LATITUDE": -35.398467,
+    "LONGITUDE": 148.977663,
+    "ALTITUDE": 684.606
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Canberra 6",
+    "LATITUDE": -35.40502,
+    "LONGITUDE": 148.983059,
+    "ALTITUDE": 686.995
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Cape Canaveral",
+    "LATITUDE": 28.447161,
+    "LONGITUDE": -80.564926,
+    "ALTITUDE": -7.21
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Cape Canaveral 10",
+    "LATITUDE": 28.463168,
+    "LONGITUDE": -80.583111,
+    "ALTITUDE": -14.81
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Cape Canaveral 11",
+    "LATITUDE": 28.517024,
+    "LONGITUDE": -80.56342,
+    "ALTITUDE": 13.69
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Cape Canaveral 12",
+    "LATITUDE": 28.481606,
+    "LONGITUDE": -80.576509,
+    "ALTITUDE": -14.22
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Cape Canaveral 13",
+    "LATITUDE": 28.486,
+    "LONGITUDE": -80.576,
+    "ALTITUDE": 14.996
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Cape Canaveral 2",
+    "LATITUDE": 28.471438,
+    "LONGITUDE": -80.537722,
+    "ALTITUDE": 1.36
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Cape Canaveral 3",
+    "LATITUDE": 28.561989,
+    "LONGITUDE": -80.577194,
+    "ALTITUDE": -14.51
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Cape Canaveral 4",
+    "LATITUDE": 28.583458,
+    "LONGITUDE": -80.582873,
+    "ALTITUDE": -14.52
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Cape Canaveral 5",
+    "LATITUDE": 28.458492,
+    "LONGITUDE": -80.528403,
+    "ALTITUDE": -17.64
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Cape Canaveral 6",
+    "LATITUDE": 28.44579,
+    "LONGITUDE": -80.565649,
+    "ALTITUDE": -7.25
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Cape Canaveral 7",
+    "LATITUDE": 28.468368,
+    "LONGITUDE": -80.540954,
+    "ALTITUDE": 0.46
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Cape Canaveral 8",
+    "LATITUDE": 28.531219,
+    "LONGITUDE": -80.564458,
+    "ALTITUDE": -19.97
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Cape Canaveral 9",
+    "LATITUDE": 28.528872,
+    "LONGITUDE": -80.590562,
+    "ALTITUDE": -20.471
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Chantilly",
+    "LATITUDE": 38.890333,
+    "LONGITUDE": -77.442167,
+    "ALTITUDE": 135
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Cocos Island",
+    "LATITUDE": -12.2,
+    "LONGITUDE": 96.85,
+    "ALTITUDE": 0
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Colorado Spgs  CO",
+    "LATITUDE": 38.805988,
+    "LONGITUDE": -104.528469,
+    "ALTITUDE": 1907.519
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "DA2P",
+    "LATITUDE": 14.757534,
+    "LONGITUDE": -17.481141,
+    "ALTITUDE": 43.066
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "DAKP",
+    "LATITUDE": 14.726257,
+    "LONGITUDE": -17.476949,
+    "ALTITUDE": 46.417
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "DAKS",
+    "LATITUDE": 14.724762,
+    "LONGITUDE": -17.128767,
+    "ALTITUDE": 91.278
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "DFRS",
+    "LATITUDE": 34.949791,
+    "LONGITUDE": -117.887394,
+    "ALTITUDE": 679.907
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "DGIS",
+    "LATITUDE": -7.270031,
+    "LONGITUDE": 72.369999,
+    "ALTITUDE": -68.375
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "DS12",
+    "LATITUDE": 35.299939,
+    "LONGITUDE": -116.805443,
+    "ALTITUDE": 969.669
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "DS14",
+    "LATITUDE": 35.425912,
+    "LONGITUDE": -116.889549,
+    "ALTITUDE": 964.131
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "DS15",
+    "LATITUDE": 35.421864,
+    "LONGITUDE": -116.887206,
+    "ALTITUDE": 955.221
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "DS16",
+    "LATITUDE": 35.341543,
+    "LONGITUDE": -116.873605,
+    "ALTITUDE": 941.441
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "DS17",
+    "LATITUDE": 35.34223,
+    "LONGITUDE": -116.873455,
+    "ALTITUDE": 942.701
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "DS24",
+    "LATITUDE": 35.339907,
+    "LONGITUDE": -116.874802,
+    "ALTITUDE": 956.059
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "DS25",
+    "LATITUDE": 35.337612,
+    "LONGITUDE": -116.87536,
+    "ALTITUDE": 959.676
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "DS27",
+    "LATITUDE": 35.23827,
+    "LONGITUDE": -116.77663,
+    "ALTITUDE": 1061.618
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "DS34",
+    "LATITUDE": -35.398503,
+    "LONGITUDE": 148.981962,
+    "ALTITUDE": 688.96
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "DS42",
+    "LATITUDE": -35.400684,
+    "LONGITUDE": 148.981244,
+    "ALTITUDE": 684.755
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "DS43",
+    "LATITUDE": -35.402434,
+    "LONGITUDE": 148.981244,
+    "ALTITUDE": 699.06
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "DS45",
+    "LATITUDE": -35.398467,
+    "LONGITUDE": 148.977663,
+    "ALTITUDE": 684.606
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "DS46",
+    "LATITUDE": -35.40502,
+    "LONGITUDE": 148.983059,
+    "ALTITUDE": 686.995
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "DS54",
+    "LATITUDE": 40.425645,
+    "LONGITUDE": -4.254099,
+    "ALTITUDE": 833.734
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "DS55",
+    "LATITUDE": 40.424294,
+    "LONGITUDE": -4.252636,
+    "ALTITUDE": 819.003
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "DS61",
+    "LATITUDE": 40.428744,
+    "LONGITUDE": -4.248928,
+    "ALTITUDE": 848.658
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "DS62",
+    "LATITUDE": 35.335689,
+    "LONGITUDE": -116.873015,
+    "ALTITUDE": 969.454
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "DS63",
+    "LATITUDE": 40.431215,
+    "LONGITUDE": -4.247914,
+    "ALTITUDE": 864.846
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "DS65",
+    "LATITUDE": 40.42719,
+    "LONGITUDE": -4.251324,
+    "ALTITUDE": 834.055
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "DS66",
+    "LATITUDE": 40.429979,
+    "LONGITUDE": -4.251323,
+    "ALTITUDE": 850.059
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "DS87",
+    "LATITUDE": 37.92659,
+    "LONGITUDE": -75.476305,
+    "ALTITUDE": -12.762
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "DX2S",
+    "LATITUDE": 65.117834,
+    "LONGITUDE": -147.431163,
+    "ALTITUDE": 514.65
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "DXAS",
+    "LATITUDE": 65.11793,
+    "LONGITUDE": -147.433504,
+    "ALTITUDE": 518.9
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Dakar",
+    "LATITUDE": 14.757534,
+    "LONGITUDE": -17.481141,
+    "ALTITUDE": 43.066
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Dakar 2",
+    "LATITUDE": 14.726257,
+    "LONGITUDE": -17.476949,
+    "ALTITUDE": 46.417
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Dakar 3",
+    "LATITUDE": 14.724762,
+    "LONGITUDE": -17.128767,
+    "ALTITUDE": 91.278
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Diego Garcia Island",
+    "LATITUDE": -7.270031,
+    "LONGITUDE": 72.369999,
+    "ALTITUDE": -68.375
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Dongara",
+    "LATITUDE": -29.045768,
+    "LONGITUDE": 115.348668,
+    "ALTITUDE": 250.6
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Dongara 2",
+    "LATITUDE": -29.045772,
+    "LONGITUDE": 115.348678,
+    "ALTITUDE": 251.84
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Dryden FRC",
+    "LATITUDE": 34.949791,
+    "LONGITUDE": -117.887394,
+    "ALTITUDE": 679.907
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "E10P",
+    "LATITUDE": 34.994458,
+    "LONGITUDE": -117.846626,
+    "ALTITUDE": 657.83
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "EA2F",
+    "LATITUDE": 34.970454,
+    "LONGITUDE": -117.930562,
+    "ALTITUDE": 799.726
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "EA2P",
+    "LATITUDE": 34.890287,
+    "LONGITUDE": -117.845636,
+    "ALTITUDE": 657.832
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "EA3F",
+    "LATITUDE": 34.938114,
+    "LONGITUDE": -118.09133,
+    "ALTITUDE": 743.537
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "EA3P",
+    "LATITUDE": 34.93086,
+    "LONGITUDE": -117.836892,
+    "ALTITUDE": 657.821
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "EA4P",
+    "LATITUDE": 34.916255,
+    "LONGITUDE": -117.862424,
+    "ALTITUDE": 660.898
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "EA5P",
+    "LATITUDE": 34.894564,
+    "LONGITUDE": -117.904937,
+    "ALTITUDE": 667.348
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "EA6P",
+    "LATITUDE": 34.966372,
+    "LONGITUDE": -117.819653,
+    "ALTITUDE": 657.496
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "EA7P",
+    "LATITUDE": 34.948705,
+    "LONGITUDE": -117.864444,
+    "ALTITUDE": 657.547
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "EA8P",
+    "LATITUDE": 34.959147,
+    "LONGITUDE": -117.866403,
+    "ALTITUDE": 657.243
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "EA9P",
+    "LATITUDE": 34.917837,
+    "LONGITUDE": -117.855326,
+    "ALTITUDE": 657.232
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "EAFF",
+    "LATITUDE": 34.96066,
+    "LONGITUDE": -117.911551,
+    "ALTITUDE": 780.567
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "EG2F",
+    "LATITUDE": 30.572528,
+    "LONGITUDE": -86.214717,
+    "ALTITUDE": 37.711
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "EG3F",
+    "LATITUDE": 30.421666,
+    "LONGITUDE": -86.798012,
+    "ALTITUDE": 1.143
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "EULY",
+    "LATITUDE": 28.463564,
+    "LONGITUDE": -80.653012,
+    "ALTITUDE": -10.51
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "EVCS",
+    "LATITUDE": 28.486,
+    "LONGITUDE": -80.576,
+    "ALTITUDE": 14.996
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Edward AFB",
+    "LATITUDE": 34.96066,
+    "LONGITUDE": -117.911551,
+    "ALTITUDE": 780.567
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Edwards AFB",
+    "LATITUDE": 34.994458,
+    "LONGITUDE": -117.846626,
+    "ALTITUDE": 657.83
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Edwards AFB 10",
+    "LATITUDE": 34.959147,
+    "LONGITUDE": -117.866403,
+    "ALTITUDE": 657.243
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Edwards AFB 11",
+    "LATITUDE": 34.917837,
+    "LONGITUDE": -117.855326,
+    "ALTITUDE": 657.232
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Edwards AFB 12",
+    "LATITUDE": 34.957738,
+    "LONGITUDE": -117.911875,
+    "ALTITUDE": 743.498
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Edwards AFB 13",
+    "LATITUDE": 34.960805,
+    "LONGITUDE": -117.911496,
+    "ALTITUDE": 751.842
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Edwards AFB 2",
+    "LATITUDE": 34.970454,
+    "LONGITUDE": -117.930562,
+    "ALTITUDE": 799.726
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Edwards AFB 3",
+    "LATITUDE": 34.890287,
+    "LONGITUDE": -117.845636,
+    "ALTITUDE": 657.832
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Edwards AFB 4",
+    "LATITUDE": 34.938114,
+    "LONGITUDE": -118.09133,
+    "ALTITUDE": 743.537
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Edwards AFB 5",
+    "LATITUDE": 34.93086,
+    "LONGITUDE": -117.836892,
+    "ALTITUDE": 657.821
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Edwards AFB 6",
+    "LATITUDE": 34.916255,
+    "LONGITUDE": -117.862424,
+    "ALTITUDE": 660.898
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Edwards AFB 7",
+    "LATITUDE": 34.894564,
+    "LONGITUDE": -117.904937,
+    "ALTITUDE": 667.348
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Edwards AFB 8",
+    "LATITUDE": 34.966372,
+    "LONGITUDE": -117.819653,
+    "ALTITUDE": 657.496
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Edwards AFB 9",
+    "LATITUDE": 34.948705,
+    "LONGITUDE": -117.864444,
+    "ALTITUDE": 657.547
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Eglin AFB",
+    "LATITUDE": 30.572528,
+    "LONGITUDE": -86.214717,
+    "ALTITUDE": 37.711
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Eglin AFB 2",
+    "LATITUDE": 30.421666,
+    "LONGITUDE": -86.798012,
+    "ALTITUDE": 1.143
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "FR2F",
+    "LATITUDE": 34.957738,
+    "LONGITUDE": -117.911875,
+    "ALTITUDE": 743.498
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "FRCF",
+    "LATITUDE": 34.960805,
+    "LONGITUDE": -117.911496,
+    "ALTITUDE": 751.842
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "FT2F",
+    "LATITUDE": 31.556767,
+    "LONGITUDE": -110.438173,
+    "ALTITUDE": 1794.96
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "FTHF",
+    "LATITUDE": 31.571024,
+    "LONGITUDE": -110.370798,
+    "ALTITUDE": 1486.316
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Fairbanks",
+    "LATITUDE": 64.972407,
+    "LONGITUDE": -147.518066,
+    "ALTITUDE": 331.108
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Fairbanks 2",
+    "LATITUDE": 64.976814,
+    "LONGITUDE": -147.518066,
+    "ALTITUDE": 308.056
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Fairbanks 3",
+    "LATITUDE": 64.97214,
+    "LONGITUDE": -147.513389,
+    "ALTITUDE": 344.054
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Fairbanks 4",
+    "LATITUDE": 64.976814,
+    "LONGITUDE": -147.518066,
+    "ALTITUDE": 308.056
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "False Cape",
+    "LATITUDE": 28.608275,
+    "LONGITUDE": -80.604117,
+    "ALTITUDE": 34.42
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "False Cape 2",
+    "LATITUDE": 28.627161,
+    "LONGITUDE": -80.62085,
+    "ALTITUDE": 37.94
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Fort Huachuca",
+    "LATITUDE": 31.556767,
+    "LONGITUDE": -110.438173,
+    "ALTITUDE": 1794.96
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Fort Huachuca 2",
+    "LATITUDE": 31.571024,
+    "LONGITUDE": -110.370798,
+    "ALTITUDE": 1486.316
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "GB2Y",
+    "LATITUDE": 26.625471,
+    "LONGITUDE": -78.298525,
+    "ALTITUDE": -10.997
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "GBIQ",
+    "LATITUDE": 26.615642,
+    "LONGITUDE": -78.34784,
+    "ALTITUDE": -13.684
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "GBIY",
+    "LATITUDE": 26.625447,
+    "LONGITUDE": -78.299091,
+    "ALTITUDE": 0.878
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "GD28",
+    "LATITUDE": 35.341543,
+    "LONGITUDE": -116.873605,
+    "ALTITUDE": 940.941
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "GDSA",
+    "LATITUDE": 35.341543,
+    "LONGITUDE": -116.873001,
+    "ALTITUDE": 935.541
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "GILD",
+    "LATITUDE": 64.978509,
+    "LONGITUDE": -147.498,
+    "ALTITUDE": 320.131
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "GILE",
+    "LATITUDE": 64.978507,
+    "LONGITUDE": -147.498,
+    "ALTITUDE": 322.434
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "GLAS",
+    "LATITUDE": 64.973672,
+    "LONGITUDE": -147.512839,
+    "ALTITUDE": 387.482
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "GLBS",
+    "LATITUDE": 64.973482,
+    "LONGITUDE": -147.508699,
+    "ALTITUDE": 405.478
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "GLCS",
+    "LATITUDE": 64.973142,
+    "LONGITUDE": -147.504778,
+    "ALTITUDE": 424.474
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "GT2S",
+    "LATITUDE": 13.615881,
+    "LONGITUDE": 144.855438,
+    "ALTITUDE": 209.16
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "GTKL",
+    "LATITUDE": 21.460525,
+    "LONGITUDE": -71.131945,
+    "ALTITUDE": -13.162
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "GTKQ",
+    "LATITUDE": 21.462632,
+    "LONGITUDE": -71.132088,
+    "ALTITUDE": -5.582
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "GTSS",
+    "LATITUDE": 13.615189,
+    "LONGITUDE": 144.856052,
+    "ALTITUDE": 219.06
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "GWM3",
+    "LATITUDE": 13.310689,
+    "LONGITUDE": 144.736815,
+    "ALTITUDE": 148.64
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "GWMK",
+    "LATITUDE": 13.588018,
+    "LONGITUDE": 144.84093,
+    "ALTITUDE": 192.61
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "GWMS",
+    "LATITUDE": 13.588018,
+    "LONGITUDE": 144.84093,
+    "ALTITUDE": 192.61
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Gilmore Creek",
+    "LATITUDE": 64.978509,
+    "LONGITUDE": -147.498,
+    "ALTITUDE": 320.131
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Gilmore Creek 2",
+    "LATITUDE": 64.978507,
+    "LONGITUDE": -147.498,
+    "ALTITUDE": 322.434
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Gilmore Creek 3",
+    "LATITUDE": 64.973672,
+    "LONGITUDE": -147.512839,
+    "ALTITUDE": 387.482
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Gilmore Creek 4",
+    "LATITUDE": 64.973482,
+    "LONGITUDE": -147.508699,
+    "ALTITUDE": 405.478
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Gilmore Creek 5",
+    "LATITUDE": 64.973142,
+    "LONGITUDE": -147.504778,
+    "ALTITUDE": 424.474
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Gilmore Creek 6",
+    "LATITUDE": 64.976596,
+    "LONGITUDE": -147.521283,
+    "ALTITUDE": 299.159
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Goldstone",
+    "LATITUDE": 35.299939,
+    "LONGITUDE": -116.805443,
+    "ALTITUDE": 969.669
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Goldstone 10",
+    "LATITUDE": 35.341543,
+    "LONGITUDE": -116.873605,
+    "ALTITUDE": 940.941
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Goldstone 11",
+    "LATITUDE": 35.341543,
+    "LONGITUDE": -116.873001,
+    "ALTITUDE": 935.541
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Goldstone 12",
+    "LATITUDE": 35.389518,
+    "LONGITUDE": -116.849377,
+    "ALTITUDE": 1004.213
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Goldstone 13",
+    "LATITUDE": 35.24771,
+    "LONGITUDE": -116.7949,
+    "ALTITUDE": 1064.078
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Goldstone 2",
+    "LATITUDE": 35.425912,
+    "LONGITUDE": -116.889549,
+    "ALTITUDE": 964.131
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Goldstone 3",
+    "LATITUDE": 35.421864,
+    "LONGITUDE": -116.887206,
+    "ALTITUDE": 955.221
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Goldstone 4",
+    "LATITUDE": 35.341543,
+    "LONGITUDE": -116.873605,
+    "ALTITUDE": 941.441
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Goldstone 5",
+    "LATITUDE": 35.34223,
+    "LONGITUDE": -116.873455,
+    "ALTITUDE": 942.701
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Goldstone 6",
+    "LATITUDE": 35.339907,
+    "LONGITUDE": -116.874802,
+    "ALTITUDE": 956.059
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Goldstone 7",
+    "LATITUDE": 35.337612,
+    "LONGITUDE": -116.87536,
+    "ALTITUDE": 959.676
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Goldstone 8",
+    "LATITUDE": 35.23827,
+    "LONGITUDE": -116.77663,
+    "ALTITUDE": 1061.618
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Goldstone 9",
+    "LATITUDE": 35.335689,
+    "LONGITUDE": -116.873015,
+    "ALTITUDE": 969.454
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Grand Bahama Island",
+    "LATITUDE": 26.625471,
+    "LONGITUDE": -78.298525,
+    "ALTITUDE": -10.997
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Grand Bahama Island 2",
+    "LATITUDE": 26.615642,
+    "LONGITUDE": -78.34784,
+    "ALTITUDE": -13.684
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Grand Bahama Island 3",
+    "LATITUDE": 26.625447,
+    "LONGITUDE": -78.299091,
+    "ALTITUDE": 0.878
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Grand Turk Island",
+    "LATITUDE": 21.460525,
+    "LONGITUDE": -71.131945,
+    "ALTITUDE": -13.162
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Grand Turk Island 2",
+    "LATITUDE": 21.462632,
+    "LONGITUDE": -71.132088,
+    "ALTITUDE": -5.582
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Greenbelt",
+    "LATITUDE": 38.998447,
+    "LONGITUDE": -76.842767,
+    "ALTITUDE": 18.333
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Greenbelt 2",
+    "LATITUDE": 38.998247,
+    "LONGITUDE": -76.841939,
+    "ALTITUDE": 24.834
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Greenbelt 3",
+    "LATITUDE": 38.998447,
+    "LONGITUDE": -76.842767,
+    "ALTITUDE": 18.333
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Greenbelt 4",
+    "LATITUDE": 39.002704,
+    "LONGITUDE": -76.837928,
+    "ALTITUDE": 60.06
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Greenbelt 5",
+    "LATITUDE": 39.020295,
+    "LONGITUDE": -76.827771,
+    "ALTITUDE": 20.897
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Guam",
+    "LATITUDE": 13.615881,
+    "LONGITUDE": 144.855438,
+    "ALTITUDE": 209.16
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Guam 2",
+    "LATITUDE": 13.615189,
+    "LONGITUDE": 144.856052,
+    "ALTITUDE": 219.06
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Guam 3",
+    "LATITUDE": 13.310689,
+    "LONGITUDE": 144.736815,
+    "ALTITUDE": 148.64
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Guam 4",
+    "LATITUDE": 13.588018,
+    "LONGITUDE": 144.84093,
+    "ALTITUDE": 192.61
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Guam 5",
+    "LATITUDE": 13.588018,
+    "LONGITUDE": 144.84093,
+    "ALTITUDE": 192.61
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "HAW3",
+    "LATITUDE": 22.126273,
+    "LONGITUDE": -159.665155,
+    "ALTITUDE": 1157.2
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "HAWQ",
+    "LATITUDE": 21.3161,
+    "LONGITUDE": -157.8864,
+    "ALTITUDE": 0
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "HAWS",
+    "LATITUDE": 19.013584,
+    "LONGITUDE": -155.663,
+    "ALTITUDE": 274.314
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "HB33",
+    "LATITUDE": -25.886428,
+    "LONGITUDE": 27.707447,
+    "ALTITUDE": 1563.72
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "HBK3",
+    "LATITUDE": -25.886728,
+    "LONGITUDE": 27.7126,
+    "ALTITUDE": 1549.04
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "HBKS",
+    "LATITUDE": -25.887,
+    "LONGITUDE": 27.712,
+    "ALTITUDE": 1544.83
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "HN2P",
+    "LATITUDE": 21.306812,
+    "LONGITUDE": -157.910589,
+    "ALTITUDE": 22.518
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "HNLP",
+    "LATITUDE": 21.30681,
+    "LONGITUDE": -157.945831,
+    "ALTITUDE": 22.353
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "HOLF",
+    "LATITUDE": 32.901464,
+    "LONGITUDE": -106.09917,
+    "ALTITUDE": 1241.5
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "HOPL",
+    "LATITUDE": 31.684247,
+    "LONGITUDE": -110.878061,
+    "ALTITUDE": 2355.659
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "HR1S",
+    "LATITUDE": 37.945499,
+    "LONGITUDE": -75.461136,
+    "ALTITUDE": -18.51
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "HR2S",
+    "LATITUDE": 37.945426,
+    "LONGITUDE": -75.46209,
+    "ALTITUDE": -17.43
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "HT2S",
+    "LATITUDE": 21.568972,
+    "LONGITUDE": -158.262279,
+    "ALTITUDE": 319.658
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "HTSS",
+    "LATITUDE": 21.562272,
+    "LONGITUDE": -158.24209,
+    "ALTITUDE": 430.423
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "HWIS",
+    "LATITUDE": 19.013904,
+    "LONGITUDE": -155.663301,
+    "ALTITUDE": 367.2
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Hartbeehoek",
+    "LATITUDE": -25.886428,
+    "LONGITUDE": 27.707447,
+    "ALTITUDE": 1563.72
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Hartbeehoek 2",
+    "LATITUDE": -25.886728,
+    "LONGITUDE": 27.7126,
+    "ALTITUDE": 1549.04
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Hartebeeshoek",
+    "LATITUDE": -25.887,
+    "LONGITUDE": 27.712,
+    "ALTITUDE": 1544.83
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Hawaii",
+    "LATITUDE": 21.3161,
+    "LONGITUDE": -157.8864,
+    "ALTITUDE": 0
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Hickam AFB",
+    "LATITUDE": 21.306812,
+    "LONGITUDE": -157.910589,
+    "ALTITUDE": 22.518
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Hickam AFB 2",
+    "LATITUDE": 21.30681,
+    "LONGITUDE": -157.945831,
+    "ALTITUDE": 22.353
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Holloman AFB",
+    "LATITUDE": 32.901464,
+    "LONGITUDE": -106.09917,
+    "ALTITUDE": 1241.5
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Houston",
+    "LATITUDE": 29.56669,
+    "LONGITUDE": -84.933333,
+    "ALTITUDE": 32.721
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "JD2Y",
+    "LATITUDE": 26.98223,
+    "LONGITUDE": -80.107561,
+    "ALTITUDE": -1.96
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "JDIQ",
+    "LATITUDE": 26.983,
+    "LONGITUDE": -80.108204,
+    "ALTITUDE": -6.403
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "JDIY",
+    "LATITUDE": 26.983804,
+    "LONGITUDE": -80.108747,
+    "ALTITUDE": -10.53
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "JSC",
+    "LATITUDE": 29.56169,
+    "LONGITUDE": -95.09,
+    "ALTITUDE": 49.531
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "JSCJ",
+    "LATITUDE": 29.56169,
+    "LONGITUDE": -95.09,
+    "ALTITUDE": 49.531
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "JSCS",
+    "LATITUDE": 29.56669,
+    "LONGITUDE": -84.933333,
+    "ALTITUDE": 32.721
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Jonathan Dickenson",
+    "LATITUDE": 26.98223,
+    "LONGITUDE": -80.107561,
+    "ALTITUDE": -1.96
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Jonathan Dickinson",
+    "LATITUDE": 26.983,
+    "LONGITUDE": -80.108204,
+    "ALTITUDE": -6.403
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Jonathan Dickinson 2",
+    "LATITUDE": 26.983804,
+    "LONGITUDE": -80.108747,
+    "ALTITUDE": -10.53
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "KA2S",
+    "LATITUDE": 35.708762,
+    "LONGITUDE": 139.491778,
+    "ALTITUDE": -641.245
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "KENS",
+    "LATITUDE": -2.995557,
+    "LONGITUDE": 40.194505,
+    "ALTITUDE": 12.314
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "KERS",
+    "LATITUDE": -49.352906,
+    "LONGITUDE": 70.257282,
+    "ALTITUDE": 82.471
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "KGLQ",
+    "LATITUDE": -49.351915,
+    "LONGITUDE": 70.255984,
+    "ALTITUDE": 6.1
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "KI2S",
+    "LATITUDE": 67.857125,
+    "LONGITUDE": 20.964342,
+    "ALTITUDE": 402.275
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "KICS",
+    "LATITUDE": 67.884232,
+    "LONGITUDE": 21.060769,
+    "ALTITUDE": 440.604
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "KILS",
+    "LATITUDE": 67.876532,
+    "LONGITUDE": 21.062337,
+    "ALTITUDE": 514.892
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "KIXS",
+    "LATITUDE": 67.878157,
+    "LONGITUDE": 21.063398,
+    "ALTITUDE": 508.573
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "KL2P",
+    "LATITUDE": 50.880583,
+    "LONGITUDE": 7.129321,
+    "ALTITUDE": 117.505
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "KLMS",
+    "LATITUDE": 78.230222,
+    "LONGITUDE": 15.398138,
+    "ALTITUDE": 498.52
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "KLNP",
+    "LATITUDE": 50.855305,
+    "LONGITUDE": 7.165154,
+    "ALTITUDE": 139.45
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "KM2F",
+    "LATITUDE": 9.395429,
+    "LONGITUDE": 167.479288,
+    "ALTITUDE": 62.86
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "KMRF",
+    "LATITUDE": 9.398747,
+    "LONGITUDE": 167.482148,
+    "ALTITUDE": 57.37
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "KMRQ",
+    "LATITUDE": 9.3986,
+    "LONGITUDE": 167.482849,
+    "ALTITUDE": 42.48
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "KMRT",
+    "LATITUDE": 8.719545,
+    "LONGITUDE": 167.718524,
+    "ALTITUDE": 59.04
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "KOOL",
+    "LATITUDE": 52.178397,
+    "LONGITUDE": 5.809767,
+    "ALTITUDE": 87.017
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "KPTQ",
+    "LATITUDE": 21.57212,
+    "LONGITUDE": -158.266585,
+    "ALTITUDE": 301.32
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "KR2P",
+    "LATITUDE": 5.232407,
+    "LONGITUDE": -52.775672,
+    "ALTITUDE": 4.489
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "KR3P",
+    "LATITUDE": 5.240363,
+    "LONGITUDE": -52.751781,
+    "ALTITUDE": -34.088
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "KRCS",
+    "LATITUDE": -12.694,
+    "LONGITUDE": 141.930667,
+    "ALTITUDE": 21
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "KRUF",
+    "LATITUDE": 5.114006,
+    "LONGITUDE": -52.64499,
+    "ALTITUDE": 148.008
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "KRUP",
+    "LATITUDE": 5.251855,
+    "LONGITUDE": -52.805825,
+    "ALTITUDE": 1.84
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "KRUS",
+    "LATITUDE": 5.098848,
+    "LONGITUDE": -52.639872,
+    "ALTITUDE": 110.039
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "KS2P",
+    "LATITUDE": 28.63281,
+    "LONGITUDE": -80.7062,
+    "ALTITUDE": -23.405
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "KS3P",
+    "LATITUDE": 28.632793,
+    "LONGITUDE": -80.706099,
+    "ALTITUDE": -23.462
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "KS4P",
+    "LATITUDE": 28.597064,
+    "LONGITUDE": -80.682717,
+    "ALTITUDE": -23.477
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "KSC",
+    "LATITUDE": 28.63281,
+    "LONGITUDE": -80.7062,
+    "ALTITUDE": -23.405
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "KSC 2",
+    "LATITUDE": 28.632793,
+    "LONGITUDE": -80.706099,
+    "ALTITUDE": -23.462
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "KSC 3",
+    "LATITUDE": 28.597064,
+    "LONGITUDE": -80.682717,
+    "ALTITUDE": -23.477
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "KSC 4",
+    "LATITUDE": 28.596981,
+    "LONGITUDE": -80.682869,
+    "ALTITUDE": -24.94
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "KSCP",
+    "LATITUDE": 28.596981,
+    "LONGITUDE": -80.682869,
+    "ALTITUDE": -24.94
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Kaena Point",
+    "LATITUDE": 21.568972,
+    "LONGITUDE": -158.262279,
+    "ALTITUDE": 319.658
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Kaena Point 2",
+    "LATITUDE": 21.562272,
+    "LONGITUDE": -158.24209,
+    "ALTITUDE": 430.423
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Kauai",
+    "LATITUDE": 22.126273,
+    "LONGITUDE": -159.665155,
+    "ALTITUDE": 1157.2
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Kergueles Is",
+    "LATITUDE": -49.352906,
+    "LONGITUDE": 70.257282,
+    "ALTITUDE": 82.471
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Kiruna",
+    "LATITUDE": 67.857125,
+    "LONGITUDE": 20.964342,
+    "ALTITUDE": 402.275
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Kiruna 2",
+    "LATITUDE": 67.884232,
+    "LONGITUDE": 21.060769,
+    "ALTITUDE": 440.604
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Kiruna 3",
+    "LATITUDE": 67.876532,
+    "LONGITUDE": 21.062337,
+    "ALTITUDE": 514.892
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Kiruna 4",
+    "LATITUDE": 67.878157,
+    "LONGITUDE": 21.063398,
+    "ALTITUDE": 508.573
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Koln Bonn",
+    "LATITUDE": 50.880583,
+    "LONGITUDE": 7.129321,
+    "ALTITUDE": 117.505
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Koln Bonn 2",
+    "LATITUDE": 50.855305,
+    "LONGITUDE": 7.165154,
+    "ALTITUDE": 139.45
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Kootwijk",
+    "LATITUDE": 52.178397,
+    "LONGITUDE": 5.809767,
+    "ALTITUDE": 87.017
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Kourou",
+    "LATITUDE": 5.209127,
+    "LONGITUDE": -52.748401,
+    "ALTITUDE": -13.808
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Kourou 2",
+    "LATITUDE": 4.948879,
+    "LONGITUDE": -52.309544,
+    "ALTITUDE": 51.96
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Kourou 3",
+    "LATITUDE": 5.232407,
+    "LONGITUDE": -52.775672,
+    "ALTITUDE": 4.489
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Kourou 4",
+    "LATITUDE": 5.240363,
+    "LONGITUDE": -52.751781,
+    "ALTITUDE": -34.088
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Kourou 5",
+    "LATITUDE": 5.114006,
+    "LONGITUDE": -52.64499,
+    "ALTITUDE": 148.008
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Kourou 6",
+    "LATITUDE": 5.251855,
+    "LONGITUDE": -52.805825,
+    "ALTITUDE": 1.84
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Kourou 7",
+    "LATITUDE": 5.098848,
+    "LONGITUDE": -52.639872,
+    "ALTITUDE": 110.039
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Kwajalein Atoll",
+    "LATITUDE": 9.395429,
+    "LONGITUDE": 167.479288,
+    "ALTITUDE": 62.86
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Kwajalein Atoll 2",
+    "LATITUDE": 9.398747,
+    "LONGITUDE": 167.482148,
+    "ALTITUDE": 57.37
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Kwajalein Atoll 3",
+    "LATITUDE": 9.3986,
+    "LONGITUDE": 167.482849,
+    "ALTITUDE": 42.48
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Kwajalein Atoll 4",
+    "LATITUDE": 8.719545,
+    "LONGITUDE": 167.718524,
+    "ALTITUDE": 59.04
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "LANS",
+    "LATITUDE": 48.751415,
+    "LONGITUDE": -2.53,
+    "ALTITUDE": 110.676
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "LBVS",
+    "LATITUDE": 0.35463,
+    "LONGITUDE": 9.6753,
+    "ALTITUDE": 111.269
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "LE1S",
+    "LATITUDE": 65.116852,
+    "LONGITUDE": -147.462255,
+    "ALTITUDE": 414
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "LE2S",
+    "LATITUDE": 37.923529,
+    "LONGITUDE": -75.476139,
+    "ALTITUDE": -33.501
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Lannion",
+    "LATITUDE": 48.751415,
+    "LONGITUDE": -2.53,
+    "ALTITUDE": 110.676
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Laurel",
+    "LATITUDE": 39.167361,
+    "LONGITUDE": -76.898778,
+    "ALTITUDE": 146.4
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Liberville",
+    "LATITUDE": 0.35463,
+    "LONGITUDE": 9.6753,
+    "ALTITUDE": 111.269
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "MA2C",
+    "LATITUDE": 20.700573,
+    "LONGITUDE": -156.2575,
+    "ALTITUDE": 3087.578
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "MAD8",
+    "LATITUDE": 40.455449,
+    "LONGITUDE": -4.168385,
+    "ALTITUDE": 837.886
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "MC1S",
+    "LATITUDE": -77.839129,
+    "LONGITUDE": 166.667082,
+    "ALTITUDE": 153
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "MCMS",
+    "LATITUDE": -77.8,
+    "LONGITUDE": 166.4,
+    "ALTITUDE": 20
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "MDLS",
+    "LATITUDE": 39.167361,
+    "LONGITUDE": -76.898778,
+    "ALTITUDE": 146.4
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "MIL3",
+    "LATITUDE": 28.508124,
+    "LONGITUDE": -80.6934,
+    "ALTITUDE": -25.95
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "MILA",
+    "LATITUDE": 28.50816,
+    "LONGITUDE": -80.692753,
+    "ALTITUDE": -27.34
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "MILJ",
+    "LATITUDE": 28.505989,
+    "LONGITUDE": -80.693013,
+    "ALTITUDE": -21.31
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "MIMF",
+    "LATITUDE": 28.625943,
+    "LONGITUDE": -80.682794,
+    "ALTITUDE": -18.12
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "MLAQ",
+    "LATITUDE": 28.424711,
+    "LONGITUDE": -80.664388,
+    "ALTITUDE": -17.35
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "MMTF",
+    "LATITUDE": 28.478577,
+    "LONGITUDE": -80.674789,
+    "ALTITUDE": -12.298
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "MPLS",
+    "LATITUDE": 27.762892,
+    "LONGITUDE": -15.6338,
+    "ALTITUDE": 204.9
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "MR2P",
+    "LATITUDE": 37.191814,
+    "LONGITUDE": -5.608694,
+    "ALTITUDE": 121.098
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "MRNP",
+    "LATITUDE": 37.161258,
+    "LONGITUDE": -5.622583,
+    "ALTITUDE": 125.764
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "MTLF",
+    "LATITUDE": 32.441663,
+    "LONGITUDE": -110.788803,
+    "ALTITUDE": 2772.82
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "MTLS",
+    "LATITUDE": 32.442137,
+    "LONGITUDE": -110.789451,
+    "ALTITUDE": 2769.192
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Madrid",
+    "LATITUDE": 40.425645,
+    "LONGITUDE": -4.254099,
+    "ALTITUDE": 833.734
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Madrid 2",
+    "LATITUDE": 40.428744,
+    "LONGITUDE": -4.248928,
+    "ALTITUDE": 848.658
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Madrid 3",
+    "LATITUDE": 40.431215,
+    "LONGITUDE": -4.247914,
+    "ALTITUDE": 864.846
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Madrid 4",
+    "LATITUDE": 40.42719,
+    "LONGITUDE": -4.251324,
+    "ALTITUDE": 834.055
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Madrid 5",
+    "LATITUDE": 40.429979,
+    "LONGITUDE": -4.251323,
+    "ALTITUDE": 850.059
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Madrid 6",
+    "LATITUDE": 40.455449,
+    "LONGITUDE": -4.168385,
+    "ALTITUDE": 837.886
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Madrid Spain",
+    "LATITUDE": 40.424294,
+    "LONGITUDE": -4.252636,
+    "ALTITUDE": 819.003
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Malindi",
+    "LATITUDE": -2.995557,
+    "LONGITUDE": 40.194505,
+    "ALTITUDE": 12.314
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Maspalomas",
+    "LATITUDE": 27.762892,
+    "LONGITUDE": -15.6338,
+    "ALTITUDE": 204.9
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Maui",
+    "LATITUDE": 20.700573,
+    "LONGITUDE": -156.2575,
+    "ALTITUDE": 3087.578
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "McMurdo",
+    "LATITUDE": -77.839129,
+    "LONGITUDE": 166.667082,
+    "ALTITUDE": 153
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "McMurdo 2",
+    "LATITUDE": -77.8,
+    "LONGITUDE": 166.4,
+    "ALTITUDE": 20
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Merritt Island",
+    "LATITUDE": 28.463564,
+    "LONGITUDE": -80.653012,
+    "ALTITUDE": -10.51
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Merritt Island 2",
+    "LATITUDE": 28.508124,
+    "LONGITUDE": -80.6934,
+    "ALTITUDE": -25.95
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Merritt Island 3",
+    "LATITUDE": 28.50816,
+    "LONGITUDE": -80.692753,
+    "ALTITUDE": -27.34
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Merritt Island 4",
+    "LATITUDE": 28.505989,
+    "LONGITUDE": -80.693013,
+    "ALTITUDE": -21.31
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Merritt Island 5",
+    "LATITUDE": 28.625943,
+    "LONGITUDE": -80.682794,
+    "ALTITUDE": -18.12
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Merritt Island 6",
+    "LATITUDE": 28.424711,
+    "LONGITUDE": -80.664388,
+    "ALTITUDE": -17.35
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Merritt Island 7",
+    "LATITUDE": 28.478577,
+    "LONGITUDE": -80.674789,
+    "ALTITUDE": -12.298
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Moron AFB",
+    "LATITUDE": 37.191814,
+    "LONGITUDE": -5.608694,
+    "ALTITUDE": 121.098
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Moron AFB 2",
+    "LATITUDE": 37.161258,
+    "LONGITUDE": -5.622583,
+    "ALTITUDE": 125.764
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Mt Hopkins",
+    "LATITUDE": 31.684247,
+    "LONGITUDE": -110.878061,
+    "ALTITUDE": 2355.659
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Mt Lemmon",
+    "LATITUDE": 32.441663,
+    "LONGITUDE": -110.788803,
+    "ALTITUDE": 2772.82
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Mt Lemmon 2",
+    "LATITUDE": 32.442137,
+    "LONGITUDE": -110.789451,
+    "ALTITUDE": 2769.192
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "N E  Pacific Ocean",
+    "LATITUDE": 36.183333,
+    "LONGITUDE": -133.383333,
+    "ALTITUDE": 2500
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "NATC",
+    "LATITUDE": -5.927805,
+    "LONGITUDE": -35.164344,
+    "ALTITUDE": 48.006
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "NATL",
+    "LATITUDE": -5.927806,
+    "LONGITUDE": -35.16455,
+    "ALTITUDE": 52.006
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "NH2S",
+    "LATITUDE": 42.944742,
+    "LONGITUDE": -71.630322,
+    "ALTITUDE": 193.259
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "NHSS",
+    "LATITUDE": 42.947821,
+    "LONGITUDE": -71.626563,
+    "ALTITUDE": 203.28
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "NO2P",
+    "LATITUDE": 32.950696,
+    "LONGITUDE": -106.40333,
+    "ALTITUDE": 1172.002
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "NO3P",
+    "LATITUDE": 32.960326,
+    "LONGITUDE": -106.417379,
+    "ALTITUDE": 1171.733
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "NO4P",
+    "LATITUDE": 32.919439,
+    "LONGITUDE": -106.42354,
+    "ALTITUDE": 1170.123
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "NORP",
+    "LATITUDE": 32.932924,
+    "LONGITUDE": -106.44744,
+    "ALTITUDE": 1170.116
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Natal",
+    "LATITUDE": -5.927805,
+    "LONGITUDE": -35.164344,
+    "ALTITUDE": 48.006
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Natal 2",
+    "LATITUDE": -5.927806,
+    "LONGITUDE": -35.16455,
+    "ALTITUDE": 52.006
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "New Boston",
+    "LATITUDE": 42.944742,
+    "LONGITUDE": -71.630322,
+    "ALTITUDE": 193.259
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "New Boston 2",
+    "LATITUDE": 42.947821,
+    "LONGITUDE": -71.626563,
+    "ALTITUDE": 203.28
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Northrup Strip",
+    "LATITUDE": 32.950696,
+    "LONGITUDE": -106.40333,
+    "ALTITUDE": 1172.002
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Northrup Strip 2",
+    "LATITUDE": 32.960326,
+    "LONGITUDE": -106.417379,
+    "ALTITUDE": 1171.733
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Northrup Strip 3",
+    "LATITUDE": 32.919439,
+    "LONGITUDE": -106.42354,
+    "ALTITUDE": 1170.123
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Northrup Strip 4",
+    "LATITUDE": 32.932924,
+    "LONGITUDE": -106.44744,
+    "ALTITUDE": 1170.116
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "ORR3",
+    "LATITUDE": -35.627893,
+    "LONGITUDE": 148.957023,
+    "ALTITUDE": 951.982
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "ORRL",
+    "LATITUDE": -35.624927,
+    "LONGITUDE": 148.954805,
+    "ALTITUDE": 948.067
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "OTSS",
+    "LATITUDE": 51.114117,
+    "LONGITUDE": -0.894897,
+    "ALTITUDE": -18.852
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Oahu",
+    "LATITUDE": 21.57212,
+    "LONGITUDE": -158.266585,
+    "ALTITUDE": 301.32
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Oakhanger",
+    "LATITUDE": 51.114117,
+    "LONGITUDE": -0.894897,
+    "ALTITUDE": -18.852
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Orroral",
+    "LATITUDE": -35.627893,
+    "LONGITUDE": 148.957023,
+    "ALTITUDE": 951.982
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Orroral 2",
+    "LATITUDE": -35.624927,
+    "LONGITUDE": 148.954805,
+    "ALTITUDE": 948.067
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Otay Mt",
+    "LATITUDE": 32.600732,
+    "LONGITUDE": -116.840804,
+    "ALTITUDE": 989.226
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "PA2Q",
+    "LATITUDE": 28.227328,
+    "LONGITUDE": -80.606098,
+    "ALTITUDE": -14.38
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "PATQ",
+    "LATITUDE": 28.226402,
+    "LONGITUDE": -80.599276,
+    "ALTITUDE": -13.76
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "PDLS",
+    "LATITUDE": 29.066648,
+    "LONGITUDE": -80.913021,
+    "ALTITUDE": -22.69
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "PFTQ",
+    "LATITUDE": 65.116793,
+    "LONGITUDE": -147.463291,
+    "ALTITUDE": 413.284
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "PFTS",
+    "LATITUDE": 65.116793,
+    "LONGITUDE": -147.463291,
+    "ALTITUDE": 413.284
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "PIOD",
+    "LATITUDE": 35.389518,
+    "LONGITUDE": -116.849377,
+    "ALTITUDE": 1004.213
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "PM2F",
+    "LATITUDE": 34.122503,
+    "LONGITUDE": -119.153799,
+    "ALTITUDE": -22.2
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "PM3F",
+    "LATITUDE": 34.122888,
+    "LONGITUDE": -119.154767,
+    "ALTITUDE": -21.67
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "PM4F",
+    "LATITUDE": 34.122118,
+    "LONGITUDE": -119.15283,
+    "ALTITUDE": -22.19
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "PMKS",
+    "LATITUDE": 38.557711,
+    "LONGITUDE": -77.057741,
+    "ALTITUDE": 41.94
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "PP2F",
+    "LATITUDE": 37.496854,
+    "LONGITUDE": -122.496684,
+    "ALTITUDE": 3.78
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "PPTF",
+    "LATITUDE": 37.497697,
+    "LONGITUDE": -122.498699,
+    "ALTITUDE": 15.049
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "PPTQ",
+    "LATITUDE": 37.497817,
+    "LONGITUDE": -122.499715,
+    "ALTITUDE": 20.15
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "PPTY",
+    "LATITUDE": 37.497774,
+    "LONGITUDE": -122.499181,
+    "ALTITUDE": 27.69
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "PRTS",
+    "LATITUDE": -31.802,
+    "LONGITUDE": 115.885,
+    "ALTITUDE": 22.16
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Patrick AFB",
+    "LATITUDE": 28.227328,
+    "LONGITUDE": -80.606098,
+    "ALTITUDE": -14.38
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Patrick AFB 2",
+    "LATITUDE": 28.226402,
+    "LONGITUDE": -80.599276,
+    "ALTITUDE": -13.76
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Patrick AFB 3",
+    "LATITUDE": 28.227997,
+    "LONGITUDE": -80.605744,
+    "ALTITUDE": -16.459
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Perth",
+    "LATITUDE": -31.802,
+    "LONGITUDE": 115.885,
+    "ALTITUDE": 22.16
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Perth 2",
+    "LATITUDE": -29.045772,
+    "LONGITUDE": 115.348678,
+    "ALTITUDE": 250.47
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Phillips Hill",
+    "LATITUDE": 33.445219,
+    "LONGITUDE": -106.132108,
+    "ALTITUDE": 1592.508
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Pillar Point",
+    "LATITUDE": 37.497697,
+    "LONGITUDE": -122.498699,
+    "ALTITUDE": 15.049
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Pillar Point 2",
+    "LATITUDE": 37.497817,
+    "LONGITUDE": -122.499715,
+    "ALTITUDE": 20.15
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Pillar Point 3",
+    "LATITUDE": 37.497774,
+    "LONGITUDE": -122.499181,
+    "ALTITUDE": 27.69
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Point Mugu",
+    "LATITUDE": 34.122503,
+    "LONGITUDE": -119.153799,
+    "ALTITUDE": -22.2
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Point Mugu 2",
+    "LATITUDE": 34.122888,
+    "LONGITUDE": -119.154767,
+    "ALTITUDE": -21.67
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Point Mugu 3",
+    "LATITUDE": 34.122118,
+    "LONGITUDE": -119.15283,
+    "ALTITUDE": -22.19
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Poker Flats",
+    "LATITUDE": 65.1167,
+    "LONGITUDE": -147.461204,
+    "ALTITUDE": 436.7
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Poker Flats 2",
+    "LATITUDE": 65.117834,
+    "LONGITUDE": -147.431163,
+    "ALTITUDE": 514.65
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Poker Flats 3",
+    "LATITUDE": 65.11793,
+    "LONGITUDE": -147.433504,
+    "ALTITUDE": 518.9
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Poker Flats 4",
+    "LATITUDE": 65.116852,
+    "LONGITUDE": -147.462255,
+    "ALTITUDE": 414
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Poker Flats 5",
+    "LATITUDE": 65.116793,
+    "LONGITUDE": -147.463291,
+    "ALTITUDE": 413.284
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Poker Flats 6",
+    "LATITUDE": 65.116793,
+    "LONGITUDE": -147.463291,
+    "ALTITUDE": 413.284
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Poker Flats 7",
+    "LATITUDE": 65.117237,
+    "LONGITUDE": -147.45906,
+    "ALTITUDE": 431.444
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Poker Flats 8",
+    "LATITUDE": 65.116733,
+    "LONGITUDE": -147.461549,
+    "ALTITUDE": 430.342
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Pomonkey",
+    "LATITUDE": 38.557711,
+    "LONGITUDE": -77.057741,
+    "ALTITUDE": 41.94
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Ponce de Leon Inlet",
+    "LATITUDE": 29.066648,
+    "LONGITUDE": -80.913021,
+    "ALTITUDE": -22.69
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Port Hedland",
+    "LATITUDE": -20.38,
+    "LONGITUDE": 118.635,
+    "ALTITUDE": 242
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Pt  Pillar",
+    "LATITUDE": 37.496854,
+    "LONGITUDE": -122.496684,
+    "ALTITUDE": 3.78
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "RALS",
+    "LATITUDE": 51.572026,
+    "LONGITUDE": -1.311464,
+    "ALTITUDE": 163.12
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "RAML",
+    "LATITUDE": 28.227997,
+    "LONGITUDE": -80.605744,
+    "ALTITUDE": -16.459
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "RGTS",
+    "LATITUDE": -35.404536,
+    "LONGITUDE": 148.982418,
+    "ALTITUDE": 663.255
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "RO2P",
+    "LATITUDE": 36.643189,
+    "LONGITUDE": -6.328696,
+    "ALTITUDE": 59.182
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "ROTP",
+    "LATITUDE": 36.647077,
+    "LONGITUDE": -6.36953,
+    "ALTITUDE": 59.843
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "RTKS",
+    "LATITUDE": -35.404745,
+    "LONGITUDE": 148.982605,
+    "ALTITUDE": 661.43
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Rota",
+    "LATITUDE": 36.643189,
+    "LONGITUDE": -6.328696,
+    "ALTITUDE": 59.182
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Rota 2",
+    "LATITUDE": 36.647077,
+    "LONGITUDE": -6.36953,
+    "ALTITUDE": 59.843
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Rutherford Appelton",
+    "LATITUDE": 51.572026,
+    "LONGITUDE": -1.311464,
+    "ALTITUDE": 163.12
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "S Pac Fr Kerguelen",
+    "LATITUDE": -49.351915,
+    "LONGITUDE": 70.255984,
+    "ALTITUDE": 6.1
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "S Vandenberg AFB",
+    "LATITUDE": 34.565624,
+    "LONGITUDE": -120.501013,
+    "ALTITUDE": 623.91
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "S Vandenberg AFB 2",
+    "LATITUDE": 34.643675,
+    "LONGITUDE": -120.592857,
+    "ALTITUDE": 233.504
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "SARS",
+    "LATITUDE": 17.667,
+    "LONGITUDE": 53.883,
+    "ALTITUDE": 30.48
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "SEYS",
+    "LATITUDE": -4.671748,
+    "LONGITUDE": 55.477821,
+    "ALTITUDE": 560.495
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "SF1S",
+    "LATITUDE": 43.736073,
+    "LONGITUDE": -96.622515,
+    "ALTITUDE": 468.752
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "SF2S",
+    "LATITUDE": 43.734287,
+    "LONGITUDE": -96.619438,
+    "ALTITUDE": 459.336
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "SG1S",
+    "LATITUDE": 78.230722,
+    "LONGITUDE": 15.389696,
+    "ALTITUDE": 497.335
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "SG3S",
+    "LATITUDE": 78.229735,
+    "LONGITUDE": 15.408096,
+    "ALTITUDE": 501.378
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "SIPQ",
+    "LATITUDE": 15.249146,
+    "LONGITUDE": 145.796217,
+    "ALTITUDE": 348.2
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "SN2F",
+    "LATITUDE": 33.247685,
+    "LONGITUDE": -119.520743,
+    "ALTITUDE": 246.68
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "SN3F",
+    "LATITUDE": 33.248393,
+    "LONGITUDE": -119.521391,
+    "ALTITUDE": 246.12
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "SNDL",
+    "LATITUDE": 32.600732,
+    "LONGITUDE": -116.840804,
+    "ALTITUDE": 989.226
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "SNIF",
+    "LATITUDE": 33.246978,
+    "LONGITUDE": -119.520094,
+    "ALTITUDE": 246.16
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "SNYC",
+    "LATITUDE": 34.530311,
+    "LONGITUDE": -119.985849,
+    "ALTITUDE": 124.49
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "SOCA",
+    "LATITUDE": 38.850026,
+    "LONGITUDE": -76.932222,
+    "ALTITUDE": 118.566
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "ST2K",
+    "LATITUDE": 32.542977,
+    "LONGITUDE": -106.612089,
+    "ALTITUDE": 1452.31
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "ST3K",
+    "LATITUDE": 32.542675,
+    "LONGITUDE": -106.612089,
+    "ALTITUDE": 1452.3
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "STAL",
+    "LATITUDE": 39.020295,
+    "LONGITUDE": -76.827771,
+    "ALTITUDE": 20.897
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "STGK",
+    "LATITUDE": 32.54328,
+    "LONGITUDE": -106.612089,
+    "ALTITUDE": 1452.28
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "STGS",
+    "LATITUDE": 32.542452,
+    "LONGITUDE": -106.612089,
+    "ALTITUDE": 1449.46
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "SWNS",
+    "LATITUDE": -20.38,
+    "LONGITUDE": 118.635,
+    "ALTITUDE": 242
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "SYOQ",
+    "LATITUDE": -69.006096,
+    "LONGITUDE": 39.590154,
+    "ALTITUDE": 5.372
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Saipan",
+    "LATITUDE": 15.249146,
+    "LONGITUDE": 145.796217,
+    "ALTITUDE": 348.2
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "San Nicolas Island",
+    "LATITUDE": 33.247685,
+    "LONGITUDE": -119.520743,
+    "ALTITUDE": 246.68
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "San Nicolas Island 2",
+    "LATITUDE": 33.248393,
+    "LONGITUDE": -119.521391,
+    "ALTITUDE": 246.12
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "San Nicolas Island 3",
+    "LATITUDE": 33.246978,
+    "LONGITUDE": -119.520094,
+    "ALTITUDE": 246.16
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Santa Ynez Peak",
+    "LATITUDE": 34.530311,
+    "LONGITUDE": -119.985849,
+    "ALTITUDE": 124.49
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Santiago",
+    "LATITUDE": -33.151794,
+    "LONGITUDE": -70.667312,
+    "ALTITUDE": 730
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Santiago 2",
+    "LATITUDE": -33.151479,
+    "LONGITUDE": -70.668308,
+    "ALTITUDE": 730.853
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Santiago 3",
+    "LATITUDE": -33.151107,
+    "LONGITUDE": -70.666403,
+    "ALTITUDE": 733.301
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Saudi Arabia",
+    "LATITUDE": 17.667,
+    "LONGITUDE": 53.883,
+    "ALTITUDE": 30.48
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Seychelles",
+    "LATITUDE": -4.671748,
+    "LONGITUDE": 55.477821,
+    "ALTITUDE": 560.495
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Sioux Falls",
+    "LATITUDE": 43.736073,
+    "LONGITUDE": -96.622515,
+    "ALTITUDE": 468.752
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Sioux Falls 2",
+    "LATITUDE": 43.734287,
+    "LONGITUDE": -96.619438,
+    "ALTITUDE": 459.336
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "South Point",
+    "LATITUDE": 19.013584,
+    "LONGITUDE": -155.663,
+    "ALTITUDE": 274.314
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "South Point 2",
+    "LATITUDE": 19.013904,
+    "LONGITUDE": -155.663301,
+    "ALTITUDE": 367.2
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Suitland",
+    "LATITUDE": 38.850026,
+    "LONGITUDE": -76.932222,
+    "ALTITUDE": 118.566
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Svalbard",
+    "LATITUDE": 78.230222,
+    "LONGITUDE": 15.398138,
+    "ALTITUDE": 498.52
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Svalbard 2",
+    "LATITUDE": 78.230722,
+    "LONGITUDE": 15.389696,
+    "ALTITUDE": 497.335
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Svalbard 3",
+    "LATITUDE": 78.229735,
+    "LONGITUDE": 15.408096,
+    "ALTITUDE": 501.378
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Syoma",
+    "LATITUDE": -69.006096,
+    "LONGITUDE": 39.590154,
+    "ALTITUDE": 5.372
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "TH2S",
+    "LATITUDE": 76.515364,
+    "LONGITUDE": -68.598815,
+    "ALTITUDE": 147.37
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "THUS",
+    "LATITUDE": 76.516293,
+    "LONGITUDE": -68.599018,
+    "ALTITUDE": 141.16
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "TSMF",
+    "LATITUDE": -42.805,
+    "LONGITUDE": 147.439,
+    "ALTITUDE": 43
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "TT2S",
+    "LATITUDE": 76.515364,
+    "LONGITUDE": -68.598858,
+    "ALTITUDE": 146.985
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "TTSS",
+    "LATITUDE": 76.515935,
+    "LONGITUDE": -68.599972,
+    "ALTITUDE": 135.906
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "TULF",
+    "LATITUDE": 33.096162,
+    "LONGITUDE": -106.159154,
+    "ALTITUDE": 1241.254
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "TULS",
+    "LATITUDE": 33.026945,
+    "LONGITUDE": -106.139091,
+    "ALTITUDE": 1328.633
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Thule",
+    "LATITUDE": 76.515364,
+    "LONGITUDE": -68.598815,
+    "ALTITUDE": 147.37
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Thule 2",
+    "LATITUDE": 76.516293,
+    "LONGITUDE": -68.599018,
+    "ALTITUDE": 141.16
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Thule 3",
+    "LATITUDE": 76.515364,
+    "LONGITUDE": -68.598858,
+    "ALTITUDE": 146.985
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Thule 4",
+    "LATITUDE": 76.515935,
+    "LONGITUDE": -68.599972,
+    "ALTITUDE": 135.906
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Tidbinbilla",
+    "LATITUDE": -35.404536,
+    "LONGITUDE": 148.982418,
+    "ALTITUDE": 663.255
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Tidbinbilla 2",
+    "LATITUDE": -35.404745,
+    "LONGITUDE": 148.982605,
+    "ALTITUDE": 661.43
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Tokyo",
+    "LATITUDE": 35.708762,
+    "LONGITUDE": 139.491778,
+    "ALTITUDE": -641.245
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Tranquillon Peak",
+    "LATITUDE": 34.583028,
+    "LONGITUDE": -120.561115,
+    "ALTITUDE": 627.55
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Tranquillon Pk",
+    "LATITUDE": 34.582386,
+    "LONGITUDE": -120.562434,
+    "ALTITUDE": 611.03
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Tula Peak",
+    "LATITUDE": 33.026945,
+    "LONGITUDE": -106.139091,
+    "ALTITUDE": 1328.633
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Tularosa",
+    "LATITUDE": 33.096162,
+    "LONGITUDE": -106.159154,
+    "ALTITUDE": 1241.254
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "UL23",
+    "LATITUDE": 64.972407,
+    "LONGITUDE": -147.518066,
+    "ALTITUDE": 331.108
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "UL33",
+    "LATITUDE": 64.976814,
+    "LONGITUDE": -147.518066,
+    "ALTITUDE": 308.056
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "ULA3",
+    "LATITUDE": 64.97214,
+    "LONGITUDE": -147.513389,
+    "ALTITUDE": 344.054
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "ULA4",
+    "LATITUDE": 64.976596,
+    "LONGITUDE": -147.521283,
+    "ALTITUDE": 299.159
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "ULAE",
+    "LATITUDE": 64.976814,
+    "LONGITUDE": -147.518066,
+    "ALTITUDE": 308.056
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "USAS",
+    "LATITUDE": 64.804241,
+    "LONGITUDE": -147.500214,
+    "ALTITUDE": 160.58
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "USDS",
+    "LATITUDE": -29.045772,
+    "LONGITUDE": 115.348678,
+    "ALTITUDE": 251.84
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "USHS",
+    "LATITUDE": 19.013904,
+    "LONGITUDE": -155.663301,
+    "ALTITUDE": 385.194
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "USN",
+    "LATITUDE": 19.013904,
+    "LONGITUDE": -155.663301,
+    "ALTITUDE": 385.194
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "USPS",
+    "LATITUDE": -29.045772,
+    "LONGITUDE": 115.348678,
+    "ALTITUDE": 250.47
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "University of Tasmania",
+    "LATITUDE": -42.805,
+    "LONGITUDE": 147.439,
+    "ALTITUDE": 43
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "VD2F",
+    "LATITUDE": 34.758232,
+    "LONGITUDE": -120.627121,
+    "ALTITUDE": 26.04
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "VD3F",
+    "LATITUDE": 34.583043,
+    "LONGITUDE": -120.561115,
+    "ALTITUDE": 627.252
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "VD4F",
+    "LATITUDE": 34.583043,
+    "LONGITUDE": -120.561115,
+    "ALTITUDE": 627.248
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "VDB3",
+    "LATITUDE": 34.565626,
+    "LONGITUDE": -120.501617,
+    "ALTITUDE": 609.44
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "VDBF",
+    "LATITUDE": 34.774878,
+    "LONGITUDE": -120.53611,
+    "ALTITUDE": 122.607
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "VEND",
+    "LATITUDE": 35.24771,
+    "LONGITUDE": -116.7949,
+    "ALTITUDE": 1064.078
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "VT2S",
+    "LATITUDE": 34.825641,
+    "LONGITUDE": -120.505398,
+    "ALTITUDE": 268.61
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "VTSS",
+    "LATITUDE": 34.822617,
+    "LONGITUDE": -120.501848,
+    "ALTITUDE": 272.51
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Vandenberg AFB",
+    "LATITUDE": 34.582739,
+    "LONGITUDE": -120.561572,
+    "ALTITUDE": 627.54
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Vandenberg AFB 10",
+    "LATITUDE": 34.581632,
+    "LONGITUDE": -120.626092,
+    "ALTITUDE": 251.655
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Vandenberg AFB 11",
+    "LATITUDE": 34.755632,
+    "LONGITUDE": -120.622378,
+    "ALTITUDE": 75.781
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Vandenberg AFB 12",
+    "LATITUDE": 34.655413,
+    "LONGITUDE": -120.555985,
+    "ALTITUDE": 75.23
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Vandenberg AFB 2",
+    "LATITUDE": 34.665844,
+    "LONGITUDE": -120.581447,
+    "ALTITUDE": 88.52
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Vandenberg AFB 3",
+    "LATITUDE": 34.758232,
+    "LONGITUDE": -120.627121,
+    "ALTITUDE": 26.04
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Vandenberg AFB 4",
+    "LATITUDE": 34.583043,
+    "LONGITUDE": -120.561115,
+    "ALTITUDE": 627.252
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Vandenberg AFB 5",
+    "LATITUDE": 34.583043,
+    "LONGITUDE": -120.561115,
+    "ALTITUDE": 627.248
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Vandenberg AFB 6",
+    "LATITUDE": 34.565626,
+    "LONGITUDE": -120.501617,
+    "ALTITUDE": 609.44
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Vandenberg AFB 7",
+    "LATITUDE": 34.774878,
+    "LONGITUDE": -120.53611,
+    "ALTITUDE": 122.607
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Vandenberg AFB 8",
+    "LATITUDE": 34.825641,
+    "LONGITUDE": -120.505398,
+    "ALTITUDE": 268.61
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Vandenberg AFB 9",
+    "LATITUDE": 34.822617,
+    "LONGITUDE": -120.501848,
+    "ALTITUDE": 272.51
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "WAPS",
+    "LATITUDE": 37.924926,
+    "LONGITUDE": -75.476522,
+    "ALTITUDE": -20.1
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "WD3F",
+    "LATITUDE": 37.856365,
+    "LONGITUDE": -75.511435,
+    "ALTITUDE": -18.126
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "WH2J",
+    "LATITUDE": 32.506281,
+    "LONGITUDE": -106.611966,
+    "ALTITUDE": 1442.61
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "WH2K",
+    "LATITUDE": 32.500737,
+    "LONGITUDE": -106.608552,
+    "ALTITUDE": 1459.74
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "WH2S",
+    "LATITUDE": 32.501297,
+    "LONGITUDE": -106.608554,
+    "ALTITUDE": 1457.665
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "WH3K",
+    "LATITUDE": 32.500462,
+    "LONGITUDE": -106.608552,
+    "ALTITUDE": 1459.74
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "WH4K",
+    "LATITUDE": 32.50139,
+    "LONGITUDE": -106.608554,
+    "ALTITUDE": 1458.675
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "WH5K",
+    "LATITUDE": 32.501242,
+    "LONGITUDE": -106.608554,
+    "ALTITUDE": 1456.635
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "WH6F",
+    "LATITUDE": 33.813864,
+    "LONGITUDE": -106.659012,
+    "ALTITUDE": 1508.97
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "WH6K",
+    "LATITUDE": 32.501462,
+    "LONGITUDE": -106.609235,
+    "ALTITUDE": 1448.046
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "WH7F",
+    "LATITUDE": 33.813078,
+    "LONGITUDE": -106.659014,
+    "ALTITUDE": 1497.454
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "WH9F",
+    "LATITUDE": 33.445219,
+    "LONGITUDE": -106.132108,
+    "ALTITUDE": 1592.508
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "WHSF",
+    "LATITUDE": 32.358042,
+    "LONGITUDE": -106.369807,
+    "ALTITUDE": 1209.86
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "WHSJ",
+    "LATITUDE": 32.506281,
+    "LONGITUDE": -106.611966,
+    "ALTITUDE": 1442.61
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "WHSK",
+    "LATITUDE": 32.501012,
+    "LONGITUDE": -106.608552,
+    "ALTITUDE": 1459.73
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "WHSS",
+    "LATITUDE": 32.50027,
+    "LONGITUDE": -106.608552,
+    "ALTITUDE": 1452.26
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "WHSX",
+    "LATITUDE": 32.500941,
+    "LONGITUDE": -106.608017,
+    "ALTITUDE": 1477.061
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "WL2F",
+    "LATITUDE": 37.944099,
+    "LONGITUDE": -75.464223,
+    "ALTITUDE": -14.04
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "WL2S",
+    "LATITUDE": 37.94643,
+    "LONGITUDE": -75.462058,
+    "ALTITUDE": -6.765
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "WL3F",
+    "LATITUDE": 37.856365,
+    "LONGITUDE": -75.511435,
+    "ALTITUDE": -18.126
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "WL3S",
+    "LATITUDE": 37.945795,
+    "LONGITUDE": -75.460437,
+    "ALTITUDE": -5.689
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "WL4S",
+    "LATITUDE": 37.946313,
+    "LONGITUDE": -75.460599,
+    "ALTITUDE": -28.793
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "WL53",
+    "LATITUDE": 37.9468,
+    "LONGITUDE": -75.4601,
+    "ALTITUDE": -25.806
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "WL6S",
+    "LATITUDE": 37.9456,
+    "LONGITUDE": -75.4611,
+    "ALTITUDE": 13.216
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "WLPF",
+    "LATITUDE": 37.84134,
+    "LONGITUDE": -75.485089,
+    "ALTITUDE": -24
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "WLPQ",
+    "LATITUDE": 37.860261,
+    "LONGITUDE": -75.509296,
+    "ALTITUDE": -21.7
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "WP2S",
+    "LATITUDE": 37.928067,
+    "LONGITUDE": -75.474416,
+    "ALTITUDE": -20.961
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "WP2Y",
+    "LATITUDE": 37.925585,
+    "LONGITUDE": -75.476857,
+    "ALTITUDE": -15.234
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "WP2Z",
+    "LATITUDE": 37.928912,
+    "LONGITUDE": -75.473751,
+    "ALTITUDE": -17.846
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "WP3S",
+    "LATITUDE": 37.928361,
+    "LONGITUDE": -75.474188,
+    "ALTITUDE": -19.631
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "WP3Z",
+    "LATITUDE": 37.928208,
+    "LONGITUDE": -75.475897,
+    "ALTITUDE": -1.52
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "WPDA",
+    "LATITUDE": 37.927373,
+    "LONGITUDE": -75.474953,
+    "ALTITUDE": -10.538
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "WPS8",
+    "LATITUDE": 37.927359,
+    "LONGITUDE": -75.475833,
+    "ALTITUDE": -20.647
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "WPSA",
+    "LATITUDE": 37.927278,
+    "LONGITUDE": -75.474986,
+    "ALTITUDE": -19.736
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "WPSS",
+    "LATITUDE": 37.92659,
+    "LONGITUDE": -75.476305,
+    "ALTITUDE": -12.762
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "WSGT",
+    "LATITUDE": 32.50137,
+    "LONGITUDE": -106.608546,
+    "ALTITUDE": 1457.555
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "WT1S",
+    "LATITUDE": 65.117237,
+    "LONGITUDE": -147.45906,
+    "ALTITUDE": 431.444
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "WT2S",
+    "LATITUDE": 65.116733,
+    "LONGITUDE": -147.461549,
+    "ALTITUDE": 430.342
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "WT3P",
+    "LATITUDE": 34.643675,
+    "LONGITUDE": -120.592857,
+    "ALTITUDE": 233.504
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "WT3S",
+    "LATITUDE": 37.923066,
+    "LONGITUDE": -75.477469,
+    "ALTITUDE": -10.644
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "WT6P",
+    "LATITUDE": 34.581632,
+    "LONGITUDE": -120.626092,
+    "ALTITUDE": 251.655
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "WTDQ",
+    "LATITUDE": 37.923066,
+    "LONGITUDE": -75.477469,
+    "ALTITUDE": -10.644
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "WTDS",
+    "LATITUDE": 37.923066,
+    "LONGITUDE": -75.477469,
+    "ALTITUDE": -10.644
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "WTRP",
+    "LATITUDE": 34.755632,
+    "LONGITUDE": -120.622378,
+    "ALTITUDE": 75.781
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "WULY",
+    "LATITUDE": 34.655413,
+    "LONGITUDE": -120.555985,
+    "ALTITUDE": 75.23
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Wallops",
+    "LATITUDE": 37.945499,
+    "LONGITUDE": -75.461136,
+    "ALTITUDE": -18.51
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Wallops 2",
+    "LATITUDE": 37.945426,
+    "LONGITUDE": -75.46209,
+    "ALTITUDE": -17.43
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Wallops 3",
+    "LATITUDE": 37.9468,
+    "LONGITUDE": -75.4601,
+    "ALTITUDE": -25.806
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Wallops 4",
+    "LATITUDE": 37.9456,
+    "LONGITUDE": -75.4611,
+    "ALTITUDE": 13.216
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Wallops Island",
+    "LATITUDE": 37.92659,
+    "LONGITUDE": -75.476305,
+    "ALTITUDE": -12.762
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Wallops Island  VA",
+    "LATITUDE": 37.923529,
+    "LONGITUDE": -75.476139,
+    "ALTITUDE": -33.501
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Wallops Island 10",
+    "LATITUDE": 37.860261,
+    "LONGITUDE": -75.509296,
+    "ALTITUDE": -21.7
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Wallops Island 11",
+    "LATITUDE": 37.928067,
+    "LONGITUDE": -75.474416,
+    "ALTITUDE": -20.961
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Wallops Island 12",
+    "LATITUDE": 37.925585,
+    "LONGITUDE": -75.476857,
+    "ALTITUDE": -15.234
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Wallops Island 13",
+    "LATITUDE": 37.928912,
+    "LONGITUDE": -75.473751,
+    "ALTITUDE": -17.846
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Wallops Island 14",
+    "LATITUDE": 37.928361,
+    "LONGITUDE": -75.474188,
+    "ALTITUDE": -19.631
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Wallops Island 15",
+    "LATITUDE": 37.928208,
+    "LONGITUDE": -75.475897,
+    "ALTITUDE": -1.52
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Wallops Island 16",
+    "LATITUDE": 37.927373,
+    "LONGITUDE": -75.474953,
+    "ALTITUDE": -10.538
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Wallops Island 17",
+    "LATITUDE": 37.927359,
+    "LONGITUDE": -75.475833,
+    "ALTITUDE": -20.647
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Wallops Island 18",
+    "LATITUDE": 37.927278,
+    "LONGITUDE": -75.474986,
+    "ALTITUDE": -19.736
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Wallops Island 19",
+    "LATITUDE": 37.92659,
+    "LONGITUDE": -75.476305,
+    "ALTITUDE": -12.762
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Wallops Island 2",
+    "LATITUDE": 37.924926,
+    "LONGITUDE": -75.476522,
+    "ALTITUDE": -20.1
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Wallops Island 20",
+    "LATITUDE": 37.923066,
+    "LONGITUDE": -75.477469,
+    "ALTITUDE": -10.644
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Wallops Island 21",
+    "LATITUDE": 37.923066,
+    "LONGITUDE": -75.477469,
+    "ALTITUDE": -10.644
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Wallops Island 22",
+    "LATITUDE": 37.923066,
+    "LONGITUDE": -75.477469,
+    "ALTITUDE": -10.644
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Wallops Island 3",
+    "LATITUDE": 37.856365,
+    "LONGITUDE": -75.511435,
+    "ALTITUDE": -18.126
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Wallops Island 4",
+    "LATITUDE": 37.944099,
+    "LONGITUDE": -75.464223,
+    "ALTITUDE": -14.04
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Wallops Island 5",
+    "LATITUDE": 37.94643,
+    "LONGITUDE": -75.462058,
+    "ALTITUDE": -6.765
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Wallops Island 6",
+    "LATITUDE": 37.856365,
+    "LONGITUDE": -75.511435,
+    "ALTITUDE": -18.126
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Wallops Island 7",
+    "LATITUDE": 37.945795,
+    "LONGITUDE": -75.460437,
+    "ALTITUDE": -5.689
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Wallops Island 8",
+    "LATITUDE": 37.946313,
+    "LONGITUDE": -75.460599,
+    "ALTITUDE": -28.793
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Wallops Island 9",
+    "LATITUDE": 37.84134,
+    "LONGITUDE": -75.485089,
+    "ALTITUDE": -24
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Weipa",
+    "LATITUDE": -12.694,
+    "LONGITUDE": 141.930667,
+    "ALTITUDE": 21
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "White Sands",
+    "LATITUDE": 32.500492,
+    "LONGITUDE": -106.608557,
+    "ALTITUDE": 1450.172
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "White Sands 10",
+    "LATITUDE": 32.500462,
+    "LONGITUDE": -106.608552,
+    "ALTITUDE": 1459.74
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "White Sands 11",
+    "LATITUDE": 32.50139,
+    "LONGITUDE": -106.608554,
+    "ALTITUDE": 1458.675
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "White Sands 12",
+    "LATITUDE": 32.501242,
+    "LONGITUDE": -106.608554,
+    "ALTITUDE": 1456.635
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "White Sands 13",
+    "LATITUDE": 33.813864,
+    "LONGITUDE": -106.659012,
+    "ALTITUDE": 1508.97
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "White Sands 14",
+    "LATITUDE": 32.501462,
+    "LONGITUDE": -106.609235,
+    "ALTITUDE": 1448.046
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "White Sands 15",
+    "LATITUDE": 33.813078,
+    "LONGITUDE": -106.659014,
+    "ALTITUDE": 1497.454
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "White Sands 16",
+    "LATITUDE": 32.358042,
+    "LONGITUDE": -106.369807,
+    "ALTITUDE": 1209.86
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "White Sands 17",
+    "LATITUDE": 32.506281,
+    "LONGITUDE": -106.611966,
+    "ALTITUDE": 1442.61
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "White Sands 18",
+    "LATITUDE": 32.501012,
+    "LONGITUDE": -106.608552,
+    "ALTITUDE": 1459.73
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "White Sands 19",
+    "LATITUDE": 32.50027,
+    "LONGITUDE": -106.608552,
+    "ALTITUDE": 1452.26
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "White Sands 2",
+    "LATITUDE": 32.500492,
+    "LONGITUDE": -106.608557,
+    "ALTITUDE": 1450.172
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "White Sands 20",
+    "LATITUDE": 32.500941,
+    "LONGITUDE": -106.608017,
+    "ALTITUDE": 1477.061
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "White Sands 21",
+    "LATITUDE": 32.50137,
+    "LONGITUDE": -106.608546,
+    "ALTITUDE": 1457.555
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "White Sands 3",
+    "LATITUDE": 32.542977,
+    "LONGITUDE": -106.612089,
+    "ALTITUDE": 1452.31
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "White Sands 4",
+    "LATITUDE": 32.542675,
+    "LONGITUDE": -106.612089,
+    "ALTITUDE": 1452.3
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "White Sands 5",
+    "LATITUDE": 32.54328,
+    "LONGITUDE": -106.612089,
+    "ALTITUDE": 1452.28
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "White Sands 6",
+    "LATITUDE": 32.542452,
+    "LONGITUDE": -106.612089,
+    "ALTITUDE": 1449.46
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "White Sands 7",
+    "LATITUDE": 32.506281,
+    "LONGITUDE": -106.611966,
+    "ALTITUDE": 1442.61
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "White Sands 8",
+    "LATITUDE": 32.500737,
+    "LONGITUDE": -106.608552,
+    "ALTITUDE": 1459.74
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "White Sands 9",
+    "LATITUDE": 32.501297,
+    "LONGITUDE": -106.608554,
+    "ALTITUDE": 1457.665
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "YARZ",
+    "LATITUDE": -29.046646,
+    "LONGITUDE": 115.346667,
+    "ALTITUDE": 192.35
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Yarragedee",
+    "LATITUDE": -29.046646,
+    "LONGITUDE": 115.346667,
+    "ALTITUDE": 192.35
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "ZZ2P",
+    "LATITUDE": 41.682254,
+    "LONGITUDE": -1.079291,
+    "ALTITUDE": 303.989
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "ZZAP",
+    "LATITUDE": 41.665865,
+    "LONGITUDE": -1.040679,
+    "ALTITUDE": 312.522
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Zaragoza",
+    "LATITUDE": 41.682254,
+    "LONGITUDE": -1.079291,
+    "ALTITUDE": 303.989
+  },
+  {
+    "ORGANIZATION": "NASA STDN",
+    "NAME": "Zaragoza 2",
+    "LATITUDE": 41.665865,
+    "LONGITUDE": -1.040679,
+    "ALTITUDE": 312.522
+  },
+  {
+    "ORGANIZATION": "NASDA",
+    "NAME": "Katsuura-1",
+    "LATITUDE": 35.2,
+    "LONGITUDE": 140.3,
+    "ALTITUDE": 0
+  },
+  {
+    "ORGANIZATION": "NASDA",
+    "NAME": "Katsuura-2",
+    "LATITUDE": 35.2,
+    "LONGITUDE": 140.3,
+    "ALTITUDE": 0
+  },
+  {
+    "ORGANIZATION": "NASDA",
+    "NAME": "Masuda-1",
+    "LATITUDE": 30.55,
+    "LONGITUDE": 131.0167,
+    "ALTITUDE": 0
+  },
+  {
+    "ORGANIZATION": "NASDA",
+    "NAME": "Masuda-2",
+    "LATITUDE": 30.55,
+    "LONGITUDE": 131.0167,
+    "ALTITUDE": 0
+  },
+  {
+    "ORGANIZATION": "NASDA",
+    "NAME": "Okinawa-1",
+    "LATITUDE": 26.5,
+    "LONGITUDE": 127.9,
+    "ALTITUDE": 0
+  },
+  {
+    "ORGANIZATION": "NASDA",
+    "NAME": "Okinawa-2",
+    "LATITUDE": 26.5,
+    "LONGITUDE": 127.9,
+    "ALTITUDE": 0
+  },
+  {
+    "ORGANIZATION": "NOAA NESDIS",
+    "NAME": "Fairbanks13",
+    "LATITUDE": 64.9764,
+    "LONGITUDE": -147.5208,
+    "ALTITUDE": 0
+  },
+  {
+    "ORGANIZATION": "NOAA NESDIS",
+    "NAME": "Fairbanks26NOAA",
+    "LATITUDE": 64.9767,
+    "LONGITUDE": -147.5175,
+    "ALTITUDE": 0
+  },
+  {
+    "ORGANIZATION": "NOAA NESDIS",
+    "NAME": "Fairbanks26VLBI",
+    "LATITUDE": 64.9783,
+    "LONGITUDE": -147.4975,
+    "ALTITUDE": 0
+  },
+  {
+    "ORGANIZATION": "NOAA NESDIS",
+    "NAME": "Fairbanks6",
+    "LATITUDE": 64.9722,
+    "LONGITUDE": -147.5175,
+    "ALTITUDE": 0
+  },
+  {
+    "ORGANIZATION": "NOAA NESDIS",
+    "NAME": "Wallops14",
+    "LATITUDE": 37.9465,
+    "LONGITUDE": -75.4443,
+    "ALTITUDE": 0
+  },
+  {
+    "ORGANIZATION": "NOAA NESDIS",
+    "NAME": "Wallops26",
+    "LATITUDE": 37.9465,
+    "LONGITUDE": -75.5934,
+    "ALTITUDE": 0
+  },
+  {
+    "ORGANIZATION": "Optical",
+    "NAME": "Diego Garcia 40in Main Telescope",
+    "LATITUDE": -7.41165,
+    "LONGITUDE": 72.4519,
+    "ALTITUDE": -61.1
+  },
+  {
+    "ORGANIZATION": "Optical",
+    "NAME": "Maui HI 15in Aux Telescope",
+    "LATITUDE": 20.70849,
+    "LONGITUDE": -156.2576,
+    "ALTITUDE": 3058.7
+  },
+  {
+    "ORGANIZATION": "Optical",
+    "NAME": "Maui HI 40in Main Telescope",
+    "LATITUDE": 20.70801,
+    "LONGITUDE": -156.2594,
+    "ALTITUDE": 3058.6
+  },
+  {
+    "ORGANIZATION": "Optical",
+    "NAME": "Maui HI AMOS",
+    "LATITUDE": 20.70837,
+    "LONGITUDE": -156.2574,
+    "ALTITUDE": 3059.5
+  },
+  {
+    "ORGANIZATION": "Optical",
+    "NAME": "Maui HI Beam Director Tracker",
+    "LATITUDE": 20.70855,
+    "LONGITUDE": -156.2576,
+    "ALTITUDE": 3057
+  },
+  {
+    "ORGANIZATION": "Optical",
+    "NAME": "Maui HI MOTIF",
+    "LATITUDE": 20.70852,
+    "LONGITUDE": -156.2578,
+    "ALTITUDE": 3059.5
+  },
+  {
+    "ORGANIZATION": "Optical",
+    "NAME": "Socorro NM 15in Aux Telescope",
+    "LATITUDE": 33.81702,
+    "LONGITUDE": -106.6599,
+    "ALTITUDE": 1510.2
+  },
+  {
+    "ORGANIZATION": "Optical",
+    "NAME": "Socorro NM 40in Main Telescope",
+    "LATITUDE": 33.81724,
+    "LONGITUDE": -106.6603,
+    "ALTITUDE": 1510.2
+  },
+  {
+    "ORGANIZATION": "Optical",
+    "NAME": "Socorro NM GEODSS Test Site",
+    "LATITUDE": 33.81806,
+    "LONGITUDE": -106.6595,
+    "ALTITUDE": 1508.5
+  },
+  {
+    "ORGANIZATION": "Optical",
+    "NAME": "Socorro NM GEODSS Test Site A",
+    "LATITUDE": 33.81806,
+    "LONGITUDE": -106.6595,
+    "ALTITUDE": 1508.5
+  },
+  {
+    "ORGANIZATION": "Optical",
+    "NAME": "Socorro NM GEODSS Test Site B",
+    "LATITUDE": 33.8184,
+    "LONGITUDE": -106.6591,
+    "ALTITUDE": 1504.6
+  },
+  {
+    "ORGANIZATION": "Other",
+    "NAME": "Antigua Island FPQ-14",
+    "LATITUDE": 17.14448,
+    "LONGITUDE": -61.7896,
+    "ALTITUDE": 5
+  },
+  {
+    "ORGANIZATION": "Other",
+    "NAME": "Ascension Island Ascension 12 15",
+    "LATITUDE": -7.9092,
+    "LONGITUDE": -14.4039,
+    "ALTITUDE": 56.1
+  },
+  {
+    "ORGANIZATION": "Other",
+    "NAME": "Ascension Island Ascension 12 18",
+    "LATITUDE": -7.97372,
+    "LONGITUDE": -14.4021,
+    "ALTITUDE": 140
+  },
+  {
+    "ORGANIZATION": "Other",
+    "NAME": "Barking Sands",
+    "LATITUDE": 22,
+    "LONGITUDE": -159.75,
+    "ALTITUDE": 46.997
+  },
+  {
+    "ORGANIZATION": "Other",
+    "NAME": "Beale AFB CA Phased Array NW Face",
+    "LATITUDE": 39.13616,
+    "LONGITUDE": -121.3509,
+    "ALTITUDE": 115.1
+  },
+  {
+    "ORGANIZATION": "Other",
+    "NAME": "Beale AFB CA Phased Array S Face",
+    "LATITUDE": 39.13594,
+    "LONGITUDE": -121.3507,
+    "ALTITUDE": 115.1
+  },
+  {
+    "ORGANIZATION": "Other",
+    "NAME": "Cape Cod MA Phased Array NE Face",
+    "LATITUDE": 41.75255,
+    "LONGITUDE": -70.538,
+    "ALTITUDE": 82.9
+  },
+  {
+    "ORGANIZATION": "Other",
+    "NAME": "Cape Cod MA Phased Array SE Face",
+    "LATITUDE": 41.75232,
+    "LONGITUDE": -70.5381,
+    "ALTITUDE": 82.9
+  },
+  {
+    "ORGANIZATION": "Other",
+    "NAME": "Cavalier ND FPQ-14 Phased Array",
+    "LATITUDE": 48.72477,
+    "LONGITUDE": -97.8998,
+    "ALTITUDE": 347.3
+  },
+  {
+    "ORGANIZATION": "Other",
+    "NAME": "Christmas Island Tracking-Command",
+    "LATITUDE": 2.05,
+    "LONGITUDE": -157.45,
+    "ALTITUDE": 0
+  },
+  {
+    "ORGANIZATION": "Other",
+    "NAME": "Clear AK FPS-50 3 Radar Fans",
+    "LATITUDE": 64.29332,
+    "LONGITUDE": -149.1954,
+    "ALTITUDE": 213.3
+  },
+  {
+    "ORGANIZATION": "Other",
+    "NAME": "Clear AK FPS-92 Continuous Wave",
+    "LATITUDE": 64.29332,
+    "LONGITUDE": -149.1954,
+    "ALTITUDE": 213.3
+  },
+  {
+    "ORGANIZATION": "Other",
+    "NAME": "Clear AK FPS-92 Pulse Compression",
+    "LATITUDE": 64.29332,
+    "LONGITUDE": -149.1954,
+    "ALTITUDE": 213.3
+  },
+  {
+    "ORGANIZATION": "Other",
+    "NAME": "Diyarbakir Turkey DS Continuous Wave",
+    "LATITUDE": 37.90476,
+    "LONGITUDE": 39.9932,
+    "ALTITUDE": 915
+  },
+  {
+    "ORGANIZATION": "Other",
+    "NAME": "Diyarbakir Turkey DS LFM",
+    "LATITUDE": 37.90476,
+    "LONGITUDE": 39.9932,
+    "ALTITUDE": 915
+  },
+  {
+    "ORGANIZATION": "Other",
+    "NAME": "Diyarbakir Turkey FPS-17 Radar Fan",
+    "LATITUDE": 37.90476,
+    "LONGITUDE": 39.9932,
+    "ALTITUDE": 915
+  },
+  {
+    "ORGANIZATION": "Other",
+    "NAME": "Diyarbakir Turkey FPS-79 Radar Tracke",
+    "LATITUDE": 37.90476,
+    "LONGITUDE": 39.9932,
+    "ALTITUDE": 915
+  },
+  {
+    "ORGANIZATION": "Other",
+    "NAME": "Diyarbakir Turkey IF Playback NE",
+    "LATITUDE": 37.90476,
+    "LONGITUDE": 39.9932,
+    "ALTITUDE": 915
+  },
+  {
+    "ORGANIZATION": "Other",
+    "NAME": "Diyarbakir Turkey Off Bore NE",
+    "LATITUDE": 37.90476,
+    "LONGITUDE": 39.9932,
+    "ALTITUDE": 915
+  },
+  {
+    "ORGANIZATION": "Other",
+    "NAME": "Diyarbakir Turkey On Bore NE",
+    "LATITUDE": 37.90476,
+    "LONGITUDE": 39.9932,
+    "ALTITUDE": 915
+  },
+  {
+    "ORGANIZATION": "Other",
+    "NAME": "Eglin AFB FL FPS-85 Phased Array",
+    "LATITUDE": 30.57244,
+    "LONGITUDE": -86.2148,
+    "ALTITUDE": 32.7
+  },
+  {
+    "ORGANIZATION": "Other",
+    "NAME": "Elephant Butte NM NAVSPASUR",
+    "LATITUDE": 33.44596,
+    "LONGITUDE": -106.9976,
+    "ALTITUDE": 1411.1
+  },
+  {
+    "ORGANIZATION": "Other",
+    "NAME": "Feltwell UK DSTS",
+    "LATITUDE": 52.4806,
+    "LONGITUDE": 0.5205,
+    "ALTITUDE": 45
+  },
+  {
+    "ORGANIZATION": "Other",
+    "NAME": "Firepond MA Laser",
+    "LATITUDE": 42.61757,
+    "LONGITUDE": -71.4923,
+    "ALTITUDE": 105.4
+  },
+  {
+    "ORGANIZATION": "Other",
+    "NAME": "Fylingdales UK Phased Array Face A",
+    "LATITUDE": 54.4166667,
+    "LONGITUDE": -0.5333333,
+    "ALTITUDE": 104.128
+  },
+  {
+    "ORGANIZATION": "Other",
+    "NAME": "Fylingdales UK Phased Array Face B",
+    "LATITUDE": 54.4166667,
+    "LONGITUDE": -0.5333333,
+    "ALTITUDE": 104.128
+  },
+  {
+    "ORGANIZATION": "Other",
+    "NAME": "Fylingdales UK Phased Array Face C",
+    "LATITUDE": 54.4166667,
+    "LONGITUDE": -0.5333333,
+    "ALTITUDE": 104.128
+  },
+  {
+    "ORGANIZATION": "Other",
+    "NAME": "Gila River TX NAVSPASUR",
+    "LATITUDE": 33.11333,
+    "LONGITUDE": -112.0307,
+    "ALTITUDE": 0
+  },
+  {
+    "ORGANIZATION": "Other",
+    "NAME": "Hawkingsville GA NAVSPASUR",
+    "LATITUDE": 32.28753,
+    "LONGITUDE": -83.5364,
+    "ALTITUDE": 71.3
+  },
+  {
+    "ORGANIZATION": "Other",
+    "NAME": "Haystack MA Haystack Auxilliary",
+    "LATITUDE": 42.62283,
+    "LONGITUDE": -71.4872,
+    "ALTITUDE": 102.6
+  },
+  {
+    "ORGANIZATION": "Other",
+    "NAME": "Haystack MA X Band Imaging Radar",
+    "LATITUDE": 42.62329,
+    "LONGITUDE": -71.4881,
+    "ALTITUDE": 115.7
+  },
+  {
+    "ORGANIZATION": "Other",
+    "NAME": "Jordan Lake AL NAVSPASUR",
+    "LATITUDE": 32.65937,
+    "LONGITUDE": -86.2638,
+    "ALTITUDE": 0
+  },
+  {
+    "ORGANIZATION": "Other",
+    "NAME": "Kaena Point HI FPQ-14",
+    "LATITUDE": 21.5748,
+    "LONGITUDE": -158.2706,
+    "ALTITUDE": 300.2
+  },
+  {
+    "ORGANIZATION": "Other",
+    "NAME": "Katsuura Tracking-Data Acq",
+    "LATITUDE": 35.2166,
+    "LONGITUDE": 140.3,
+    "ALTITUDE": 0
+  },
+  {
+    "ORGANIZATION": "Other",
+    "NAME": "Kickapoo TX NAVSPASUR",
+    "LATITUDE": 33.55398,
+    "LONGITUDE": -98.7629,
+    "ALTITUDE": 305.3
+  },
+  {
+    "ORGANIZATION": "Other",
+    "NAME": "Kiruna S X-Band antenna",
+    "LATITUDE": 67.9,
+    "LONGITUDE": 21,
+    "ALTITUDE": 0
+  },
+  {
+    "ORGANIZATION": "Other",
+    "NAME": "Kodiak",
+    "LATITUDE": 57.2,
+    "LONGITUDE": -153.2,
+    "ALTITUDE": 125.965
+  },
+  {
+    "ORGANIZATION": "Other",
+    "NAME": "Kourou ELA-1 France Europe LPad",
+    "LATITUDE": 5.23583,
+    "LONGITUDE": -52.7747,
+    "ALTITUDE": 0
+  },
+  {
+    "ORGANIZATION": "Other",
+    "NAME": "Kourou ELA-2 France Europe LPad",
+    "LATITUDE": 5.23222,
+    "LONGITUDE": -52.7755,
+    "ALTITUDE": 0
+  },
+  {
+    "ORGANIZATION": "Other",
+    "NAME": "Kourou ELA-3 France Europe LPad",
+    "LATITUDE": 5.23916,
+    "LONGITUDE": -52.7667,
+    "ALTITUDE": 0
+  },
+  {
+    "ORGANIZATION": "Other",
+    "NAME": "Kourou S-Band station",
+    "LATITUDE": 5.2,
+    "LONGITUDE": -52.8,
+    "ALTITUDE": 0
+  },
+  {
+    "ORGANIZATION": "Other",
+    "NAME": "Kwajalein Atoll ALTAIR",
+    "LATITUDE": 9.40363,
+    "LONGITUDE": 167.4825,
+    "ALTITUDE": 62.7
+  },
+  {
+    "ORGANIZATION": "Other",
+    "NAME": "Kwajalein Atoll TRADEX",
+    "LATITUDE": 9.39871,
+    "LONGITUDE": 167.482,
+    "ALTITUDE": 25
+  },
+  {
+    "ORGANIZATION": "Other",
+    "NAME": "Malindi S-Band station",
+    "LATITUDE": -2.9,
+    "LONGITUDE": 40.1,
+    "ALTITUDE": 0
+  },
+  {
+    "ORGANIZATION": "Other",
+    "NAME": "Masuda Tracking Data Acq",
+    "LATITUDE": 30.55,
+    "LONGITUDE": 131.016,
+    "ALTITUDE": 0
+  },
+  {
+    "ORGANIZATION": "Other",
+    "NAME": "Millstone Hill MA L Band Radar",
+    "LATITUDE": 42.6174,
+    "LONGITUDE": -71.491,
+    "ALTITUDE": 123.1
+  },
+  {
+    "ORGANIZATION": "Other",
+    "NAME": "Millstone Hill MA UHF Radar",
+    "LATITUDE": 42.61959,
+    "LONGITUDE": -71.4912,
+    "ALTITUDE": 113.1
+  },
+  {
+    "ORGANIZATION": "Other",
+    "NAME": "Misawa Japan DSTS",
+    "LATITUDE": 40.7136,
+    "LONGITUDE": 141.3829,
+    "ALTITUDE": 75
+  },
+  {
+    "ORGANIZATION": "Other",
+    "NAME": "Odenwald Telecommand-Tracking",
+    "LATITUDE": 49.7,
+    "LONGITUDE": 8.9,
+    "ALTITUDE": 0
+  },
+  {
+    "ORGANIZATION": "Other",
+    "NAME": "Ogasawara Tracking-Command",
+    "LATITUDE": 27.066,
+    "LONGITUDE": 142.2166,
+    "ALTITUDE": 0
+  },
+  {
+    "ORGANIZATION": "Other",
+    "NAME": "Okinawa Tracking-Data Acq",
+    "LATITUDE": 26.5,
+    "LONGITUDE": 127.9,
+    "ALTITUDE": 0
+  },
+  {
+    "ORGANIZATION": "Other",
+    "NAME": "Perth S X-Band antenna",
+    "LATITUDE": -31.8,
+    "LONGITUDE": 115.8,
+    "ALTITUDE": 0
+  },
+  {
+    "ORGANIZATION": "Other",
+    "NAME": "Red River AR NAVSPASUR",
+    "LATITUDE": 33.33066,
+    "LONGITUDE": -93.5499,
+    "ALTITUDE": 51.9
+  },
+  {
+    "ORGANIZATION": "Other",
+    "NAME": "Redu Control Centre",
+    "LATITUDE": 50,
+    "LONGITUDE": 5.1,
+    "ALTITUDE": 0
+  },
+  {
+    "ORGANIZATION": "Other",
+    "NAME": "San Diego CA NAVSPASUR",
+    "LATITUDE": 32.57742,
+    "LONGITUDE": -116.9747,
+    "ALTITUDE": 119.6
+  },
+  {
+    "ORGANIZATION": "Other",
+    "NAME": "Seychelles Seychelles 18M",
+    "LATITUDE": -4.67171,
+    "LONGITUDE": 55.478,
+    "ALTITUDE": 561.4
+  },
+  {
+    "ORGANIZATION": "Other",
+    "NAME": "Silver Lake MS NAVSPASUR",
+    "LATITUDE": 33.14675,
+    "LONGITUDE": -91.0207,
+    "ALTITUDE": 4.3
+  },
+  {
+    "ORGANIZATION": "Other",
+    "NAME": "Socorro NM ETS 14in and 31in",
+    "LATITUDE": 33.81773,
+    "LONGITUDE": -106.6593,
+    "ALTITUDE": 1509.6
+  },
+  {
+    "ORGANIZATION": "Other",
+    "NAME": "Socorro NM ETS B 31in",
+    "LATITUDE": 33.81792,
+    "LONGITUDE": -106.6599,
+    "ALTITUDE": 1508.8
+  },
+  {
+    "ORGANIZATION": "Other",
+    "NAME": "Tattnall GA NAVSPASUR",
+    "LATITUDE": 32.0438,
+    "LONGITUDE": -81.9259,
+    "ALTITUDE": 24.7
+  },
+  {
+    "ORGANIZATION": "Other",
+    "NAME": "Thule Greenland Phased Array N Face",
+    "LATITUDE": 76.57035,
+    "LONGITUDE": -68.2994,
+    "ALTITUDE": 424.7
+  },
+  {
+    "ORGANIZATION": "Other",
+    "NAME": "Thule Greenland Phased Array SE Face",
+    "LATITUDE": 76.57026,
+    "LONGITUDE": -68.2991,
+    "ALTITUDE": 424.7
+  },
+  {
+    "ORGANIZATION": "Other",
+    "NAME": "Tromso Telemetry Station",
+    "LATITUDE": 69.65,
+    "LONGITUDE": 18.933,
+    "ALTITUDE": 0
+  },
+  {
+    "ORGANIZATION": "Other",
+    "NAME": "Tsukuba Japan Space Center",
+    "LATITUDE": 36.066,
+    "LONGITUDE": 140.133,
+    "ALTITUDE": 0
+  },
+  {
+    "ORGANIZATION": "Other",
+    "NAME": "Villafranca Tracking Station",
+    "LATITUDE": 40.4,
+    "LONGITUDE": -3.9,
+    "ALTITUDE": 0
+  },
+  {
+    "ORGANIZATION": "PrioraNet",
+    "NAME": "Kiruna ELS",
+    "LATITUDE": 67.8765392,
+    "LONGITUDE": 21.06233889,
+    "ALTITUDE": 510.3
+  },
+  {
+    "ORGANIZATION": "PrioraNet",
+    "NAME": "Kiruna ESX",
+    "LATITUDE": 67.8781633,
+    "LONGITUDE": 21.06339944,
+    "ALTITUDE": 504
+  },
+  {
+    "ORGANIZATION": "PrioraNet",
+    "NAME": "Kiruna TTC",
+    "LATITUDE": 67.8842386,
+    "LONGITUDE": 21.06077056,
+    "ALTITUDE": 436
+  },
+  {
+    "ORGANIZATION": "PrioraNet",
+    "NAME": "Kiruna ETX",
+    "LATITUDE": 67.889565,
+    "LONGITUDE": 21.06565472,
+    "ALTITUDE": 394.6
+  },
+  {
+    "ORGANIZATION": "PrioraNet",
+    "NAME": "Kiruna ESC",
+    "LATITUDE": 67.8843589,
+    "LONGITUDE": 21.05991861,
+    "ALTITUDE": 432.6
+  },
+  {
+    "ORGANIZATION": "PrioraNet",
+    "NAME": "Kiruna ESSEX",
+    "LATITUDE": 67.8904403,
+    "LONGITUDE": 21.06309806,
+    "ALTITUDE": 405
+  },
+  {
+    "ORGANIZATION": "PrioraNet",
+    "NAME": "Sturup KSX",
+    "LATITUDE": 55.5411225,
+    "LONGITUDE": 13.34946667,
+    "ALTITUDE": 109.2
+  },
+  {
+    "ORGANIZATION": "PrioraNet",
+    "NAME": "North Pole",
+    "LATITUDE": 64.8042411,
+    "LONGITUDE": -147.500214,
+    "ALTITUDE": 149.4
+  },
+  {
+    "ORGANIZATION": "PrioraNet",
+    "NAME": "Dongara",
+    "LATITUDE": -29.045768,
+    "LONGITUDE": 115.3486681,
+    "ALTITUDE": 250.6
+  },
+  {
+    "ORGANIZATION": "PrioraNet",
+    "NAME": "South Point",
+    "LATITUDE": 19.0139044,
+    "LONGITUDE": -155.663301,
+    "ALTITUDE": 367.2
+  },
+  {
+    "ORGANIZATION": "QinetiQ",
+    "NAME": "West_Freugh",
+    "LATITUDE": 54.843057,
+    "LONGITUDE": -4.943056,
+    "ALTITUDE": 150
+  },
+  {
+    "ORGANIZATION": "RSGS",
+    "NAME": "Miyun",
+    "LATITUDE": 40.3625,
+    "LONGITUDE": 116.848057,
+    "ALTITUDE": 50.767
+  },
+  {
+    "ORGANIZATION": "SPOT",
+    "NAME": "Aussaguel",
+    "LATITUDE": 43.4286,
+    "LONGITUDE": 1.5,
+    "ALTITUDE": 214.525
+  },
+  {
+    "ORGANIZATION": "SPOT",
+    "NAME": "Alice Springs",
+    "LATITUDE": -23.75881,
+    "LONGITUDE": 133.882599,
+    "ALTITUDE": 576.542
+  },
+  {
+    "ORGANIZATION": "SPOT",
+    "NAME": "Cuiaba",
+    "LATITUDE": -15.5333,
+    "LONGITUDE": -56.0667,
+    "ALTITUDE": 185.004
+  },
+  {
+    "ORGANIZATION": "SPOT",
+    "NAME": "GSS",
+    "LATITUDE": 45.5813,
+    "LONGITUDE": -75.8062,
+    "ALTITUDE": 330
+  },
+  {
+    "ORGANIZATION": "SPOT",
+    "NAME": "Hartebeesthoek",
+    "LATITUDE": -25.883333,
+    "LONGITUDE": 27.7,
+    "ALTITUDE": 1524
+  },
+  {
+    "ORGANIZATION": "SPOT",
+    "NAME": "Hobart",
+    "LATITUDE": -42.845833,
+    "LONGITUDE": 147.291944,
+    "ALTITUDE": 35.339
+  },
+  {
+    "ORGANIZATION": "SPOT",
+    "NAME": "Islamabad",
+    "LATITUDE": 33.718151,
+    "LONGITUDE": 73.060547,
+    "ALTITUDE": 542.373
+  },
+  {
+    "ORGANIZATION": "SPOT",
+    "NAME": "Kiruna_Esrange",
+    "LATITUDE": 68.4833333,
+    "LONGITUDE": 26.1,
+    "ALTITUDE": 386
+  },
+  {
+    "ORGANIZATION": "SPOT",
+    "NAME": "Maspalomas",
+    "LATITUDE": 28,
+    "LONGITUDE": -15.3,
+    "ALTITUDE": 0
+  },
+  {
+    "ORGANIZATION": "SPOT",
+    "NAME": "Miyun",
+    "LATITUDE": 40.3625,
+    "LONGITUDE": 116.848057,
+    "ALTITUDE": 50.767
+  },
+  {
+    "ORGANIZATION": "SPOT",
+    "NAME": "Obninsk",
+    "LATITUDE": 55.083333,
+    "LONGITUDE": 36.616667,
+    "ALTITUDE": 180.998
+  },
+  {
+    "ORGANIZATION": "SPOT",
+    "NAME": "Parepare",
+    "LATITUDE": -4.020104,
+    "LONGITUDE": 119.643071,
+    "ALTITUDE": 0
+  },
+  {
+    "ORGANIZATION": "SPOT",
+    "NAME": "PASS",
+    "LATITUDE": 53.2126,
+    "LONGITUDE": -105.934,
+    "ALTITUDE": 488.8
+  },
+  {
+    "ORGANIZATION": "SPOT",
+    "NAME": "Quito",
+    "LATITUDE": -0.216668,
+    "LONGITUDE": -78.5,
+    "ALTITUDE": 2753
+  },
+  {
+    "ORGANIZATION": "SPOT",
+    "NAME": "Riyadh",
+    "LATITUDE": 24.643889,
+    "LONGITUDE": 46.740556,
+    "ALTITUDE": 609.902
+  },
+  {
+    "ORGANIZATION": "SPOT",
+    "NAME": "Singapore",
+    "LATITUDE": 1.229794,
+    "LONGITUDE": 104.177116,
+    "ALTITUDE": 0
+  },
+  {
+    "ORGANIZATION": "SPOT",
+    "NAME": "Taejon",
+    "LATITUDE": 36.326944,
+    "LONGITUDE": 127.433333,
+    "ALTITUDE": 43.53
+  },
+  {
+    "ORGANIZATION": "SPOT",
+    "NAME": "Tel_Aviv",
+    "LATITUDE": 32.077779,
+    "LONGITUDE": 34.762778,
+    "ALTITUDE": 31.888
+  },
+  {
+    "ORGANIZATION": "SSC",
+    "NAME": "Kiruna ELS",
+    "LATITUDE": 67.8765392,
+    "LONGITUDE": 21.06233889,
+    "ALTITUDE": 510.3
+  },
+  {
+    "ORGANIZATION": "SSC",
+    "NAME": "Kiruna ESX",
+    "LATITUDE": 67.8781633,
+    "LONGITUDE": 21.06339944,
+    "ALTITUDE": 504
+  },
+  {
+    "ORGANIZATION": "SSC",
+    "NAME": "Kiruna TTC",
+    "LATITUDE": 67.8842386,
+    "LONGITUDE": 21.06077056,
+    "ALTITUDE": 436
+  },
+  {
+    "ORGANIZATION": "SSC",
+    "NAME": "Kiruna ETX",
+    "LATITUDE": 67.889565,
+    "LONGITUDE": 21.06565472,
+    "ALTITUDE": 394.6
+  },
+  {
+    "ORGANIZATION": "SSC",
+    "NAME": "Kiruna ESC",
+    "LATITUDE": 67.8843589,
+    "LONGITUDE": 21.05991861,
+    "ALTITUDE": 432.6
+  },
+  {
+    "ORGANIZATION": "SSC",
+    "NAME": "Kiruna ESSEX",
+    "LATITUDE": 67.8904403,
+    "LONGITUDE": 21.06309806,
+    "ALTITUDE": 405
+  },
+  {
+    "ORGANIZATION": "SSC",
+    "NAME": "Sturup KSX",
+    "LATITUDE": 55.5411225,
+    "LONGITUDE": 13.34946667,
+    "ALTITUDE": 109.2
+  },
+  {
+    "ORGANIZATION": "TCCON",
+    "NAME": "anmeyondo01",
+    "LATITUDE": 36.5382,
+    "LONGITUDE": 126.3311,
+    "ALTITUDE": 30
+  },
+  {
+    "ORGANIZATION": "TCCON",
+    "NAME": "ascension01",
+    "LATITUDE": -7.9165,
+    "LONGITUDE": -14.3325,
+    "ALTITUDE": 30.8
+  },
+  {
+    "ORGANIZATION": "TCCON",
+    "NAME": "bialystok01",
+    "LATITUDE": 53.23,
+    "LONGITUDE": 23.025,
+    "ALTITUDE": 180
+  },
+  {
+    "ORGANIZATION": "TCCON",
+    "NAME": "bremen01",
+    "LATITUDE": 53.1,
+    "LONGITUDE": 8.85,
+    "ALTITUDE": 27
+  },
+  {
+    "ORGANIZATION": "TCCON",
+    "NAME": "darwin01",
+    "LATITUDE": -12.4559,
+    "LONGITUDE": 130.9266,
+    "ALTITUDE": 32
+  },
+  {
+    "ORGANIZATION": "TCCON",
+    "NAME": "edwards01",
+    "LATITUDE": 34.95839,
+    "LONGITUDE": -117.88216,
+    "ALTITUDE": 699
+  },
+  {
+    "ORGANIZATION": "TCCON",
+    "NAME": "eureka01",
+    "LATITUDE": 80.05,
+    "LONGITUDE": -86.42,
+    "ALTITUDE": 610
+  },
+  {
+    "ORGANIZATION": "TCCON",
+    "NAME": "fourcorners01",
+    "LATITUDE": 36.79749,
+    "LONGITUDE": -108.48009,
+    "ALTITUDE": 1643
+  },
+  {
+    "ORGANIZATION": "TCCON",
+    "NAME": "garmisch01",
+    "LATITUDE": 47.476,
+    "LONGITUDE": 11.063,
+    "ALTITUDE": 740
+  },
+  {
+    "ORGANIZATION": "TCCON",
+    "NAME": "izana01",
+    "LATITUDE": 28.3,
+    "LONGITUDE": -16.5,
+    "ALTITUDE": 2370
+  },
+  {
+    "ORGANIZATION": "TCCON",
+    "NAME": "jena01",
+    "LATITUDE": 50.91033,
+    "LONGITUDE": 11.56871,
+    "ALTITUDE": 211.7
+  },
+  {
+    "ORGANIZATION": "TCCON",
+    "NAME": "karlsruhe01",
+    "LATITUDE": 49.1,
+    "LONGITUDE": 8.438,
+    "ALTITUDE": 110
+  },
+  {
+    "ORGANIZATION": "TCCON",
+    "NAME": "lamont01",
+    "LATITUDE": 36.604,
+    "LONGITUDE": -97.486,
+    "ALTITUDE": 320
+  },
+  {
+    "ORGANIZATION": "TCCON",
+    "NAME": "lauder01",
+    "LATITUDE": -45.038,
+    "LONGITUDE": 169.684,
+    "ALTITUDE": 370
+  },
+  {
+    "ORGANIZATION": "TCCON",
+    "NAME": "lauder02",
+    "LATITUDE": -45.038,
+    "LONGITUDE": 169.684,
+    "ALTITUDE": 370
+  },
+  {
+    "ORGANIZATION": "TCCON",
+    "NAME": "manaus01",
+    "LATITUDE": -3.2133,
+    "LONGITUDE": -60.5983,
+    "ALTITUDE": 50
+  },
+  {
+    "ORGANIZATION": "TCCON",
+    "NAME": "nyalesund01",
+    "LATITUDE": 78.9,
+    "LONGITUDE": 11.9,
+    "ALTITUDE": 20
+  },
+  {
+    "ORGANIZATION": "TCCON",
+    "NAME": "orleans01",
+    "LATITUDE": 47.97,
+    "LONGITUDE": 2.113,
+    "ALTITUDE": 130
+  },
+  {
+    "ORGANIZATION": "TCCON",
+    "NAME": "paris01",
+    "LATITUDE": 48.97,
+    "LONGITUDE": 2.37,
+    "ALTITUDE": 60
+  },
+  {
+    "ORGANIZATION": "TCCON",
+    "NAME": "parkfalls01",
+    "LATITUDE": 45.945,
+    "LONGITUDE": -90.273,
+    "ALTITUDE": 440
+  },
+  {
+    "ORGANIZATION": "TCCON",
+    "NAME": "pasadena01",
+    "LATITUDE": 34.136,
+    "LONGITUDE": -118.127,
+    "ALTITUDE": 230
+  },
+  {
+    "ORGANIZATION": "TCCON",
+    "NAME": "reunion01",
+    "LATITUDE": -20.901,
+    "LONGITUDE": 55.485,
+    "ALTITUDE": 85
+  },
+  {
+    "ORGANIZATION": "TCCON",
+    "NAME": "rikubetsu01",
+    "LATITUDE": 43.46,
+    "LONGITUDE": 143.77,
+    "ALTITUDE": 380
+  },
+  {
+    "ORGANIZATION": "TCCON",
+    "NAME": "saga01",
+    "LATITUDE": 33.24096,
+    "LONGITUDE": 130.28824,
+    "ALTITUDE": 7
+  },
+  {
+    "ORGANIZATION": "TCCON",
+    "NAME": "sodankyla01",
+    "LATITUDE": 67.3668,
+    "LONGITUDE": 26.631,
+    "ALTITUDE": 188
+  },
+  {
+    "ORGANIZATION": "TCCON",
+    "NAME": "tsukuba01",
+    "LATITUDE": 36.0513,
+    "LONGITUDE": 140.1215,
+    "ALTITUDE": 30
+  },
+  {
+    "ORGANIZATION": "TCCON",
+    "NAME": "tsukuba02",
+    "LATITUDE": 36.0513,
+    "LONGITUDE": 140.1215,
+    "ALTITUDE": 30
+  },
+  {
+    "ORGANIZATION": "TCCON",
+    "NAME": "wollongong01",
+    "LATITUDE": -34.406,
+    "LONGITUDE": 150.8798,
+    "ALTITUDE": 30
+  },
+  {
+    "ORGANIZATION": "USAF AFSCN",
+    "NAME": "CTSA",
+    "LATITUDE": 38.8059353,
+    "LONGITUDE": -104.52848,
+    "ALTITUDE": 1899.1
+  },
+  {
+    "ORGANIZATION": "USAF AFSCN",
+    "NAME": "DGSA",
+    "LATITUDE": -7.2700227,
+    "LONGITUDE": 72.37002305,
+    "ALTITUDE": -56.8
+  },
+  {
+    "ORGANIZATION": "USAF AFSCN",
+    "NAME": "EPTS",
+    "LATITUDE": 21.52325,
+    "LONGITUDE": -157.997167,
+    "ALTITUDE": 404.1
+  },
+  {
+    "ORGANIZATION": "USAF AFSCN",
+    "NAME": "GTSA",
+    "LATITUDE": 13.6151942,
+    "LONGITUDE": 144.8560742,
+    "ALTITUDE": 217
+  },
+  {
+    "ORGANIZATION": "USAF AFSCN",
+    "NAME": "GTSB",
+    "LATITUDE": 13.6158802,
+    "LONGITUDE": 144.8554464,
+    "ALTITUDE": 211.2
+  },
+  {
+    "ORGANIZATION": "USAF AFSCN",
+    "NAME": "HTSA",
+    "LATITUDE": 21.56228,
+    "LONGITUDE": -158.242109,
+    "ALTITUDE": 428.42
+  },
+  {
+    "ORGANIZATION": "USAF AFSCN",
+    "NAME": "HTSB",
+    "LATITUDE": 21.5689783,
+    "LONGITUDE": -158.262297,
+    "ALTITUDE": 317.7
+  },
+  {
+    "ORGANIZATION": "USAF AFSCN",
+    "NAME": "ITLS",
+    "LATITUDE": 40.93,
+    "LONGITUDE": 14.04527777,
+    "ALTITUDE": 41
+  },
+  {
+    "ORGANIZATION": "USAF AFSCN",
+    "NAME": "MANE",
+    "LATITUDE": 44.404229,
+    "LONGITUDE": -67.987154,
+    "ALTITUDE": 12.8016
+  },
+  {
+    "ORGANIZATION": "USAF AFSCN",
+    "NAME": "NHSA",
+    "LATITUDE": 42.9478333,
+    "LONGITUDE": -71.626559,
+    "ALTITUDE": 204.62
+  },
+  {
+    "ORGANIZATION": "USAF AFSCN",
+    "NAME": "NHSB",
+    "LATITUDE": 42.9447544,
+    "LONGITUDE": -71.630319,
+    "ALTITUDE": 194.6
+  },
+  {
+    "ORGANIZATION": "USAF AFSCN",
+    "NAME": "NORS",
+    "LATITUDE": 36.5594444,
+    "LONGITUDE": -76.267222,
+    "ALTITUDE": 20.7
+  },
+  {
+    "ORGANIZATION": "USAF AFSCN",
+    "NAME": "OTSE",
+    "LATITUDE": 32.6166666,
+    "LONGITUDE": -117.233333,
+    "ALTITUDE": 12.192
+  },
+  {
+    "ORGANIZATION": "USAF AFSCN",
+    "NAME": "STKS",
+    "LATITUDE": 37.9452777,
+    "LONGITUDE": -121.346806,
+    "ALTITUDE": 28.5
+  },
+  {
+    "ORGANIZATION": "USAF AFSCN",
+    "NAME": "TCSA",
+    "LATITUDE": 51.1167229,
+    "LONGITUDE": -0.90636355,
+    "ALTITUDE": 130.58
+  },
+  {
+    "ORGANIZATION": "USAF AFSCN",
+    "NAME": "TCSB",
+    "LATITUDE": 51.1178738,
+    "LONGITUDE": -0.90642519,
+    "ALTITUDE": 138.58
+  },
+  {
+    "ORGANIZATION": "USAF AFSCN",
+    "NAME": "TTSA",
+    "LATITUDE": 76.5151944,
+    "LONGITUDE": -68.5956028,
+    "ALTITUDE": 131.3
+  },
+  {
+    "ORGANIZATION": "USAF AFSCN",
+    "NAME": "TTSB",
+    "LATITUDE": 76.5153639,
+    "LONGITUDE": -68.5988147,
+    "ALTITUDE": 147.37
+  },
+  {
+    "ORGANIZATION": "USAF AFSCN",
+    "NAME": "TTSC",
+    "LATITUDE": 76.5157036,
+    "LONGITUDE": -68.605031,
+    "ALTITUDE": 145.66
+  },
+  {
+    "ORGANIZATION": "USAF AFSCN",
+    "NAME": "TVF1",
+    "LATITUDE": 28.4858933,
+    "LONGITUDE": -80.575793,
+    "ALTITUDE": 15
+  },
+  {
+    "ORGANIZATION": "USAF AFSCN",
+    "NAME": "VTSA",
+    "LATITUDE": 34.8226094,
+    "LONGITUDE": -120.501852,
+    "ALTITUDE": 271.51
+  },
+  {
+    "ORGANIZATION": "USAF AFSCN",
+    "NAME": "VTSB",
+    "LATITUDE": 34.8256235,
+    "LONGITUDE": -120.505403,
+    "ALTITUDE": 268.61
+  },
+  {
+    "ORGANIZATION": "USAF AFSCN",
+    "NAME": "WPTE",
+    "LATITUDE": 13.5977222,
+    "LONGITUDE": 144.83527,
+    "ALTITUDE": 141.427
+  },
+  {
+    "ORGANIZATION": "USAF AFSCN",
+    "NAME": "WPTS",
+    "LATITUDE": 13.5819166,
+    "LONGITUDE": 144.8474722,
+    "ALTITUDE": 153.3
+  }
+]
