@@ -7,6 +7,30 @@
  */
 module.exports = function (grunt) {
     grunt.initConfig({
+        connect:{
+            options: {
+            base: ['.'],
+            port: 9000,
+            hostname: 'localhost',
+            livereload: 35729
+          },
+          livereload: {
+            options: {
+              open: true,
+              base: ['.']
+            }
+          }
+        },
+
+        watch: {
+            options: {
+                livereload: 35729,
+            },
+            sources: {
+                files: ['standalone/*.js', 'standalone/*.html']
+            }
+        },
+
         jsdoc: {
             dist: {
                 src: ['src'],
@@ -72,6 +96,9 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-requirejs');
     grunt.loadNpmTasks('grunt-jsdoc');
     grunt.loadNpmTasks('grunt-contrib-compress');
+    grunt.loadNpmTasks('grunt-contrib-connect');
+    grunt.loadNpmTasks('grunt-contrib-watch');
 
     grunt.registerTask('default', ['jsdoc', 'requirejs', 'compress']);
+    grunt.registerTask('server', ['connect', 'watch']);
 };
