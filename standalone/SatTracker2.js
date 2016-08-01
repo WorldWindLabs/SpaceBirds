@@ -297,6 +297,7 @@ $.get('./SatTracker/groundstations.json', function(groundStations) {
                       try {
                           var position = getPosition(satellite.twoline2satrec(satData[j].TLE_LINE1, satData[j].TLE_LINE2), time);
                       } catch (err) {
+                        break;
                       }
                       if (i < 0) {
                           pastOrbit.push(position);

@@ -73,10 +73,11 @@ function orbitalCalculation(satData){
               var position = getPosition(satellite.twoline2satrec(satData[j].TLE_LINE1, satData[j].TLE_LINE2), time);
           } catch (err) {
             console.log('Satellite ' + satData[j].OBJECT_NAME +  ' messes up twoline2satrec. Its TLE data is:');
+            console.log(satData[j].INTLDES);
             console.log(satData[j].TLE_LINE1);
             console.log(satData[j].TLE_LINE2);
             console.log('The error is ' + err);
-            continue; //Skip this faulty satellite just because
+            break; //Skip this faulty satellite just because
           }
           //TODO: calculate time as a function of orbital period, to always show
           //two orbits regardless of altitude
