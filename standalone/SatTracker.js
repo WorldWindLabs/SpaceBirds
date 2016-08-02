@@ -1,9 +1,8 @@
 
 "use strict";
-var satParserWorker;
-var orbitWorker;
-var groundStationWorker;
-var satData = [];
+//var orbitWorker;
+var satData = []; //global object array with all satellite data
+var groundStations = [];
 
 WorldWind.Logger.setLoggingLevel(WorldWind.Logger.LEVEL_WARNING);
 
@@ -27,21 +26,15 @@ for (var l = 0; l < layers.length; l++) {
 
 //custom layers
 //var groundStationsLayer = new WorldWind.RenderableLayer();
-var modelLayer = new WorldWind.RenderableLayer("Model");
+//var modelLayer = new WorldWind.RenderableLayer("Model");
 //var meshLayer = new WorldWind.RenderableLayer();
-var orbitsLayer = new WorldWind.RenderableLayer("Orbit");
+//var orbitsLayer = new WorldWind.RenderableLayer("Orbit");
 //var leoSatLayer = new WorldWind.RenderableLayer("LEO Satellite");
 //var meoSatLayer = new WorldWind.RenderableLayer("MEO Satellite");
 //var heoSatLayer = new WorldWind.RenderableLayer("HEO Satellite");
 
 //add custom layers
 //wwd.addLayer(groundStationsLayer);
-
-
-if (typeof(satParserWorker) == "undefined") {
-  satParserWorker = new Worker("satelliteParseWorker.js");
-  console.log('worker created');
-}
 
 function deg2text(deg, letters) {
     var letter;
@@ -68,14 +61,21 @@ function deg2text(deg, letters) {
     return degrees + "° " + minutes + "' " + seconds + "\" " + letter;
 }
 
-satParserWorker.postMessage("do your deed, slave!");
+var satParserWorker = new Worker("Workers/satelliteParseWorker.js");
+var grndStationsWorker = new Worker("Workers/groundStationsWorker.js");
+
+satParserWorker.postMessage("do your deed, sat parser slave!");
+grndStationsWorker.postMessage("and you too, groundstations servant!");
 
 satParserWorker.addEventListener('message', function(event){
   satData = event.data;
-  //event.data = satData;
-  //console.log('Message received in main thread: ' + event.data);
   console.log('the first satellite retrieved by the worker is: ' + satData[0].OBJECT_NAME);
   satParserWorker.postMessage('close');
+}, false);
+
+grndStationsWorker.addEventListener('message', function(event){
+  groundStations = event.data;
+  grndStationsWorker.postMessage('close');
 }, false);
 
 

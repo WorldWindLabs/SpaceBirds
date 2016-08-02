@@ -1,22 +1,22 @@
 "use strict"
-importScripts('./SatTracker/util/Satellite.js');
+importScripts('./../SatTracker/util/Satellite.js');
 self.addEventListener('message', onMessage);
 self.addEventListener('error', onError);
 
 function onError(e){
-  console.log('worker says: Im on error');
+  console.log('worker says: Error on satellite parser. I suck.');
 }
 
 //Web Worker interface: onMessage
 function onMessage(inputMessage){
-  console.log('worker says message received: ' + inputMessage.data);
+  console.log('satellites worker says: message received: ' + inputMessage.data);
   //postMessage('Send this crap to main thread');
   if(inputMessage.data == 'close'){
-    console.log('worker says: Im closing');
+    console.log('satellites worker says: Im closing');
     self.close();
   }
   else{
-    loadJSON('./SatTracker/allObjectsTLE.json',
+    loadJSON('./../SatTracker/allObjectsTLE.json',
       function(data) {
         //console.log(data); //Getting the data alright
         self.postMessage(data); //Sending JSON object to the main thread
