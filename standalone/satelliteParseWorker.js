@@ -1,21 +1,47 @@
 "use strict"
-self.importScripts('./SatTracker/util/Satellite.js');
+importScripts('./SatTracker/util/Satellite.js');
 self.addEventListener('message', onMessage);
 self.addEventListener('error', onError);
 
-var satellites;
-
 function onError(e){
-  console.log('on error inside satelliteWorker');
+  console.log('worker says: Im on error');
 }
 
 //Web Worker interface: onMessage
-function onMessage(e){
-  $.get('./SatTracker/allObjectsTLE.json', function(response){
-    satellites = JSON.parse(text);
-  }).done(function(){
-    //TODO: Stuff after retrieving the .json file
-    console.log('TLE data parsed by worker.');
-    postmessage(satellites);
-  });
+function onMessage(inputMessage){
+  console.log('worker says message received: ' + inputMessage.data);
+  //postMessage('Send this crap to main thread');
+  if(inputMessage.data == 'close'){
+    console.log('worker says: Im closing');
+    self.close();
+  }
+  else{
+    loadJSON('./SatTracker/allObjectsTLE.json',
+      function(data) {
+        //console.log(data); //Getting the data alright
+        self.postMessage(data); //Sending JSON object to the main thread
+
+      },
+      function(xhr) { console.error(xhr); }
+    );
+  }
+}
+
+
+function loadJSON(path, success, error){
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function()
+    {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+                if (success)
+                    success(JSON.parse(xhr.responseText));
+            } else {
+                if (error)
+                    error(xhr);
+            }
+        }
+    };
+    xhr.open("GET", path, true);
+    xhr.send();
 }

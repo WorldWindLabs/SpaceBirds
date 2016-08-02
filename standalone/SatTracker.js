@@ -1,20 +1,16 @@
-/*
- * Copyright (C) 2014 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration. All Rights Reserved.
- */
+
 "use strict";
 var satParserWorker;
 var orbitWorker;
 var groundStationWorker;
 var satData = [];
-// Tell World Wind to log only warnings and errors.
+
 WorldWind.Logger.setLoggingLevel(WorldWind.Logger.LEVEL_WARNING);
 
 // Create the World Window.
 var wwd = new WorldWind.ObjectWindow("canvasOne");
 wwd.navigator.lookAtLocation.altitude = 0;
 wwd.navigator.range = 5e7;
-
 
 //Add imagery layers.
 var layers = [
@@ -41,17 +37,10 @@ var orbitsLayer = new WorldWind.RenderableLayer("Orbit");
 //add custom layers
 //wwd.addLayer(groundStationsLayer);
 
-/*$.get('./SatTracker/groundstations.json', function(groundStations){
-  //TODO handle groundstations
-}).done(function(){
-  //TODO stuff after adding groundstations
-  //$.get('./SatTracker/payloadsTLE.json', function())
-});*/
 
-function stopWorker(w) {
-    w.terminate();
-    w = undefined;
-    return w;
+if (typeof(satParserWorker) == "undefined") {
+  satParserWorker = new Worker("satelliteParseWorker.js");
+  console.log('worker created');
 }
 
 function deg2text(deg, letters) {
@@ -79,19 +68,27 @@ function deg2text(deg, letters) {
     return degrees + "° " + minutes + "' " + seconds + "\" " + letter;
 }
 
+satParserWorker.postMessage("do your deed, slave!");
 
-if (typeof(satParserWorker) == "undefined") {
-    satParserWorker = new Worker("satelliteParseWorker.js");
-}
+satParserWorker.addEventListener('message', function(event){
+  satData = event.data;
+  //event.data = satData;
+  //console.log('Message received in main thread: ' + event.data);
+  console.log('the first satellite retrieved by the worker is: ' + satData[0].OBJECT_NAME);
+  satParserWorker.postMessage('close');
+}, false);
 
-satParserWorker.onmessage = function(event){
-    event.data = satData;
-    console.log('inside sat parser.onmessage');
-};
 
-stopWorker(satParserWorker);
 
-console.log('the first satellite retrieved by a worker is: ' + satData[0].OBJECT_NAME);
+$(document).ready(function() {
+  //Nothing to do here yet
+});
+
+
+
+
+
+
 
 /*
 $.get('./SatTracker/groundstations.json', function(groundStations) {

@@ -34,7 +34,7 @@ function onError(e){
 }
 
 //Web Worker interface: onMessage
-function onMessage(e){
+function onMessage(){
   $.get('./SatTracker/allObjectsTLE.json', function(response){
     orbitalCalculation(response);
   }).done(function(){
