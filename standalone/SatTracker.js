@@ -75,6 +75,7 @@ satParserWorker.addEventListener('message', function(event){
 
 grndStationsWorker.addEventListener('message', function(event){
   groundStations = event.data;
+  console.log('the first groundstation retrieved by the worker is: ' + groundStations[0].NAME);
   grndStationsWorker.postMessage('close');
 }, false);
 
