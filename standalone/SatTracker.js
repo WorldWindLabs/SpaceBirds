@@ -65,7 +65,7 @@ var satParserWorker = new Worker("Workers/satelliteParseWorker.js");
 var grndStationsWorker = new Worker("Workers/groundStationsWorker.js");
 
 satParserWorker.postMessage("do your deed, sat parser slave!");
-grndStationsWorker.postMessage("and you too, groundstations servant!");
+grndStationsWorker.postMessage("and you too, groundstations JSON servant!");
 
 satParserWorker.addEventListener('message', function(event){
   satData = event.data;
