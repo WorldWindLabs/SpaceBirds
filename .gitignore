@@ -3,3 +3,5 @@ worldwindlib.js
 WebWorldWind.zip
 node_modules/
 .idea/
+.DS_Store
+standalone/.DS_Store
