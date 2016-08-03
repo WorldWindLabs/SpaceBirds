@@ -3,6 +3,7 @@
 //var orbitWorker;
 var satData = []; //global object array with all satellite data
 var groundStations = [];
+var everyObjectCurrentPosition = [];
 
 WorldWind.Logger.setLoggingLevel(WorldWind.Logger.LEVEL_WARNING);
 
@@ -36,6 +37,7 @@ for (var l = 0; l < layers.length; l++) {
 //add custom layers
 //wwd.addLayer(groundStationsLayer);
 
+
 function deg2text(deg, letters) {
     var letter;
     if (deg < 0) {
@@ -61,29 +63,68 @@ function deg2text(deg, letters) {
     return degrees + "° " + minutes + "' " + seconds + "\" " + letter;
 }
 
+// Orbit Propagation (MIT License, see https://github.com/shashwatak/satellite-js)
+function getPosition (satrec, time) {
+    var position_and_velocity = satellite.propagate(satrec,
+        time.getUTCFullYear(),
+        time.getUTCMonth() + 1,
+        time.getUTCDate(),
+        time.getUTCHours(),
+        time.getUTCMinutes(),
+        time.getUTCSeconds());
+    var position_eci = position_and_velocity["position"];
+
+    var gmst = satellite.gstime_from_date(time.getUTCFullYear(),
+        time.getUTCMonth() + 1,
+        time.getUTCDate(),
+        time.getUTCHours(),
+        time.getUTCMinutes(),
+        time.getUTCSeconds());
+
+    var position_gd = satellite.eci_to_geodetic(position_eci, gmst);
+    var latitude = satellite.degrees_lat(position_gd["latitude"]);
+    var longitude = satellite.degrees_long(position_gd["longitude"]);
+    var altitude = position_gd["height"] * 1000;
+
+    return new WorldWind.Position(latitude, longitude, altitude);
+};
+
+
 var satParserWorker = new Worker("Workers/satelliteParseWorker.js");
 var grndStationsWorker = new Worker("Workers/groundStationsWorker.js");
 
-satParserWorker.postMessage("do your deed, sat parser slave!");
-grndStationsWorker.postMessage("and you too, groundstations JSON servant!");
+//Initiating JSON parsing workers
+satParserWorker.postMessage("work, satellite parser, work!");
+grndStationsWorker.postMessage("and you too, groundstations servant!");
 
+//Retrieval of JSON file data from worker threads. Also, closing such threads.
 satParserWorker.addEventListener('message', function(event){
   satData = event.data;
-  console.log('the first satellite retrieved by the worker is: ' + satData[0].OBJECT_NAME);
   satParserWorker.postMessage('close');
+  renderSatellites(satData);
 }, false);
 
 grndStationsWorker.addEventListener('message', function(event){
   groundStations = event.data;
-  console.log('the first groundstation retrieved by the worker is: ' + groundStations[0].NAME);
   grndStationsWorker.postMessage('close');
 }, false);
 
-
-
 $(document).ready(function() {
-  //Nothing to do here yet
+
 });
+
+function renderSatellites(satData){
+  var time = new Date(now.getTime());
+  for(i in satData){
+    try{
+      var position = getPosition(satellite.twoline2satrec(satData[i].TLE_LINE1, satData[i].TLE_LINE2), time);
+    } catch (err){
+      console.log("Satellite " + satData[i].OBJECT_NAME + ' TLE data is messed up.');
+      continue;
+    }
+  }
+}
+
 
 
 

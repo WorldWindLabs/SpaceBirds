@@ -1,5 +1,5 @@
 "use strict"
-importScripts('./../SatTracker/util/Satellite.js');
+//importScripts('./../SatTracker/util/Satellite.js');
 self.addEventListener('message', onMessage);
 self.addEventListener('error', onError);
 
@@ -9,25 +9,22 @@ function onError(e){
 
 //Web Worker interface: onMessage
 function onMessage(inputMessage){
-  console.log('satellites worker says: message received: ' + inputMessage.data);
-  //postMessage('Send this crap to main thread');
+  console.log('Message received by satellite worker: ' + inputMessage.data);
   if(inputMessage.data == 'close'){
-    console.log('satellites worker says: Im closing');
+    console.log('Closing satellite worker');
     self.close();
   }
   else{
     loadJSON('./../SatTracker/allObjectsTLE.json',
       function(data) {
-        //console.log(data); //Getting the data alright
         self.postMessage(data); //Sending JSON object to the main thread
-
       },
       function(xhr) { console.error(xhr); }
     );
   }
 }
 
-
+//Reading json with pure JavaScript. No jQuery allowed in web workers (no DOM access).
 function loadJSON(path, success, error){
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function()

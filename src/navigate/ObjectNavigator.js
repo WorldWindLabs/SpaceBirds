@@ -112,6 +112,7 @@ define([
             // modelview matrix and before computing the near clip distance. The far clip distance depends on the
             // modelview matrix, and the near clip distance depends on the far clip distance.
             this.farDistance = WWMath.horizonDistanceForGlobeRadius(globeRadius, eyePos.altitude);
+            this.farDistance += 60000000;
             if (this.farDistance < 1e3)
                 this.farDistance = 1e3;
 
