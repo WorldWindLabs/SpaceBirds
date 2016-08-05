@@ -21,6 +21,7 @@ var layers = [
     {layer: new WorldWind.ViewControlsLayer(wwd), enabled: true}
 ];
 
+
 for (var l = 0; l < layers.length; l++) {
     layers[l].layer.enabled = layers[l].enabled;
     wwd.addLayer(layers[l].layer);
@@ -35,76 +36,39 @@ var leoSatLayer = new WorldWind.RenderableLayer("LEO Satellite");
 var meoSatLayer = new WorldWind.RenderableLayer("MEO Satellite");
 var heoSatLayer = new WorldWind.RenderableLayer("HEO Satellite");
 
-var updateAllSats;
-var endAllSats = function(){
-    clearInterval(updateAllSats);
-    modelLayer.removeAllRenderables();
-    meshLayer.removeAllRenderables();
-    orbitsLayer.removeAllRenderables();
-    leoSatLayer.removeAllRenderables();
-    meoSatLayer.removeAllRenderables();
-    heoSatLayer.removeAllRenderables();
-};
-
 //add custom layers
 wwd.addLayer(groundStationsLayer);
 
-/*$.get('./SatTracker/groundstations.json', function(groundStations){
-  //TODO handle groundstations
-}).done(function(){
-  //TODO stuff after adding groundstations
-  //$.get('./SatTracker/payloadsTLE.json', function())
-});*/
-
 var payloads = [];
-var rocketbodies = [];
-var debris = [];
-var unknown = [];
 
 $.get('./SatTracker/groundstations.json', function(groundStations) {
     $.get('./SatTracker/TLE.json', function (satPac) {
-        satPac.satDataString = JSON.stringify(satPac);
-        console.log(satPac[0].OBJECT_NAME);
-
-         for (var i = 0; i < satPac.length; i++) {
-         if (satPac[i].OBJECT_TYPE === 'PAYLOAD') {
+        /*   for (var i = 0; i < satPac.length; i++) {
+         satPac.satDataString = JSON.stringify(satPac);
+         if (satPac.OBJECT_TYPE === 'PAYLOAD') {
+         //Do something
+         console.log(payloads.OBJECT_NAME);
          payloads.push(satPac[i]);
-             }
          }
-
-        for (var i = 0; i < satPac.length; i++) {
-            if (satPac[i].OBJECT_TYPE === 'ROCKET BODY') {
-                rocketbodies.push(satPac[i]);
-            }
-        }
-
-        for (var i = 0; i < satPac.length; i++) {
-            if (satPac[i].OBJECT_TYPE === 'DEBRIS') {
-                debris.push(satPac[i]);
-            }
-        }
-
-        for (var i = 0; i < satPac.length; i++) {
-            if (satPac[i].OBJECT_TYPE !== 'PAYLOAD' && satPac[i].OBJECT_TYPE !== 'ROCKET BODY' && satPac[i].OBJECT_TYPE !== 'DEBRIS') {
-                unknown.push(satPac[i]);
-            }
-        }
+         }*/
 
 
 
-    //Latitude, Longitude, and Altitude
-    var latitudePlaceholder = document.getElementById('latitude');
-    var longitudePlaceholder = document.getElementById('longitude');
-    var altitudePlaceholder = document.getElementById('altitude');
-    var typePlaceholder = document.getElementById('type');
-    var intldesPlaceholder = document.getElementById('intldes');
-    var namePlaceholder  = document.getElementById('name');
-    var inclinationPlaceholder = document.getElementById('inclination');
-    var eccentricityPlaceHolder = document.getElementById('eccentricity');
-    var revDayPlaceholder = document.getElementById('revDay');
-    var apogeeplaceholder = document.getElementById('apogee');
-    var perigeeplaceholder = document.getElementById('perigee');
-    var periodPlaceholder = document.getElementById('period');
+
+        //Latitude, Longitude, and Altitude
+        var latitudePlaceholder = document.getElementById('latitude');
+        var longitudePlaceholder = document.getElementById('longitude');
+        var altitudePlaceholder = document.getElementById('altitude');
+        var typePlaceholder = document.getElementById('type');
+        var intldesPlaceholder = document.getElementById('intldes');
+        var namePlaceholder  = document.getElementById('name');
+        var inclinationPlaceholder = document.getElementById('inclination');
+        var eccentricityPlaceHolder = document.getElementById('eccentricity');
+        var revDayPlaceholder = document.getElementById('revDay');
+        var apogeeplaceholder = document.getElementById('apogee');
+        var perigeeplaceholder = document.getElementById('perigee');
+        var periodPlaceholder = document.getElementById('period');
+
 
         function deg2text(deg, letters) {
             var letter;
@@ -138,54 +102,50 @@ $.get('./SatTracker/groundstations.json', function(groundStations) {
             altitudePlaceholder.textContent = (Math.round(position.altitude / 10) / 100) + "km";
         }
 
-      // Ground Stations Layer
-      var gsPlacemarkAttributes = new WorldWind.PlacemarkAttributes(null);
-      gsPlacemarkAttributes.imageSource = "../apps/SatTracker/ground-station.png";
-      gsPlacemarkAttributes.imageScale = 0.25;
-      gsPlacemarkAttributes.imageOffset = new WorldWind.Offset(
-          WorldWind.OFFSET_FRACTION, 0.3,
-          WorldWind.OFFSET_FRACTION, 0.0);
-      gsPlacemarkAttributes.imageColor = WorldWind.Color.WHITE;
-      gsPlacemarkAttributes.labelAttributes.offset = new WorldWind.Offset(
-          WorldWind.OFFSET_FRACTION, 0.5,
-          WorldWind.OFFSET_FRACTION, 1.0);
-      gsPlacemarkAttributes.labelAttributes.color = WorldWind.Color.WHITE;
+        // Ground Stations Layer
+        var gsPlacemarkAttributes = new WorldWind.PlacemarkAttributes(null);
+        gsPlacemarkAttributes.imageSource = "../apps/SatTracker/ground-station.png";
+        gsPlacemarkAttributes.imageScale = 0.25;
+        gsPlacemarkAttributes.imageOffset = new WorldWind.Offset(
+            WorldWind.OFFSET_FRACTION, 0.3,
+            WorldWind.OFFSET_FRACTION, 0.0);
+        gsPlacemarkAttributes.imageColor = WorldWind.Color.WHITE;
+        gsPlacemarkAttributes.labelAttributes.offset = new WorldWind.Offset(
+            WorldWind.OFFSET_FRACTION, 0.5,
+            WorldWind.OFFSET_FRACTION, 1.0);
+        gsPlacemarkAttributes.labelAttributes.color = WorldWind.Color.WHITE;
 
-      // Create a layer to hold the surface shapes.
-      //var shapesLayer = new WorldWind.RenderableLayer("Ground Station Range");
+        // Create a layer to hold the surface shapes.
+        //var shapesLayer = new WorldWind.RenderableLayer("Ground Station Range");
 
-      // Create and set attributes for it. The shapes below except the surface polyline use this same attributes
-      // object. Real apps typically create new attributes objects for each shape unless they know the attributes
-      // can be shared among shapes.
-      var gsAttributes = new WorldWind.ShapeAttributes(null);
-      gsAttributes.outlineColor = new WorldWind.Color(0, 255, 255, 0.1);
-          gsAttributes.interiorColor = WorldWind.Color.TRANSPARENT;
+        // Create and set attributes for it. The shapes below except the surface polyline use this same attributes
+        // object. Real apps typically create new attributes objects for each shape unless they know the attributes
+        // can be shared among shapes.
+        var gsAttributes = new WorldWind.ShapeAttributes(null);
+        gsAttributes.outlineColor = new WorldWind.Color(0, 255, 255, 0.1);
+        gsAttributes.interiorColor = WorldWind.Color.TRANSPARENT;
 
-      var boundary = [];
+        var boundary = [];
 
-      var shape = new WorldWind.SurfacePolygon(boundary, gsAttributes);
+        var shape = new WorldWind.SurfacePolygon(boundary, gsAttributes);
 
-      for (var i = 0, len = groundStations.length; i < len; i++) {
-          var groundStation = groundStations[i];
+        for (var i = 0, len = groundStations.length; i < len; i++) {
+            var groundStation = groundStations[i];
 
-          var gsPlacemark = new WorldWind.Placemark(new WorldWind.Position(groundStation.LATITUDE,
-              groundStation.LONGITUDE,
-              1e3));
+            var gsPlacemark = new WorldWind.Placemark(new WorldWind.Position(groundStation.LATITUDE,
+                groundStation.LONGITUDE,
+                1e3));
 
-          shape = new WorldWind.SurfaceCircle(new WorldWind.Location(groundStation.LATITUDE,
-              groundStation.LONGITUDE), 150e4, gsAttributes);
+            shape = new WorldWind.SurfaceCircle(new WorldWind.Location(groundStation.LATITUDE,
+                groundStation.LONGITUDE), 150e4, gsAttributes);
 
-          gsPlacemark.altitudeMode = WorldWind.RELATIVE_TO_GROUND;
-          gsPlacemark.label = groundStation.name;
-          gsPlacemark.attributes = gsPlacemarkAttributes;
-          groundStationsLayer.addRenderable(gsPlacemark);
-          groundStationsLayer.addRenderable(shape);
-      }
+            gsPlacemark.altitudeMode = WorldWind.RELATIVE_TO_GROUND;
+            gsPlacemark.label = groundStation.name;
+            gsPlacemark.attributes = gsPlacemarkAttributes;
+            groundStationsLayer.addRenderable(gsPlacemark);
+            groundStationsLayer.addRenderable(shape);
 
-      // Add the path to a layer and the layer to the World Window's layer list.
-      groundStationsLayer.displayName = "Ground Stations";
-      groundStationsLayer.enabled = false;
-
+        }
 
         // Add the path to a layer and the layer to the World Window's layer list.
         groundStationsLayer.displayName = "Ground Stations";
@@ -200,71 +160,52 @@ $.get('./SatTracker/groundstations.json', function(groundStations) {
         $('.allSats').click(function() {
             if ($(this).text() == "ALL OFF") {
                 $(this).text("ALL ON");
-                endAllSats();
                 $('.payloads').text("PAYLOADS OFF");
                 $('.rockets').text("ROCKETS OFF");
                 $('.debris').text("DEBRIS OFF");
-                $('.unknown').text("UNKNOWN OFF");
-                selectSat(satPac);
+                var satData = satPac;
+                selectSat(satData);
             } else {
                 $(this).text("ALL OFF");
-                endAllSats();
             }
         });
         $('.payloads').click(function() {
             if ($(this).text() == "PAYLOADS OFF") {
                 $(this).text("PAYLOADS ON");
-                endAllSats();
                 $('.allSats').text("ALL OFF");
                 $('.rockets').text("ROCKETS OFF");
-                $('.unknown').text("UNKNOWN OFF");
                 $('.debris').text("DEBRIS OFF");
+
                 selectSat(payloads);
             } else {
                 $(this).text("PAYLOADS OFF");
-                endAllSats();
+
             }
         });
         $('.rockets').click(function() {
             if ($(this).text() == "ROCKETS OFF") {
                 $(this).text("ROCKETS ON");
-                endAllSats();
                 $('.payloads').text("PAYLOADS OFF");
                 $('.allSats').text("ALL OFF");
-                $('.unknown').text("UNKNOWN OFF");
                 $('.debris').text("DEBRIS OFF");
-                selectSat(rocketbodies);
+                var satPac = './SatTracker/rocketStagesTLE.json';
+                selectSat(satPac);
             } else {
                 $(this).text("ROCKETS OFF");
-                endAllSats();
+                satPac = null;
             }
         });
         $('.debris').click(function() {
             if ($(this).text() == "DEBRIS OFF") {
                 $(this).text("DEBRIS ON");
-                endAllSats();
                 $('.payloads').text("PAYLOADS OFF");
                 $('.rockets').text("ROCKETS OFF");
-                $('.unknown').text("UNKNOWN OFF");
                 $('.allSats').text("ALL OFF");
-                selectSat(debris);
+                var satPac = './SatTracker/debrisTLE.json';
+                selectSat(satPac);
             } else {
                 $(this).text("DEBRIS OFF");
-                endAllSats();
-            }
-        });
-        $('.unknown').click(function() {
-            if ($(this).text() == "UNKNOWN OFF") {
-                $(this).text("UNKNOWN ON");
-                endAllSats();
-                $('.payloads').text("PAYLOADS OFF");
-                $('.rockets').text("ROCKETS OFF");
-                $('.debris').tect("DEBRIS OFF");
-                $('.allSats').text("ALL OFF");
-                selectSat(unknown);
-            } else {
-                $(this).text("UNKNOWN OFF");
-                endAllSats();
+                satPac = null;
             }
         });
 
@@ -373,15 +314,27 @@ $.get('./SatTracker/groundstations.json', function(groundStations) {
             //add colored image depending on sat type
             for (var ind = 0; ind < satNum; ind += 1) {
                 var placemarkAttributes = new WorldWind.PlacemarkAttributes(null);
-                var highlightPlacemarkAttributes = new WorldWind.PlacemarkAttributes(placemarkAttributes);
-                highlightPlacemarkAttributes.imageScale = 0.40;
-
                 if (satData[ind].OBJECT_TYPE === "PAYLOAD") {
                     placemarkAttributes.imageSource = "../apps/SatTracker/dot-red.png";
+                    placemarkAttributes.imageScale = 0.35;
+                    var highlightPlacemarkAttributes = new WorldWind.PlacemarkAttributes(placemarkAttributes);
+                    highlightPlacemarkAttributes.imageSource = "../apps/SatTracker/satellite.png";
+                    highlightPlacemarkAttributes.imageColor = WorldWind.Color.WHITE;
+                    highlightPlacemarkAttributes.imageScale = 0.5;
                 } else if (satData[ind].OBJECT_TYPE === "ROCKET BODY") {
                     placemarkAttributes.imageSource = "../apps/SatTracker/dot-blue.png";
+                    placemarkAttributes.imageScale = 0.35;
+                    var highlightPlacemarkAttributes = new WorldWind.PlacemarkAttributes(placemarkAttributes);
+                    highlightPlacemarkAttributes.imageSource = "../apps/SatTracker/satellite.png";
+                    highlightPlacemarkAttributes.imageColor = WorldWind.Color.WHITE;
+                    highlightPlacemarkAttributes.imageScale = 0.5;
                 } else {
                     placemarkAttributes.imageSource = "../apps/SatTracker/dot-grey.png";
+                    placemarkAttributes.imageScale = 0.30;
+                    var highlightPlacemarkAttributes = new WorldWind.PlacemarkAttributes(placemarkAttributes);
+                    highlightPlacemarkAttributes.imageSource = "../apps/SatTracker/satellite.png";
+                    highlightPlacemarkAttributes.imageColor = WorldWind.Color.WHITE;
+                    highlightPlacemarkAttributes.imageScale = 0.5;
                 }
 
                 placemarkAttributes.imageOffset = new WorldWind.Offset(
@@ -393,12 +346,16 @@ $.get('./SatTracker/groundstations.json', function(groundStations) {
                     WorldWind.OFFSET_FRACTION, 1.0);
                 placemarkAttributes.labelAttributes.color = WorldWind.Color.WHITE;
 
+                var highlightPlacemarkAttributes = new WorldWind.PlacemarkAttributes(placemarkAttributes);
+                highlightPlacemarkAttributes.imageSource = "../apps/SatTracker/satellite.png";
+                highlightPlacemarkAttributes.imageColor = WorldWind.Color.WHITE;
+                highlightPlacemarkAttributes.imageScale = 0.5;
 
                 var placemark = new WorldWind.Placemark(everyCurrentPosition[ind]);
                 placemark.altitudeMode = WorldWind.RELATIVE_TO_GROUND;
                 placemark.attributes = placemarkAttributes;
                 placemark.highlightAttributes = highlightPlacemarkAttributes;
-                placemarkAttributes.imageScale = 0.35;
+
 
 
                 //Defines orbit ranges
@@ -435,7 +392,7 @@ $.get('./SatTracker/groundstations.json', function(groundStations) {
             wwd.redraw();
 
             // Update all Satellite Positions
-            updateAllSats = window.setInterval(function () {
+            window.setInterval(function () {
                 for (var indx = 0; indx < satNum; indx += 1) {
                     var position = getPosition(satellite.twoline2satrec(satData[indx].TLE_LINE1, satData[indx].TLE_LINE2), new Date());
                     everyCurrentPosition[indx].latitude = position.latitude;
@@ -445,6 +402,7 @@ $.get('./SatTracker/groundstations.json', function(groundStations) {
                     wwd.redraw();
                 }
             }, 1000);
+
 
 
             //follow satellite on click
@@ -550,7 +508,6 @@ $.get('./SatTracker/groundstations.json', function(groundStations) {
                     satPos.latitude = position.latitude;
                     satPos.longitude = position.longitude;
                     satPos.altitude = position.altitude;
-                    updateLLA(position);
 
                 });
             };
@@ -662,12 +619,13 @@ $.get('./SatTracker/groundstations.json', function(groundStations) {
                     endExtra();
 
                     //turns off renderables that were turned on by click
+                    orbitsLayer.removeAllRenderables();
                     modelLayer.removeAllRenderables();
-
+                    meshLayer.removeAllRenderables();
 
 
                 }
-                //highlightedItems = [];
+                highlightedItems = [];
 
                 // Perform the pick. Must first convert from window coordinates to canvas coordinates, which are
                 // relative to the upper left corner of the canvas rather than the upper left corner of the page.
@@ -795,7 +753,7 @@ $.get('./SatTracker/groundstations.json', function(groundStations) {
                 // De-highlight any highlighted placemarks.
                 for (var h = 0; h < highlightedItems.length; h++) {
                     highlightedItems[h].highlighted = false;
-                    endExtra();
+                    orbitsLayer.removeAllRenderables();
                     endOrbit();
                     endMesh();
 
@@ -833,11 +791,11 @@ $.get('./SatTracker/groundstations.json', function(groundStations) {
                     intldesPlaceholder.textContent = satData[index].INTLDES;
                     namePlaceholder.textContent = satData[index].OBJECT_NAME;
                     extraData(index);
-                    endExtra();
+
                     endOrbit();
                     endMesh();
 
-                   /* meshToCurrentPosition(index);
+                    meshToCurrentPosition(index);
                     $('.mesh').click(function () {
                         if ($(this).text() == "Mesh Off") {
                             $(this).text("Mesh On");
@@ -847,7 +805,7 @@ $.get('./SatTracker/groundstations.json', function(groundStations) {
                             $(this).text("Mesh Off");
                             endMesh();
                         }
-                    });*/
+                    });
 
                     createOrbit(index);
                     $('.orbit').click(function () {
