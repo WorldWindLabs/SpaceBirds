@@ -15,7 +15,7 @@ function onMessage(inputMessage){
     self.close();
   }
   else{
-    loadJSON('./../SatTracker/allObjectsTLE.json',
+    loadJSON('./../data/allObjectsTLE.json',
       function(data) {
         self.postMessage(data); //Sending JSON object to the main thread
       },

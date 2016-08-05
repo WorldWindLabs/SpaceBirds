@@ -1,42 +1,49 @@
-
 "use strict";
-//var orbitWorker;
-var satData = []; //global object array with all satellite data
-var groundStations = [];
-var everyObjectCurrentPosition = [];
+var allOrbitingBodies = []; //Global variable with all the orbiting objects
 
-WorldWind.Logger.setLoggingLevel(WorldWind.Logger.LEVEL_WARNING);
+//Orbital object properties
+var payloadAttributes = new WorldWind.PlacemarkAttributes(null);
+var rocketBodyAttributes = new WorldWind.PlacemarkAttributes(null);
+var debrisAttributes = new WorldWind.PlacemarkAttributes(null);
 
-// Create the World Window.
-var wwd = new WorldWind.ObjectWindow("canvasOne");
-wwd.navigator.lookAtLocation.altitude = 0;
-wwd.navigator.range = 5e7;
+payloadAttributes.highlightAttributes.imageScale = 0.40;
+payloadAttributes.highlightAttributes.imageScale = 0.40;
 
-//Add imagery layers.
-var layers = [
-    {layer: new WorldWind.BMNGLayer(), enabled: true},
-    //{layer: new WorldWind.CompassLayer(), enabled: true},
-    {layer: new WorldWind.CoordinatesDisplayLayer(wwd), enabled: true},
-    {layer: new WorldWind.ViewControlsLayer(wwd), enabled: true}
-];
-
-for (var l = 0; l < layers.length; l++) {
-    layers[l].layer.enabled = layers[l].enabled;
-    wwd.addLayer(layers[l].layer);
+if (satData[ind].OBJECT_TYPE === "PAYLOAD") {
+    placemarkAttributes.imageSource = "../apps/SatTracker/dot-red.png";
+} else if (satData[ind].OBJECT_TYPE === "ROCKET BODY") {
+    placemarkAttributes.imageSource = "../apps/SatTracker/dot-blue.png";
+} else {
+    placemarkAttributes.imageSource = "../apps/SatTracker/dot-grey.png";
 }
 
-//custom layers
-//var groundStationsLayer = new WorldWind.RenderableLayer();
-//var modelLayer = new WorldWind.RenderableLayer("Model");
-//var meshLayer = new WorldWind.RenderableLayer();
-//var orbitsLayer = new WorldWind.RenderableLayer("Orbit");
-//var leoSatLayer = new WorldWind.RenderableLayer("LEO Satellite");
-//var meoSatLayer = new WorldWind.RenderableLayer("MEO Satellite");
-//var heoSatLayer = new WorldWind.RenderableLayer("HEO Satellite");
+placemarkAttributes.imageOffset = new WorldWind.Offset(
+    WorldWind.OFFSET_FRACTION, 0.5,
+    WorldWind.OFFSET_FRACTION, 0.5);
+placemarkAttributes.imageColor = WorldWind.Color.WHITE;
+placemarkAttributes.labelAttributes.offset = new WorldWind.Offset(
+    WorldWind.OFFSET_FRACTION, 0.5,
+    WorldWind.OFFSET_FRACTION, 1.0);
+placemarkAttributes.labelAttributes.color = WorldWind.Color.WHITE;
 
-//add custom layers
-//wwd.addLayer(groundStationsLayer);
+var placemark = new WorldWind.Placemark(everyCurrentPosition[ind]);
+placemark.altitudeMode = WorldWind.RELATIVE_TO_GROUND;
+placemark.attributes = placemarkAttributes;
+placemark.highlightAttributes = highlightPlacemarkAttributes;
+placemarkAttributes.imageScale = 0.35;
 
+//Abstraction of an orbital body
+function orbitalBody(satelliteData){
+  this.objectName = satelliteData.OBJECT_NAME;
+  this.tleLine1 = satelliteData.TLE_LINE1;
+  this.tleLine2 = satelliteData.TLE_LINE2;
+  this.intlDes = satelliteData.INTLDES;
+  this.objectType = satelliteData.OBJECT_TYPE;
+  this.orbitalPeriod = satelliteData.PERIOD;
+  this.currentPosition = null;
+  this.collada3dModel = retrieve3dModelPath(satelliteData.INTLDES);
+  this.orbitType = obtainOrbitType(satelliteData);
+}
 
 function deg2text(deg, letters) {
     var letter;
@@ -89,6 +96,33 @@ function getPosition (satrec, time) {
     return new WorldWind.Position(latitude, longitude, altitude);
 };
 
+function renderSatellites(satData){
+  var now = new Date();
+  for(var i = 0; i < satData.length ; i += 1){
+    var time = new Date(now.getTime());
+    try{
+      var position = getPosition(satellite.twoline2satrec(satData[i].TLE_LINE1, satData[i].TLE_LINE2), time);
+      var myOrbitalBody = new orbitalBody(satData);
+      myOrbitalBody.currentPosition = new WorldWind.Position(position.latitude, position.longitude, position.altitude)
+      allOrbitingBodies.push(myOrbitalBody);
+    } catch (err) {
+      console.log('Orbital object with index ' + i + ' and name ' + satData[i].OBJECT_NAME + ' has messed up TLE');
+      //console.log(err);
+      continue;
+    }
+  }
+  console.log('We have ' + allOrbitingBodies.length + ' orbiting bodies');
+}
+
+function retrieve3dModelPath(intlDes){
+  var modelPath = null;
+  return modelPath;
+}
+
+function obtainOrbitType(satOrbit){
+  var orbitType = null;
+  return orbitType;
+}
 
 var satParserWorker = new Worker("Workers/satelliteParseWorker.js");
 var grndStationsWorker = new Worker("Workers/groundStationsWorker.js");
@@ -99,13 +133,13 @@ grndStationsWorker.postMessage("and you too, groundstations servant!");
 
 //Retrieval of JSON file data from worker threads. Also, closing such threads.
 satParserWorker.addEventListener('message', function(event){
-  satData = event.data;
+  var satData = event.data;
   satParserWorker.postMessage('close');
   renderSatellites(satData);
 }, false);
 
 grndStationsWorker.addEventListener('message', function(event){
-  groundStations = event.data;
+  var groundStations = event.data;
   grndStationsWorker.postMessage('close');
 }, false);
 
@@ -113,20 +147,37 @@ $(document).ready(function() {
 
 });
 
-function renderSatellites(satData){
-  var time = new Date(now.getTime());
-  for(i in satData){
-    try{
-      var position = getPosition(satellite.twoline2satrec(satData[i].TLE_LINE1, satData[i].TLE_LINE2), time);
-    } catch (err){
-      console.log("Satellite " + satData[i].OBJECT_NAME + ' TLE data is messed up.');
-      continue;
-    }
-  }
+WorldWind.Logger.setLoggingLevel(WorldWind.Logger.LEVEL_WARNING);
+
+// Create the World Window.
+var wwd = new WorldWind.ObjectWindow("canvasOne");
+wwd.navigator.lookAtLocation.altitude = 0;
+wwd.navigator.range = 5e7;
+
+//Add imagery layers.
+var layers = [
+    {layer: new WorldWind.BMNGOneImageLayer(), enabled: true},
+    //{layer: new WorldWind.CompassLayer(), enabled: true},
+    {layer: new WorldWind.CoordinatesDisplayLayer(wwd), enabled: true},
+    {layer: new WorldWind.ViewControlsLayer(wwd), enabled: true}
+];
+
+for (var l = 0; l < layers.length; l++) {
+    layers[l].layer.enabled = layers[l].enabled;
+    wwd.addLayer(layers[l].layer);
 }
 
+//custom layers
+//var groundStationsLayer = new WorldWind.RenderableLayer();
+//var modelLayer = new WorldWind.RenderableLayer("Model");
+//var meshLayer = new WorldWind.RenderableLayer();
+//var orbitsLayer = new WorldWind.RenderableLayer("Orbit");
+//var leoSatLayer = new WorldWind.RenderableLayer("LEO Satellite");
+//var meoSatLayer = new WorldWind.RenderableLayer("MEO Satellite");
+//var heoSatLayer = new WorldWind.RenderableLayer("HEO Satellite");
 
-
+//add custom layers
+//wwd.addLayer(groundStationsLayer);
 
 
 
