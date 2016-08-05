@@ -92,6 +92,8 @@ $.get('./SatTracker/groundstations.json', function(groundStations) {
 
 
 
+
+
     //Latitude, Longitude, and Altitude
     var latitudePlaceholder = document.getElementById('latitude');
     var longitudePlaceholder = document.getElementById('longitude');
@@ -105,6 +107,8 @@ $.get('./SatTracker/groundstations.json', function(groundStations) {
     var apogeeplaceholder = document.getElementById('apogee');
     var perigeeplaceholder = document.getElementById('perigee');
     var periodPlaceholder = document.getElementById('period');
+    var semiMajorAxisPlaceholder = document.getElementById('majorAxis');
+    var semiMinorAxisPlaceholder = document.getElementById('minorAxis');
 
         function deg2text(deg, letters) {
             var letter;
@@ -195,7 +199,7 @@ $.get('./SatTracker/groundstations.json', function(groundStations) {
         /***
          * Satellites
          */
-        var satNum = 3000;
+        var satNum = satPac.length;
         //Sat Tyoe toggles
         $('.allSats').click(function() {
             if ($(this).text() == "ALL OFF") {
@@ -315,13 +319,6 @@ $.get('./SatTracker/groundstations.json', function(groundStations) {
             wwd.addLayer(meshLayer);
             wwd.addLayer(modelLayer);
             wwd.addLayer(orbitsLayer);
-
-            //  meshToCurrentPosition = function () {};
-            //  toCurrentPosition = function () {};
-            //parse json 3 files payload, rockets, debris
-
-
-
 
 // Orbit Propagation (MIT License, see https://github.com/shashwatak/satellite-js)
             var getPosition = function (satrec, time) {
@@ -605,6 +602,7 @@ $.get('./SatTracker/groundstations.json', function(groundStations) {
                     orbitsLayer.addRenderable(futureOrbitPath);
                 });
             };
+
             var endOrbit = function(){
                 clearInterval(startOrbit);
                 orbitsLayer.removeAllRenderables();
@@ -635,6 +633,8 @@ $.get('./SatTracker/groundstations.json', function(groundStations) {
                     apogeeplaceholder.textContent = extra.apogee;
                     perigeeplaceholder.textContent = extra.perigee;
                     periodPlaceholder.textContent = extra.period;
+                    semiMajorAxisPlaceholder.textContent = extra.semiMajorAxis;
+                    semiMinorAxisPlaceholder.textContent = extra.semiMinorAxis;
                 });
             };
             var endExtra = function(){
@@ -832,8 +832,8 @@ $.get('./SatTracker/groundstations.json', function(groundStations) {
                     typePlaceholder.textContent = satData[index].OBJECT_TYPE;
                     intldesPlaceholder.textContent = satData[index].INTLDES;
                     namePlaceholder.textContent = satData[index].OBJECT_NAME;
-                    extraData(index);
                     endExtra();
+                    extraData(index);
                     endOrbit();
                     endMesh();
 
