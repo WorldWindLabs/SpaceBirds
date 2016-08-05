@@ -6,8 +6,8 @@ var payloadAttributes = new WorldWind.PlacemarkAttributes(null);
 var rocketBodyAttributes = new WorldWind.PlacemarkAttributes(null);
 var debrisAttributes = new WorldWind.PlacemarkAttributes(null);
 
-payloadAttributes.highlightAttributes.imageScale = 0.40;
-payloadAttributes.highlightAttributes.imageScale = 0.40;
+//payloadAttributes.highlightAttributes.imageScale = 0.40;
+//payloadAttributes.highlightAttributes.imageScale = 0.40;
 
 
 //Abstraction of an orbital body
@@ -80,7 +80,7 @@ function getSatellites(satData){
     var time = new Date(now.getTime());
     try{
       var position = getPosition(satellite.twoline2satrec(satData[i].TLE_LINE1, satData[i].TLE_LINE2), time);
-      var myOrbitalBody = new orbitalBody(satData);
+      var myOrbitalBody = new orbitalBody(satData[i]);
       myOrbitalBody.currentPosition = new WorldWind.Position(position.latitude, position.longitude, position.altitude)
       allOrbitingBodies.push(myOrbitalBody);
     } catch (err) {
@@ -89,7 +89,13 @@ function getSatellites(satData){
       continue;
     }
   }
-  //console.log('We have ' + allOrbitingBodies.length + ' orbiting bodies');
+  console.log('We have ' + allOrbitingBodies.length + ' orbiting bodies');
+
+  for(var j = 0; j < 10; j+=1){
+    for(var prop in allOrbitingBodies[j]){
+      console.log(' - ' + allOrbitingBodies[j][prop]);
+    }
+  }
   renderEverything();
 }
 
@@ -98,12 +104,12 @@ function renderEverything(){
 }
 
 function retrieve3dModelPath(intlDes){
-  var modelPath = null;
+  var modelPath = "nothing here yet";
   return modelPath;
 }
 
 function obtainOrbitType(satOrbit){
-  var orbitType = null;
+  var orbitType = "nothing here yet";
   return orbitType;
 }
 
