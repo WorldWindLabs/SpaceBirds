@@ -1,6 +1,37 @@
 "use strict";
 var allOrbitingBodies = []; //Global variable with all the orbiting objects
 
+//Orbital object properties
+var payloadAttributes = new WorldWind.PlacemarkAttributes(null);
+var rocketBodyAttributes = new WorldWind.PlacemarkAttributes(null);
+var debrisAttributes = new WorldWind.PlacemarkAttributes(null);
+
+payloadAttributes.highlightAttributes.imageScale = 0.40;
+payloadAttributes.highlightAttributes.imageScale = 0.40;
+
+if (satData[ind].OBJECT_TYPE === "PAYLOAD") {
+    placemarkAttributes.imageSource = "../apps/SatTracker/dot-red.png";
+} else if (satData[ind].OBJECT_TYPE === "ROCKET BODY") {
+    placemarkAttributes.imageSource = "../apps/SatTracker/dot-blue.png";
+} else {
+    placemarkAttributes.imageSource = "../apps/SatTracker/dot-grey.png";
+}
+
+placemarkAttributes.imageOffset = new WorldWind.Offset(
+    WorldWind.OFFSET_FRACTION, 0.5,
+    WorldWind.OFFSET_FRACTION, 0.5);
+placemarkAttributes.imageColor = WorldWind.Color.WHITE;
+placemarkAttributes.labelAttributes.offset = new WorldWind.Offset(
+    WorldWind.OFFSET_FRACTION, 0.5,
+    WorldWind.OFFSET_FRACTION, 1.0);
+placemarkAttributes.labelAttributes.color = WorldWind.Color.WHITE;
+
+var placemark = new WorldWind.Placemark(everyCurrentPosition[ind]);
+placemark.altitudeMode = WorldWind.RELATIVE_TO_GROUND;
+placemark.attributes = placemarkAttributes;
+placemark.highlightAttributes = highlightPlacemarkAttributes;
+placemarkAttributes.imageScale = 0.35;
+
 //Abstraction of an orbital body
 function orbitalBody(satelliteData){
   this.objectName = satelliteData.OBJECT_NAME;
