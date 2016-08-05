@@ -1,6 +1,5 @@
-
 "use strict";
-var allOrbitingBodies = [];
+var allOrbitingBodies = []; //Global variable with all the orbiting objects
 
 //Abstraction of an orbital body
 function orbitalBody(satelliteData){
@@ -72,27 +71,27 @@ function renderSatellites(satData){
     var time = new Date(now.getTime());
     try{
       var position = getPosition(satellite.twoline2satrec(satData[i].TLE_LINE1, satData[i].TLE_LINE2), time);
+      var myOrbitalBody = new orbitalBody(satData);
+      myOrbitalBody.currentPosition = new WorldWind.Position(position.latitude, position.longitude, position.altitude)
+      allOrbitingBodies.push(myOrbitalBody);
     } catch (err) {
-      console.log('Satellite with index ' + i + ' and name ' + satData[i].OBJECT_NAME + ' has messed up TLE');
-      console.log(err);
+      console.log('Orbital object with index ' + i + ' and name ' + satData[i].OBJECT_NAME + ' has messed up TLE');
+      //console.log(err);
       continue;
     }
-    var myOrbitalBody = new orbitalBody(satData);
-    myOrbitalBody.currentPosition = new WorldWind.Position(position.latitude, position.longitude, position.altitude)
-    allOrbitingBodies.push(myOrbitalBody);
   }
   console.log('We have ' + allOrbitingBodies.length + ' orbiting bodies');
 }
 
-retrieve3dModelPath(intlDes){
+function retrieve3dModelPath(intlDes){
   var modelPath = null;
   return modelPath;
 }
 
-//obtainOrbitType(satOrbit){
-//  var orbitType = null;
-//  return orbitType;
-//}
+function obtainOrbitType(satOrbit){
+  var orbitType = null;
+  return orbitType;
+}
 
 var satParserWorker = new Worker("Workers/satelliteParseWorker.js");
 var grndStationsWorker = new Worker("Workers/groundStationsWorker.js");
@@ -126,7 +125,7 @@ wwd.navigator.range = 5e7;
 
 //Add imagery layers.
 var layers = [
-    {layer: new WorldWind.BMNGLayer(), enabled: true},
+    {layer: new WorldWind.BMNGOneImageLayer(), enabled: true},
     //{layer: new WorldWind.CompassLayer(), enabled: true},
     {layer: new WorldWind.CoordinatesDisplayLayer(wwd), enabled: true},
     {layer: new WorldWind.ViewControlsLayer(wwd), enabled: true}
