@@ -1,5 +1,6 @@
+//This worker is still unused. Not sure if we will implement it.
 "use strict"
-self.importScripts('./SatTracker/util/Satellite.js');
+self.importScripts('./../util/Satellite.js');
 self.addEventListener('message', onMessage);
 self.addEventListener('error', onError);
 
@@ -24,7 +25,7 @@ function orbitalBody(){           //Abstraction of an orbital body
   this.objectType: null,          //from space-track.org json TLE
   this.orbitalPeriod: null,       //from space-track.org json TLE
   this.currentPosition: null,     //Worldwind.position object
-  this.collada3dModel: null;      //path to collada 3D model, if any. If not found, randomize model.
+  this.collada3dModel: null,      //path to collada 3D model, if any. If not found, randomize model.
   this.orbitType: null;           //LEO, MEO or GEO
 }
 

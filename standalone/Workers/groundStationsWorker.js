@@ -15,7 +15,7 @@ function onMessage(inputMessage){
     self.close();
   }
   else{
-    loadJSON('./../SatTracker/groundstations.json',
+    loadJSON('./../data/groundstations.json',
       function(data) {
         self.postMessage(data); //Sending JSON object to the main thread
       },
