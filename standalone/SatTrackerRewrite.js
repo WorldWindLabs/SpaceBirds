@@ -9,28 +9,6 @@ var debrisAttributes = new WorldWind.PlacemarkAttributes(null);
 payloadAttributes.highlightAttributes.imageScale = 0.40;
 payloadAttributes.highlightAttributes.imageScale = 0.40;
 
-if (satData[ind].OBJECT_TYPE === "PAYLOAD") {
-    placemarkAttributes.imageSource = "../apps/SatTracker/dot-red.png";
-} else if (satData[ind].OBJECT_TYPE === "ROCKET BODY") {
-    placemarkAttributes.imageSource = "../apps/SatTracker/dot-blue.png";
-} else {
-    placemarkAttributes.imageSource = "../apps/SatTracker/dot-grey.png";
-}
-
-placemarkAttributes.imageOffset = new WorldWind.Offset(
-    WorldWind.OFFSET_FRACTION, 0.5,
-    WorldWind.OFFSET_FRACTION, 0.5);
-placemarkAttributes.imageColor = WorldWind.Color.WHITE;
-placemarkAttributes.labelAttributes.offset = new WorldWind.Offset(
-    WorldWind.OFFSET_FRACTION, 0.5,
-    WorldWind.OFFSET_FRACTION, 1.0);
-placemarkAttributes.labelAttributes.color = WorldWind.Color.WHITE;
-
-var placemark = new WorldWind.Placemark(everyCurrentPosition[ind]);
-placemark.altitudeMode = WorldWind.RELATIVE_TO_GROUND;
-placemark.attributes = placemarkAttributes;
-placemark.highlightAttributes = highlightPlacemarkAttributes;
-placemarkAttributes.imageScale = 0.35;
 
 //Abstraction of an orbital body
 function orbitalBody(satelliteData){
@@ -96,7 +74,7 @@ function getPosition (satrec, time) {
     return new WorldWind.Position(latitude, longitude, altitude);
 };
 
-function renderSatellites(satData){
+function getSatellites(satData){
   var now = new Date();
   for(var i = 0; i < satData.length ; i += 1){
     var time = new Date(now.getTime());
@@ -111,7 +89,12 @@ function renderSatellites(satData){
       continue;
     }
   }
-  console.log('We have ' + allOrbitingBodies.length + ' orbiting bodies');
+  //console.log('We have ' + allOrbitingBodies.length + ' orbiting bodies');
+  renderEverything();
+}
+
+function renderEverything(){
+
 }
 
 function retrieve3dModelPath(intlDes){
@@ -135,7 +118,7 @@ grndStationsWorker.postMessage("and you too, groundstations servant!");
 satParserWorker.addEventListener('message', function(event){
   var satData = event.data;
   satParserWorker.postMessage('close');
-  renderSatellites(satData);
+  getSatellites(satData);
 }, false);
 
 grndStationsWorker.addEventListener('message', function(event){
