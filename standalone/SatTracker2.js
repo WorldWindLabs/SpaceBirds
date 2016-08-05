@@ -49,20 +49,13 @@ var endAllSats = function(){
 //add custom layers
 wwd.addLayer(groundStationsLayer);
 
-/*$.get('./SatTracker/groundstations.json', function(groundStations){
-  //TODO handle groundstations
-}).done(function(){
-  //TODO stuff after adding groundstations
-  //$.get('./SatTracker/payloadsTLE.json', function())
-});*/
-
 var payloads = [];
 var rocketbodies = [];
 var debris = [];
 var unknown = [];
 
-$.get('./SatTracker/groundstations.json', function(groundStations) {
-    $.get('./SatTracker/TLE.json', function (satPac) {
+$.get('data/groundstations.json', function(groundStations) {
+    $.get('data/TLE.json', function (satPac) {
         satPac.satDataString = JSON.stringify(satPac);
         console.log(satPac[0].OBJECT_NAME);
 
