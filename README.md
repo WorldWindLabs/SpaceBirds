@@ -23,6 +23,7 @@ The application is still in its alpha stage as it still contains some bugs and i
 
 ###HOW TO USE:
 -Satellites-
+
 In its current stage of the application, on opening the application, the user can select one of four sets of satellite data, which allows the user to view all known satellites or exclusively payloads, rocket bodies, or debris.
 
 Once the satellites are rendered on the World Wind Globe, the user can toggle three different orbit types to focus on one or all of the following: Low Earth Orbit, Medium Earth Orbit, and High Earth Orbit.
@@ -36,27 +37,40 @@ While in follow mode, the user can toggle the orbit paths, visual cone, and the 
 -Ground Stations-
 Ground stations can be rendered by selecting the Ground Stations button at the bottom left of the screen.
 
-FEATURES TO COME:
+##FEATURES TO COME:
 -Satellites-
-*Orbit length control that displays current time of the end of orbit
-*Ability to move individual satellites forward and backward in time
-*Additional orbit types and ranges the user can toggle between
-*Faster and smoother animation
-*Search
-*Pre-defined groups
-*Custom grouping
-*Expanded library of 3d models
+
+* Orbit length control that displays current time of the end of orbit
+
+* Ability to move individual satellites forward and backward in time
+
+* Additional orbit types and ranges the user can toggle between
+
+* Faster and smoother animation
+
+* Search
+
+* Pre-defined groups
+
+* Custom grouping
+
+* Expanded library of 3d models
+
 
 -Ground Stations-
-*Ability to highlight and display coordinates, information, and area coverage shapes
-*Search
-*Pre-defined groups
-*Custom grouping
-*3D models
+* Ability to highlight and display coordinates, information, and area coverage shapes
+* Search
+* Pre-defined groups
+* Custom grouping
+* 3D models
 
 ====================
-**Organization:** NASA Ames Research Center (PX)
-**Manager:** Patrick Hogan, Yann Voumard
-**Authors:** Miguel Del Castillo, Bert Stewart
-**Developers:** Enika Biswas, Nidhi Jain, Jenipher Gonzalez, Nancy Hernandez
-**Acknowledgements:** Benjamin Chang, Gabriel Militão, Farah Salah, Khaled Sharif
+**Organization:** NASA Ames Research Center (PX)**
+
+**Manager:** Patrick Hogan, Yann Voumard**
+
+**Authors:** Miguel Del Castillo, Bert Stewart**
+
+**Developers:** Enika Biswas, Nidhi Jain, Jenipher Gonzalez, Nancy Hernandez**
+
+**Acknowledgements:** Benjamin Chang, Gabriel Militão, Farah Salah, Khaled Sharif**
