@@ -180,7 +180,7 @@ $.get('data/groundstations.json', function(groundStations) {
 
       // Ground Stations Layer
       var gsPlacemarkAttributes = new WorldWind.PlacemarkAttributes(null);
-      gsPlacemarkAttributes.imageSource = "../apps/SatTracker/ground-station.png";
+      gsPlacemarkAttributes.imageSource = "assets/ground-station.png";
       gsPlacemarkAttributes.imageScale = 0.25;
       gsPlacemarkAttributes.imageOffset = new WorldWind.Offset(
           WorldWind.OFFSET_FRACTION, 0.3,
@@ -811,14 +811,14 @@ $.get('data/groundstations.json', function(groundStations) {
                 var placemarkAttributes = new WorldWind.PlacemarkAttributes(null);
                 var highlightPlacemarkAttributes = new WorldWind.PlacemarkAttributes(placemarkAttributes);
                 highlightPlacemarkAttributes.imageScale = 0.50;
-                highlightPlacemarkAttributes.imageSource = "../apps/SatTracker/satellite.png";
+                highlightPlacemarkAttributes.imageSource = "assets/satellite.png";
 
                 if (satData[ind].OBJECT_TYPE === "PAYLOAD") {
-                    placemarkAttributes.imageSource = "../apps/SatTracker/dot-red.png";
+                    placemarkAttributes.imageSource = "assets/dot-red.png";
                 } else if (satData[ind].OBJECT_TYPE === "ROCKET BODY") {
-                    placemarkAttributes.imageSource = "../apps/SatTracker/dot-blue.png";
+                    placemarkAttributes.imageSource = "assets/dot-blue.png";
                 } else if (satData[ind].OBJECT_TYPE === "DEBRIS"){
-                    placemarkAttributes.imageSource = "../apps/SatTracker/dot-grey.png";
+                    placemarkAttributes.imageSource = "assets/dot-gray.png";
                 }
 
                 placemarkAttributes.imageOffset = new WorldWind.Offset(
