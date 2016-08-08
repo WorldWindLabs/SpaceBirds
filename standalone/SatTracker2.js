@@ -52,8 +52,53 @@ var rocketbodies = [];
 var debris = [];
 var unknown = [];
 
+function tryPosition (satrec, time) {
+    var position_and_velocity = satellite.propagate(satrec,
+        time.getUTCFullYear(),
+        time.getUTCMonth() + 1,
+        time.getUTCDate(),
+        time.getUTCHours(),
+        time.getUTCMinutes(),
+        time.getUTCSeconds());
+    var position_eci = position_and_velocity["position"];
+
+    var gmst = satellite.gstime_from_date(time.getUTCFullYear(),
+        time.getUTCMonth() + 1,
+        time.getUTCDate(),
+        time.getUTCHours(),
+        time.getUTCMinutes(),
+        time.getUTCSeconds());
+
+    var position_gd = satellite.eci_to_geodetic(position_eci, gmst);
+    var latitude = satellite.degrees_lat(position_gd["latitude"]);
+    var longitude = satellite.degrees_long(position_gd["longitude"]);
+    var altitude = position_gd["height"] * 1000;
+
+    return new WorldWind.Position(latitude, longitude, altitude);
+};
+
+function sanitizeSatellites(objectArray){
+  var faultySatellites = 0;
+  console.log('Array size before splicing is ' + objectArray.length);
+  for (var i = 0; i < objectArray.length ; i += 1){
+    try{
+      var position = tryPosition(satellite.twoline2satrec(objectArray[i].TLE_LINE1, objectArray[i].TLE_LINE2), new Date());
+    } catch (err){
+      faultySatellites += 1;
+      objectArray.splice(i,1);
+      i--;
+    }
+  }
+
+  console.log('we have ' + objectArray.length + ' sanitized satellites');
+  console.log('Total number of objects is ' + i);
+  console.log(faultySatellites + ' do not work');
+  return objectArray;
+}
+
 $.get('data/groundstations.json', function(groundStations) {
-    $.get('data/TLE.json', function (satPac) {
+    $.get('data/TLE.json', function (satellites) {
+        var satPac = sanitizeSatellites(satellites);
         satPac.satDataString = JSON.stringify(satPac);
         console.log(satPac[0].OBJECT_NAME);
 
@@ -737,10 +782,7 @@ $.get('data/groundstations.json', function(groundStations) {
             for (var j = 0; j < satNum; j ++) {
                 var currentPosition = null;
                 var time = new Date(now.getTime() + i * 60000);
-                try {
-                    var position = getPosition(satellite.twoline2satrec(satData[j].TLE_LINE1, satData[j].TLE_LINE2), time);
-                } catch (err) {
-                }
+                var position = getPosition(satellite.twoline2satrec(satData[j].TLE_LINE1, satData[j].TLE_LINE2), time);
                 currentPosition = new WorldWind.Position(position.latitude,
                     position.longitude,
                     position.altitude);

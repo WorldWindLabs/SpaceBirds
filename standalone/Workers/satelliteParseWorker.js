@@ -15,7 +15,7 @@ function onMessage(inputMessage){
     self.close();
   }
   else{
-    loadJSON('./../data/allObjectsTLE.json',
+    loadJSON('./../data/TLE.json',
       function(data) {
         self.postMessage(data); //Sending JSON object to the main thread
       },
