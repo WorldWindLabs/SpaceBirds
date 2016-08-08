@@ -78,10 +78,13 @@ function tryPosition (satrec, time) {
     return new WorldWind.Position(latitude, longitude, altitude);
 };
 
-function sanitizeSatellites(objectArray){
+function sanitizeSatellites(arrayToSplice){
+  var objectArray = [];
+  console.log(typeof objectArray);
   var faultySatellites = 0;
   //console.log('Array size before splicing is ' + objectArray.length);
-  for (var i = 0; i < objectArray.length ; i += 1){
+  for (var i = 0; i < arrayToSplice.length ; i += 1){
+    objectArray.push(arrayToSplice[i]);
     try{
       var position = tryPosition(satellite.twoline2satrec(objectArray[i].TLE_LINE1, objectArray[i].TLE_LINE2), new Date());
     } catch (err){
@@ -99,6 +102,7 @@ function sanitizeSatellites(objectArray){
 $.get('data/groundstations.json', function(groundStations) {
     $.get('data/TLE.json', function (satellites) {
         var satPac = sanitizeSatellites(satellites);
+        console.log(typeof satPac);
         satPac.satDataString = JSON.stringify(satPac);
         //console.log(satPac[0].OBJECT_NAME);
 
