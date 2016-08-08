@@ -22,6 +22,7 @@ The application is still in its alpha stage as it still contains some bugs and i
 
 
 ###HOW TO USE:
+
 -Satellites-
 
 In its current stage of the application, on opening the application, the user can select one of four sets of satellite data, which allows the user to view all known satellites or exclusively payloads, rocket bodies, or debris.
@@ -35,9 +36,11 @@ Clicking on the satellite will take the user to the satellite and update the cam
 While in follow mode, the user can toggle the orbit paths, visual cone, and the camera follow mode with the corresponding buttons.
 
 -Ground Stations-
+
 Ground stations can be rendered by selecting the Ground Stations button at the bottom left of the screen.
 
 ##FEATURES TO COME:
+
 -Satellites-
 
 * Orbit length control that displays current time of the end of orbit
@@ -58,10 +61,15 @@ Ground stations can be rendered by selecting the Ground Stations button at the b
 
 
 -Ground Stations-
+
 * Ability to highlight and display coordinates, information, and area coverage shapes
+
 * Search
+
 * Pre-defined groups
+
 * Custom grouping
+
 * 3D models
 
 ====================
