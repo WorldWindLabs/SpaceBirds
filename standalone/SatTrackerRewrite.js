@@ -101,7 +101,7 @@ function getSatellites(satData){
   var now = new Date();
   for(var i = 0; i < satData.length ; i += 1){
     var time = new Date(now.getTime());
-     try{
+    try{
       var position = getPosition(satellite.twoline2satrec(satData[i].TLE_LINE1, satData[i].TLE_LINE2), time);
     } catch (err) {
       faultySatsNumber += 1;
