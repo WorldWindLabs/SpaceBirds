@@ -201,13 +201,13 @@ $.get('data/groundstations.json', function(groundStations) {
       // Create and set attributes for it. The shapes below except the surface polyline use this same attributes
       // object. Real apps typically create new attributes objects for each shape unless they know the attributes
       // can be shared among shapes.
-      var gsAttributes = new WorldWind.ShapeAttributes(null);
-      gsAttributes.outlineColor = new WorldWind.Color(0, 255, 255, 0.1);
-          gsAttributes.interiorColor = WorldWind.Color.TRANSPARENT;
+      //var gsAttributes = new WorldWind.ShapeAttributes(null);
+      //gsAttributes.outlineColor = new WorldWind.Color(0, 255, 255, 0.1);
+        //  gsAttributes.interiorColor = WorldWind.Color.TRANSPARENT;
 
-      var boundary = [];
+     // var boundary = [];
 
-      var shape = new WorldWind.SurfacePolygon(boundary, gsAttributes);
+      //var shape = new WorldWind.SurfacePolygon(boundary, gsAttributes);
 
       for (var i = 0, len = groundStations.length; i < len; i++) {
           var groundStation = groundStations[i];
@@ -216,24 +216,19 @@ $.get('data/groundstations.json', function(groundStations) {
               groundStation.LONGITUDE,
               1e3));
 
-          shape = new WorldWind.SurfaceCircle(new WorldWind.Location(groundStation.LATITUDE,
-              groundStation.LONGITUDE), 150e4, gsAttributes);
+         // shape = new WorldWind.SurfaceCircle(new WorldWind.Location(groundStation.LATITUDE,
+           //   groundStation.LONGITUDE), 150e4, gsAttributes);
 
           gsPlacemark.altitudeMode = WorldWind.RELATIVE_TO_GROUND;
           gsPlacemark.label = groundStation.name;
           gsPlacemark.attributes = gsPlacemarkAttributes;
           groundStationsLayer.addRenderable(gsPlacemark);
-          groundStationsLayer.addRenderable(shape);
+          //groundStationsLayer.addRenderable(shape);
       }
 
       // Add the path to a layer and the layer to the World Window's layer list.
       groundStationsLayer.displayName = "Ground Stations";
       groundStationsLayer.enabled = false;
-
-
-        // Add the path to a layer and the layer to the World Window's layer list.
-        groundStationsLayer.displayName = "Ground Stations";
-        groundStationsLayer.enabled = false;
 
 
         /***
@@ -819,10 +814,13 @@ $.get('data/groundstations.json', function(groundStations) {
 
                 if (satData[ind].OBJECT_TYPE === "PAYLOAD") {
                     placemarkAttributes.imageSource = "assets/dot-red.png";
+                    placemarkAttributes.imageScale = 0.40;
                 } else if (satData[ind].OBJECT_TYPE === "ROCKET BODY") {
                     placemarkAttributes.imageSource = "assets/dot-blue.png";
+                    placemarkAttributes.imageScale = 0.40;
                 } else if (satData[ind].OBJECT_TYPE === "DEBRIS"){
                     placemarkAttributes.imageSource = "assets/dot-gray.png";
+                    placemarkAttributes.imageScale = 0.30;
                 }
 
                 placemarkAttributes.imageOffset = new WorldWind.Offset(
@@ -839,7 +837,6 @@ $.get('data/groundstations.json', function(groundStations) {
                 placemark.altitudeMode = WorldWind.RELATIVE_TO_GROUND;
                 placemark.attributes = placemarkAttributes;
                 placemark.highlightAttributes = highlightPlacemarkAttributes;
-                placemarkAttributes.imageScale = 0.40;
 
 
                 //Defines orbit ranges
