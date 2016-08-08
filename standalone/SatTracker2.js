@@ -31,9 +31,16 @@ var groundStationsLayer = new WorldWind.RenderableLayer();
 var modelLayer = new WorldWind.RenderableLayer("Model");
 var meshLayer = new WorldWind.RenderableLayer();
 var orbitsLayer = new WorldWind.RenderableLayer("Orbit");
-var leoSatLayer = new WorldWind.RenderableLayer("LEO Satellite");
-var meoSatLayer = new WorldWind.RenderableLayer("MEO Satellite");
-var heoSatLayer = new WorldWind.RenderableLayer("HEO Satellite");
+var leoSatLayer = new WorldWind.RenderableLayer("LEO Payloads");
+var meoSatLayer = new WorldWind.RenderableLayer("MEO Payloads");
+var heoSatLayer = new WorldWind.RenderableLayer("HEO Payloads");
+var leoRocketLayer = new WorldWind.RenderableLayer("LEO Rocket Bodies");
+var meoRocketLayer = new WorldWind.RenderableLayer("MEO Rocket Bodies");
+var heoRocketLayer = new WorldWind.RenderableLayer("HEO Rocket Bodies");
+var leoDebrisLayer = new WorldWind.RenderableLayer("LEO Debris");
+var meoDebrisLayer = new WorldWind.RenderableLayer("MEO Debris");
+var heoDebrisLayer = new WorldWind.RenderableLayer("HEO Debris");
+
 
 var updateAllSats;
 var endAllSats = function(){
@@ -192,65 +199,142 @@ $.get('data/groundstations.json', function(groundStations) {
         /***
          * Satellites
          */
+        var leoOrbit = 9;
         var satNum = satPac.length;
         //Sat Tyoe toggles
-        $('.allSats').click(function() {
+        $('.allSats').click(function(leoOrbit) {
             if ($(this).text() == "ALL OFF") {
                 $(this).text("ALL ON");
-                endAllSats();
                 $('.payloads').text("PAYLOADS OFF");
                 $('.rockets').text("ROCKETS OFF");
                 $('.debris').text("DEBRIS OFF");
                 $('.unknown').text("UNKNOWN OFF");
-                selectSat(satPac);
+                leoSatLayer.enabled = true;
+                leoRocketLayer.enabled = true;
+                leoDebrisLayer.enabled = true;
+                meoSatLayer.enabled = true;
+                meoRocketLayer.enabled = true;
+                meoDebrisLayer.enabled = true;
+                heoSatLayer.enabled = true;
+                heoRocketLayer.enabled = true;
+                heoDebrisLayer.enabled = true;
+                leoOrbit = 9;
+                return leoOrbit;
             } else {
                 $(this).text("ALL OFF");
-                endAllSats();
-            }
+                leoSatLayer.enabled = false;
+                leoRocketLayer.enabled = false;
+                leoDebrisLayer.enabled = false;
+                meoSatLayer.enabled = false;
+                meoRocketLayer.enabled = false;
+                meoDebrisLayer.enabled = false;
+                heoSatLayer.enabled = false;
+                heoRocketLayer.enabled = false;
+                heoDebrisLayer.enabled = false;
+                leoOrbit = 0;
+                return leoOrbit;           }
         });
         $('.payloads').click(function() {
             if ($(this).text() == "PAYLOADS OFF") {
                 $(this).text("PAYLOADS ON");
-                endAllSats();
+               // endAllSats();
                 $('.allSats').text("ALL OFF");
                 $('.rockets').text("ROCKETS OFF");
                 $('.unknown').text("UNKNOWN OFF");
                 $('.debris').text("DEBRIS OFF");
-                selectSat(payloads);
+                leoSatLayer.enabled = true;
+                leoRocketLayer.enabled = false;
+                leoDebrisLayer.enabled = false;
+                meoSatLayer.enabled = true;
+                meoRocketLayer.enabled = false;
+                meoDebrisLayer.enabled = false;
+                heoSatLayer.enabled = true;
+                heoRocketLayer.enabled = false;
+                heoDebrisLayer.enabled = false;
+                leoOrbit = 1;
+                return leoOrbit;
             } else {
                 $(this).text("PAYLOADS OFF");
-                endAllSats();
+                leoSatLayer.enabled = false;
+                leoRocketLayer.enabled = false;
+                leoDebrisLayer.enabled = false;
+                meoSatLayer.enabled = false;
+                meoRocketLayer.enabled = false;
+                meoDebrisLayer.enabled = false;
+                heoSatLayer.enabled = false;
+                heoRocketLayer.enabled = false;
+                heoDebrisLayer.enabled = false;
+                leoOrbit = 0;
+                return leoOrbit;
             }
         });
         $('.rockets').click(function() {
             if ($(this).text() == "ROCKETS OFF") {
                 $(this).text("ROCKETS ON");
-                endAllSats();
                 $('.payloads').text("PAYLOADS OFF");
                 $('.allSats').text("ALL OFF");
                 $('.unknown').text("UNKNOWN OFF");
                 $('.debris').text("DEBRIS OFF");
-                selectSat(rocketbodies);
+                leoSatLayer.enabled = false;
+                leoRocketLayer.enabled = true;
+                leoDebrisLayer.enabled = false;
+                meoSatLayer.enabled = false;
+                meoRocketLayer.enabled = true;
+                meoDebrisLayer.enabled = false;
+                heoSatLayer.enabled = false;
+                heoRocketLayer.enabled = true;
+                heoDebrisLayer.enabled = false;
+                leoOrbit = 3;
+                return leoOrbit;
             } else {
                 $(this).text("ROCKETS OFF");
-                endAllSats();
+                leoSatLayer.enabled = false;
+                leoRocketLayer.enabled = false;
+                leoDebrisLayer.enabled = false;
+                meoSatLayer.enabled = false;
+                meoRocketLayer.enabled = false;
+                meoDebrisLayer.enabled = false;
+                heoSatLayer.enabled = false;
+                heoRocketLayer.enabled = false;
+                heoDebrisLayer.enabled = false;
+                leoOrbit = 0;
+                return leoOrbit;
             }
         });
         $('.debris').click(function() {
             if ($(this).text() == "DEBRIS OFF") {
                 $(this).text("DEBRIS ON");
-                endAllSats();
                 $('.payloads').text("PAYLOADS OFF");
                 $('.rockets').text("ROCKETS OFF");
                 $('.unknown').text("UNKNOWN OFF");
                 $('.allSats').text("ALL OFF");
-                selectSat(debris);
+                leoSatLayer.enabled = false;
+                leoRocketLayer.enabled = false;
+                leoDebrisLayer.enabled = true;
+                meoSatLayer.enabled = false;
+                meoRocketLayer.enabled = false;
+                meoDebrisLayer.enabled = true;
+                heoSatLayer.enabled = false;
+                heoRocketLayer.enabled = false;
+                heoDebrisLayer.enabled = true;
+                leoOrbit = 5;
+                return leoOrbit;
             } else {
                 $(this).text("DEBRIS OFF");
-                endAllSats();
+                leoSatLayer.enabled = false;
+                leoRocketLayer.enabled = false;
+                leoDebrisLayer.enabled = false;
+                meoSatLayer.enabled = false;
+                meoRocketLayer.enabled = false;
+                meoDebrisLayer.enabled = false;
+                heoSatLayer.enabled = false;
+                heoRocketLayer.enabled = false;
+                heoDebrisLayer.enabled = false;
+                leoOrbit = 0;
+                return leoOrbit;
             }
         });
-        $('.unknown').click(function() {
+        /*$('.unknown').click(function() {
             if ($(this).text() == "UNKNOWN OFF") {
                 $(this).text("UNKNOWN ON");
                 endAllSats();
@@ -258,39 +342,165 @@ $.get('data/groundstations.json', function(groundStations) {
                 $('.rockets').text("ROCKETS OFF");
                 $('.debris').tect("DEBRIS OFF");
                 $('.allSats').text("ALL OFF");
-                selectSat(unknown);
+                //selectSat(unknown);
             } else {
                 $(this).text("UNKNOWN OFF");
                 endAllSats();
             }
-        });
+        });*/
+       /* function satsLeoOn() {
+            if (payloadsOrbit = true) {
+                leoSatLayer.enabled = true;
+            }
+        }
+        function rocketLoeOn() {
+            if (rocketsOrbit = true) {
+                leoRocketLayer.enabled = true;
+            }
+        }
+        function debrisLeoOn(){
+            if (debrisOrbit = true) {
+                leoDebrisLayer.enabled = true;
+            }
+        }
+
+        function satsLeoOff() {
+            if (payloadsOrbit = true) {
+                leoSatLayer.enabled = false;
+            }
+        }
+        function rocketLeoOff() {
+            if (rocketsOrbit = true) {
+                leoRocketLayer.enabled = false;
+            }
+        }
+        function debrisLeoOff(){
+            if (debrisOrbit = true) {
+                leoDebrisLayer.enabled = false;
+            }
+        }*/
+
+        console.log(leoOrbit);
+        function OrbitToggleOn() {
+            console.log(leoOrbit);
+            switch (leoOrbit) {
+                case 0:
+                    //leoSatLayer.enabled = false;
+                    //leoRocketLayer.enabled = false;
+                    //leoDebrisLayer.enabled = false;
+                    break;
+                case 1:
+                    leoSatLayer.enabled = true;
+                    //leoRocketLayer.enabled = false;
+                    //leoDebrisLayer.enabled = false;
+                    break;
+                case 3:
+                    //leoSatLayer.enabled = false;
+                    leoRocketLayer.enabled = true;
+                    //leoDebrisLayer.enabled = false;
+                    break;
+                case 5:
+                    //leoSatLayer.enabled = false;
+                    //leoRocketLayer.enabled = false;
+                    leoDebrisLayer.enabled = true;
+                    break;
+                case 4:
+                    leoSatLayer.enabled = true;
+                    leoRocketLayer.enabled = true;
+                   // leoDebrisLayer.enabled = false;
+                    break;
+                case 6:
+                    leoSatLayer.enabled = true;
+                    //leoRocketLayer.enabled = false;
+                    leoDebrisLayer.enabled = true;
+                    break;
+                case 8:
+                    //leoSatLayer.enabled = false;
+                    leoRocketLayer.enabled = true;
+                    leoDebrisLayer.enabled = true;
+                    break;
+                case 9:
+                    leoSatLayer.enabled = true;
+                    leoRocketLayer.enabled = true;
+                    leoDebrisLayer.enabled = true;
+                    break;
+            }
+        }
+
+        function OrbitToggleOff() {
+            switch (leoOrbit) {
+                case 0:
+                    leoSatLayer.enabled = false;
+                    leoRocketLayer.enabled = false;
+                    leoDebrisLayer.enabled = false;
+                    break;
+                case 1:
+                    leoSatLayer.enabled = false;
+                    //leoRocketLayer.enabled = false;
+                    //leoDebrisLayer.enabled = false;
+                    break;
+                case 3:
+                    //leoSatLayer.enabled = false;
+                    leoRocketLayer.enabled = false;
+                    //leoDebrisLayer.enabled = false;
+                    break;
+                case 5:
+                    //leoSatLayer.enabled = false;
+                    //leoRocketLayer.enabled = false;
+                    leoDebrisLayer.enabled = false;
+
+                    break;
+                case 4:
+                    leoSatLayer.enabled = false;
+                    leoRocketLayer.enabled = false;
+                   // leoDebrisLayer.enabled = false;
+
+                    break;
+                case 6:
+                    leoSatLayer.enabled = false;
+                    //leoRocketLayer.enabled = false;
+                    leoDebrisLayer.enabled = false;
+                    break;
+                case 8:
+                    //leoSatLayer.enabled = false;
+                    leoRocketLayer.enabled = false;
+                    leoDebrisLayer.enabled = false;
+                    break;
+                case 9:
+                    leoSatLayer.enabled = false;
+                    leoRocketLayer.enabled = false;
+                    leoDebrisLayer.enabled = false;
+                    break;
+
+            }
+        }
 
         //Range Toggles
         $('.leo').click(function() {
             if ($(this).text() == "LEO OFF") {
                 $(this).text("LEO ON");
-                leoSatLayer.enabled = true;
+                OrbitToggleOn();
             } else {
                 $(this).text("LEO OFF");
-                leoSatLayer.enabled = false;
+                OrbitToggleOff();
             }
         });
         $('.meo').click(function() {
             if ($(this).text() == "MEO OFF") {
                 $(this).text("MEO ON");
-                meoSatLayer.enabled = true;
+
             } else {
                 $(this).text("MEO OFF");
-                meoSatLayer.enabled = false;
+
             }
         });
         $('.heo').click(function() {
             if ($(this).text() == "HEO OFF") {
                 $(this).text("HEO ON");
-                heoSatLayer.enabled = true;
+
             } else {
                 $(this).text("HEO OFF");
-                heoSatLayer.enabled = false;
+
             }
         });
 
@@ -303,12 +513,19 @@ $.get('data/groundstations.json', function(groundStations) {
                 groundStationsLayer.enabled = false;
             }
         });
+        selectSat(satPac);
 
         function selectSat(satData) {
 
             wwd.addLayer(leoSatLayer);
             wwd.addLayer(meoSatLayer);
             wwd.addLayer(heoSatLayer);
+            wwd.addLayer(leoRocketLayer);
+            wwd.addLayer(meoRocketLayer);
+            wwd.addLayer(heoRocketLayer);
+            wwd.addLayer(leoDebrisLayer);
+            wwd.addLayer(meoDebrisLayer);
+            wwd.addLayer(heoDebrisLayer);
             wwd.addLayer(meshLayer);
             wwd.addLayer(modelLayer);
             wwd.addLayer(orbitsLayer);
@@ -402,19 +619,19 @@ $.get('data/groundstations.json', function(groundStations) {
                     }
                 } else if (satData[ind].OBJECT_TYPE === "ROCKET BODY") {
                     if ((Math.round(everyCurrentPosition[ind].altitude / 10) / 100) <= 1200) {
-                        leoSatLayer.addRenderable(placemark);
+                        leoRocketLayer.addRenderable(placemark);
                     } else if ((Math.round(everyCurrentPosition[ind].altitude / 10) / 100) > 1200 && (Math.round(everyCurrentPosition[ind].altitude / 10) / 100) <= 35790) {
-                        meoSatLayer.addRenderable(placemark);
+                        meoRocketLayer.addRenderable(placemark);
                     } else if ((Math.round(everyCurrentPosition[ind].altitude / 10) / 100) > 35790) {
-                        heoSatLayer.addRenderable(placemark);
+                        heoRocketLayer.addRenderable(placemark);
                     }
                 } else if (satData[ind].OBJECT_TYPE === "DEBRIS") {
                     if ((Math.round(everyCurrentPosition[ind].altitude / 10) / 100) <= 1200) {
-                        leoSatLayer.addRenderable(placemark);
+                        leoDebrisLayer.addRenderable(placemark);
                     } else if ((Math.round(everyCurrentPosition[ind].altitude / 10) / 100) > 1200 && (Math.round(everyCurrentPosition[ind].altitude / 10) / 100) <= 35790) {
-                        meoSatLayer.addRenderable(placemark);
+                        meoDebrisLayer.addRenderable(placemark);
                     } else if ((Math.round(everyCurrentPosition[ind].altitude / 10) / 100) > 35790) {
-                        heoSatLayer.addRenderable(placemark);
+                        heoDebrisLayer.addRenderable(placemark);
                     }
                 }
 

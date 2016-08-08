@@ -55,8 +55,8 @@ FEATURES TO COME:
 *3D models
 
 ====================
-*Organization:** NASA Ames Research Center (PX)
-*Manager:** Patrick Hogan, Yann Voumard
-*Authors:** Miguel Del Castillo, Bert Stewart
-*Developers:** Enika Biswas, Nidhi Jain, Jenipher Gonzalez, Nancy Hernandez
-*Acknowledgements:** Benjamin Chang, Gabriel Militão, Farah Salah, Khaled Sharif
+**Organization:** NASA Ames Research Center (PX)
+**Manager:** Patrick Hogan, Yann Voumard
+**Authors:** Miguel Del Castillo, Bert Stewart
+**Developers:** Enika Biswas, Nidhi Jain, Jenipher Gonzalez, Nancy Hernandez
+**Acknowledgements:** Benjamin Chang, Gabriel Militão, Farah Salah, Khaled Sharif
