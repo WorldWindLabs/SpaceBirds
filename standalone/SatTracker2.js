@@ -200,6 +200,9 @@ $.get('data/groundstations.json', function(groundStations) {
                 $('#rockets').text("ROCKETS OFF");
                 $('#debris').text("DEBRIS OFF");
                 $('#unknown').text("UNKNOWN OFF");
+                $('#leo').text("LEO ON");
+                $('#meo').text("MEO ON");
+                $('#heo').text("HEO ON");
                 leoSatLayer.enabled = true;
                 leoRocketLayer.enabled = true;
                 leoDebrisLayer.enabled = true;
@@ -209,10 +212,15 @@ $.get('data/groundstations.json', function(groundStations) {
                 heoSatLayer.enabled = true;
                 heoRocketLayer.enabled = true;
                 heoDebrisLayer.enabled = true;
-                orbitToggle = 9;
+                orbitToggle.leo = 9;
+                orbitToggle.meo = 9;
+                orbitToggle.heo = 9;
                 return orbitToggle;
             } else {
                 $(this).text("ALL OFF");
+                $('#leo').text("LEO OFF");
+                $('#meo').text("MEO OFF");
+                $('#heo').text("HEO OFF");
                 leoSatLayer.enabled = false;
                 leoRocketLayer.enabled = false;
                 leoDebrisLayer.enabled = false;
@@ -222,159 +230,132 @@ $.get('data/groundstations.json', function(groundStations) {
                 heoSatLayer.enabled = false;
                 heoRocketLayer.enabled = false;
                 heoDebrisLayer.enabled = false;
-                orbitToggle = 0;
+                orbitToggle.leo = 0;
+                orbitToggle.meo = 0;
+                orbitToggle.heo = 0;
                 return orbitToggle;          }
         });
         $('#payloads').click(function() {
             if ($(this).text() == "PAYLOADS OFF") {
                 $(this).text("PAYLOADS ON");
-               // endAllSats();
+                if ($('#allSats').text() == "ALL ON"){
+                   // leoSatLayer.enabled = false;
+                    leoRocketLayer.enabled = false;
+                    leoDebrisLayer.enabled = false;
+                   // meoSatLayer.enabled = false;
+                    meoRocketLayer.enabled = false;
+                    meoDebrisLayer.enabled = false;
+                   // heoSatLayer.enabled = false;
+                    heoRocketLayer.enabled = false;
+                    heoDebrisLayer.enabled = false;
+        }
                 $('#allSats').text("ALL OFF");
-                $('#rockets').text("ROCKETS OFF");
-                $('#unknown').text("UNKNOWN OFF");
-                $('#debris').text("DEBRIS OFF");
+                $('#leo').text("LEO ON");
+                $('#meo').text("MEO ON");
+                $('#heo').text("HEO ON");
                 leoSatLayer.enabled = true;
-                leoRocketLayer.enabled = false;
-                leoDebrisLayer.enabled = false;
                 meoSatLayer.enabled = true;
-                meoRocketLayer.enabled = false;
-                meoDebrisLayer.enabled = false;
                 heoSatLayer.enabled = true;
-                heoRocketLayer.enabled = false;
-                heoDebrisLayer.enabled = false;
-                orbitToggle = 1;
+                orbitToggle.leo = 1;
+                orbitToggle.meo = 1;
+                orbitToggle.heo = 1;
                 return orbitToggle;
             } else {
                 $(this).text("PAYLOADS OFF");
+                $('#leo').text("LEO OFF");
+                $('#meo').text("MEO OFF");
+                $('#heo').text("HEO OFF");
                 leoSatLayer.enabled = false;
-                leoRocketLayer.enabled = false;
-                leoDebrisLayer.enabled = false;
                 meoSatLayer.enabled = false;
-                meoRocketLayer.enabled = false;
-                meoDebrisLayer.enabled = false;
                 heoSatLayer.enabled = false;
-                heoRocketLayer.enabled = false;
-                heoDebrisLayer.enabled = false;
-                orbitToggle = 0;
+                orbitToggle.leo = 0;
+                orbitToggle.meo = 0;
+                orbitToggle.heo = 0;
                 return orbitToggle;
             }
         });
         $('#rockets').click(function() {
             if ($(this).text() == "ROCKETS OFF") {
                 $(this).text("ROCKETS ON");
-                $('#payloads').text("PAYLOADS OFF");
+                if ($('#allSats').text() == "ALL ON"){
+                    leoSatLayer.enabled = false;
+                    //leoRocketLayer.enabled = false;
+                    leoDebrisLayer.enabled = false;
+                    meoSatLayer.enabled = false;
+                   // meoRocketLayer.enabled = false;
+                    meoDebrisLayer.enabled = false;
+                    heoSatLayer.enabled = false;
+                    //heoRocketLayer.enabled = false;
+                    heoDebrisLayer.enabled = false;
+                }
                 $('#allSats').text("ALL OFF");
-                $('#unknown').text("UNKNOWN OFF");
-                $('#debris').text("DEBRIS OFF");
-                leoSatLayer.enabled = false;
+                $('#leo').text("LEO ON");
+                $('#meo').text("MEO ON");
+                $('#heo').text("HEO ON");
                 leoRocketLayer.enabled = true;
-                leoDebrisLayer.enabled = false;
-                meoSatLayer.enabled = false;
                 meoRocketLayer.enabled = true;
-                meoDebrisLayer.enabled = false;
-                heoSatLayer.enabled = false;
                 heoRocketLayer.enabled = true;
-                heoDebrisLayer.enabled = false;
-                orbitToggle = 3;
+                orbitToggle.leo = 3;
+                orbitToggle.meo = 3;
+                orbitToggle.heo = 3;
                 return orbitToggle;
             } else {
                 $(this).text("ROCKETS OFF");
-                leoSatLayer.enabled = false;
+                $('#leo').text("LEO OFF");
+                $('#meo').text("MEO OFF");
+                $('#heo').text("HEO OFF");
                 leoRocketLayer.enabled = false;
-                leoDebrisLayer.enabled = false;
-                meoSatLayer.enabled = false;
                 meoRocketLayer.enabled = false;
-                meoDebrisLayer.enabled = false;
-                heoSatLayer.enabled = false;
                 heoRocketLayer.enabled = false;
-                heoDebrisLayer.enabled = false;
-                orbitToggle = 0;
+                orbitToggle.leo = 0;
+                orbitToggle.meo = 0;
+                orbitToggle.heo = 0;
                 return orbitToggle;
             }
         });
         $('#debris').click(function() {
             if ($(this).text() == "DEBRIS OFF") {
                 $(this).text("DEBRIS ON");
-                $('#payloads').text("PAYLOADS OFF");
-                $('#rockets').text("ROCKETS OFF");
-                $('#unknown').text("UNKNOWN OFF");
+                if ($('#allSats').text() == "ALL ON"){
+                    leoSatLayer.enabled = false;
+                    leoRocketLayer.enabled = false;
+                    //leoDebrisLayer.enabled = false;
+                    meoSatLayer.enabled = false;
+                    meoRocketLayer.enabled = false;
+                   // meoDebrisLayer.enabled = false;
+                    heoSatLayer.enabled = false;
+                    heoRocketLayer.enabled = false;
+                   // heoDebrisLayer.enabled = false;
+                }
                 $('#allSats').text("ALL OFF");
-                leoSatLayer.enabled = false;
-                leoRocketLayer.enabled = false;
+                $('#leo').text("LEO ON");
+                $('#meo').text("MEO ON");
+                $('#heo').text("HEO ON");
                 leoDebrisLayer.enabled = true;
-                meoSatLayer.enabled = false;
-                meoRocketLayer.enabled = false;
                 meoDebrisLayer.enabled = true;
-                heoSatLayer.enabled = false;
-                heoRocketLayer.enabled = false;
                 heoDebrisLayer.enabled = true;
-                orbitToggle = 5;
+                orbitToggle.leo = 5;
+                orbitToggle.meo = 5;
+                orbitToggle.heo = 5;
                 return orbitToggle;
             } else {
                 $(this).text("DEBRIS OFF");
-                leoSatLayer.enabled = false;
-                leoRocketLayer.enabled = false;
+                $('#leo').text("LEO OFF");
+                $('#meo').text("MEO OFF");
+                $('#heo').text("HEO OFF");
                 leoDebrisLayer.enabled = false;
-                meoSatLayer.enabled = false;
-                meoRocketLayer.enabled = false;
                 meoDebrisLayer.enabled = false;
-                heoSatLayer.enabled = false;
-                heoRocketLayer.enabled = false;
                 heoDebrisLayer.enabled = false;
-                orbitToggle = 0;
+                orbitToggle.leo = 0;
+                orbitToggle.meo = 0;
+                orbitToggle.heo = 0;
                 return orbitToggle;
             }
         });
-        /*$('.unknown').click(function() {
-            if ($(this).text() == "UNKNOWN OFF") {
-                $(this).text("UNKNOWN ON");
-                endAllSats();
-                $('.payloads').text("PAYLOADS OFF");
-                $('.rockets').text("ROCKETS OFF");
-                $('.debris').tect("DEBRIS OFF");
-                $('.allSats').text("ALL OFF");
-                //selectSat(unknown);
-            } else {
-                $(this).text("UNKNOWN OFF");
-                endAllSats();
-            }
-        });*/
-       /* function satsLeoOn() {
-            if (payloadsOrbit = true) {
-                leoSatLayer.enabled = true;
-            }
-        }
-        function rocketLoeOn() {
-            if (rocketsOrbit = true) {
-                leoRocketLayer.enabled = true;
-            }
-        }
-        function debrisLeoOn(){
-            if (debrisOrbit = true) {
-                leoDebrisLayer.enabled = true;
-            }
-        }
-
-        function satsLeoOff() {
-            if (payloadsOrbit = true) {
-                leoSatLayer.enabled = false;
-            }
-        }
-        function rocketLeoOff() {
-            if (rocketsOrbit = true) {
-                leoRocketLayer.enabled = false;
-            }
-        }
-        function debrisLeoOff(){
-            if (debrisOrbit = true) {
-                leoDebrisLayer.enabled = false;
-            }
-        }*/
-
 
         function leoToggleOn() {
-            console.log(orbitToggle);
-            switch (orbitToggle) {
+            console.log(orbitToggle.leo);
+            switch (orbitToggle.leo) {
                 case 0:
                     //leoSatLayer.enabled = false;
                     //leoRocketLayer.enabled = false;
@@ -418,8 +399,8 @@ $.get('data/groundstations.json', function(groundStations) {
             }
         }
         function meoToggleOn() {
-            console.log(orbitToggle);
-            switch (orbitToggle) {
+            console.log(orbitToggle.meo);
+            switch (orbitToggle.meo) {
                 case 0:
                     //meoSatLayer.enabled = false;
                     //meoRocketLayer.enabled = false;
@@ -463,8 +444,8 @@ $.get('data/groundstations.json', function(groundStations) {
             }
         }
         function heoToggleOn() {
-            console.log(orbitToggle);
-            switch (orbitToggle) {
+            console.log(orbitToggle.heo);
+            switch (orbitToggle.heo) {
                 case 0:
                     //heoSatLayer.enabled = false;
                     //heoRocketLayer.enabled = false;
@@ -509,7 +490,7 @@ $.get('data/groundstations.json', function(groundStations) {
         }
 
         function leoToggleOff() {
-            switch (orbitToggle) {
+            switch (orbitToggle.leo) {
                 case 0:
                     leoSatLayer.enabled = false;
                     leoRocketLayer.enabled = false;
@@ -555,7 +536,7 @@ $.get('data/groundstations.json', function(groundStations) {
             }
         }
         function meoToggleOff() {
-            switch (orbitToggle) {
+            switch (orbitToggle.meo) {
                 case 0:
                     meoSatLayer.enabled = false;
                     meoRocketLayer.enabled = false;
@@ -601,7 +582,7 @@ $.get('data/groundstations.json', function(groundStations) {
             }
         }
         function heoToggleOff() {
-            switch (orbitToggle) {
+            switch (orbitToggle.heo) {
                 case 0:
                     heoSatLayer.enabled = false;
                     heoRocketLayer.enabled = false;
