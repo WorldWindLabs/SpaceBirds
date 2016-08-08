@@ -28,6 +28,7 @@ for (var l = 0; l < layers.length; l++) {
 
 //custom layers
 var groundStationsLayer = new WorldWind.RenderableLayer();
+var orbitsHoverLayer = new WorldWind.RenderableLayer();
 var modelLayer = new WorldWind.RenderableLayer("Model");
 var meshLayer = new WorldWind.RenderableLayer();
 var orbitsLayer = new WorldWind.RenderableLayer("Orbit");
@@ -45,6 +46,7 @@ var heoDebrisLayer = new WorldWind.RenderableLayer("HEO Debris");
 
 //add custom layers
 wwd.addLayer(groundStationsLayer);
+wwd.addLayer(orbitsHoverLayer);
 
 var payloads = [];
 var rocketbodies = [];
@@ -260,11 +262,9 @@ $.get('data/groundstations.json', function(groundStations) {
                 orbitToggle.leoP = 1;
                 orbitToggle.leoR = 3;
                 orbitToggle.leoD = 5;
-
                 orbitToggle.meoP = 1;
                 orbitToggle.meoR = 3;
                 orbitToggle.meoD = 5;
-
                 orbitToggle.heoP = 1;
                 orbitToggle.heoR = 3;
                 orbitToggle.heoD = 5;
@@ -302,6 +302,13 @@ $.get('data/groundstations.json', function(groundStations) {
                     orbitToggle.leoP = 0;
                     orbitToggle.leoR = 0;
                     orbitToggle.leoD = 0;
+                    orbitToggle.meoP = 0;
+                    orbitToggle.meoR = 0;
+                    orbitToggle.meoD = 0;
+                    orbitToggle.heoP = 0;
+                    orbitToggle.heoR = 0;
+                    orbitToggle.heoD = 0;
+
                     // leoSatLayer.enabled = false;
                     leoRocketLayer.enabled = false;
                     leoDebrisLayer.enabled = false;
@@ -341,6 +348,12 @@ $.get('data/groundstations.json', function(groundStations) {
                     orbitToggle.leoP = 0;
                     orbitToggle.leoR = 0;
                     orbitToggle.leoD = 0;
+                    orbitToggle.meoP = 0;
+                    orbitToggle.meoR = 0;
+                    orbitToggle.meoD = 0;
+                    orbitToggle.heoP = 0;
+                    orbitToggle.heoR = 0;
+                    orbitToggle.heoD = 0;
                     leoSatLayer.enabled = false;
                     //leoRocketLayer.enabled = false;
                     leoDebrisLayer.enabled = false;
@@ -380,6 +393,12 @@ $.get('data/groundstations.json', function(groundStations) {
                     orbitToggle.leoP = 0;
                     orbitToggle.leoR = 0;
                     orbitToggle.leoD = 0;
+                    orbitToggle.meoP = 0;
+                    orbitToggle.meoR = 0;
+                    orbitToggle.meoD = 0;
+                    orbitToggle.heoP = 0;
+                    orbitToggle.heoR = 0;
+                    orbitToggle.heoD = 0;
                     leoSatLayer.enabled = false;
                     leoRocketLayer.enabled = false;
                     //leoDebrisLayer.enabled = false;
@@ -792,13 +811,14 @@ $.get('data/groundstations.json', function(groundStations) {
             for (var ind = 0; ind < satNum; ind += 1) {
                 var placemarkAttributes = new WorldWind.PlacemarkAttributes(null);
                 var highlightPlacemarkAttributes = new WorldWind.PlacemarkAttributes(placemarkAttributes);
-                highlightPlacemarkAttributes.imageScale = 0.40;
+                highlightPlacemarkAttributes.imageScale = 0.50;
+                highlightPlacemarkAttributes.imageSource = "../apps/SatTracker/satellite.png";
 
                 if (satData[ind].OBJECT_TYPE === "PAYLOAD") {
                     placemarkAttributes.imageSource = "../apps/SatTracker/dot-red.png";
                 } else if (satData[ind].OBJECT_TYPE === "ROCKET BODY") {
                     placemarkAttributes.imageSource = "../apps/SatTracker/dot-blue.png";
-                } else {
+                } else if (satData[ind].OBJECT_TYPE === "DEBRIS"){
                     placemarkAttributes.imageSource = "../apps/SatTracker/dot-grey.png";
                 }
 
@@ -816,7 +836,7 @@ $.get('data/groundstations.json', function(groundStations) {
                 placemark.altitudeMode = WorldWind.RELATIVE_TO_GROUND;
                 placemark.attributes = placemarkAttributes;
                 placemark.highlightAttributes = highlightPlacemarkAttributes;
-                placemarkAttributes.imageScale = 0.35;
+                placemarkAttributes.imageScale = 0.40;
 
 
                 //Defines orbit ranges
@@ -1075,8 +1095,12 @@ $.get('data/groundstations.json', function(groundStations) {
                 var redrawRequired = highlightedItems.length > 0;
 
                 // De-highlight any highlighted placemarks.
+                index = null;
                 for (var h = 0; h < highlightedItems.length; h++) {
                     highlightedItems[h].highlighted = false;
+                    $('#follow').text("Follow Off");
+                    orbitsHoverLayer.enabled = true;
+                    endHoverOrbit();
                     endOrbit();
                     endMesh();
                     endFollow();
@@ -1084,9 +1108,6 @@ $.get('data/groundstations.json', function(groundStations) {
 
                     //turns off renderables that were turned on by click
                     modelLayer.removeAllRenderables();
-
-
-
                 }
                 //highlightedItems = [];
 
@@ -1102,9 +1123,14 @@ $.get('data/groundstations.json', function(groundStations) {
                 // If only one thing is picked and it is the terrain, tell the world window to go to the picked location.
                 if (pickList.objects.length == 1 && pickList.objects[0].isTerrain) {
                     var position = pickList.objects[0].position;
+                    $('#follow').text("Follow Off");
+                    index = null;
+                    orbitsHoverLayer.removeAllRenderables();
+                    orbitsHoverLayer.enabled = true;
                     orbitsLayer.removeAllRenderables();
                     modelLayer.removeAllRenderables();
                     meshLayer.removeAllRenderables();
+                    endHoverOrbit();
                     endExtra();
                     endFollow();
                     endOrbit();
@@ -1135,9 +1161,14 @@ $.get('data/groundstations.json', function(groundStations) {
                     var position = pickList.objects[0].position;
                     var index = everyCurrentPosition.indexOf(position);
                     var satPos = everyCurrentPosition[index];
+                    orbitsHoverLayer.enabled = false;
+                    $('#follow').text("Follow On");
                     endFollow();
+                    endHoverOrbit();
                     endMesh();
                     endExtra();
+                    endOrbit();
+
                     extraData(index);
                     $(this).text("Mesh On");
                     meshToCurrentPosition(index);
@@ -1201,6 +1232,57 @@ $.get('data/groundstations.json', function(groundStations) {
             var tapRecognizer = new WorldWind.TapRecognizer(wwd, handleClick);
 
 
+            var startHoverOrbit;
+            var createHoverOrbit = function(index) {
+                startHoverOrbit = window.setInterval(function() {
+                    orbitsHoverLayer.removeAllRenderables();
+                    var now = new Date();
+                    var pastOrbit = [];
+                    var futureOrbit = [];
+                    for (var i = -98; i <= 98; i++) {
+                        var time = new Date(now.getTime() + i * 60000);
+
+                        var position = getPosition(satellite.twoline2satrec(satData[index].TLE_LINE1, satData[index].TLE_LINE2), time);
+
+                        if (i < 0) {
+                            pastOrbit.push(position);
+                        } else if (i > 0) {
+                            futureOrbit.push(position);
+                        } else {
+                            pastOrbit.push(position);
+                            futureOrbit.push(position);
+                        }
+                    }
+
+                    // Orbit Path
+                    var pastOrbitPathAttributes = new WorldWind.ShapeAttributes(null);
+                    pastOrbitPathAttributes.outlineColor = WorldWind.Color.RED;
+                    pastOrbitPathAttributes.interiorColor = new WorldWind.Color(1, 0, 0, 0.5);
+
+                    var futureOrbitPathAttributes = new WorldWind.ShapeAttributes(null);//pastAttributes
+                    futureOrbitPathAttributes.outlineColor = WorldWind.Color.GREEN;
+                    futureOrbitPathAttributes.interiorColor = new WorldWind.Color(0, 1, 0, 0.5);
+
+                    //plot orbit on click
+                    var pastOrbitPath = new WorldWind.Path(pastOrbit);
+                    pastOrbitPath.altitudeMode = WorldWind.RELATIVE_TO_GROUND;
+                    pastOrbitPath.attributes = pastOrbitPathAttributes;
+
+
+                    var futureOrbitPath = new WorldWind.Path(futureOrbit);
+                    futureOrbitPath.altitudeMode = WorldWind.RELATIVE_TO_GROUND;
+                    futureOrbitPath.attributes = futureOrbitPathAttributes;
+
+                    orbitsHoverLayer.addRenderable(pastOrbitPath);
+                    orbitsHoverLayer.addRenderable(futureOrbitPath);
+                });
+            };
+
+            var endHoverOrbit = function(){
+                clearInterval(startHoverOrbit);
+                orbitsHoverLayer.removeAllRenderables();
+            };
+
             //Highlight on hover
             // Now set up to handle picking.
             var highlightedItems = [];
@@ -1217,8 +1299,7 @@ $.get('data/groundstations.json', function(groundStations) {
                 for (var h = 0; h < highlightedItems.length; h++) {
                     highlightedItems[h].highlighted = false;
                     endExtra();
-                    endOrbit();
-                    endMesh();
+                    endHoverOrbit();
 
                 }
                 highlightedItems = [];
@@ -1254,33 +1335,10 @@ $.get('data/groundstations.json', function(groundStations) {
                     intldesPlaceholder.textContent = satData[index].INTLDES;
                     namePlaceholder.textContent = satData[index].OBJECT_NAME;
                     endExtra();
+                    endHoverOrbit();
                     extraData(index);
-                    endOrbit();
-                    endMesh();
 
-                   /* meshToCurrentPosition(index);
-                    $('.mesh').click(function () {
-                        if ($(this).text() == "Mesh Off") {
-                            $(this).text("Mesh On");
-                            meshToCurrentPosition(index);
-                        }
-                        else {
-                            $(this).text("Mesh Off");
-                            endMesh();
-                        }
-                    });*/
-
-                    createOrbit(index);
-                    $('#orbit').click(function () {
-                        if ($(this).text() == "Orbit Off") {
-                            $(this).text("Orbit On");
-                            createOrbit(index);
-                        }
-                        else {
-                            $(this).text("Orbit Off");
-                            endOrbit();
-                        }
-                    });
+                    createHoverOrbit(index);
 
                     updateLLA(everyCurrentPosition[index]);
                     // Update the window if we changed anything.
