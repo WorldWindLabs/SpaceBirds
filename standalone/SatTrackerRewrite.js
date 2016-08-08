@@ -1,7 +1,6 @@
 "use strict";
 var allOrbitingBodies = []; //Global variable with all the orbiting objects
 
-
 WorldWind.Logger.setLoggingLevel(WorldWind.Logger.LEVEL_WARNING);
 
 // Create the World Window.
@@ -28,29 +27,9 @@ var groundStationsLayer = new WorldWind.RenderableLayer();
 //var meshLayer = new WorldWind.RenderableLayer();
 //var orbitsLayer = new WorldWind.RenderableLayer("Orbit");
 var satellitesLayer = new WorldWind.RenderableLayer("Satellites");
+var debrisLayer = new WorldWind.RenderableLayer("Debris");
 //var meoSatLayer = new WorldWind.RenderableLayer("MEO Satellite");
 //var heoSatLayer = new WorldWind.RenderableLayer("HEO Satellite");
-
-//Orbital object attributes
-var placemarkAttributes = new WorldWind.PlacemarkAttributes(null);
-placemarkAttributes.imageOffset = new WorldWind.Offset(
-    WorldWind.OFFSET_FRACTION, 0.5,
-    WorldWind.OFFSET_FRACTION, 0.5);
-placemarkAttributes.labelAttributes.offset = new WorldWind.Offset(
-    WorldWind.OFFSET_FRACTION, 0.5,
-    WorldWind.OFFSET_FRACTION, 1.0);
-placemarkAttributes.labelAttributes.color = WorldWind.Color.WHITE;
-placemarkAttributes.imageScale = 0.35;
-var highlightAttributes = new WorldWind.PlacemarkAttributes(placemarkAttributes);
-highlightAttributes.imageScale = 0.40;
-
-var payloads = new WorldWind.PlacemarkAttributes(placemarkAttributes);
-var rocketBodies = new WorldWind.PlacemarkAttributes(placemarkAttributes);
-var debris = new WorldWind.PlacemarkAttributes(placemarkAttributes);
-
-payloads.imageSource = "../apps/SatTracker/dot-red.png";
-rocketBodies.imageSource = "../apps/SatTracker/dot-blue.png";
-debris.imageSource = "../apps/SatTracker/dot-grey.png";
 
 //Abstraction of an orbital body
 function orbitalBody(satelliteData){
@@ -118,6 +97,7 @@ function getPosition (satrec, time) {
 
 function getSatellites(satData){
   var faultySatsNumber = 0;
+  var orbitalBodiesNumber = 0;
   var now = new Date();
   for(var i = 0; i < satData.length ; i += 1){
     var time = new Date(now.getTime());
@@ -131,43 +111,58 @@ function getSatellites(satData){
 
     var myOrbitalBody = new orbitalBody(satData[i]);
     myOrbitalBody.currentPosition = new WorldWind.Position(position.latitude, position.longitude, position.altitude);
-    allOrbitingBodies.push(myOrbitalBody);
-    var placemark = new WorldWind.Placemark(myOrbitalBody.currentPosition);
-
-    switch(myOrbitalBody.objectType) {
-      case 'PAYLOAD':
-          placemark.Attributes = payloads;
-          break;
-      case 'ROCKET BODY':
-          placemark.Attributes = rocketBodies;
-          break;
-      default:
-          placemark.Attributes = debris;
+    orbitalBodiesNumber += 1;
+    allOrbitingBodies.push(myOrbitalBody); //Not sure if this array is useful anymore
+    if(myOrbitalBody.objectType !== "DEBRIS"){
+      satellitesLayer.addRenderable(generatePlacemark(myOrbitalBody));
+    } else {
+      debrisLayer.addRenderable(generatePlacemark(myOrbitalBody));
     }
-
-    placemark.altitudeMode = WorldWind.RELATIVE_TO_GROUND;
-    placemark.highlightAttributes = highlightAttributes;
-    satellitesLayer.addRenderable(placemark);
-
-
   }
-  console.log('We have ' + allOrbitingBodies.length + ' orbiting bodies');
+
+  console.log('We have ' + orbitalBodiesNumber + ' orbiting bodies');
   console.log(faultySatsNumber + ' satellites had errors in their TLE.');
-  wwd.addLayer(satellitesLayer);
-// renderEverything();
- for(var j = 0; j < 10; j+=1){
-   for(var prop in allOrbitingBodies[j]){
-     console.log(' - ' + allOrbitingBodies[j][prop]);
-   }
-   if(allOrbitingBodies[j].objectType === "ROCKET BODY"){
-     console.log('El objeto ' + j + ' es de tipo rocket');
-   }
- }
+  renderEverything();
+ // for(var j = 0; j < 10; j+=1){
+ //   for(var prop in allOrbitingBodies[j]){
+ //     console.log(' - ' + allOrbitingBodies[j][prop]);
+ //   }
+ // }
 
 }
 
-function renderEverything(){
+function generatePlacemark(orbitalBody){
+  var placemark = new WorldWind.Placemark(orbitalBody.currentPosition);
+  var placemarkAttributes = new WorldWind.PlacemarkAttributes(null);
+  // placemarkAttributes.labelAttributes.offset = new WorldWind.Offset(WorldWind.OFFSET_FRACTION, 0.5, WorldWind.OFFSET_FRACTION, 1.0);
+  // placemarkAttributes.labelAttributes.color = WorldWind.Color.WHITE;
 
+  var highlightAttributes = new WorldWind.PlacemarkAttributes(placemarkAttributes);
+  highlightAttributes.imageScale = 0.70;
+  placemark.altitudeMode = WorldWind.RELATIVE_TO_GROUND;
+
+  switch(orbitalBody.objectType) {
+    case "PAYLOAD":
+        placemarkAttributes.imageSource = "assets/dot-red.png";
+        placemarkAttributes.imageScale = 0.60;
+        break;
+    case "ROCKET BODY":
+        placemarkAttributes.imageSource = "assets/dot-blue.png";
+        placemarkAttributes.imageScale = 0.60;
+        break;
+    default:
+        placemarkAttributes.imageSource = "assets/dot-grey.png";
+        placemarkAttributes.imageScale = 0.40;
+  }
+
+  placemark.attributes = placemarkAttributes;
+  placemark.highlightAttributes = highlightAttributes;
+
+  return placemark;
+}
+
+function renderEverything(){
+  wwd.addLayer(satellitesLayer);
 }
 
 function retrieve3dModelPath(intlDes){
@@ -198,6 +193,15 @@ grndStationsWorker.addEventListener('message', function(event){
   var groundStations = event.data;
   grndStationsWorker.postMessage('close');
 }, false);
+
+window.setInterval(function () {
+    // for (var i = 0; i < allOrbitingBodies.length; i += 1) {
+    //     var position = getPosition(satellite.twoline2satrec(allOrbitingBodies[i].tleLine1, allOrbitingBodies[i].tleLine2), new Date());
+    //     allOrbitingBodies[i].currentPosition = new WorldWind.Position(position.latitude, position.longitude, position.altitude);
+    //     wwd.redraw();
+    // }
+}, 1000);
+
 
 $(document).ready(function() {
 
