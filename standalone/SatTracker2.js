@@ -42,7 +42,6 @@ var meoDebrisLayer = new WorldWind.RenderableLayer("MEO Debris");
 var heoDebrisLayer = new WorldWind.RenderableLayer("HEO Debris");
 
 
-var updateAllSats;
 
 //add custom layers
 wwd.addLayer(groundStationsLayer);
@@ -190,7 +189,7 @@ $.get('data/groundstations.json', function(groundStations) {
         /***
          * Satellites
          */
-        var orbitToggle = 9;
+        var orbitToggle = {leo:9, meo:9, heo:9};
 
         var satNum = satPac.length;
         //Sat Tyoe toggles
@@ -815,7 +814,7 @@ $.get('data/groundstations.json', function(groundStations) {
             wwd.redraw();
 
             // Update all Satellite Positions
-            updateAllSats = window.setInterval(function () {
+             window.setInterval(function () {
                 for (var indx = 0; indx < satNum; indx += 1) {
                     var position = getPosition(satellite.twoline2satrec(satData[indx].TLE_LINE1, satData[indx].TLE_LINE2), new Date());
                     everyCurrentPosition[indx].latitude = position.latitude;
@@ -840,11 +839,11 @@ $.get('data/groundstations.json', function(groundStations) {
                 window.setTimeout(function () {
                     startFollow = window.setInterval(function () {
                         var position = getPosition(satellite.twoline2satrec(satData[index].TLE_LINE1, satData[index].TLE_LINE2), new Date());
-                        everyCurrentPosition[index].latitude = position.latitude;
+                      /*  everyCurrentPosition[index].latitude = position.latitude;
                         everyCurrentPosition[index].longitude = position.longitude;
                         //  everyCurrentPosition[index].altitude = position.altitude;
 
-                        //allows for updating lookAtNavigator and visual cone when called on line 34
+                        //allows for updating lookAtNavigator and visual cone when called on line 34*/
 
                         //change view position
                         wwd.navigator.lookAtLocation.latitude = satPos.latitude;
@@ -1101,7 +1100,7 @@ $.get('data/groundstations.json', function(groundStations) {
                     endMesh();
                     endExtra();
                     extraData(index);
-
+                    $(this).text("Mesh On");
                     meshToCurrentPosition(index);
                     $('.mesh').click(function () {
                         if ($(this).text() == "Mesh Off") {
