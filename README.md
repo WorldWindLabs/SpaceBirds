@@ -12,16 +12,16 @@ The app will offer fun and exciting visual interactivity, by providing 3D models
 
 The application is still in its alpha stage as it still contains some bugs and is lacking some features we plan to incorporate.
 
-SCREEN SHOTS:
+###SCREEN SHOTS:
 
-<img src="http://imgur.com/trhnhue"/>
+<img src="http://i.imgur.com/SJ38jpL.png"/>
 
-<img src="http://imgur.com/KhmyPZ1"/>
+<img src="http://i.imgur.com/KhmyPZ1.png"/>
 
-<img src="http://imgur.com/SJ38jpL"/>
+<img src="http://i.imgur.com/trhnhue.png"/>
 
 
-HOW TO USE:
+###HOW TO USE:
 -Satellites-
 In its current stage of the application, on opening the application, the user can select one of four sets of satellite data, which allows the user to view all known satellites or exclusively payloads, rocket bodies, or debris.
 
@@ -38,25 +38,25 @@ Ground stations can be rendered by selecting the Ground Stations button at the b
 
 FEATURES TO COME:
 -Satellites-
-**Orbit length control that displays current time of the end of orbit
-**Ability to move individual satellites forward and backward in time
-**Additional orbit types and ranges the user can toggle between
-**Faster and smoother animation
-**Search
-**Pre-defined groups
-**Custom grouping
-**Expanded library of 3d models
+*Orbit length control that displays current time of the end of orbit
+*Ability to move individual satellites forward and backward in time
+*Additional orbit types and ranges the user can toggle between
+*Faster and smoother animation
+*Search
+*Pre-defined groups
+*Custom grouping
+*Expanded library of 3d models
 
 -Ground Stations-
-**Ability to highlight and display coordinates, information, and area coverage shapes
-**Search
-**Pre-defined groups
-**Custom grouping
-**3D models
+*Ability to highlight and display coordinates, information, and area coverage shapes
+*Search
+*Pre-defined groups
+*Custom grouping
+*3D models
 
 ====================
-**Organization:** NASA Ames Research Center (PX)
-**Manager:** Patrick Hogan, Yann Voumard
-**Authors:** Miguel Del Castillo, Bert Stewart
-**Developers:** Enika Biswas, Nidhi Jain, Jenipher Gonzalez, Nancy Hernandez
-**Acknowledgements:** Benjamin Chang, Gabriel Militão, Farah Salah, Khaled Sharif
+*Organization:** NASA Ames Research Center (PX)
+*Manager:** Patrick Hogan, Yann Voumard
+*Authors:** Miguel Del Castillo, Bert Stewart
+*Developers:** Enika Biswas, Nidhi Jain, Jenipher Gonzalez, Nancy Hernandez
+*Acknowledgements:** Benjamin Chang, Gabriel Militão, Farah Salah, Khaled Sharif
