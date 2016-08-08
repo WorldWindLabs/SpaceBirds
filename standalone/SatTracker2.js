@@ -43,15 +43,6 @@ var heoDebrisLayer = new WorldWind.RenderableLayer("HEO Debris");
 
 
 var updateAllSats;
-var endAllSats = function(){
-    clearInterval(updateAllSats);
-    modelLayer.removeAllRenderables();
-    meshLayer.removeAllRenderables();
-    orbitsLayer.removeAllRenderables();
-    leoSatLayer.removeAllRenderables();
-    meoSatLayer.removeAllRenderables();
-    heoSatLayer.removeAllRenderables();
-};
 
 //add custom layers
 wwd.addLayer(groundStationsLayer);
@@ -199,10 +190,11 @@ $.get('data/groundstations.json', function(groundStations) {
         /***
          * Satellites
          */
-        var leoOrbit = 9;
+        var orbitToggle = 9;
+
         var satNum = satPac.length;
         //Sat Tyoe toggles
-        $('.allSats').click(function(leoOrbit) {
+        $('.allSats').click(function(orbitToggle) {
             if ($(this).text() == "ALL OFF") {
                 $(this).text("ALL ON");
                 $('.payloads').text("PAYLOADS OFF");
@@ -218,8 +210,8 @@ $.get('data/groundstations.json', function(groundStations) {
                 heoSatLayer.enabled = true;
                 heoRocketLayer.enabled = true;
                 heoDebrisLayer.enabled = true;
-                leoOrbit = 9;
-                return leoOrbit;
+                orbitToggle = 9;
+                return orbitToggle;
             } else {
                 $(this).text("ALL OFF");
                 leoSatLayer.enabled = false;
@@ -231,8 +223,8 @@ $.get('data/groundstations.json', function(groundStations) {
                 heoSatLayer.enabled = false;
                 heoRocketLayer.enabled = false;
                 heoDebrisLayer.enabled = false;
-                leoOrbit = 0;
-                return leoOrbit;           }
+                orbitToggle = 0;
+                return orbitToggle;          }
         });
         $('.payloads').click(function() {
             if ($(this).text() == "PAYLOADS OFF") {
@@ -251,8 +243,8 @@ $.get('data/groundstations.json', function(groundStations) {
                 heoSatLayer.enabled = true;
                 heoRocketLayer.enabled = false;
                 heoDebrisLayer.enabled = false;
-                leoOrbit = 1;
-                return leoOrbit;
+                orbitToggle = 1;
+                return orbitToggle;
             } else {
                 $(this).text("PAYLOADS OFF");
                 leoSatLayer.enabled = false;
@@ -264,8 +256,8 @@ $.get('data/groundstations.json', function(groundStations) {
                 heoSatLayer.enabled = false;
                 heoRocketLayer.enabled = false;
                 heoDebrisLayer.enabled = false;
-                leoOrbit = 0;
-                return leoOrbit;
+                orbitToggle = 0;
+                return orbitToggle;
             }
         });
         $('.rockets').click(function() {
@@ -284,8 +276,8 @@ $.get('data/groundstations.json', function(groundStations) {
                 heoSatLayer.enabled = false;
                 heoRocketLayer.enabled = true;
                 heoDebrisLayer.enabled = false;
-                leoOrbit = 3;
-                return leoOrbit;
+                orbitToggle = 3;
+                return orbitToggle;
             } else {
                 $(this).text("ROCKETS OFF");
                 leoSatLayer.enabled = false;
@@ -297,8 +289,8 @@ $.get('data/groundstations.json', function(groundStations) {
                 heoSatLayer.enabled = false;
                 heoRocketLayer.enabled = false;
                 heoDebrisLayer.enabled = false;
-                leoOrbit = 0;
-                return leoOrbit;
+                orbitToggle = 0;
+                return orbitToggle;
             }
         });
         $('.debris').click(function() {
@@ -317,8 +309,8 @@ $.get('data/groundstations.json', function(groundStations) {
                 heoSatLayer.enabled = false;
                 heoRocketLayer.enabled = false;
                 heoDebrisLayer.enabled = true;
-                leoOrbit = 5;
-                return leoOrbit;
+                orbitToggle = 5;
+                return orbitToggle;
             } else {
                 $(this).text("DEBRIS OFF");
                 leoSatLayer.enabled = false;
@@ -330,8 +322,8 @@ $.get('data/groundstations.json', function(groundStations) {
                 heoSatLayer.enabled = false;
                 heoRocketLayer.enabled = false;
                 heoDebrisLayer.enabled = false;
-                leoOrbit = 0;
-                return leoOrbit;
+                orbitToggle = 0;
+                return orbitToggle;
             }
         });
         /*$('.unknown').click(function() {
@@ -380,10 +372,10 @@ $.get('data/groundstations.json', function(groundStations) {
             }
         }*/
 
-        console.log(leoOrbit);
-        function OrbitToggleOn() {
-            console.log(leoOrbit);
-            switch (leoOrbit) {
+
+        function leoToggleOn() {
+            console.log(orbitToggle);
+            switch (orbitToggle) {
                 case 0:
                     //leoSatLayer.enabled = false;
                     //leoRocketLayer.enabled = false;
@@ -426,9 +418,99 @@ $.get('data/groundstations.json', function(groundStations) {
                     break;
             }
         }
+        function meoToggleOn() {
+            console.log(orbitToggle);
+            switch (orbitToggle) {
+                case 0:
+                    //meoSatLayer.enabled = false;
+                    //meoRocketLayer.enabled = false;
+                    //meoDebrisLayer.enabled = false;
+                    break;
+                case 1:
+                    meoSatLayer.enabled = true;
+                    //meoRocketLayer.enabled = false;
+                    //meoDebrisLayer.enabled = false;
+                    break;
+                case 3:
+                    //meoSatLayer.enabled = false;
+                    meoRocketLayer.enabled = true;
+                    //meoDebrisLayer.enabled = false;
+                    break;
+                case 5:
+                    //meoSatLayer.enabled = false;
+                    //meoRocketLayer.enabled = false;
+                    meoDebrisLayer.enabled = true;
+                    break;
+                case 4:
+                    meoSatLayer.enabled = true;
+                    meoRocketLayer.enabled = true;
+                    // leoDebrisLayer.enabled = false;
+                    break;
+                case 6:
+                    leoSatLayer.enabled = true;
+                    //meoRocketLayer.enabled = false;
+                    meoDebrisLayer.enabled = true;
+                    break;
+                case 8:
+                    //meoSatLayer.enabled = false;
+                    meoRocketLayer.enabled = true;
+                    meoDebrisLayer.enabled = true;
+                    break;
+                case 9:
+                    meoSatLayer.enabled = true;
+                    meoRocketLayer.enabled = true;
+                    meoDebrisLayer.enabled = true;
+                    break;
+            }
+        }
+        function heoToggleOn() {
+            console.log(orbitToggle);
+            switch (orbitToggle) {
+                case 0:
+                    //heoSatLayer.enabled = false;
+                    //heoRocketLayer.enabled = false;
+                    //heoDebrisLayer.enabled = false;
+                    break;
+                case 1:
+                    heoSatLayer.enabled = true;
+                    //heoRocketLayer.enabled = false;
+                    //heoDebrisLayer.enabled = false;
+                    break;
+                case 3:
+                    //heoSatLayer.enabled = false;
+                    heoRocketLayer.enabled = true;
+                    //heoDebrisLayer.enabled = false;
+                    break;
+                case 5:
+                    //heoSatLayer.enabled = false;
+                    //heoRocketLayer.enabled = false;
+                    heoDebrisLayer.enabled = true;
+                    break;
+                case 4:
+                    heoSatLayer.enabled = true;
+                    heoRocketLayer.enabled = true;
+                    // heoDebrisLayer.enabled = false;
+                    break;
+                case 6:
+                    heoSatLayer.enabled = true;
+                    //heoRocketLayer.enabled = false;
+                    heoDebrisLayer.enabled = true;
+                    break;
+                case 8:
+                    //heoSatLayer.enabled = false;
+                    heoRocketLayer.enabled = true;
+                    heoDebrisLayer.enabled = true;
+                    break;
+                case 9:
+                    heoSatLayer.enabled = true;
+                    heoRocketLayer.enabled = true;
+                    heoDebrisLayer.enabled = true;
+                    break;
+            }
+        }
 
-        function OrbitToggleOff() {
-            switch (leoOrbit) {
+        function leoToggleOff() {
+            switch (orbitToggle) {
                 case 0:
                     leoSatLayer.enabled = false;
                     leoRocketLayer.enabled = false;
@@ -471,7 +553,98 @@ $.get('data/groundstations.json', function(groundStations) {
                     leoRocketLayer.enabled = false;
                     leoDebrisLayer.enabled = false;
                     break;
+            }
+        }
+        function meoToggleOff() {
+            switch (orbitToggle) {
+                case 0:
+                    meoSatLayer.enabled = false;
+                    meoRocketLayer.enabled = false;
+                    meoDebrisLayer.enabled = false;
+                    break;
+                case 1:
+                    meoSatLayer.enabled = false;
+                    //meoRocketLayer.enabled = false;
+                    //meoDebrisLayer.enabled = false;
+                    break;
+                case 3:
+                    //meoSatLayer.enabled = false;
+                    meoRocketLayer.enabled = false;
+                    //meoDebrisLayer.enabled = false;
+                    break;
+                case 5:
+                    //meoSatLayer.enabled = false;
+                    //meoRocketLayer.enabled = false;
+                    meoDebrisLayer.enabled = false;
 
+                    break;
+                case 4:
+                    meoSatLayer.enabled = false;
+                    meoRocketLayer.enabled = false;
+                    // meoDebrisLayer.enabled = false;
+
+                    break;
+                case 6:
+                    meoSatLayer.enabled = false;
+                    //meoRocketLayer.enabled = false;
+                    meoDebrisLayer.enabled = false;
+                    break;
+                case 8:
+                    //meoSatLayer.enabled = false;
+                    meoRocketLayer.enabled = false;
+                    meoDebrisLayer.enabled = false;
+                    break;
+                case 9:
+                    meoSatLayer.enabled = false;
+                    meoRocketLayer.enabled = false;
+                    meoDebrisLayer.enabled = false;
+                    break;
+            }
+        }
+        function heoToggleOff() {
+            switch (orbitToggle) {
+                case 0:
+                    heoSatLayer.enabled = false;
+                    heoRocketLayer.enabled = false;
+                    heoDebrisLayer.enabled = false;
+                    break;
+                case 1:
+                    heoSatLayer.enabled = false;
+                    //heoRocketLayer.enabled = false;
+                    //heoDebrisLayer.enabled = false;
+                    break;
+                case 3:
+                    //heoSatLayer.enabled = false;
+                    heoRocketLayer.enabled = false;
+                    //heoDebrisLayer.enabled = false;
+                    break;
+                case 5:
+                    //heoSatLayer.enabled = false;
+                    //heoRocketLayer.enabled = false;
+                    heoDebrisLayer.enabled = false;
+
+                    break;
+                case 4:
+                    heoSatLayer.enabled = false;
+                    heoRocketLayer.enabled = false;
+                    // heoDebrisLayer.enabled = false;
+
+                    break;
+                case 6:
+                    heoSatLayer.enabled = false;
+                    //heoRocketLayer.enabled = false;
+                    heoDebrisLayer.enabled = false;
+                    break;
+                case 8:
+                    //heoSatLayer.enabled = false;
+                    heoRocketLayer.enabled = false;
+                    heoDebrisLayer.enabled = false;
+                    break;
+                case 9:
+                    heoSatLayer.enabled = false;
+                    heoRocketLayer.enabled = false;
+                    heoDebrisLayer.enabled = false;
+                    break;
             }
         }
 
@@ -479,28 +652,28 @@ $.get('data/groundstations.json', function(groundStations) {
         $('.leo').click(function() {
             if ($(this).text() == "LEO OFF") {
                 $(this).text("LEO ON");
-                OrbitToggleOn();
+                leoToggleOn();
             } else {
                 $(this).text("LEO OFF");
-                OrbitToggleOff();
+                leoToggleOff();
             }
         });
         $('.meo').click(function() {
             if ($(this).text() == "MEO OFF") {
                 $(this).text("MEO ON");
-
+                meoToggleOn();
             } else {
                 $(this).text("MEO OFF");
-
+                meoToggleOff();
             }
         });
         $('.heo').click(function() {
             if ($(this).text() == "HEO OFF") {
                 $(this).text("HEO ON");
-
+                heoToggleOn();
             } else {
                 $(this).text("HEO OFF");
-
+            heoToggleOff();
             }
         });
 
