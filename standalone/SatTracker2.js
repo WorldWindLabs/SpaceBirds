@@ -51,8 +51,53 @@ var rocketbodies = [];
 var debris = [];
 var unknown = [];
 
+function tryPosition (satrec, time) {
+    var position_and_velocity = satellite.propagate(satrec,
+        time.getUTCFullYear(),
+        time.getUTCMonth() + 1,
+        time.getUTCDate(),
+        time.getUTCHours(),
+        time.getUTCMinutes(),
+        time.getUTCSeconds());
+    var position_eci = position_and_velocity["position"];
+
+    var gmst = satellite.gstime_from_date(time.getUTCFullYear(),
+        time.getUTCMonth() + 1,
+        time.getUTCDate(),
+        time.getUTCHours(),
+        time.getUTCMinutes(),
+        time.getUTCSeconds());
+
+    var position_gd = satellite.eci_to_geodetic(position_eci, gmst);
+    var latitude = satellite.degrees_lat(position_gd["latitude"]);
+    var longitude = satellite.degrees_long(position_gd["longitude"]);
+    var altitude = position_gd["height"] * 1000;
+
+    return new WorldWind.Position(latitude, longitude, altitude);
+};
+
+function sanitizeSatellites(objectArray){
+  var faultySatellites = 0;
+  console.log('Array size before splicing is ' + objectArray.length);
+  for (var i = 0; i < objectArray.length ; i += 1){
+    try{
+      var position = tryPosition(satellite.twoline2satrec(objectArray[i].TLE_LINE1, objectArray[i].TLE_LINE2), new Date());
+    } catch (err){
+      faultySatellites += 1;
+      objectArray.splice(i,1);
+      i--;
+    }
+  }
+
+  console.log('we have ' + objectArray.length + ' sanitized satellites');
+  console.log('Total number of objects is ' + i);
+  console.log(faultySatellites + ' do not work');
+  return objectArray;
+}
+
 $.get('data/groundstations.json', function(groundStations) {
-    $.get('data/TLE.json', function (satPac) {
+    $.get('data/TLE.json', function (satellites) {
+        var satPac = sanitizeSatellites(satellites);
         satPac.satDataString = JSON.stringify(satPac);
         console.log(satPac[0].OBJECT_NAME);
 
@@ -257,16 +302,16 @@ $.get('data/groundstations.json', function(groundStations) {
                     orbitToggle.leoP = 0;
                     orbitToggle.leoR = 0;
                     orbitToggle.leoD = 0;
-                   // leoSatLayer.enabled = false;
+                    // leoSatLayer.enabled = false;
                     leoRocketLayer.enabled = false;
                     leoDebrisLayer.enabled = false;
-                   // meoSatLayer.enabled = false;
+                    // meoSatLayer.enabled = false;
                     meoRocketLayer.enabled = false;
                     meoDebrisLayer.enabled = false;
-                   // heoSatLayer.enabled = false;
+                    // heoSatLayer.enabled = false;
                     heoRocketLayer.enabled = false;
                     heoDebrisLayer.enabled = false;
-        }
+                }
                 $('#allSats').text("ALL OFF");
                 $('#leo').text("LEO ON");
                 $('#meo').text("MEO ON");
@@ -300,7 +345,7 @@ $.get('data/groundstations.json', function(groundStations) {
                     //leoRocketLayer.enabled = false;
                     leoDebrisLayer.enabled = false;
                     meoSatLayer.enabled = false;
-                   // meoRocketLayer.enabled = false;
+                    // meoRocketLayer.enabled = false;
                     meoDebrisLayer.enabled = false;
                     heoSatLayer.enabled = false;
                     //heoRocketLayer.enabled = false;
@@ -340,10 +385,10 @@ $.get('data/groundstations.json', function(groundStations) {
                     //leoDebrisLayer.enabled = false;
                     meoSatLayer.enabled = false;
                     meoRocketLayer.enabled = false;
-                   // meoDebrisLayer.enabled = false;
+                    // meoDebrisLayer.enabled = false;
                     heoSatLayer.enabled = false;
                     heoRocketLayer.enabled = false;
-                   // heoDebrisLayer.enabled = false;
+                    // heoDebrisLayer.enabled = false;
                 }
                 $('#allSats').text("ALL OFF");
                 $('#leo').text("LEO ON");
@@ -394,7 +439,7 @@ $.get('data/groundstations.json', function(groundStations) {
                 case 4:
                     leoSatLayer.enabled = true;
                     leoRocketLayer.enabled = true;
-                   // leoDebrisLayer.enabled = false;
+                    // leoDebrisLayer.enabled = false;
                     break;
                 case 6:
                     leoSatLayer.enabled = true;
@@ -531,7 +576,7 @@ $.get('data/groundstations.json', function(groundStations) {
                 case 4:
                     leoSatLayer.enabled = false;
                     leoRocketLayer.enabled = false;
-                   // leoDebrisLayer.enabled = false;
+                    // leoDebrisLayer.enabled = false;
 
                     break;
                 case 6:
@@ -669,7 +714,7 @@ $.get('data/groundstations.json', function(groundStations) {
                 heoToggleOn();
             } else {
                 $(this).text("HEO OFF");
-            heoToggleOff();
+                heoToggleOff();
             }
         });
 
@@ -733,10 +778,7 @@ $.get('data/groundstations.json', function(groundStations) {
             for (var j = 0; j < satNum; j ++) {
                 var currentPosition = null;
                 var time = new Date(now.getTime() + i * 60000);
-                try {
-                    var position = getPosition(satellite.twoline2satrec(satData[j].TLE_LINE1, satData[j].TLE_LINE2), time);
-                } catch (err) {
-                }
+                var position = getPosition(satellite.twoline2satrec(satData[j].TLE_LINE1, satData[j].TLE_LINE2), time);
                 currentPosition = new WorldWind.Position(position.latitude,
                     position.longitude,
                     position.altitude);
