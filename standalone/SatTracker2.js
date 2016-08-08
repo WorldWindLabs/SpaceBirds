@@ -80,7 +80,7 @@ function tryPosition (satrec, time) {
 
 function sanitizeSatellites(objectArray){
   var faultySatellites = 0;
-  console.log('Array size before splicing is ' + objectArray.length);
+  //console.log('Array size before splicing is ' + objectArray.length);
   for (var i = 0; i < objectArray.length ; i += 1){
     try{
       var position = tryPosition(satellite.twoline2satrec(objectArray[i].TLE_LINE1, objectArray[i].TLE_LINE2), new Date());
@@ -90,10 +90,9 @@ function sanitizeSatellites(objectArray){
       i--;
     }
   }
-
-  console.log('we have ' + objectArray.length + ' sanitized satellites');
-  console.log('Total number of objects is ' + i);
-  console.log(faultySatellites + ' do not work');
+  // console.log('we have ' + objectArray.length + ' sanitized satellites');
+  // console.log('Total number of objects is ' + i);
+  // console.log(faultySatellites + ' do not work');
   return objectArray;
 }
 
@@ -101,7 +100,7 @@ $.get('data/groundstations.json', function(groundStations) {
     $.get('data/TLE.json', function (satellites) {
         var satPac = sanitizeSatellites(satellites);
         satPac.satDataString = JSON.stringify(satPac);
-        console.log(satPac[0].OBJECT_NAME);
+        //console.log(satPac[0].OBJECT_NAME);
 
          for (var i = 0; i < satPac.length; i++) {
          if (satPac[i].OBJECT_TYPE === 'PAYLOAD') {
@@ -1331,7 +1330,12 @@ $.get('data/groundstations.json', function(groundStations) {
                 if (pickList.objects.length == 1 && pickList.objects[0]) {
                     var position = pickList.objects[0].position;
                     var index = everyCurrentPosition.indexOf(position);
-                    typePlaceholder.textContent = satData[index].OBJECT_TYPE;
+                    try{
+                      typePlaceholder.textContent = satData[index].OBJECT_TYPE;
+                    }catch (err){
+                      console.log('error in index ' + index);
+                    }
+
                     intldesPlaceholder.textContent = satData[index].INTLDES;
                     namePlaceholder.textContent = satData[index].OBJECT_NAME;
                     endExtra();

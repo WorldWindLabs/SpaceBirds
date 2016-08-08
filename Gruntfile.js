@@ -101,5 +101,6 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
 
     grunt.registerTask('default', ['jsdoc', 'requirejs', 'compress']);
+    grunt.registerTask('minify', ['compress']);
     grunt.registerTask('server', ['connect', 'watch']);
 };
