@@ -1210,7 +1210,7 @@ $.get('data/groundstations.json', function(groundStations) {
 
                     //create 3D collada model
                     var colladaLoader = new WorldWind.ColladaLoader(satPos);
-                    colladaLoader.init({dirPath: '../apps/SatTracker/collada-models/'});
+                    colladaLoader.init({dirPath: 'assets/collada-models/'});
                     colladaLoader.load('ISS.dae', function (scene) {
                         scene.scale = 10000;
                         modelLayer.addRenderable(scene);
