@@ -78,25 +78,25 @@ function tryPosition (satrec, time) {
     return new WorldWind.Position(latitude, longitude, altitude);
 };
 
-function sanitizeSatellites(arrayToSplice){
-  var objectArray = [];
-  console.log(typeof objectArray);
+function sanitizeSatellites(objectArray){
   var faultySatellites = 0;
+  var resultArray = [];
   //console.log('Array size before splicing is ' + objectArray.length);
-  for (var i = 0; i < arrayToSplice.length ; i += 1){
-    objectArray.push(arrayToSplice[i]);
+  for (var i = 0; i < objectArray.length ; i += 1){
     try{
       var position = tryPosition(satellite.twoline2satrec(objectArray[i].TLE_LINE1, objectArray[i].TLE_LINE2), new Date());
     } catch (err){
       faultySatellites += 1;
-      objectArray.splice(i,1);
-      i--;
+      // objectArray.splice(i,1);
+      // i--;
+      continue;
     }
+    resultArray.push(objectArray[i]);
   }
-  // console.log('we have ' + objectArray.length + ' sanitized satellites');
-  // console.log('Total number of objects is ' + i);
-  // console.log(faultySatellites + ' do not work');
-  return objectArray;
+  console.log('we have ' + objectArray.length + ' total satellites');
+  console.log(faultySatellites + ' do not work');
+  console.log('We will keep ' + resultArray.length + ' sanitized satellites.');
+  return resultArray;
 }
 
 $.get('data/groundstations.json', function(groundStations) {
