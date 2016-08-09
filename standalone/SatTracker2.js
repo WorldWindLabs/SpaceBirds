@@ -795,21 +795,6 @@ function getGroundStations (groundStations) {
 
                 // Satellite render loop
                 for (var ind = 0; ind < satNum; ind += 1) {
-                    //divide satType into different arrays
-                    switch (satPac[i].OBJECT_TYPE){
-                        case 'PAYLOAD':
-                            payloads.push(satPac[i]);
-                            break;
-                        case 'ROCKET BODY':
-                            rocketbodies.push(satPac[i]);
-                            break;
-                        case 'DEBRIS':
-                            debris.push(satPac[i]);
-                        default:
-                            unknown.push(satPac[i]);
-                    }
-
-
                 var placemarkAttributes = new WorldWind.PlacemarkAttributes(null);
                 var highlightPlacemarkAttributes = new WorldWind.PlacemarkAttributes(placemarkAttributes);
                 highlightPlacemarkAttributes.imageScale = 0.50;
