@@ -993,12 +993,10 @@ function getGroundStations (groundStations) {
 
                         var position = getPosition(satellite.twoline2satrec(satData[index].TLE_LINE1, satData[index].TLE_LINE2), time);
 
-                        if (i < 0) {
+                        if (i <= 0) {
                             pastOrbit.push(position);
-                        } else if (i > 0) {
-                            futureOrbit.push(position);
-                        } else {
-                            pastOrbit.push(position);
+                        }
+                        if (i >= 0) {
                             futureOrbit.push(position);
                         }
                     }
