@@ -81,7 +81,7 @@ function getPosition (satrec, time) {
 function sanitizeSatellites(objectArray){
   var faultySatellites = 0;
   var resultArray = [];
-  var maxSats = objectArray.length / 3;
+  var maxSats = objectArray.length;
   //console.log('Array size before splicing is ' + objectArray.length);
   for (var i = 0; i < maxSats ; i += 1){
     try{
@@ -100,11 +100,25 @@ function sanitizeSatellites(objectArray){
   return resultArray;
 }
 
+var grndStationsWorker = new Worker("Workers/groundStationsWorker.js");
 
+grndStationsWorker.postMessage("you go first, groundstations servant!");
+grndStationsWorker.addEventListener('message', function(event){
+  grndStationsWorker.postMessage('close');
+  getGroundStations(event.data);
+}, false);
 
+function getGroundStations (groundStations) {
+  var satParserWorker = new Worker("Workers/satelliteParseWorker.js");
+  satParserWorker.postMessage("work, satellite parser, work!");
+  //Retrieval of JSON file data from worker threads. Also, closing such threads.
+  satParserWorker.addEventListener('message', function(event){
+    //var satData = event.data;
+    satParserWorker.postMessage('close');
+    getSatellites(event.data);
+  }, false);
 
-$.get('data/groundstations.json', function(groundStations) {
-    $.get('data/TLE.json', function (satellites) {
+    function getSatellites (satellites) {
         var satPac = sanitizeSatellites(satellites);
         satPac.satDataString = JSON.stringify(satPac);
         //console.log(satPac[0].OBJECT_NAME);
@@ -225,6 +239,9 @@ $.get('data/groundstations.json', function(groundStations) {
          * Satellites
          */
         var orbitToggle = {leoP:9, leoR:0, leoD:0, meoP:9, meoR:0, meoD:0, heoP:9, heoR:0, heoD:0};
+        leoDebrisLayer.enabled = false;
+        meoDebrisLayer.enabled = false;
+        heoDebrisLayer.enabled = false;
 
         var satNum = satPac.length;
         //Sat Tyoe toggles
@@ -1330,7 +1347,7 @@ $.get('data/groundstations.json', function(groundStations) {
 
 
         }
-    });
-});
+    }
+}
 var layerManger = new LayerManager(wwd);
 wwd.redraw();
