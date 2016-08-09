@@ -53,7 +53,7 @@ var rocketbodies = [];
 var debris = [];
 var unknown = [];
 
-function tryPosition (satrec, time) {
+function getPosition (satrec, time) {
     var position_and_velocity = satellite.propagate(satrec,
         time.getUTCFullYear(),
         time.getUTCMonth() + 1,
@@ -81,11 +81,11 @@ function tryPosition (satrec, time) {
 function sanitizeSatellites(objectArray){
   var faultySatellites = 0;
   var resultArray = [];
-  var maxSats = objectArray.length / 2.5;
+  var maxSats = objectArray.length / 3;
   //console.log('Array size before splicing is ' + objectArray.length);
   for (var i = 0; i < maxSats ; i += 1){
     try{
-      var position = tryPosition(satellite.twoline2satrec(objectArray[i].TLE_LINE1, objectArray[i].TLE_LINE2), new Date());
+      var position = getPosition(satellite.twoline2satrec(objectArray[i].TLE_LINE1, objectArray[i].TLE_LINE2), new Date());
     } catch (err){
       faultySatellites += 1;
       // objectArray.splice(i,1);
@@ -99,6 +99,9 @@ function sanitizeSatellites(objectArray){
   // console.log('We will keep ' + resultArray.length + ' sanitized satellites.');
   return resultArray;
 }
+
+
+
 
 $.get('data/groundstations.json', function(groundStations) {
     $.get('data/TLE.json', function (satellites) {
@@ -747,33 +750,6 @@ $.get('data/groundstations.json', function(groundStations) {
             wwd.addLayer(meshLayer);
             wwd.addLayer(modelLayer);
             wwd.addLayer(orbitsLayer);
-
-// Orbit Propagation (MIT License, see https://github.com/shashwatak/satellite-js)
-            var getPosition = function (satrec, time) {
-                var position_and_velocity = satellite.propagate(satrec,
-                    time.getUTCFullYear(),
-                    time.getUTCMonth() + 1,
-                    time.getUTCDate(),
-                    time.getUTCHours(),
-                    time.getUTCMinutes(),
-                    time.getUTCSeconds());
-                var position_eci = position_and_velocity["position"];
-
-                var gmst = satellite.gstime_from_date(time.getUTCFullYear(),
-                    time.getUTCMonth() + 1,
-                    time.getUTCDate(),
-                    time.getUTCHours(),
-                    time.getUTCMinutes(),
-                    time.getUTCSeconds());
-
-                var position_gd = satellite.eci_to_geodetic(position_eci, gmst);
-                var latitude = satellite.degrees_lat(position_gd["latitude"]);
-                var longitude = satellite.degrees_long(position_gd["longitude"]);
-                var altitude = position_gd["height"] * 1000;
-
-                return new WorldWind.Position(latitude, longitude, altitude);
-            };
-
 
             var now = new Date();
             var everyCurrentPosition = [];
