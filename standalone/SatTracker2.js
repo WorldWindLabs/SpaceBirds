@@ -81,8 +81,9 @@ function tryPosition (satrec, time) {
 function sanitizeSatellites(objectArray){
   var faultySatellites = 0;
   var resultArray = [];
+  var maxSats = objectArray.length / 2.5;
   //console.log('Array size before splicing is ' + objectArray.length);
-  for (var i = 0; i < objectArray.length ; i += 1){
+  for (var i = 0; i < maxSats ; i += 1){
     try{
       var position = tryPosition(satellite.twoline2satrec(objectArray[i].TLE_LINE1, objectArray[i].TLE_LINE2), new Date());
     } catch (err){
@@ -93,46 +94,32 @@ function sanitizeSatellites(objectArray){
     }
     resultArray.push(objectArray[i]);
   }
-  console.log('we have ' + objectArray.length + ' total satellites');
-  console.log(faultySatellites + ' do not work');
-  console.log('We will keep ' + resultArray.length + ' sanitized satellites.');
+  // console.log('we have ' + objectArray.length + ' total satellites');
+  // console.log(faultySatellites + ' do not work');
+  // console.log('We will keep ' + resultArray.length + ' sanitized satellites.');
   return resultArray;
 }
 
 $.get('data/groundstations.json', function(groundStations) {
     $.get('data/TLE.json', function (satellites) {
         var satPac = sanitizeSatellites(satellites);
-        console.log(typeof satPac);
         satPac.satDataString = JSON.stringify(satPac);
         //console.log(satPac[0].OBJECT_NAME);
 
-         for (var i = 0; i < satPac.length; i++) {
-         if (satPac[i].OBJECT_TYPE === 'PAYLOAD') {
-         payloads.push(satPac[i]);
+        for (var i = 0; i < satPac.length; i++) {
+          if (satPac[i].OBJECT_TYPE === 'PAYLOAD') {
+          payloads.push(satPac[i]);
+              }
+          else if (satPac[i].OBJECT_TYPE === 'ROCKET BODY') {
+                 rocketbodies.push(satPac[i]);
              }
-         }
-
-        for (var i = 0; i < satPac.length; i++) {
-            if (satPac[i].OBJECT_TYPE === 'ROCKET BODY') {
-                rocketbodies.push(satPac[i]);
-            }
-        }
-
-        for (var i = 0; i < satPac.length; i++) {
-            if (satPac[i].OBJECT_TYPE === 'DEBRIS') {
-                debris.push(satPac[i]);
-            }
-        }
-
-        for (var i = 0; i < satPac.length; i++) {
-            if (satPac[i].OBJECT_TYPE !== 'PAYLOAD' && satPac[i].OBJECT_TYPE !== 'ROCKET BODY' && satPac[i].OBJECT_TYPE !== 'DEBRIS') {
+          else if (satPac[i].OBJECT_TYPE === 'DEBRIS') {
+                 debris.push(satPac[i]);
+             }
+          else if (satPac[i].OBJECT_TYPE !== 'PAYLOAD' && satPac[i].OBJECT_TYPE !== 'ROCKET BODY' && satPac[i].OBJECT_TYPE !== 'DEBRIS') {
                 unknown.push(satPac[i]);
             }
         }
-
-
-
-
 
     //Latitude, Longitude, and Altitude
     var latitudePlaceholder = document.getElementById('latitude');
@@ -1333,12 +1320,11 @@ $.get('data/groundstations.json', function(groundStations) {
                     var index = everyCurrentPosition.indexOf(position);
                     try{
                       typePlaceholder.textContent = satData[index].OBJECT_TYPE;
+                      intldesPlaceholder.textContent = satData[index].INTLDES;
+                      namePlaceholder.textContent = satData[index].OBJECT_NAME;
                     }catch (err){
                       console.log('error in index ' + index);
                     }
-
-                    intldesPlaceholder.textContent = satData[index].INTLDES;
-                    namePlaceholder.textContent = satData[index].OBJECT_NAME;
                     endExtra();
                     endHoverOrbit();
                     extraData(index);
