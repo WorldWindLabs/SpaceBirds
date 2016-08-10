@@ -28,6 +28,7 @@ for (var l = 0; l < layers.length; l++) {
 
 //custom layers
 var groundStationsLayer = new WorldWind.RenderableLayer();
+var shapeLayer = new WorldWind.RenderableLayer();
 var orbitsHoverLayer = new WorldWind.RenderableLayer();
 var modelLayer = new WorldWind.RenderableLayer("Model");
 var meshLayer = new WorldWind.RenderableLayer();
@@ -46,6 +47,7 @@ var heoDebrisLayer = new WorldWind.RenderableLayer("HEO Debris");
 
 //add custom layers
 wwd.addLayer(groundStationsLayer);
+wwd.addLayer(shapeLayer);
 wwd.addLayer(orbitsHoverLayer);
 wwd.addLayer(leoSatLayer);
 wwd.addLayer(meoSatLayer);
@@ -59,6 +61,7 @@ wwd.addLayer(heoDebrisLayer);
 wwd.addLayer(meshLayer);
 wwd.addLayer(modelLayer);
 wwd.addLayer(orbitsLayer);
+
 
 var payloads = [];
 var rocketbodies = [];
@@ -167,11 +170,11 @@ function getGroundStations (groundStations) {
     var semiMinorAxisPlaceholder = document.getElementById('minorAxis');
 
     //TODO: ground station info
-    /*  var gsNamePlaceHolder = document.getElementById('gsName');
-     var gsOrgPlaceHolder = document.getElementById('gsOrg');
-     var gsLatPlaceHolder = document.getElementById('gsLat');
-     var gsLongPlaceHolder = document.getElementById('gsLong');
-     var gsAltPlaceHolder = document.getElementById('gsAlt');*/
+ var gsNamePlaceHolder = document.getElementById('gsName');
+ var gsOrgPlaceHolder = document.getElementById('gsOrg');
+ var gsLatPlaceHolder = document.getElementById('gsLat');
+ var gsLongPlaceHolder = document.getElementById('gsLong');
+ var gsAltPlaceHolder = document.getElementById('gsAlt');
 
         function deg2text(deg, letters) {
             var letter;
@@ -220,43 +223,27 @@ function getGroundStations (groundStations) {
           WorldWind.OFFSET_FRACTION, 1.0);
       gsPlacemarkAttributes.labelAttributes.color = WorldWind.Color.WHITE;
 
-        //TODO: groundstation area on pick
-      // Create a layer to hold the surface shapes.
-      //var shapesLayer = new WorldWind.RenderableLayer("Ground Station Range");
-
-      // Create and set attributes for it. The shapes below except the surface polyline use this same attributes
-      // object. Real apps typically create new attributes objects for each shape unless they know the attributes
-      // can be shared among shapes.
-      //var gsAttributes = new WorldWind.ShapeAttributes(null);
-      //gsAttributes.outlineColor = new WorldWind.Color(0, 255, 255, 0.1);
-        //  gsAttributes.interiorColor = WorldWind.Color.TRANSPARENT;
-
-     // var boundary = [];
-
-      //var shape = new WorldWind.SurfacePolygon(boundary, gsAttributes);
-
+        var groundStation = [];
       for (var i = 0, len = groundStations.length; i < len; i++) {
-          var groundStation = groundStations[i];
 
-          var gsPlacemark = new WorldWind.Placemark(new WorldWind.Position(groundStation.LATITUDE,
-              groundStation.LONGITUDE,
-              1e3));
-
-         // shape = new WorldWind.SurfaceCircle(new WorldWind.Location(groundStation.LATITUDE,
-           //   groundStation.LONGITUDE), 150e4, gsAttributes);
+          groundStation[i] = new WorldWind.Position(groundStations[i].LATITUDE,
+              groundStations[i].LONGITUDE,
+              1e3);
+          var gsPlacemark = new WorldWind.Placemark(groundStation[i]);
 
           gsPlacemark.altitudeMode = WorldWind.RELATIVE_TO_GROUND;
-          gsPlacemark.label = groundStation.name;
+          gsPlacemark.label = groundStation.NAME;
           gsPlacemark.attributes = gsPlacemarkAttributes;
           gsPlacemark.highlightAttributes = gsHighlightPlacemarkAttributes;
           groundStationsLayer.addRenderable(gsPlacemark);
-          //groundStationsLayer.addRenderable(shape);
       }
-
       // Add the path to a layer and the layer to the World Window's layer list.
       groundStationsLayer.displayName = "Ground Stations";
       groundStationsLayer.enabled = false;
 
+        $('#clearStations').click(function() {
+            shapeLayer.removeAllRenderables();
+        });
 
         /***
          * Satellites
@@ -898,81 +885,23 @@ function getGroundStations (groundStations) {
             var endFollow = function(){     //ends startFollow window.setInterval
                 clearInterval(startFollow);
             };
+            $('#follow').click(function () {
+                endFollow();
+            });
 
             //Mesh-cone to follow sat position
             var startMesh;                                    //allows to end window interval
             var meshToCurrentPosition = function (index) {
                 startMesh = window.setInterval(function () {
-                    var satPos = everyCurrentPosition[index];
                     meshLayer.removeAllRenderables();
-                    //create triangle mesh
-                    var altitude = [],
-                        numRadialPositions = 40,
-                        meshPositions = [],
-                        meshIndices = [],
-                        outlineIndices = [],
-                        texCoords = [],
-                        meshRadius = 15; // degrees
+                    var attributes = new WorldWind.ShapeAttributes(null);
+                    attributes.outlineColor = new WorldWind.Color(28, 255, 47, 1);
+                    attributes.interiorColor = new WorldWind.Color(28, 255, 47, 0.1);
 
-                    // Create the mesh's positions, which are the center point of a circle followed by points on the circle.
-                    meshPositions.push(satPos);// the mesh center
-                    wwd.redraw();
-                    texCoords.push(new WorldWind.Vec2(0.5, 0.5));
+                    var shape = new WorldWind.SurfaceCircle(new WorldWind.Location(everyCurrentPosition[index].latitude,
+                        everyCurrentPosition[index].longitude), 150e4, attributes);
 
-                    for (var angle = 0; angle < 360; angle += 360 / numRadialPositions) {
-                        var angleRadians = angle * WorldWind.Angle.DEGREES_TO_RADIANS,
-                            lat = meshPositions[0].latitude + Math.sin(angleRadians) * meshRadius,
-                            lon = meshPositions[0].longitude + Math.cos(angleRadians) * meshRadius,
-                            t = 0.5 * (1 + Math.sin(angleRadians)),
-                            s = 0.5 * (1 + Math.cos(angleRadians));
-
-                        meshPositions.push(new WorldWind.Position(lat, lon, altitude));
-                        texCoords.push(new WorldWind.Vec2(s, t));
-                    }
-
-                    // Create the mesh indices.
-                    for (var i = 1; i < numRadialPositions; i++) {
-                        meshIndices.push(0);
-                        meshIndices.push(i);
-                        meshIndices.push(i + 1);
-                    }
-
-                    // Close the circle.
-                    meshIndices.push(0);
-                    meshIndices.push(numRadialPositions);
-                    meshIndices.push(1);
-
-                    // Create the outline indices.
-                    for (var j = 1; j <= numRadialPositions; j++) {
-                        outlineIndices.push(j);
-                    }
-                    // Close the outline.
-                    outlineIndices.push(1);
-
-                    // Create the mesh's attributes. Light this mesh.
-                    var meshAttributes = new WorldWind.ShapeAttributes(null);
-                    meshAttributes.outlineColor = new WorldWind.Color(51, 51, 255, 0.03);
-                    meshAttributes.interiorColor = new WorldWind.Color(255, 255, 51, 0.030);
-                    // meshAttributes.imageSource = "../images/400x230-splash-nww.png";
-                    meshAttributes.applyLighting = false;
-
-
-                    // Create the mesh.
-                    var mesh = new WorldWind.TriangleMesh(meshPositions, meshIndices, meshAttributes);
-                    mesh.textureCoordinates = texCoords;
-                    mesh.outlineIndices = outlineIndices;
-                    //mesh.highlightAttributes = highlightAttributes;
-
-                    // Add the mesh to a layer and the layer to the World Window's layer list.
-                    meshLayer.displayName = "Triangle Mesh";
-                    meshLayer.addRenderable(mesh);
-
-                    var position = getPosition(satellite.twoline2satrec(satData[index].TLE_LINE1, satData[index].TLE_LINE2), new Date());
-                    satPos.latitude = position.latitude;
-                    satPos.longitude = position.longitude;
-                    satPos.altitude = position.altitude;
-                    updateLLA(position);
-
+                    meshLayer.addRenderable(shape);
                 });
             };
             var endMesh = function () {
@@ -1087,7 +1016,6 @@ function getGroundStations (groundStations) {
                 index = null;
                 for (var h = 0; h < highlightedItems.length; h++) {
                     highlightedItems[h].highlighted = false;
-                    $('#follow').text("Follow Off");
                     orbitsHoverLayer.enabled = true;
                     endHoverOrbit();
                     endOrbit();
@@ -1112,7 +1040,6 @@ function getGroundStations (groundStations) {
                 // If only one thing is picked and it is the terrain, tell the world window to go to the picked location.
                 if (pickList.objects.length == 1 && pickList.objects[0].isTerrain) {
                     var position = pickList.objects[0].position;
-                    $('#follow').text("Follow Off");
                     index = null;
                     orbitsHoverLayer.removeAllRenderables();
                     orbitsHoverLayer.enabled = true;
@@ -1145,54 +1072,44 @@ function getGroundStations (groundStations) {
 
                 if (pickList.objects.length == 1 && pickList.objects[0]) {
                     var position = pickList.objects[0].position;
-                    var index = everyCurrentPosition.indexOf(position);
-                    var satPos = everyCurrentPosition[index];
-                    orbitsHoverLayer.enabled = false;
-                    $('#follow').text("Follow On");
-                    endFollow();
-                    endHoverOrbit();
-                    endMesh();
-                    endExtra();
-                    endOrbit();
+                    if (position.altitude > 1000) {
+                        var index = everyCurrentPosition.indexOf(position);
+                        var satPos = everyCurrentPosition[index];
+                        orbitsHoverLayer.enabled = false;
 
-                    extraData(index);
-                    $(this).text("Mesh On");
-                    meshToCurrentPosition(index);
-                    $('#mesh').click(function () {
-                        if ($(this).text() == "Mesh Off") {
-                            $(this).text("Mesh On");
-                            meshToCurrentPosition(index);
-                        }
-                        else {
-                            $(this).text("Mesh Off");
-                            endMesh();
-                        }
-                    });
+                        endFollow();
+                        endHoverOrbit();
+                        endMesh();
+                        endExtra();
+                        endOrbit();
 
-                    toCurrentPosition(index);
-                    $('#follow').click(function () {
-                        if ($(this).text() == "Follow Off") {
-                            $(this).text("Follow On");
-                            toCurrentPosition(index);
-                        }
-                        else {
-                            $(this).text("Follow Off");
-                            endFollow();
-                        }
-                    });
+                        extraData(index);
+                        $(this).text("Mesh On");
+                        meshToCurrentPosition(index);
+                        $('#mesh').click(function () {
+                            if ($(this).text() == "Mesh Off") {
+                                $(this).text("Mesh On");
+                                meshToCurrentPosition(index);
+                            }
+                            else {
+                                $(this).text("Mesh Off");
+                                endMesh();
+                            }
+                        });
 
-                    createOrbit(index);
-                    $('#orbit').click(function () {
-                        if ($(this).text() == "Orbit Off") {
-                            $(this).text("Orbit On");
-                            createOrbit(index);
-                        }
-                        else {
-                            $(this).text("Orbit Off");
-                            endOrbit();
-                        }
-                    });
+                        toCurrentPosition(index);
 
+                        createOrbit(index);
+                        $('#orbit').click(function () {
+                            if ($(this).text() == "Orbit Off") {
+                                $(this).text("Orbit On");
+                                createOrbit(index);
+                            }
+                            else {
+                                $(this).text("Orbit Off");
+                                endOrbit();
+                            }
+                        });
 
                     //create 3D collada model
                     var colladaLoader = new WorldWind.ColladaLoader(satPos);
@@ -1202,8 +1119,28 @@ function getGroundStations (groundStations) {
                         modelLayer.addRenderable(scene);
                     });
 
-                }
+                    } else {
 
+                        var gsindex = groundStation.indexOf(position);
+                        console.log(gsindex);
+                        console.log(groundStations[gsindex].NAME);
+                        //TODO: GS information display
+                        gsNamePlaceHolder.textContent = groundStations[gsindex].NAME;
+                        gsOrgPlaceHolder.textContent = groundStations[gsindex].ORGANIZATION;
+                        gsLatPlaceHolder.textContent = groundStations[gsindex].LATITUDE;
+                        gsLongPlaceHolder.textContent = groundStations[gsindex].LONGITUDE;
+                        gsAltPlaceHolder.text = groundStations[gsindex].ALTITUDE;
+
+                       var gsAttributes = new WorldWind.ShapeAttributes(null);
+                        gsAttributes.outlineColor = new WorldWind.Color(0, 255, 255, 1);
+                         gsAttributes.interiorColor = new WorldWind.Color(0, 255, 255, 0.2);
+
+                         var shape = new WorldWind.SurfaceCircle(new WorldWind.Location(groundStations[gsindex].LATITUDE,
+                           groundStations[gsindex].LONGITUDE), 150e4, gsAttributes);
+
+                        shapeLayer.addRenderable(shape);
+                    }
+                }
 
                 // Update the window if we changed anything.
                 if (redrawRequired) {
@@ -1322,28 +1259,35 @@ function getGroundStations (groundStations) {
 
                 if (pickList.objects.length == 1 && pickList.objects[0]) {
                     var position = pickList.objects[0].position;
-                    var index = everyCurrentPosition.indexOf(position);
-                    try{
-                      typePlaceholder.textContent = satData[index].OBJECT_TYPE;
-                      intldesPlaceholder.textContent = satData[index].INTLDES;
-                      namePlaceholder.textContent = satData[index].OBJECT_NAME;
-                    }catch (err){
-                      console.log('error in index ' + index);
+                    console.log(position);
+                    if (position.altitude > 1000) {
+                        var index = everyCurrentPosition.indexOf(position);
+                        try {
+                            typePlaceholder.textContent = satData[index].OBJECT_TYPE;
+                            intldesPlaceholder.textContent = satData[index].INTLDES;
+                            namePlaceholder.textContent = satData[index].OBJECT_NAME;
+                        } catch (err) {
+                            console.log('error in index ' + index);
+                        }
+                        endExtra();
+                        endHoverOrbit();
+                        extraData(index);
+
+                        createHoverOrbit(index);
+
+                        updateLLA(everyCurrentPosition[index]);
+                    } else {
+                        var gsindex = groundStation.indexOf(position);
+                        console.log(gsindex);
+                        console.log(groundStations[gsindex].NAME);
+                        //TODO: GS information display
+                        typePlaceholder.textContent= "Ground Station";
+                        namePlaceholder.textContent = groundStations[gsindex].NAME;
+                        intldesPlaceholder.textContent = groundStations[gsindex].ORGANIZATION;
+                        latitudePlaceholder.textContent = groundStations[gsindex].LATITUDE;
+                        longitudePlaceholder.textContent = groundStations[gsindex].LONGITUDE;
+                        altitudePlaceholder.textContent = groundStations[gsindex].ALTITUDE;
                     }
-                    endExtra();
-                    endHoverOrbit();
-                    extraData(index);
-
-                    createHoverOrbit(index);
-
-                    updateLLA(everyCurrentPosition[index]);
-
-                    //TODO: GS information display
-                    /*gsNamePlaceHolder.text = groundStation[index].NAME;
-                     gsOrgPlaceHolder.text = groundStation[index].ORGANIZATION;
-                     gsLatPlaceHolder.text = groundStation[index].LATITUDE;
-                     gsLongPlaceHolder.text = groundStation[index].LONGITUDE;
-                     gsAltPlaceHolder.text = groundStation[index].ALTITUDE;*/
 
                     // Update the window if we changed anything.
                     if (redrawRequired) {

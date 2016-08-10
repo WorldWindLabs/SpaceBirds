@@ -51,3 +51,13 @@ body {
     padding-bottom: 10px;
     padding-bottom: 10px;
 }
+#gsBox {
+    position: fixed;
+    right: 150px;
+    bottom: 10px;
+    background: rgba(0, 0, 0, 0.5);
+    padding-left: 10px;
+    padding-right: 200px;
+    padding-bottom: 10px;
+    padding-bottom: 10px;
+}

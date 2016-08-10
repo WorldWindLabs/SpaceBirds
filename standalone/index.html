@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<meta charset="UTF-8">
 <!--@version $Id: BasicExample.html 3314 2015-07-10 18:28:45Z dcollins $-->
 
 <html lang="en">
@@ -23,7 +24,6 @@
         <div style="color:black">
           <button id="allSats">ALL OFF</button>
           <button id="payloads">PAYLOADS ON</button>
-          <!--<button id="unknown">UNKNOWN ON</button>-->
         </div>
         <br>
         <div style="color:black">
@@ -50,6 +50,8 @@
         <div style="color: black">
           <h4 style="color: white">Ground Stations</h4>
           <button id='gStations'>GS OFF</button>
+          <button id='clearStations'>Clear Area</button>
+
         </div>
       </header>
   </div>
@@ -83,6 +85,15 @@
       <p>PERIGEE: <span id="perigee"></span></p>
       <p>PERIOD: <span id="period"></span></p>
     </div>
+    <br>
+  <!-- <div id="gsBox">
+     <h4 style="color: white">Ground Stations:</h4>
+     <p>NAME: <span id="gsName"></span></p>
+     <p>ORG: <span id="gsOrg"></span></p>
+     <p>LAT: <span id="gsLat"></span></p>
+     <p>LONG: <span id="gsLong"></span></p>
+     <p>ALT: <span id="gsAlt"></span></p>
+   </div>-->
   <br>
 </div>
 </body>
