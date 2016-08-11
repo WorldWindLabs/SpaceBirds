@@ -212,7 +212,7 @@ function getGroundStations (groundStations) {
       var gsPlacemarkAttributes = new WorldWind.PlacemarkAttributes(null);
       var gsHighlightPlacemarkAttributes = new WorldWind.PlacemarkAttributes(gsPlacemarkAttributes);
 
-        gsPlacemarkAttributes.imageSource = "assets/ground-station.png";
+        gsPlacemarkAttributes.imageSource = "assets/icons/ground-station.png";
       gsPlacemarkAttributes.imageScale = 0.25;
       gsPlacemarkAttributes.imageOffset = new WorldWind.Offset(
           WorldWind.OFFSET_FRACTION, 0.3,
@@ -785,20 +785,20 @@ function getGroundStations (groundStations) {
                 var placemarkAttributes = new WorldWind.PlacemarkAttributes(null);
                 var highlightPlacemarkAttributes = new WorldWind.PlacemarkAttributes(placemarkAttributes);
                 highlightPlacemarkAttributes.imageScale = 0.50;
-                highlightPlacemarkAttributes.imageSource = "assets/satellite.png";
+                highlightPlacemarkAttributes.imageSource = "assets/icons/satellite.png";
 
                 //add colored image depending on sat type
                 switch(satData[ind].OBJECT_TYPE) {
                     case "PAYLOAD":
-                        placemarkAttributes.imageSource = "assets/dot-red.png";
+                        placemarkAttributes.imageSource = "assets/icons/dot-red.png";
                         placemarkAttributes.imageScale = 0.60;
                         break;
                     case "ROCKET BODY":
-                        placemarkAttributes.imageSource = "assets/dot-blue.png";
+                        placemarkAttributes.imageSource = "assets/icons/dot-blue.png";
                         placemarkAttributes.imageScale = 0.60;
                         break;
                     default:
-                        placemarkAttributes.imageSource = "assets/dot-gray.png";
+                        placemarkAttributes.imageSource = "assets/icons/dot-gray.png";
                         placemarkAttributes.imageScale = 0.40;
                 }
 
