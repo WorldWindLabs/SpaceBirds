@@ -764,7 +764,7 @@ function getGroundStations (groundStations) {
         selectSat(satPac);
 
         function selectSat(satData) {
-
+            var satNames = [];
             var now = new Date();
             var everyCurrentPosition = [];
 
@@ -777,6 +777,8 @@ function getGroundStations (groundStations) {
                     position.longitude,
                     position.altitude);
                 everyCurrentPosition[j] = currentPosition;
+                satNames[j] = satData[j].OBJECT_NAME;
+
             }
 
 
@@ -845,6 +847,55 @@ function getGroundStations (groundStations) {
                     }
                 }
             }
+
+            $(document).ready(function () {
+                var url = "data/TLE.json";
+                // prepare the data
+                var source =
+                {
+                    datatype: "json",
+                    datafields: [
+                        { name: 'OBJECT_NAME', type:'string'},
+                        {name: 'OBJECT_TYPE', type:'string'},
+                    ],
+                    url: url,
+                    async: false
+                };
+                var dataAdapter = new $.jqx.dataAdapter(source);
+                // Create a jqxComboBox
+                $("#jqxWidget").jqxComboBox({ selectedIndex: 0, source: dataAdapter, displayMember: "OBJECT_NAME", valueMember: "OBJECT_TYPE", width: 300, height: 25});
+                // trigger the select event.
+                $("#jqxWidget").on('select', function (event) {
+                    if (event.args) {
+                        var item = event.args.item;
+                        if (item) {
+                            var valueElement = $("<div></div>");
+                            valueElement.text("Type: " + item.value);
+                            var labelElement = $("<div></div>");
+                            labelElement.text("Name: " + item.label);
+                            $("#selectionlog").children().remove();
+                            $("#selectionlog").append(labelElement);
+                            $("#selectionlog").append(valueElement);
+                            console.log(item.label);
+                            console.log(satNames[1]);
+                            endFollow();
+                            endMesh();
+                            endOrbit();
+                            endExtra();
+                            var customSat = satNames.indexOf(item.label);
+                            console.log(customSat);
+                            toCurrentPosition(customSat);
+                            meshToCurrentPosition(customSat);
+                            createOrbit(customSat);
+                            extraData(customSat);
+                            typePlaceholder.textContent = satData[customSat].OBJECT_TYPE;
+                            intldesPlaceholder.textContent = satData[customSat].INTLDES;
+                            namePlaceholder.textContent = satData[customSat].OBJECT_NAME;
+
+                        }
+                    }
+                });
+            });
 
             // Draw
             wwd.redraw();

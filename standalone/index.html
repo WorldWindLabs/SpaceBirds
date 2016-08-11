@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+        <meta charset="UTF-8">
 <!--@version $Id: BasicExample.html 3314 2015-07-10 18:28:45Z dcollins $-->
 
 <html lang="en">
@@ -17,6 +18,14 @@
     <link rel="stylesheet" href="styles/style.css">
     <link rel="stylesheet" href="styles/simple-sidebar.css">
     <link rel="stylesheet" href="assets/thirdparty/css/main.css" />
+
+    <link rel="stylesheet" href="jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="jqwidgets/jqxcombobox.js"></script>
 
     <!--Title for Tab-->
     <title>SPACEBIRDS</title>
@@ -37,6 +46,15 @@
                     </li>
                     <li>
                         <a href="#"><strong style="color: white">SATELLITE TRACKING</strong> </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <spam id='content'>
+                                <div id='jqxWidget'>
+                                </div>
+                                <div style="font-size: 12px; font-family: Verdana;" id="selectionlog"></div>
+                            </spam>
+                        </a>
                     </li>
                      <li>
                         <a href="#"><spam id="allSats">ALL ON</spam></a>
