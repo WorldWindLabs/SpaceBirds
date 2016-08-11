@@ -791,15 +791,15 @@ function getGroundStations (groundStations) {
                 switch(satData[ind].OBJECT_TYPE) {
                     case "PAYLOAD":
                         placemarkAttributes.imageSource = "assets/dot-red.png";
-                        placemarkAttributes.imageScale = 0.40;
+                        placemarkAttributes.imageScale = 0.60;
                         break;
                     case "ROCKET BODY":
-                        placemarkAttributes.imageSource = "assets/dot-gray.png";
-                        placemarkAttributes.imageScale = 0.40;
+                        placemarkAttributes.imageSource = "assets/dot-blue.png";
+                        placemarkAttributes.imageScale = 0.60;
                         break;
                     default:
-                        placemarkAttributes.imageSource = "assets/dot-yellow.png";
-                        placemarkAttributes.imageScale = 0.30;
+                        placemarkAttributes.imageSource = "assets/dot-gray.png";
+                        placemarkAttributes.imageScale = 0.40;
                 }
 
                 placemarkAttributes.imageOffset = new WorldWind.Offset(
