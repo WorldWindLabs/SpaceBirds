@@ -2100,7 +2100,7 @@
 
 	#header {
 		position: relative;
-		background-image: url("./../../Images/indexBackground.png");
+		background-image: url("../../images/indexBackground.png");
 		background-size: cover;
 		background-position: center center;
 		background-attachment: fixed;
