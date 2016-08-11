@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<meta charset="UTF-8">
 <!--@version $Id: BasicExample.html 3314 2015-07-10 18:28:45Z dcollins $-->
 
 <html lang="en">
@@ -18,119 +19,128 @@
     <link rel="stylesheet" href="styles/simple-sidebar.css">
     <link rel="stylesheet" href="assets/thirdparty/css/main.css" />
 
+    <link rel="stylesheet" href="jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="jqwidgets/jqxcombobox.js"></script>
+
     <!--Title for Tab-->
     <title>SPACEBIRDS</title>
     <link rel="shortcut icon" href="/standalone/assets/images/spacebirdlogo_dark.png" />
 </head>
 
 <body style="background-image: url('assets/images/space.jpeg');">
-    <div id="globe">
-        <canvas id="canvasOne" style= "width: 100%; height:100%;" >
-            Your browser does not support HTML5 Canvas.
-        </canvas>
-        <!--Menu-->
-        <div id="wrapper">
-            <div id="sidebar-wrapper">
-                <ul class="sidebar-nav">
-                    <li class="sidebar-brand">
-                        <a href="#" class="coolLogo">SPACEBIRDS</a>
-                    </li>
-                    <li>
-                        <a href="#"><strong style="color: white">SATELLITE TRACKING</strong> </a>
-                    </li>
-<li>
- <div id='content'>
+<div id="globe">
+    <canvas id="canvasOne" style= "width: 100%; height:100%;" >
+        Your browser does not support HTML5 Canvas.
+    </canvas>
+    <!--Menu-->
+    <div id="wrapper">
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="#" class="coolLogo">SPACEBIRDS</a>
+                </li>
+                <li>
+                    <a href="#"><strong style="color: white">SATELLITE TRACKING</strong> </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <spam id='content'>
                             <div id='jqxWidget'>
                             </div>
                             <div style="font-size: 12px; font-family: Verdana;" id="selectionlog"></div>
-                        </div>
+                        </spam>
+                    </a>
+                </li>
+                <li>
+                    <a href="#"><spam id="allSats">ALL ON</spam></a>
+                </li>
+                <li>
+                    <a href="#"><span id="payloads">PAYLOADS OFF</span></a>
+                </li>
+                <li>
+                    <a href="#"><spam id="rockets">ROCKETS OFF</spam></a>
+                </li>
+                <li>
+                    <a href="#"><spam id="debris">DEBRIS OFF</spam></a>
+                </li>
 
-</li>
-                     <li>
-                        <a href="#"><spam id="allSats">ALL ON</spam></a>
-                    </li>
-                    <li>
-                        <a href="#"><span id="payloads">PAYLOADS OFF</span></a>
-                    </li>
-                    <li>
-                        <a href="#"><spam id="rockets">ROCKETS OFF</spam></a>
-                    </li>
-                    <li>
-                        <a href="#"><spam id="debris">DEBRIS OFF</spam></a>
-                    </li>
+                <li>
+                    <a href="#"><strong style="color: white">ORBIT RANGE</strong> </a>
+                </li>
 
-                     <li>
-                        <a href="#"><strong style="color: white">ORBIT RANGE</strong> </a>
-                    </li>
+                <li>
+                    <a href="#"><spam id="leo">LEO ON</spam></a>
+                </li>
+                <li>
+                    <a href="#"><spam id="meo">MEO ON</spam></a>
+                </li>
+                <li>
+                    <a href="#"><spam id="heo">HEO ON</spam></a>
+                </li>
+                <li>
+                    <a href="#"><strong style="color: white">TOOLS</strong> </a>
+                </li>
 
-                    <li>
-                        <a href="#"><spam id="leo">LEO ON</spam></a>
-                    </li>
-                    <li>
-                        <a href="#"><spam id="meo">MEO ON</spam></a>
-                    </li>
-                    <li>
-                        <a href="#"><spam id="heo">HEO ON</spam></a>
-                    </li>
-                    <li>
-                        <a href="#"><strong style="color: white">TOOLS</strong> </a>
-                    </li>
-
-                    <li>
-                        <a href="#"><spam id="follow">FOLLOW OFF</spam></a>
-                    </li>
-                    <li>
-                        <a href="#"><spam id="mesh">MESH OFF</spam></a>
-                    </li>
-                    <li>
-                        <a href="#"><spam id="orbit">ORBIT OFF</spam></a>
-                    </li>
-                    <li>
-                        <a href="#"><strong style="color: white">GROUND STATIONS (GS)</strong> </a>
-                    </li>
-                    <li>
-                        <a href="#"><spam id="gStations">GS OFF</spam></a>
-                    </li>
-                    <li>
-                        <a href="#"><strong style="color: white">GENERAL</strong> </a>
-                    </li>
-                    <li>
-                        <a href="about.html">ABOUT</a>
-                    </li>
-                    <li>
-                        <a href="#" id="menu-toggle"><spam id="infoSidebar">INFORMATION PANEL</spam></a>
-                    </li>
-                </ul>
-            </div>
+                <li>
+                    <a href="#"><spam id="follow">FOLLOW OFF</spam></a>
+                </li>
+                <li>
+                    <a href="#"><spam id="mesh">MESH OFF</spam></a>
+                </li>
+                <li>
+                    <a href="#"><spam id="orbit">ORBIT OFF</spam></a>
+                </li>
+                <li>
+                    <a href="#"><strong style="color: white">GROUND STATIONS (GS)</strong> </a>
+                </li>
+                <li>
+                    <a href="#"><spam id="gStations">GS OFF</spam></a>
+                </li>
+                <li>
+                    <a href="#"><strong style="color: white">GENERAL</strong> </a>
+                </li>
+                <li>
+                    <a href="about.html">ABOUT</a>
+                </li>
+                <li>
+                    <a href="#" id="menu-toggle"><spam id="infoSidebar">INFORMATION PANEL</spam></a>
+                </li>
+            </ul>
         </div>
-        <!--Information Sidebar-->
-        <div id="wrapper-right">
-            <div id="sidebar-wrapper-right">
-                <h4 style="color: white">SATELLITE INFORMATION</h4>
-                <p>SATELLITE TYPE: <span id="type"></span></p>
-                <p>INTLDES: <span id="intldes"></span></p>
-                <p>NAME: <span id="name"></span></p>
-                <br>
-                <h4 style="color: white">SATELLITE POSITION</h4>
-                <p>LATITUDE: <span id="latitude"></span></p>
-                <p>LONGITUDE: <span id="longitude"></span></p>
-                <p>ALTITUDE: <span id="altitude"></span></p>
-                <br>
-                <h4 style="color: white">AXIS</h4>
-                <p>SEMI-MAJOR: <span id="majorAxis"></span></p>
-                <p>SEMI-MINOR: <span id="minorAxis"></span></p>
-                <br>
-                <h4 style="color: white">EXTRA DATA</h4>
-                <p>INCLINE: <span id="inclination"></span></p>
-                <p>ECCENTRICITY: <span id="eccentricity"></span></p>
-                <p>REV/DAY: <span id="revDay"></span></p>
-                <p>APOGEE: <span id="apogee"></span></p>
-                <p>PERIGEE: <span id="perigee"></span></p>
-                <p>PERIOD: <span id="period"></span></p>
-            </div>
-        </div>
-        <br>
     </div>
+    <!--Information Sidebar-->
+    <div id="wrapper-right">
+        <div id="sidebar-wrapper-right">
+            <h4 style="color: white">SATELLITE INFORMATION</h4>
+            <p>SATELLITE TYPE: <span id="type"></span></p>
+            <p>INTLDES: <span id="intldes"></span></p>
+            <p>NAME: <span id="name"></span></p>
+            <br>
+            <h4 style="color: white">SATELLITE POSITION</h4>
+            <p>LATITUDE: <span id="latitude"></span></p>
+            <p>LONGITUDE: <span id="longitude"></span></p>
+            <p>ALTITUDE: <span id="altitude"></span></p>
+            <br>
+            <h4 style="color: white">AXIS</h4>
+            <p>SEMI-MAJOR: <span id="majorAxis"></span></p>
+            <p>SEMI-MINOR: <span id="minorAxis"></span></p>
+            <br>
+            <h4 style="color: white">EXTRA DATA</h4>
+            <p>INCLINE: <span id="inclination"></span></p>
+            <p>ECCENTRICITY: <span id="eccentricity"></span></p>
+            <p>REV/DAY: <span id="revDay"></span></p>
+            <p>APOGEE: <span id="apogee"></span></p>
+            <p>PERIGEE: <span id="perigee"></span></p>
+            <p>PERIOD: <span id="period"></span></p>
+        </div>
+    </div>
+    <br>
+</div>
 </body>
 <script>
     $("#menu-toggle").click(function(e) {
