@@ -6,19 +6,19 @@ body {
 
 #canvasOne {
     position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
+    padding-bottom: 0;
+    padding-top: 0;
+    padding-left: 0;
+    padding-right: 0;
 }
 
 #canvas-holder {
     padding: 0;
+     padding-bottom: 0;
+    padding-top: 0;
+    padding-left: 0;
+    padding-right: 0;
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
     overflow: hidden;
 }
 
@@ -43,21 +43,19 @@ body {
 }
 #infoBox {
     position: fixed;
+    top: 1px;
     right: 10px;
-    bottom: 10px;
+    bottom: auto;
     background: rgba(0, 0, 0, 0.5);
     padding-left: 10px;
     padding-right: 50px;
     padding-bottom: 10px;
-    padding-bottom: 10px;
+    color: white;
 }
-#gsBox {
-    position: fixed;
-    right: 150px;
-    bottom: 10px;
-    background: rgba(0, 0, 0, 0.5);
-    padding-left: 10px;
-    padding-right: 200px;
-    padding-bottom: 10px;
-    padding-bottom: 10px;
+  @font-face {
+      font-family: 'riko';
+      src: url('../assets/fonts/rikos.regular.ttf') format('truetype');
+}
+.coolLogo{
+    font-family: 'riko';
 }

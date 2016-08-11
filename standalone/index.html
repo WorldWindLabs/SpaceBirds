@@ -1,104 +1,137 @@
 <!DOCTYPE html>
-<meta charset="UTF-8">
 <!--@version $Id: BasicExample.html 3314 2015-07-10 18:28:45Z dcollins $-->
 
 <html lang="en">
 <head>
     <!--NOTE: Most Web World Wind examples use jquery, Bootstrap and requirejs but those technologies are NOT-->
     <!--required by Web World Wind. See SimplestExample.html for an example of using Web World Wind without them.-->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js" type="text/javascript"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="styles/style2.css">
-</head>
-<body>
-<div id="globe" class="container; width: 100%; height: auto">
-  <canvas id="canvasOne" style= "color:white; background-image: url('assets/space.jpeg'); width: 100%; height: auto" >
-      Your browser does not support HTML5 Canvas.
-  </canvas>
-  <div id="overlay">
-      <header style="color:white">
-        <h1 style="text-align: left">SpaceBirds: Satellite Tracker</h1>
-          <h4>v 0.2</h4>
-        <div style="color:black">
-          <button id="allSats">ALL OFF</button>
-          <button id="payloads">PAYLOADS ON</button>
-        </div>
-        <br>
-        <div style="color:black">
-          <button id="rockets">ROCKETS ON</button>
-          <button id="debris">DEBRIS OFF</button>
-          <!--<button id="unknown">UNKNOWN OFF</button>-->
-        </div>
-        <br>
-        <div style="color:black">
-          <h4 style="color:white">Orbit Range:</h4>
-          <button id="leo">LEO ON</button>
-          <button id="meo">MEO ON</button>
-          <button id="heo">HEO ON</button>
-          <!--<button id="geo">GEO ON</button>-->
-        </div>
-        <br>
-        <div style="color:black">
-          <h4 style="color: white">Tools:</h4>
-          <button id='follow'>Follow Off</button>
-          <button id='mesh'>Mesh On</button>
-          <button id='orbit'>Orbit On</button>
-        </div>
-        <br>
-        <div style="color: black">
-          <h4 style="color: white">Ground Stations</h4>
-          <button id='gStations'>GS OFF</button>
-          <button id='clearStations'>Clear Area</button>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
+    
+    <!--Bootstrap-->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+    <!--jQuery-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/simple-sidebar.css">
+    <link rel="stylesheet" href="assets/thirdparty/css/main.css" />
+    
+    <!--Title for Tab-->
+    <title>SPACEBIRDS</title>
+    <link rel="shortcut icon" href="/standalone/assets/images/spacebirdlogo_dark.png" />
+</head>
+    
+<body style="background-image: url('assets/images/space.jpeg');">
+    <div id="globe">
+        <canvas id="canvasOne" style= "width: 100%; height:100%;" >
+            Your browser does not support HTML5 Canvas.
+        </canvas>
+        <!--Menu-->
+        <div id="wrapper">
+            <div id="sidebar-wrapper">
+                <ul class="sidebar-nav">
+                    <li class="sidebar-brand">
+                        <a href="#" class="coolLogo">SPACEBIRDS</a>
+                    </li>
+                    <li>
+                        <a href="#"><strong style="color: white">SATELLITE TRACKING</strong> </a>
+                    </li>
+                     <li>
+                        <a href="#"><spam id="allSats">ALL ON</spam></a>
+                    </li>
+                    <li>
+                        <a href="#"><span id="payloads">PAYLAODS OFF</span></a>
+                    </li>
+                    <li>
+                        <a href="#"><spam id="rockets">ROCKETS OFF</spam></a>
+                    </li>
+                    <li>
+                        <a href="#"><spam id="debris">DEBRIS OFF</spam></a>
+                    </li>
+                   
+                     <li>
+                        <a href="#"><strong style="color: white">ORBIT RANGE</strong> </a>
+                    </li>
+                    
+                    <li>
+                        <a href="#"><spam id="leo">LEO ON</spam></a>
+                    </li>
+                    <li>
+                        <a href="#"><spam id="meo">MEO ON</spam></a>
+                    </li>
+                    <li>
+                        <a href="#"><spam id="heo">HEO ON</spam></a>
+                    </li>
+                    <li>
+                        <a href="#"><strong style="color: white">TOOLS</strong> </a>
+                    </li>
+                    
+                    <li>
+                        <a href="#"><spam id="follow">FOLLOW OFF</spam></a>
+                    </li>
+                    <li>
+                        <a href="#"><spam id="mesh">MESH OFF</spam></a>
+                    </li>
+                    <li>
+                        <a href="#"><spam id="orbit">ORBIT OFF</spam></a>
+                    </li>
+                    <li>
+                        <a href="#"><strong style="color: white">GROUND STATIONS (GS)</strong> </a>
+                    </li> 
+                    <li>
+                        <a href="#"><spam id="gStations">GS OFF</spam></a>
+                    </li>
+                    <li>
+                        <a href="#"><strong style="color: white">GENERAL</strong> </a>
+                    </li>
+                    <li>
+                        <a href="about.html">ABOUT</a>
+                    </li>
+                    <li>
+                        <a href="#" id="menu-toggle"><spam id="infoSidebar">INFORMATION PANNEL</spam></a>
+                    </li>
+                </ul>
+            </div>
         </div>
-      </header>
-  </div>
-    <div id="overlay2" style="color: black">
-      <div class="col-sm-2" style="width: 150px">
-        <h4>Projection</h4>
-        <div class="dropdown" id="projectionDropdown">
+        <!--Information Sidebar-->
+        <div id="wrapper-right">
+            <div id="sidebar-wrapper-right">
+                <h4 style="color: white">SATELLITE INFORMATION</h4>
+                <p>SATELLITE TYPE: <span id="type"></span></p>
+                <p>INTLDES: <span id="intldes"></span></p>
+                <p>NAME: <span id="name"></span></p>
+                <br>
+                <h4 style="color: white">SATELLITE POSITION</h4>
+                <p>LATITUDE: <span id="latitude"></span></p>
+                <p>LONGITUDE: <span id="longitude"></span></p>
+                <p>ALTITUDE: <span id="altitude"></span></p>
+                <br>
+                <h4 style="color: white">AXIS</h4>
+                <p>SEMI-MAJOR: <span id="majorAxis"></span></p>
+                <p>SEMI-MINOR: <span id="minorAxis"></span></p>
+                <br>
+                <h4 style="color: white">EXTRA DATA</h4>
+                <p>INCLINE: <span id="inclination"></span></p>
+                <p>ECCENTRICITY: <span id="eccentricity"></span></p>
+                <p>REV/DAY: <span id="revDay"></span></p>
+                <p>APOGEE: <span id="apogee"></span></p>
+                <p>PERIGEE: <span id="perigee"></span></p>
+                <p>PERIOD: <span id="period"></span></p>
+            </div>
         </div>
-      </div>
+        <br>
     </div>
-    <div id="infoBox">
-      <h4 style="color: white">Sat Info:</h4>
-      <p>SAT TYPE: <span id="type"></span></p>
-      <p>INTLDES: <span id="intldes"></span></p>
-      <p>NAME: <span id="name"></span></p>
-      <br>
-      <h4>Sat Position:</h4>
-      <p>LATITUDE: <span id="latitude"></span></p>
-      <p>LONGITUDE: <span id="longitude"></span></p>
-      <p>ALTITUDE: <span id="altitude"></span></p>
-      <br>
-      <h4>AXIS:</h4>
-      <p>SEMI-MAJOR: <span id="majorAxis"></span></p>
-      <p>SEMI-MINOR: <span id="minorAxis"></span></p>
-      <br>
-      <h4>Extra Data:</h4>
-      <p>INCLINE: <span id="inclination"></span></p>
-      <p>ECCENTRICITY: <span id="eccentricity"></span></p>
-      <p>REV/DAY: <span id="revDay"></span></p>
-      <p>APOGEE: <span id="apogee"></span></p>
-      <p>PERIGEE: <span id="perigee"></span></p>
-      <p>PERIOD: <span id="period"></span></p>
-    </div>
-    <br>
-  <!-- <div id="gsBox">
-     <h4 style="color: white">Ground Stations:</h4>
-     <p>NAME: <span id="gsName"></span></p>
-     <p>ORG: <span id="gsOrg"></span></p>
-     <p>LAT: <span id="gsLat"></span></p>
-     <p>LONG: <span id="gsLong"></span></p>
-     <p>ALT: <span id="gsAlt"></span></p>
-   </div>-->
-  <br>
-</div>
 </body>
-  <script src="util/worldwindlib.js"></script>
-  <script src="util/LayerManager.js"></script>
-  <script src="util/Satellite.js"></script>
-  <script src="SatTracker2.js"></script>
+<script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper-right").toggleClass("toggled");
+    });
+</script>
+<script src="util/worldwindlib.js"></script>
+<script src="util/LayerManager.js"></script>
+<script src="util/Satellite.js"></script>
+<script src="SatTracker2.js"></script>
 </html>
