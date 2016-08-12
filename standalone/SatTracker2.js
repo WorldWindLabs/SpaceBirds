@@ -863,7 +863,7 @@ function getGroundStations (groundStations) {
                 };
                 var dataAdapter = new $.jqx.dataAdapter(source);
                 // Create a jqxComboBox
-                $("#jqxWidget").jqxComboBox({ selectedIndex: 0, source: dataAdapter, displayMember: "OBJECT_NAME", valueMember: "OBJECT_TYPE", width: 300, height: 25});
+                $("#jqxWidget").jqxComboBox({ selectedIndex: 0, source: dataAdapter, displayMember: "OBJECT_NAME", valueMember: "OBJECT_TYPE", width: 220, height: 30});
                 // trigger the select event.
                 $("#jqxWidget").on('select', function (event) {
                     if (event.args) {

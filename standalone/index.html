@@ -33,6 +33,14 @@
 </head>
 
 <body style="background-image: url('assets/images/space.jpeg');">
+     <div class="container">
+        <nav class="navbar  navbar-inverse navbar-fixed-top" role="navigation" style="background-color:transparent; border-color:transparent;">
+            <div class="container" style="text-align: center;">
+                <br>
+              <spam class="coolLogo" style="font-size:40px; color: white;" id="menu-toggle">SPACEBIRDS 0.4</spam>
+            </div>
+        </nav>
+    </div>
 <div id="globe">
     <canvas id="canvasOne" style= "width: 100%; height:100%;" >
         Your browser does not support HTML5 Canvas.
@@ -41,20 +49,23 @@
     <div id="wrapper">
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
-                <li class="sidebar-brand">
-                    <a href="#" class="coolLogo">SPACEBIRDS 0.4</a>
+                <li>
+                    <a href="#" style="padding-left: 50px"><img src="assets/images/spacebirdlogo.png" height="30%" width="30%"></a>
                 </li>
                 <li>
-                    <a href="#"><strong style="color: white">SATELLITE TRACKING</strong> </a>
+                    <a href="#"><strong style="color: white">SEARCH</strong> </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="#" style="padding-left: 20px">
                         <spam id='content'>
                             <div id='jqxWidget'>
                             </div>
                             <div style="font-size: 12px; font-family: Verdana;" id="selectionlog"></div>
                         </spam>
                     </a>
+                </li>
+                  <li>
+                    <a href="#"><strong style="color: white">SATELLITE TRACKING</strong> </a>
                 </li>
                 <li>
                     <a href="#"><spam id="allSats">ALL ON</spam></a>
@@ -108,7 +119,7 @@
                     <a href="about.html">ABOUT</a>
                 </li>
                 <li>
-                    <a href="#" id="menu-toggle"><spam id="infoSidebar">INFORMATION PANEL</spam></a>
+                    <a href="#" id="menu-toggle-right"><spam id="infoSidebar">INFORMATION PANEL</spam></a>
                 </li>
             </ul>
         </div>
@@ -144,6 +155,10 @@
 </body>
 <script>
     $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+     $("#menu-toggle-right").click(function(e) {
         e.preventDefault();
         $("#wrapper-right").toggleClass("toggled");
     });
