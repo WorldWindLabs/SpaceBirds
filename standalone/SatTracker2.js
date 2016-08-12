@@ -907,9 +907,8 @@ function getGroundStations (groundStations) {
                     everyCurrentPosition[indx].latitude = position.latitude;
                     everyCurrentPosition[indx].longitude = position.longitude;
                     everyCurrentPosition[indx].altitude = position.altitude;
-
-                    wwd.redraw();
                 }
+                wwd.redraw();
             }, 1000);
 
             /****
