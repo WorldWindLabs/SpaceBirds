@@ -4,14 +4,14 @@ self.addEventListener('message', onMessage);
 self.addEventListener('error', onError);
 
 function onError(e){
-  console.log('worker says: Error on satellite parser. I suck.');
+  //console.log('worker says: Error on satellite parser. I suck.');
 }
 
 //Web Worker interface: onMessage
 function onMessage(inputMessage){
-  console.log('Message received by satellite worker: ' + inputMessage.data);
+  //console.log('Message received by satellite worker: ' + inputMessage.data);
   if(inputMessage.data == 'close'){
-    console.log('Closing satellite worker');
+    //console.log('Closing satellite worker');
     self.close();
   }
   else{

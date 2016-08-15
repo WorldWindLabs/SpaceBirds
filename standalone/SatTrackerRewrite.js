@@ -4,7 +4,7 @@ var allOrbitingBodies = []; //Global variable with all the orbiting objects
 WorldWind.Logger.setLoggingLevel(WorldWind.Logger.LEVEL_WARNING);
 
 // Create the World Window.
-var wwd = new WorldWind.ObjectWindow("canvasOne");
+var wwd = new WorldWind.WorldWindow("canvasOne");
 wwd.navigator.lookAtLocation.altitude = 0;
 wwd.navigator.range = 5e7;
 
@@ -143,15 +143,15 @@ function generatePlacemark(orbitalBody){
 
   switch(orbitalBody.objectType) {
     case "PAYLOAD":
-        placemarkAttributes.imageSource = "assets/dot-red.png";
+        placemarkAttributes.imageSource = "assets/icons/dot-red.png";
         placemarkAttributes.imageScale = 0.60;
         break;
     case "ROCKET BODY":
-        placemarkAttributes.imageSource = "assets/dot-blue.png";
+        placemarkAttributes.imageSource = "assets/icons/dot-blue.png";
         placemarkAttributes.imageScale = 0.60;
         break;
     default:
-        placemarkAttributes.imageSource = "assets/dot-grey.png";
+        placemarkAttributes.imageSource = "assets/icons/dot-grey.png";
         placemarkAttributes.imageScale = 0.40;
   }
 
@@ -195,11 +195,11 @@ grndStationsWorker.addEventListener('message', function(event){
 }, false);
 
 window.setInterval(function () {
-    // for (var i = 0; i < allOrbitingBodies.length; i += 1) {
-    //     var position = getPosition(satellite.twoline2satrec(allOrbitingBodies[i].tleLine1, allOrbitingBodies[i].tleLine2), new Date());
-    //     allOrbitingBodies[i].currentPosition = new WorldWind.Position(position.latitude, position.longitude, position.altitude);
-    //     wwd.redraw();
-    // }
+    for (var i = 0; i < allOrbitingBodies.length; i += 1) {
+        var position = getPosition(satellite.twoline2satrec(allOrbitingBodies[i].tleLine1, allOrbitingBodies[i].tleLine2), new Date());
+        allOrbitingBodies[i].currentPosition = new WorldWind.Position(position.latitude, position.longitude, position.altitude);
+        wwd.redraw();
+    }
 }, 1000);
 
 

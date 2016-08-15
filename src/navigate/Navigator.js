@@ -112,14 +112,16 @@ define([
             // modelview matrix and before computing the near clip distance. The far clip distance depends on the
             // modelview matrix, and the near clip distance depends on the far clip distance.
             this.farDistance = WWMath.horizonDistanceForGlobeRadius(globeRadius, eyePos.altitude);
+            var nearBuffer = this.farDistance;
+            this.farDistance += 60000000;
             if (this.farDistance < 1e3)
                 this.farDistance = 1e3;
-
             // Compute the near clip distance in order to achieve a desired depth resolution at the far clip distance.
             // This computed distance is limited such that it does not intersect the terrain when possible and is never
             // less than a predetermined minimum (usually one). The computed near distance automatically scales with the
             // resolution of the WebGL depth buffer.
-            this.nearDistance = WWMath.perspectiveNearDistanceForFarDistance(this.farDistance, 10, viewDepthBits);
+            //this.nearDistance = WWMath.perspectiveNearDistanceForFarDistance(this.farDistance, 10, viewDepthBits);
+            this.nearDistance = WWMath.perspectiveNearDistanceForFarDistance(nearBuffer, 10, viewDepthBits);
 
             // Prevent the near clip plane from intersecting the terrain.
             distanceToSurface = eyePos.altitude - globe.elevationAtLocation(eyePos.latitude, eyePos.longitude);
