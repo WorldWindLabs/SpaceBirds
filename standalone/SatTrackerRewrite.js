@@ -11,7 +11,7 @@ wwd.navigator.range = 5e7;
 //Add imagery layers.
 var layers = [
     {layer: new WorldWind.BMNGOneImageLayer(), enabled: true},
-    //{layer: new WorldWind.CompassLayer(), enabled: true},
+    {layer: new WorldWind.AtmosphereLayer(), enabled: true},
     {layer: new WorldWind.CoordinatesDisplayLayer(wwd), enabled: true},
     {layer: new WorldWind.ViewControlsLayer(wwd), enabled: true}
 ];
