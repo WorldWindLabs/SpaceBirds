@@ -187,10 +187,16 @@ grndStationsWorker.addEventListener('message', function(event){
 
 window.setInterval(function () {
     for (var i = 0; i < allOrbitingBodies.length; i += 1) {
-        var position = getPosition(satellite.twoline2satrec(allOrbitingBodies[i].tleLine1, allOrbitingBodies[i].tleLine2), new Date());
-        allOrbitingBodies[i].currentPosition = new WorldWind.Position(position.latitude, position.longitude, position.altitude);
-        wwd.redraw();
+        var position = getPosition(
+            satellite.twoline2satrec(
+                allOrbitingBodies[i].tleLine1,
+                allOrbitingBodies[i].tleLine2),
+            new Date());
+        allOrbitingBodies[i].currentPosition = new WorldWind.Position(position.latitude,
+            position.longitude,
+            position.altitude);
     }
+    wwd.redraw();
 }, 1000);
 
 
