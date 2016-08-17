@@ -92,7 +92,7 @@ function getSatellites(satData){
   var faultySatsNumber = 0;
   var orbitalBodiesNumber = 0;
   var now = new Date();
-  for(var i = 0; i < satData.length ; i += 1){
+  for(var i = 0; i < satData.length; i += 1){
     var time = new Date(now.getTime());
     try{
       var position = getPosition(satellite.twoline2satrec(satData[i].TLE_LINE1, satData[i].TLE_LINE2), time);
@@ -103,11 +103,12 @@ function getSatellites(satData){
     var myOrbitalBody = new orbitalBody(satData[i]);
     myOrbitalBody.currentPosition = new WorldWind.Position(position.latitude, position.longitude, position.altitude);
     orbitalBodiesNumber += 1;
-//    allOrbitingBodies.push(myOrbitalBody); //Not sure if this array is useful anymore
+
     if(myOrbitalBody.objectType !== "DEBRIS"){
       satellitesLayer.addRenderable(generatePlacemark(myOrbitalBody));
+      allOrbitingBodies.push(myOrbitalBody); //Not sure if this array is useful anymore
     } else {
-      debrisLayer.addRenderable(generatePlacemark(myOrbitalBody));
+     debrisLayer.addRenderable(generatePlacemark(myOrbitalBody));
     }
   }
 
@@ -154,6 +155,15 @@ function generatePlacemark(orbitalBody){
 
 function renderEverything(){
   wwd.addLayer(satellitesLayer);
+  // for(var i = 0; i < satellitesLayer.renderables.length; i += 1){
+  //   console.log(satellitesLayer.renderables[i]);
+  // }
+  //console.log(allOrbitingBodies.length);
+  // for(var i = 0; i < satellitesLayer.renderables.length; i += 1){
+  //   console.log(satellitesLayer.renderables[i].position.altitude);
+  // }
+
+  updateSatellites();
 }
 
 function retrieve3dModelPath(intlDes){
@@ -185,19 +195,20 @@ grndStationsWorker.addEventListener('message', function(event){
   grndStationsWorker.postMessage('close');
 }, false);
 
-window.setInterval(function () {
-    for (var i = 0; i < allOrbitingBodies.length; i += 1) {
-        var position = getPosition(
-            satellite.twoline2satrec(
-                allOrbitingBodies[i].tleLine1,
-                allOrbitingBodies[i].tleLine2),
-            new Date());
-        allOrbitingBodies[i].currentPosition = new WorldWind.Position(position.latitude,
-            position.longitude,
-            position.altitude);
-    }
-    wwd.redraw();
-}, 1000);
+function updateSatellites(){
+  for (var i = 0; i < allOrbitingBodies.length; i += 1) {
+      var newPosition = getPosition(
+        satellite.twoline2satrec(
+          allOrbitingBodies[i].tleLine1,
+          allOrbitingBodies[i].tleLine2),
+        new Date());
+      satellitesLayer.renderables[i].position.latitude = newPosition.latitude;
+      satellitesLayer.renderables[i].position.longitude = newPosition.longitude;
+      satellitesLayer.renderables[i].position.altitude = newPosition.altitude;
+  }
+  wwd.redraw();
+  setTimeout(updateSatellites, 1000);
+}
 
 
 $(document).ready(function() {
