@@ -51,21 +51,14 @@ function deg2text(deg, letters) {
     } else {
         letter = letters[0]
     }
-
     var position = Math.abs(deg);
-
     var degrees = Math.floor(position);
-
     position -= degrees;
     position *= 60;
-
     var minutes = Math.floor(position);
-
     position -= minutes;
     position *= 60;
-
     var seconds = Math.floor(position * 100) / 100;
-
     return degrees + "° " + minutes + "' " + seconds + "\" " + letter;
 }
 
@@ -107,12 +100,10 @@ function getSatellites(satData){
       faultySatsNumber += 1;
       continue;
     }
-    //TODO modularize this inside a function, check out why colored dots aren't loading.
-
     var myOrbitalBody = new orbitalBody(satData[i]);
     myOrbitalBody.currentPosition = new WorldWind.Position(position.latitude, position.longitude, position.altitude);
     orbitalBodiesNumber += 1;
-    allOrbitingBodies.push(myOrbitalBody); //Not sure if this array is useful anymore
+//    allOrbitingBodies.push(myOrbitalBody); //Not sure if this array is useful anymore
     if(myOrbitalBody.objectType !== "DEBRIS"){
       satellitesLayer.addRenderable(generatePlacemark(myOrbitalBody));
     } else {
