@@ -64,6 +64,8 @@
 }
 
 #sidebar-wrapper-right {
+    padding-left: 10px;
+    color: white;
     z-index: 1000;
     position: fixed;
     right: 250px;
