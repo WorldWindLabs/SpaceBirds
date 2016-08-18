@@ -5,7 +5,7 @@ WorldWind.Logger.setLoggingLevel(WorldWind.Logger.LEVEL_WARNING);
 
 // Create the World Window.
 var wwd = new WorldWind.WorldWindow("canvasOne");
-wwd.navigator.lookAtLocation.altitude = 0;
+//wwd.navigator.lookAtLocation.altitude = 0;
 wwd.navigator.range = 5e7;
 
 //Add imagery layers.
@@ -40,8 +40,10 @@ function orbitalBody(satelliteData){
   this.objectType = satelliteData.OBJECT_TYPE;
   this.orbitalPeriod = satelliteData.PERIOD;
   this.currentPosition = null;
+
   this.collada3dModel = retrieve3dModelPath(satelliteData.INTLDES);
   this.orbitType = obtainOrbitType(satelliteData);
+  this.url = null; //to be added to satellite data. Patrick will.
 }
 
 function deg2text(deg, letters) {
@@ -163,7 +165,12 @@ function renderEverything(){
   //   console.log(satellitesLayer.renderables[i].position.altitude);
   // }
 
-  updateSatellites();
+  setUpdateTimer(updateSatellites, 1000);
+}
+
+function setUpdateTimer(myFunction, delay){
+  myFunction();
+  setInterval(myFunction, delay);
 }
 
 function retrieve3dModelPath(intlDes){
@@ -195,7 +202,10 @@ grndStationsWorker.addEventListener('message', function(event){
   grndStationsWorker.postMessage('close');
 }, false);
 
+//setInterval
+
 function updateSatellites(){
+  //console.log('UpdateSatellites invoked');
   for (var i = 0; i < allOrbitingBodies.length; i += 1) {
       var newPosition = getPosition(
         satellite.twoline2satrec(
@@ -207,10 +217,9 @@ function updateSatellites(){
       satellitesLayer.renderables[i].position.altitude = newPosition.altitude;
   }
   wwd.redraw();
-  setTimeout(updateSatellites, 1000);
 }
 
 
-$(document).ready(function() {
-
-});
+// $(document).ready(function() {
+//
+// });
