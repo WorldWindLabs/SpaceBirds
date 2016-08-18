@@ -13,18 +13,24 @@ wwd.navigator.lookAtLocation.altitude = 0;
 wwd.navigator.range = 5e7;
 
 
+var viewControlsLayer = new WorldWind.ViewControlsLayer(wwd);
+viewControlsLayer.alignment = new WorldWind.Offset(WorldWind.OFFSET_FRACTION, 0.25, WorldWind.OFFSET_FRACTION, 0);
+viewControlsLayer.placement = new WorldWind.Offset(WorldWind.OFFSET_FRACTION, 0.25, WorldWind.OFFSET_FRACTION, 0);
+
 //Add imagery layers.
 var layers = [
     {layer: new WorldWind.BMNGLayer(), enabled: true},
     //{layer: new WorldWind.CompassLayer(), enabled: true},
     {layer: new WorldWind.CoordinatesDisplayLayer(wwd), enabled: true},
-    {layer: new WorldWind.ViewControlsLayer(wwd), enabled: true}
+    {layer: viewControlsLayer, enabled: true}
 ];
 
 for (var l = 0; l < layers.length; l++) {
     layers[l].layer.enabled = layers[l].enabled;
     wwd.addLayer(layers[l].layer);
 }
+
+
 
 //custom layers
 var groundStationsLayer = new WorldWind.RenderableLayer();
@@ -223,8 +229,10 @@ function getGroundStations (groundStations) {
           WorldWind.OFFSET_FRACTION, 1.0);
       gsPlacemarkAttributes.labelAttributes.color = WorldWind.Color.WHITE;
 
+        var gsNames = [];
         var groundStation = [];
       for (var i = 0, len = groundStations.length; i < len; i++) {
+          gsNames[i] = groundStations[i].NAME;
 
           groundStation[i] = new WorldWind.Position(groundStations[i].LATITUDE,
               groundStations[i].LONGITUDE,
@@ -244,6 +252,59 @@ function getGroundStations (groundStations) {
         $('#clearStations').click(function() {
             shapeLayer.removeAllRenderables();
         });
+
+        $(document).ready(function () {
+            var url = "data/groundstations.json";
+            // prepare the data
+            var source =
+            {
+                datatype: "json",
+                datafields: [
+                    { name: 'NAME', type:'string'},
+                    {name: 'ORGANIZATION', type:'string'}
+                ],
+                url: url,
+                async: false
+            };
+            var dataAdapter = new $.jqx.dataAdapter(source);
+            // Create a jqxComboBox
+            $("#jqxWidget2").jqxComboBox({ selectedIndex: 0, source: dataAdapter, displayMember: "NAME", valueMember: "ORGANIZATION", width: 220, height: 30});
+            // trigger the select event.
+            $("#jqxWidget2").on('select', function (event) {
+                if (event.args) {
+                    var item = event.args.item;
+                    if (item) {
+                        var valueElement = $("<div></div>");
+                        valueElement.text("Type: " + item.value);
+                        var labelElement = $("<div></div>");
+                        labelElement.text("Name: " + item.label);
+                        $("#selectionlog2").children().remove();
+                        $("#selectionlog2").append(labelElement);
+                        $("#selectionlog2").append(valueElement);
+                        var customGSat = gsNames.indexOf(item);
+                        toGsStation(customGSat);
+                    }
+                }
+            });
+        });
+        var toGsStation = function(gsindex){
+            //TODO: GS information display
+            typePlaceholder.textContent= "Ground Station";
+            namePlaceholder.textContent = groundStations[gsindex].NAME;
+            intldesPlaceholder.textContent = groundStations[gsindex].ORGANIZATION;
+            latitudePlaceholder.textContent = groundStations[gsindex].LATITUDE;
+            longitudePlaceholder.textContent = groundStations[gsindex].LONGITUDE;
+            altitudePlaceholder.textContent = groundStations[gsindex].ALTITUDE;
+            wwd.goTo(new WorldWind.Position(groundStations[gsindex].latitude, groundStations[gsindex].longitude, groundStations[gsindex].altitude + 10000));
+            var gsAttributes = new WorldWind.ShapeAttributes(null);
+            gsAttributes.outlineColor = new WorldWind.Color(0, 255, 255, 1);
+            gsAttributes.interiorColor = new WorldWind.Color(0, 255, 255, 0.2);
+
+            var shape = new WorldWind.SurfaceCircle(new WorldWind.Location(groundStations[gsindex].LATITUDE,
+                groundStations[gsindex].LONGITUDE), 150e4, gsAttributes);
+
+            shapeLayer.addRenderable(shape);
+        };
 
         /***
          * Satellites
@@ -1170,23 +1231,7 @@ function getGroundStations (groundStations) {
                     } else {
 
                         var gsindex = groundStation.indexOf(position);
-                        console.log(gsindex);
-                        console.log(groundStations[gsindex].NAME);
-                        //TODO: GS information display
-                        gsNamePlaceHolder.textContent = groundStations[gsindex].NAME;
-                        gsOrgPlaceHolder.textContent = groundStations[gsindex].ORGANIZATION;
-                        gsLatPlaceHolder.textContent = groundStations[gsindex].LATITUDE;
-                        gsLongPlaceHolder.textContent = groundStations[gsindex].LONGITUDE;
-                        gsAltPlaceHolder.text = groundStations[gsindex].ALTITUDE;
-
-                       var gsAttributes = new WorldWind.ShapeAttributes(null);
-                        gsAttributes.outlineColor = new WorldWind.Color(0, 255, 255, 1);
-                         gsAttributes.interiorColor = new WorldWind.Color(0, 255, 255, 0.2);
-
-                         var shape = new WorldWind.SurfaceCircle(new WorldWind.Location(groundStations[gsindex].LATITUDE,
-                           groundStations[gsindex].LONGITUDE), 150e4, gsAttributes);
-
-                        shapeLayer.addRenderable(shape);
+                        toGsStation(gsindex);
                     }
                 }
 
@@ -1255,6 +1300,7 @@ function getGroundStations (groundStations) {
                 clearInterval(startHoverOrbit);
                 orbitsHoverLayer.removeAllRenderables();
             };
+
 
             /**
              * Pick-handle
@@ -1326,15 +1372,7 @@ function getGroundStations (groundStations) {
                         updateLLA(everyCurrentPosition[index]);
                     } else {
                         var gsindex = groundStation.indexOf(position);
-                        console.log(gsindex);
-                        console.log(groundStations[gsindex].NAME);
-                        //TODO: GS information display
-                        typePlaceholder.textContent= "Ground Station";
-                        namePlaceholder.textContent = groundStations[gsindex].NAME;
-                        intldesPlaceholder.textContent = groundStations[gsindex].ORGANIZATION;
-                        latitudePlaceholder.textContent = groundStations[gsindex].LATITUDE;
-                        longitudePlaceholder.textContent = groundStations[gsindex].LONGITUDE;
-                        altitudePlaceholder.textContent = groundStations[gsindex].ALTITUDE;
+                        toGsStation();
                     }
 
                     // Update the window if we changed anything.
