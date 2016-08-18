@@ -112,10 +112,10 @@ function getSatellites(satData){
         rocketLayer.addRenderable(generatePlacemark(myOrbitalBody));
         allOrbitingBodies.push(myOrbitalBody);
         break;
-      case "DEBRIS":
+/*      case "DEBRIS":
         debrisLayer.addRenderable(generatePlacemark(myOrbitalBody));
         allOrbitingBodies.push(myOrbitalBody);
-        break;
+        break;*/
       }
   }
   console.log('We have ' + orbitalBodiesNumber + ' orbiting bodies');
@@ -203,7 +203,7 @@ function updateSatellites(){
         allOrbitingBodies[i].tleLine2),
       new Date());
 
-    switch (allOrbitingBodies[i].objectType){
+    switch (allOrbitingBodies[i].objectType) {
       case "PAYLOAD":
         payloadLayer.renderables[payloadCounter].position.latitude = newPosition.latitude;
         payloadLayer.renderables[payloadCounter].position.longitude = newPosition.longitude;
@@ -214,11 +214,11 @@ function updateSatellites(){
         rocketLayer.renderables[rocketCounter].position.longitude = newPosition.longitude;
         rocketLayer.renderables[rocketCounter++].position.altitude = newPosition.altitude;
         break;
-      case "DEBRIS":
-        debrisLayer.renderables[debrisCounter].position.latitude = newPosition.latitude;
-        debrisLayer.renderables[debrisCounter].position.longitude = newPosition.longitude;
-        debrisLayer.renderables[debrisCounter++].position.altitude = newPosition.altitude;
-        break;
+        /*      case "DEBRIS":
+         debrisLayer.renderables[debrisCounter].position.latitude = newPosition.latitude;
+         debrisLayer.renderables[debrisCounter].position.longitude = newPosition.longitude;
+         debrisLayer.renderables[debrisCounter++].position.altitude = newPosition.altitude;
+         break;*/
     }
 }
   wwd.redraw();
