@@ -18,15 +18,15 @@ wwd.navigator.range = 5e7;
 
 //Add imagery layers.
 var layers = [
-    {layer: new WorldWind.BMNGOneImageLayer(), enabled: true},
-    {layer: new WorldWind.AtmosphereLayer(), enabled: true},
-    {layer: new WorldWind.CoordinatesDisplayLayer(wwd), enabled: true},
-    {layer: new WorldWind.ViewControlsLayer(wwd), enabled: false}
+  {layer: new WorldWind.BMNGOneImageLayer(), enabled: true},
+  {layer: new WorldWind.AtmosphereLayer(), enabled: true},
+  {layer: new WorldWind.CoordinatesDisplayLayer(wwd), enabled: true},
+  {layer: new WorldWind.ViewControlsLayer(wwd), enabled: true}
 ];
 
 for (var l = 0; l < layers.length; l++) {
-    layers[l].layer.enabled = layers[l].enabled;
-    wwd.addLayer(layers[l].layer);
+  layers[l].layer.enabled = layers[l].enabled;
+  wwd.addLayer(layers[l].layer);
 }
 
 //custom layers
@@ -34,10 +34,9 @@ var groundStationsLayer = new WorldWind.RenderableLayer();
 //var modelLayer = new WorldWind.RenderableLayer("Model");
 //var meshLayer = new WorldWind.RenderableLayer();
 //var orbitsLayer = new WorldWind.RenderableLayer("Orbit");
-var satellitesLayer = new WorldWind.RenderableLayer("Satellites");
+var payloadLayer = new WorldWind.RenderableLayer("Payloads");
+var rocketLayer = new WorldWind.RenderableLayer("Rocket Bodies");
 var debrisLayer = new WorldWind.RenderableLayer("Debris");
-//var meoSatLayer = new WorldWind.RenderableLayer("MEO Satellite");
-//var heoSatLayer = new WorldWind.RenderableLayer("HEO Satellite");
 
 //Abstraction of an orbital body
 function orbitalBody(satelliteData){
@@ -56,47 +55,47 @@ function orbitalBody(satelliteData){
 }
 
 function deg2text(deg, letters) {
-    var letter;
-    if (deg < 0) {
-        letter = letters[1]
-    } else {
-        letter = letters[0]
-    }
-    var position = Math.abs(deg);
-    var degrees = Math.floor(position);
-    position -= degrees;
-    position *= 60;
-    var minutes = Math.floor(position);
-    position -= minutes;
-    position *= 60;
-    var seconds = Math.floor(position * 100) / 100;
-    return degrees + "° " + minutes + "' " + seconds + "\" " + letter;
+  var letter;
+  if (deg < 0) {
+      letter = letters[1]
+  } else {
+      letter = letters[0]
+  }
+  var position = Math.abs(deg);
+  var degrees = Math.floor(position);
+  position -= degrees;
+  position *= 60;
+  var minutes = Math.floor(position);
+  position -= minutes;
+  position *= 60;
+  var seconds = Math.floor(position * 100) / 100;
+  return degrees + "° " + minutes + "' " + seconds + "\" " + letter;
 }
 
 // Orbit Propagation (MIT License, see https://github.com/shashwatak/satellite-js)
 function getPosition (satrec, time) {
-    var position_and_velocity = satellite.propagate(satrec,
-        time.getUTCFullYear(),
-        time.getUTCMonth() + 1,
-        time.getUTCDate(),
-        time.getUTCHours(),
-        time.getUTCMinutes(),
-        time.getUTCSeconds());
-    var position_eci = position_and_velocity["position"];
+  var position_and_velocity = satellite.propagate(satrec,
+    time.getUTCFullYear(),
+    time.getUTCMonth() + 1,
+    time.getUTCDate(),
+    time.getUTCHours(),
+    time.getUTCMinutes(),
+    time.getUTCSeconds());
+  var position_eci = position_and_velocity["position"];
 
-    var gmst = satellite.gstime_from_date(time.getUTCFullYear(),
-        time.getUTCMonth() + 1,
-        time.getUTCDate(),
-        time.getUTCHours(),
-        time.getUTCMinutes(),
-        time.getUTCSeconds());
+  var gmst = satellite.gstime_from_date(time.getUTCFullYear(),
+    time.getUTCMonth() + 1,
+    time.getUTCDate(),
+    time.getUTCHours(),
+    time.getUTCMinutes(),
+    time.getUTCSeconds());
 
-    var position_gd = satellite.eci_to_geodetic(position_eci, gmst);
-    var latitude = satellite.degrees_lat(position_gd["latitude"]);
-    var longitude = satellite.degrees_long(position_gd["longitude"]);
-    var altitude = position_gd["height"] * 1000;
+  var position_gd = satellite.eci_to_geodetic(position_eci, gmst);
+  var latitude = satellite.degrees_lat(position_gd["latitude"]);
+  var longitude = satellite.degrees_long(position_gd["longitude"]);
+  var altitude = position_gd["height"] * 1000;
 
-    return new WorldWind.Position(latitude, longitude, altitude);
+  return new WorldWind.Position(latitude, longitude, altitude);
 };
 
 function getSatellites(satData){
@@ -117,14 +116,21 @@ function getSatellites(satData){
     myOrbitalBody.altitude = position.altitude;
     orbitalBodiesNumber += 1;
 
-    if(myOrbitalBody.objectType !== "DEBRIS"){
-      satellitesLayer.addRenderable(generatePlacemark(myOrbitalBody));
-      allOrbitingBodies.push(myOrbitalBody); //Not sure if this array is useful anymore
-    } else {
-     debrisLayer.addRenderable(generatePlacemark(myOrbitalBody));
-    }
+    switch (myOrbitalBody.objectType){
+      case "PAYLOAD":
+        payloadLayer.addRenderable(generatePlacemark(myOrbitalBody));
+        allOrbitingBodies.push(myOrbitalBody);
+        break;
+      case "ROCKET BODY":
+        rocketLayer.addRenderable(generatePlacemark(myOrbitalBody));
+        allOrbitingBodies.push(myOrbitalBody);
+        break;
+/*      case "DEBRIS":
+        debrisLayer.addRenderable(generatePlacemark(myOrbitalBody));
+        allOrbitingBodies.push(myOrbitalBody);
+        break;*/
+      }
   }
-
   console.log('We have ' + orbitalBodiesNumber + ' orbiting bodies');
   console.log(faultySatsNumber + ' satellites had errors in their TLE.');
   renderEverything();
@@ -143,16 +149,16 @@ function generatePlacemark(orbitalBody){
 
   switch(orbitalBody.objectType) {
     case "PAYLOAD":
-        placemarkAttributes.imageSource = "assets/icons/dot-red.png";
-        placemarkAttributes.imageScale = 0.60;
-        break;
+      placemarkAttributes.imageSource = "assets/icons/dot-red.png";
+      placemarkAttributes.imageScale = 0.60;
+      break;
     case "ROCKET BODY":
-        placemarkAttributes.imageSource = "assets/icons/dot-blue.png";
-        placemarkAttributes.imageScale = 0.60;
-        break;
+      placemarkAttributes.imageSource = "assets/icons/dot-blue.png";
+      placemarkAttributes.imageScale = 0.60;
+      break;
     default:
-        placemarkAttributes.imageSource = "assets/icons/dot-grey.png";
-        placemarkAttributes.imageScale = 0.40;
+      placemarkAttributes.imageSource = "assets/icons/dot-grey.png";
+      placemarkAttributes.imageScale = 0.40;
   }
 
   placemark.attributes = placemarkAttributes;
@@ -162,7 +168,9 @@ function generatePlacemark(orbitalBody){
 }
 
 function renderEverything(){
-  wwd.addLayer(satellitesLayer);
+  wwd.addLayer(payloadLayer);
+  wwd.addLayer(rocketLayer);
+  wwd.addLayer(debrisLayer);
   //TODO: Maybe calculate optimal delay?
   //could do a full 15k loop of updatePositions as test
   //to provide optimal delay to update satellites.
@@ -203,19 +211,39 @@ grndStationsWorker.addEventListener('message', function(event){
   grndStationsWorker.postMessage('close');
 }, false);
 
+
+
 function updatePositions(){
-  console.log('shit is runnin, yo');
+  var payloadCounter = 0;
+  var rocketCounter = 0;
+  var debrisCounter = 0;
+
   for (var i = 0; i < allOrbitingBodies.length; i += 1) {
-      var newPosition = getPosition(
-        satellite.twoline2satrec(
-          allOrbitingBodies[i].tleLine1,
-          allOrbitingBodies[i].tleLine2),
-        new Date());
-      satellitesLayer.renderables[i].position.latitude = newPosition.latitude;
-      satellitesLayer.renderables[i].position.longitude = newPosition.longitude;
-      satellitesLayer.renderables[i].position.altitude = newPosition.altitude;
-      //TODO: update positions in allOrbitingBodies
-  }
+    var newPosition = getPosition(
+      satellite.twoline2satrec(
+        allOrbitingBodies[i].tleLine1,
+        allOrbitingBodies[i].tleLine2),
+      new Date());
+
+    switch (allOrbitingBodies[i].objectType) {
+      case "PAYLOAD":
+        payloadLayer.renderables[payloadCounter].position.latitude = newPosition.latitude;
+        payloadLayer.renderables[payloadCounter].position.longitude = newPosition.longitude;
+        payloadLayer.renderables[payloadCounter++].position.altitude = newPosition.altitude;
+        break;
+      case "ROCKET BODY":
+        rocketLayer.renderables[rocketCounter].position.latitude = newPosition.latitude;
+        rocketLayer.renderables[rocketCounter].position.longitude = newPosition.longitude;
+        rocketLayer.renderables[rocketCounter++].position.altitude = newPosition.altitude;
+        break;
+        /*      case "DEBRIS":
+         debrisLayer.renderables[debrisCounter].position.latitude = newPosition.latitude;
+         debrisLayer.renderables[debrisCounter].position.longitude = newPosition.longitude;
+         debrisLayer.renderables[debrisCounter++].position.altitude = newPosition.altitude;
+         break;*/
+    }
+    //TODO: update positions in allOrbitingBodies
+}
   wwd.redraw();
 }
 
