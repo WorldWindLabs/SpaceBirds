@@ -2,7 +2,8 @@
 var allOrbitingBodies = []; //Global array with all the orbiting objects
 
 //Event handling to avoid redraw on mousedown to simulate stuttering elimination
-var mouseupID = -1; //Global ID of mouse up interval. Note that mouse button IDs are 0,1,2...
+var mousedownID = -1; //Global ID of mouse up interval. Note that mouse button IDs are 0,1,2...
+var satUpdateTimer = -1;
 addEventListener("mousedown", mousedown);
 addEventListener("mouseup", mouseup);
 //Clear the interval of previous events when user leaves the window with mouse
@@ -46,8 +47,9 @@ function orbitalBody(satelliteData){
   this.intlDes = satelliteData.INTLDES;
   this.objectType = satelliteData.OBJECT_TYPE;
   this.orbitalPeriod = satelliteData.PERIOD;
-  this.currentPosition = null;
-
+  this.latitude = null;
+  this.longitude = null;
+  this.altitude = null;
   this.collada3dModel = retrieve3dModelPath(satelliteData.INTLDES);
   this.orbitType = obtainOrbitType(satelliteData);
   this.url = null; //to be added to satellite data. Patrick will provide URLs.
@@ -110,7 +112,9 @@ function getSatellites(satData){
       continue;
     }
     var myOrbitalBody = new orbitalBody(satData[i]);
-    myOrbitalBody.currentPosition = new WorldWind.Position(position.latitude, position.longitude, position.altitude);
+    myOrbitalBody.latitude = position.latitude;
+    myOrbitalBody.longitude = position.longitude;
+    myOrbitalBody.altitude = position.altitude;
     orbitalBodiesNumber += 1;
 
     if(myOrbitalBody.objectType !== "DEBRIS"){
@@ -124,11 +128,11 @@ function getSatellites(satData){
   console.log('We have ' + orbitalBodiesNumber + ' orbiting bodies');
   console.log(faultySatsNumber + ' satellites had errors in their TLE.');
   renderEverything();
-  updateSatellites(updatePositions, 1000);
 }
 
 function generatePlacemark(orbitalBody){
-  var placemark = new WorldWind.Placemark(orbitalBody.currentPosition);
+  var placemarkPosition = new WorldWind.Position(orbitalBody.latitude, orbitalBody.longitude, orbitalBody.altitude);
+  var placemark = new WorldWind.Placemark(placemarkPosition);
   var placemarkAttributes = new WorldWind.PlacemarkAttributes(null);
   // placemarkAttributes.labelAttributes.offset = new WorldWind.Offset(WorldWind.OFFSET_FRACTION, 0.5, WorldWind.OFFSET_FRACTION, 1.0);
   // placemarkAttributes.labelAttributes.color = WorldWind.Color.WHITE;
@@ -159,15 +163,15 @@ function generatePlacemark(orbitalBody){
 
 function renderEverything(){
   wwd.addLayer(satellitesLayer);
-  //Maybe calculate optimal delay?
+  //TODO: Maybe calculate optimal delay?
   //could do a full 15k loop of updatePositions as test
   //to provide optimal delay to update satellites.
-
+  satelliteUpdating(updatePositions, satUpdateTimer, 1000);
 }
 
-function updateSatellites(callbackFunction, delay){
-  callbackFunction();
-  setInterval(callbackFunction, delay);
+function satelliteUpdating(callbackFunction, timerID, delay){
+  clearInterval(timerID);
+  satUpdateTimer = setInterval(callbackFunction, delay);
 }
 
 function retrieve3dModelPath(intlDes){
@@ -200,6 +204,7 @@ grndStationsWorker.addEventListener('message', function(event){
 }, false);
 
 function updatePositions(){
+  console.log('shit is runnin, yo');
   for (var i = 0; i < allOrbitingBodies.length; i += 1) {
       var newPosition = getPosition(
         satellite.twoline2satrec(
@@ -209,27 +214,17 @@ function updatePositions(){
       satellitesLayer.renderables[i].position.latitude = newPosition.latitude;
       satellitesLayer.renderables[i].position.longitude = newPosition.longitude;
       satellitesLayer.renderables[i].position.altitude = newPosition.altitude;
+      //TODO: update positions in allOrbitingBodies
   }
   wwd.redraw();
 }
 
-function mouseup(event) {
-  console.log('Im in mouseup ' + mouseupID);
-  if(mouseupID == -1)  //Prevent multiple loops!
-     mouseupID = setInterval(whilemouseup, 100 /*execute every 100ms*/);
-}
-
 function mousedown(event) {
-  console.log('Im in mousedown ' + mouseupID);
-   if(mouseupID != -1) {  //Only stop if exists
-     clearInterval(mouseupID);
-     mouseupID = -1;
-   }
+  clearInterval(satUpdateTimer);
 }
 
-function whilemouseup() {
-  console.log('Im in whilemouseup ' + mouseupID);
-  clearInterval(updatePositions);
+function mouseup(event) {
+  satelliteUpdating(updatePositions, satUpdateTimer, 1000);
 }
 
 // $(document).ready(function() {
