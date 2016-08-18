@@ -1,5 +1,12 @@
 "use strict";
-var allOrbitingBodies = []; //Global variable with all the orbiting objects
+var allOrbitingBodies = []; //Global array with all the orbiting objects
+
+//Event handling to avoid redraw on mousedown to simulate stuttering elimination
+var mouseupID = -1; //Global ID of mouse up interval. Note that mouse button IDs are 0,1,2...
+addEventListener("mousedown", mousedown);
+addEventListener("mouseup", mouseup);
+//Clear the interval of previous events when user leaves the window with mouse
+addEventListener("mouseout", mouseup);
 
 WorldWind.Logger.setLoggingLevel(WorldWind.Logger.LEVEL_WARNING);
 
@@ -13,7 +20,7 @@ var layers = [
     {layer: new WorldWind.BMNGOneImageLayer(), enabled: true},
     {layer: new WorldWind.AtmosphereLayer(), enabled: true},
     {layer: new WorldWind.CoordinatesDisplayLayer(wwd), enabled: true},
-    {layer: new WorldWind.ViewControlsLayer(wwd), enabled: true}
+    {layer: new WorldWind.ViewControlsLayer(wwd), enabled: false}
 ];
 
 for (var l = 0; l < layers.length; l++) {
@@ -43,7 +50,7 @@ function orbitalBody(satelliteData){
 
   this.collada3dModel = retrieve3dModelPath(satelliteData.INTLDES);
   this.orbitType = obtainOrbitType(satelliteData);
-  this.url = null; //to be added to satellite data. Patrick will.
+  this.url = null; //to be added to satellite data. Patrick will provide URLs.
 }
 
 function deg2text(deg, letters) {
@@ -117,12 +124,7 @@ function getSatellites(satData){
   console.log('We have ' + orbitalBodiesNumber + ' orbiting bodies');
   console.log(faultySatsNumber + ' satellites had errors in their TLE.');
   renderEverything();
- // for(var j = 0; j < 10; j+=1){
- //   for(var prop in allOrbitingBodies[j]){
- //     console.log(' - ' + allOrbitingBodies[j][prop]);
- //   }
- // }
-
+  updateSatellites(updatePositions, 1000);
 }
 
 function generatePlacemark(orbitalBody){
@@ -157,20 +159,15 @@ function generatePlacemark(orbitalBody){
 
 function renderEverything(){
   wwd.addLayer(satellitesLayer);
-  // for(var i = 0; i < satellitesLayer.renderables.length; i += 1){
-  //   console.log(satellitesLayer.renderables[i]);
-  // }
-  //console.log(allOrbitingBodies.length);
-  // for(var i = 0; i < satellitesLayer.renderables.length; i += 1){
-  //   console.log(satellitesLayer.renderables[i].position.altitude);
-  // }
+  //Maybe calculate optimal delay?
+  //could do a full 15k loop of updatePositions as test
+  //to provide optimal delay to update satellites.
 
-  setUpdateTimer(updateSatellites, 1000);
 }
 
-function setUpdateTimer(myFunction, delay){
-  myFunction();
-  setInterval(myFunction, delay);
+function updateSatellites(callbackFunction, delay){
+  callbackFunction();
+  setInterval(callbackFunction, delay);
 }
 
 function retrieve3dModelPath(intlDes){
@@ -202,10 +199,7 @@ grndStationsWorker.addEventListener('message', function(event){
   grndStationsWorker.postMessage('close');
 }, false);
 
-//setInterval
-
-function updateSatellites(){
-  //console.log('UpdateSatellites invoked');
+function updatePositions(){
   for (var i = 0; i < allOrbitingBodies.length; i += 1) {
       var newPosition = getPosition(
         satellite.twoline2satrec(
@@ -219,6 +213,24 @@ function updateSatellites(){
   wwd.redraw();
 }
 
+function mouseup(event) {
+  console.log('Im in mouseup ' + mouseupID);
+  if(mouseupID == -1)  //Prevent multiple loops!
+     mouseupID = setInterval(whilemouseup, 100 /*execute every 100ms*/);
+}
+
+function mousedown(event) {
+  console.log('Im in mousedown ' + mouseupID);
+   if(mouseupID != -1) {  //Only stop if exists
+     clearInterval(mouseupID);
+     mouseupID = -1;
+   }
+}
+
+function whilemouseup() {
+  console.log('Im in whilemouseup ' + mouseupID);
+  clearInterval(updatePositions);
+}
 
 // $(document).ready(function() {
 //
