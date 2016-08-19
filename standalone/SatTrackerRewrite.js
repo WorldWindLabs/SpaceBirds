@@ -23,37 +23,13 @@ var FixedLocation = function(wwd) {
 
 FixedLocation.prototype = Object.create(WorldWind.Location.prototype);
 
-Object.defineProperties(FixedLocation.prototype, {
 
-    latitude: {
-        get: function () {
-            return WorldWind.Location.greatCircleLocation(
-                this._wwd.navigator.lookAtLocation,
-                -40,
-                1.2,
-                new WorldWind.Location()
-            ).latitude;
-        }
-    },
-
-    longitude: {
-        get: function () {
-            return WorldWind.Location.greatCircleLocation(
-                this._wwd.navigator.lookAtLocation,
-                -40,
-                1.2,
-                new WorldWind.Location()
-            ).longitude;
-        }
-    }
-
-});
 
 //Add imagery layers.
 var layers = [
   {layer: new WorldWind.BMNGOneImageLayer(), enabled: true},
-  {layer: new WorldWind.BMNGLayer(), enabled: false},
-  {layer: new WorldWind.AtmosphereLayer(), enabled: false},
+  {layer: new WorldWind.BMNGLayer(), enabled: true},
+  {layer: new WorldWind.AtmosphereLayer(), enabled: true},
   {layer: new WorldWind.CoordinatesDisplayLayer(wwd), enabled: true},
   {layer: new WorldWind.ViewControlsLayer(wwd), enabled: false}
 ];
@@ -63,7 +39,10 @@ for (var l = 0; l < layers.length; l++) {
   wwd.addLayer(layers[l].layer);
 }
 
-// layers[2].layer.lightLocation = new FixedLocation(wwd);
+layers[1].layer.maxActiveAltitude = 15e6;
+layers[2].layer.maxActiveAltitude = 15e7;
+layers[2].layer.lightLocation = new FixedLocation(wwd);
+
 //custom layers
 var groundStationsLayer = new WorldWind.RenderableLayer();
 //var modelLayer = new WorldWind.RenderableLayer("Model");
@@ -293,7 +272,31 @@ function mouseup(event) {
   satelliteUpdating(updatePositions, satUpdateTimer, loopTime);
 }
 
+Object.defineProperties(FixedLocation.prototype, {
 
+    latitude: {
+        get: function () {
+            return WorldWind.Location.greatCircleLocation(
+                this._wwd.navigator.lookAtLocation,
+                -40,
+                1.2,
+                new WorldWind.Location()
+            ).latitude;
+        }
+    },
+
+    longitude: {
+        get: function () {
+            return WorldWind.Location.greatCircleLocation(
+                this._wwd.navigator.lookAtLocation,
+                -40,
+                1.2,
+                new WorldWind.Location()
+            ).longitude;
+        }
+    }
+
+});
 
 // function wheel(event) {
 //   clearInterval(satUpdateTimer);
