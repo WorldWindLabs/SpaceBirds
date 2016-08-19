@@ -1,20 +1,20 @@
 "use strict";
 var allOrbitingBodies = []; //Global array with all the orbiting objects
-
 //Event handling to avoid redraw on mousedown to simulate stuttering elimination
 var satUpdateTimer = -1; //Global ID of mouse up interval. Note that mouse button IDs are 0,1,2...
+var loopTime = 5000; //Default value to update satellites position. It will get optimized in renderEverything()
 
 addEventListener("mousedown", mousedown);
 addEventListener("mouseup", mouseup);
 //addEventListener("mouseout", mouseup);
-addEventListener("wheel", mousedown);
+//addEventListener("wheel", wheel);
 
 WorldWind.Logger.setLoggingLevel(WorldWind.Logger.LEVEL_WARNING);
 
 // Create the World Window.
 var wwd = new WorldWind.WorldWindow("canvasOne");
 //wwd.navigator.lookAtLocation.altitude = 0;
-wwd.navigator.range = 5e7;
+wwd.navigator.range = 2e7;
 
 //Add imagery layers.
 var layers = [
@@ -101,11 +101,9 @@ function getPosition (satrec, time) {
 function getSatellites(satData){
   var faultySatsNumber = 0;
   var orbitalBodiesNumber = 0;
-  var now = new Date();
   for(var i = 0; i < satData.length; i += 1){
-    var time = new Date(now.getTime());
     try{
-      var position = getPosition(satellite.twoline2satrec(satData[i].TLE_LINE1, satData[i].TLE_LINE2), time);
+      var position = getPosition(satellite.twoline2satrec(satData[i].TLE_LINE1, satData[i].TLE_LINE2), new Date());
     } catch (err) {
       faultySatsNumber += 1;
       continue;
@@ -175,7 +173,7 @@ function renderEverything(){
   var start = performance.now();
   updatePositions();
   var end = performance.now();
-  var loopTime = end - start;
+  loopTime = end - start;
   console.log("Updating all satellites' positions took " + loopTime + " ms. " +
       "Now it will be updated every " + loopTime * 3 + " ms.");
   satelliteUpdating(updatePositions, satUpdateTimer, loopTime * 3);
@@ -256,8 +254,12 @@ function mousedown(event) {
 }
 
 function mouseup(event) {
-  satelliteUpdating(updatePositions, satUpdateTimer, 500);
+  satelliteUpdating(updatePositions, satUpdateTimer, loopTime);
 }
+
+// function wheel(event) {
+//   clearInterval(satUpdateTimer);
+// }
 
 // $(document).ready(function() {
 //
