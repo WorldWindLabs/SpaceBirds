@@ -12,13 +12,16 @@ var wwd = new WorldWind.ObjectWindow("canvasOne");
 wwd.navigator.lookAtLocation.altitude = 0;
 wwd.navigator.range = 5e7;
 
+var viewControlsLayer = new WorldWind.ViewControlsLayer(wwd);
+viewControlsLayer.alignment = new WorldWind.Offset(WorldWind.OFFSET_FRACTION, 0.25, WorldWind.OFFSET_FRACTION, 0);
+viewControlsLayer.placement = new WorldWind.Offset(WorldWind.OFFSET_FRACTION, 0.25, WorldWind.OFFSET_FRACTION, 0);
 
 //Add imagery layers.
 var layers = [
     {layer: new WorldWind.BMNGLayer(), enabled: true},
     //{layer: new WorldWind.CompassLayer(), enabled: true},
     {layer: new WorldWind.CoordinatesDisplayLayer(wwd), enabled: true},
-    {layer: new WorldWind.ViewControlsLayer(wwd), enabled: true}
+    {layer: viewControlsLayer, enabled: true}
 ];
 
 for (var l = 0; l < layers.length; l++) {
@@ -244,6 +247,69 @@ function getGroundStations (groundStations) {
         $('#clearStations').click(function() {
             shapeLayer.removeAllRenderables();
         });
+
+        $(document).ready(function () {
+            var url = "data/groundstations.json";
+            // prepare the data
+            var source =
+            {
+                datatype: "json",
+                datafields: [
+                    { name: 'NAME', type:'string'},
+                    {name: 'ORGANIZATION', type:'string'}
+                ],
+                url: url,
+                async: false
+            };
+            var dataAdapter = new $.jqx.dataAdapter(source);
+            // Create a jqxComboBox
+            $("#jqxWidget2").jqxComboBox({ selectedIndex: 0, source: dataAdapter, displayMember: "NAME", valueMember: "ORGANIZATION", width: 220, height: 30});
+            // trigger the select event.
+            $("#jqxWidget2").on('select', function (event) {
+                if (event.args) {
+                    var item = event.args.item;
+                    if (item) {
+                        var valueElement = $("<div></div>");
+                        valueElement.text("Type: " + item.value);
+                        var labelElement = $("<div></div>");
+                        labelElement.text("Name: " + item.label);
+                        $("#selectionlog2").children().remove();
+                        $("#selectionlog2").append(labelElement);
+                        $("#selectionlog2").append(valueElement);
+                        var customGSat = gsNames.indexOf(item.label);
+                        toGsStation(customGSat);
+                    }
+                }
+            });
+        });
+        var toGsStation = function(gsindex){
+            //TODO: GS information display
+            typePlaceholder.textContent= "Ground Station";
+            namePlaceholder.textContent = groundStations[gsindex].NAME;
+            intldesPlaceholder.textContent = groundStations[gsindex].ORGANIZATION;
+            latitudePlaceholder.textContent = groundStations[gsindex].LATITUDE;
+            longitudePlaceholder.textContent = groundStations[gsindex].LONGITUDE;
+            altitudePlaceholder.textContent = groundStations[gsindex].ALTITUDE;
+            inclinationPlaceholder.textContent = "";
+            eccentricityPlaceHolder.textContent = "";
+            revDayPlaceholder.textContent = "";
+            apogeeplaceholder.textContent = "";
+            perigeeplaceholder.textContent = "";
+            periodPlaceholder.textContent = "";
+            semiMajorAxisPlaceholder.textContent = "";
+            semiMinorAxisPlaceholder.textContent = "";
+
+            wwd.goTo(new WorldWind.Location(groundStations[gsindex].LATITUDE, groundStations[gsindex].LONGITUDE));
+
+            var gsAttributes = new WorldWind.ShapeAttributes(null);
+            gsAttributes.outlineColor = new WorldWind.Color(0, 255, 255, 1);
+            gsAttributes.interiorColor = new WorldWind.Color(0, 255, 255, 0.2);
+
+            var shape = new WorldWind.SurfaceCircle(new WorldWind.Location(groundStations[gsindex].LATITUDE,
+                groundStations[gsindex].LONGITUDE), 150e4, gsAttributes);
+
+            shapeLayer.addRenderable(shape);
+        };
 
         /***
          * Satellites
@@ -921,16 +987,13 @@ function getGroundStations (groundStations) {
                 var satPos = everyCurrentPosition[index];
                 //Changes center point of view.
                 wwd.navigator.lookAtLocation.altitude = satPos.altitude;
-                wwd.goTo(new WorldWind.Position(satPos.latitude, satPos.longitude, satPos.altitude + 10000));
-                window.setTimeout(function () {     //delays navigator position change for smooth transition
-                    startFollow = window.setInterval(function () {
-                        var position = getPosition(satellite.twoline2satrec(satData[index].TLE_LINE1, satData[index].TLE_LINE2), new Date());
-                        //change view position
-                        wwd.navigator.lookAtLocation.latitude = satPos.latitude;
-                        wwd.navigator.lookAtLocation.longitude = satPos.longitude;
-                        updateLLA(position);
-                    });
-                }, 3000);
+                startFollow = window.setInterval(function () {
+                    var position = getPosition(satellite.twoline2satrec(satData[index].TLE_LINE1, satData[index].TLE_LINE2), new Date());
+                    //change view position
+                    wwd.navigator.lookAtLocation.latitude = satPos.latitude;
+                    wwd.navigator.lookAtLocation.longitude = satPos.longitude;
+                    updateLLA(position);
+                });
             };
             var endFollow = function(){     //ends startFollow window.setInterval
                 clearInterval(startFollow);
@@ -1070,11 +1133,14 @@ function getGroundStations (groundStations) {
                     endMesh();
                     endFollow();
                     endExtra();
+                    $('#follow').text('FOLLOW OFF');
+                    $('#mesh').text('MESH OFF');
+                    $('#orbit').text('ORBIT OFF');
 
                     //turns off renderables that were turned on by click
                     modelLayer.removeAllRenderables();
                 }
-                //highlightedItems = [];
+                highlightedItems = [];
 
                 // Perform the pick. Must first convert from window coordinates to canvas coordinates, which are
                 // relative to the upper left corner of the canvas rather than the upper left corner of the page.
@@ -1096,6 +1162,9 @@ function getGroundStations (groundStations) {
                     endFollow();
                     endOrbit();
                     endMesh();
+                    $('#follow').text('FOLLOW OFF');
+                    $('#mesh').text('MESH OFF');
+                    $('#orbit').text('ORBIT OFF');
 
                     wwd.goTo(new WorldWind.Location(position.latitude, position.longitude));
 
@@ -1132,61 +1201,61 @@ function getGroundStations (groundStations) {
                         endOrbit();
 
                         extraData(index);
-                        $(this).text("Mesh On");
+                        $('#mesh').text("MESH ON");
                         meshToCurrentPosition(index);
                         $('#mesh').click(function () {
-                            if ($(this).text() == "Mesh Off") {
-                                $(this).text("Mesh On");
+                            if ($(this).text() == "MESH OFF") {
+                                $(this).text("MESH ON");
                                 meshToCurrentPosition(index);
                             }
                             else {
-                                $(this).text("Mesh Off");
+                                $(this).text("MESH OFF");
                                 endMesh();
                             }
                         });
 
-                        toCurrentPosition(index);
+                        wwd.goTo(new WorldWind.Position(satPos.latitude, satPos.longitude, satPos.altitude + 10000));
+                        window.setTimeout(function () {     //delays navigator position change for smooth transition
+                            toCurrentPosition(index);
+                        }, 3000);
+                        $('#follow').text('FOLLOW ON');
+                        $('#follow').click(function () {
+                            if ($(this).text() == "FOLLOW OFF") {
+                                $(this).text("FOLLOW ON");
+                                toCurrentPosition(index);
+                            }
+                            else {
+                                $(this).text("FOLLOW OFF");
+                                endFollow();
+                            }
+                        });
+
 
                         createOrbit(index);
+                        $('#orbit').text('ORBIT ON');
                         $('#orbit').click(function () {
-                            if ($(this).text() == "Orbit Off") {
-                                $(this).text("Orbit On");
+                            if ($(this).text() == "ORBIT OFF") {
+                                $(this).text("ORBIT ON");
                                 createOrbit(index);
                             }
                             else {
-                                $(this).text("Orbit Off");
+                                $(this).text("ORBIT OFF");
                                 endOrbit();
                             }
                         });
 
-                    //create 3D collada model
-                    var colladaLoader = new WorldWind.ColladaLoader(satPos);
-                    colladaLoader.init({dirPath: 'assets/collada-models/'});
-                    colladaLoader.load('ISS.dae', function (scene) {
-                        scene.scale = 10000;
-                        modelLayer.addRenderable(scene);
-                    });
+                        //create 3D collada model
+                        var colladaLoader = new WorldWind.ColladaLoader(satPos);
+                        colladaLoader.init({dirPath: 'assets/collada-models/'});
+                        colladaLoader.load('ISS.dae', function (scene) {
+                            scene.scale = 10000;
+                            modelLayer.addRenderable(scene);
+                        });
 
                     } else {
 
                         var gsindex = groundStation.indexOf(position);
-                        console.log(gsindex);
-                        console.log(groundStations[gsindex].NAME);
-                        //TODO: GS information display
-                        gsNamePlaceHolder.textContent = groundStations[gsindex].NAME;
-                        gsOrgPlaceHolder.textContent = groundStations[gsindex].ORGANIZATION;
-                        gsLatPlaceHolder.textContent = groundStations[gsindex].LATITUDE;
-                        gsLongPlaceHolder.textContent = groundStations[gsindex].LONGITUDE;
-                        gsAltPlaceHolder.text = groundStations[gsindex].ALTITUDE;
-
-                       var gsAttributes = new WorldWind.ShapeAttributes(null);
-                        gsAttributes.outlineColor = new WorldWind.Color(0, 255, 255, 1);
-                         gsAttributes.interiorColor = new WorldWind.Color(0, 255, 255, 0.2);
-
-                         var shape = new WorldWind.SurfaceCircle(new WorldWind.Location(groundStations[gsindex].LATITUDE,
-                           groundStations[gsindex].LONGITUDE), 150e4, gsAttributes);
-
-                        shapeLayer.addRenderable(shape);
+                        toGsStation(gsindex);
                     }
                 }
 
@@ -1326,15 +1395,20 @@ function getGroundStations (groundStations) {
                         updateLLA(everyCurrentPosition[index]);
                     } else {
                         var gsindex = groundStation.indexOf(position);
-                        console.log(gsindex);
-                        console.log(groundStations[gsindex].NAME);
-                        //TODO: GS information display
                         typePlaceholder.textContent= "Ground Station";
                         namePlaceholder.textContent = groundStations[gsindex].NAME;
                         intldesPlaceholder.textContent = groundStations[gsindex].ORGANIZATION;
                         latitudePlaceholder.textContent = groundStations[gsindex].LATITUDE;
                         longitudePlaceholder.textContent = groundStations[gsindex].LONGITUDE;
                         altitudePlaceholder.textContent = groundStations[gsindex].ALTITUDE;
+                        inclinationPlaceholder.textContent = "";
+                        eccentricityPlaceHolder.textContent = "";
+                        revDayPlaceholder.textContent = "";
+                        apogeeplaceholder.textContent = "";
+                        perigeeplaceholder.textContent = "";
+                        periodPlaceholder.textContent = "";
+                        semiMajorAxisPlaceholder.textContent = "";
+                        semiMinorAxisPlaceholder.textContent = "";
                     }
 
                     // Update the window if we changed anything.
