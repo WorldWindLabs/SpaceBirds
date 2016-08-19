@@ -171,10 +171,14 @@ function renderEverything(){
   wwd.addLayer(payloadLayer);
   wwd.addLayer(rocketLayer);
   wwd.addLayer(debrisLayer);
-  //TODO: Maybe calculate optimal delay?
-  //could do a full 15k loop of updatePositions as test
-  //to provide optimal delay to update satellites.
-  satelliteUpdating(updatePositions, satUpdateTimer, 1000);
+
+  var start = performance.now();
+  updatePositions();
+  var end = performance.now();
+  var loopTime = end - start;
+  console.log("Updating all satellites' positions took " + loopTime + " ms. " +
+      "Now it will be updated every " + loopTime * 3 + " ms.");
+  satelliteUpdating(updatePositions, satUpdateTimer, loopTime * 3);
 }
 
 function satelliteUpdating(callbackFunction, timerID, delay){
