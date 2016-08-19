@@ -2,12 +2,12 @@
 var allOrbitingBodies = []; //Global array with all the orbiting objects
 
 //Event handling to avoid redraw on mousedown to simulate stuttering elimination
-var mousedownID = -1; //Global ID of mouse up interval. Note that mouse button IDs are 0,1,2...
-var satUpdateTimer = -1;
+var satUpdateTimer = -1; //Global ID of mouse up interval. Note that mouse button IDs are 0,1,2...
+
 addEventListener("mousedown", mousedown);
 addEventListener("mouseup", mouseup);
-//Clear the interval of previous events when user leaves the window with mouse
-addEventListener("mouseout", mouseup);
+//addEventListener("mouseout", mouseup);
+addEventListener("wheel", mousedown);
 
 WorldWind.Logger.setLoggingLevel(WorldWind.Logger.LEVEL_WARNING);
 
@@ -19,7 +19,7 @@ wwd.navigator.range = 5e7;
 //Add imagery layers.
 var layers = [
   {layer: new WorldWind.BMNGOneImageLayer(), enabled: true},
-  {layer: new WorldWind.AtmosphereLayer(), enabled: true},
+  {layer: new WorldWind.AtmosphereLayer(), enabled: false},
   {layer: new WorldWind.CoordinatesDisplayLayer(wwd), enabled: true},
   {layer: new WorldWind.ViewControlsLayer(wwd), enabled: true}
 ];
@@ -252,7 +252,7 @@ function mousedown(event) {
 }
 
 function mouseup(event) {
-  satelliteUpdating(updatePositions, satUpdateTimer, 1000);
+  satelliteUpdating(updatePositions, satUpdateTimer, 500);
 }
 
 // $(document).ready(function() {
