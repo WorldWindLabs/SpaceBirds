@@ -848,7 +848,7 @@ function getGroundStations (groundStations) {
                 var placemarkAttributes = new WorldWind.PlacemarkAttributes(null);
                 var highlightPlacemarkAttributes = new WorldWind.PlacemarkAttributes(placemarkAttributes);
                 highlightPlacemarkAttributes.imageScale = 0.50;
-                highlightPlacemarkAttributes.imageSource = "assets/icons/satellite.png";
+               // highlightPlacemarkAttributes.imageSource = "assets/icons/satellite.png";
 
                 //add colored image depending on sat type
                 switch(satData[ind].OBJECT_TYPE) {
@@ -981,9 +981,6 @@ function getGroundStations (groundStations) {
             var toCurrentPosition = function (index) {
                 var satPos = everyCurrentPosition[index];
                 //Changes center point of view.
-                wwd.navigator.lookAtLocation.altitude = satPos.altitude;
-                wwd.goTo(new WorldWind.Position(satPos.latitude, satPos.longitude, satPos.altitude + 10000));
-                window.setTimeout(function () {     //delays navigator position change for smooth transition
                     startFollow = window.setInterval(function () {
                         var position = getPosition(satellite.twoline2satrec(satData[index].TLE_LINE1, satData[index].TLE_LINE2), new Date());
                         //change view position
@@ -991,7 +988,6 @@ function getGroundStations (groundStations) {
                         wwd.navigator.lookAtLocation.longitude = satPos.longitude;
                         updateLLA(position);
                     });
-                }, 3000);
             };
             var endFollow = function(){     //ends startFollow window.setInterval
                 clearInterval(startFollow);
@@ -1065,8 +1061,8 @@ function getGroundStations (groundStations) {
                 });
             };
             var endOrbit = function(){
-                clearInterval(startOrbit);
                 orbitsLayer.removeAllRenderables();
+                clearInterval(startOrbit);
             };
 
             //Get additional info of satellite on click and hover handles
@@ -1135,11 +1131,11 @@ function getGroundStations (groundStations) {
                     //turns off renderables that were turned on by click
                     modelLayer.removeAllRenderables();
                 }
-                //highlightedItems = [];
+               // highlightedItems = [];
 
                 // Perform the pick. Must first convert from window coordinates to canvas coordinates, which are
                 // relative to the upper left corner of the canvas rather than the upper left corner of the page.
-                var rectRadius = 1,
+                var rectRadius = 2,
                     pickPoint = wwd.canvasCoordinates(x, y),
                     pickRectangle = new WorldWind.Rectangle(pickPoint[0] - rectRadius, pickPoint[1] + rectRadius,
                         2 * rectRadius, 2 * rectRadius);
@@ -1193,29 +1189,46 @@ function getGroundStations (groundStations) {
                         endOrbit();
 
                         extraData(index);
-                        $(this).text("Mesh On");
+                        $('#mesh').text("MESH ON");
                         meshToCurrentPosition(index);
                         $('#mesh').click(function () {
-                            if ($(this).text() == "Mesh Off") {
-                                $(this).text("Mesh On");
+                            if ($(this).text() == "MESH OFF") {
+                                $(this).text("MESH ON");
                                 meshToCurrentPosition(index);
                             }
                             else {
-                                $(this).text("Mesh Off");
+                                $(this).text("MESH OFF");
                                 endMesh();
                             }
                         });
 
-                        toCurrentPosition(index);
+                        wwd.navigator.lookAtLocation.altitude = satPos.altitude;
+                        wwd.goTo(new WorldWind.Position(satPos.latitude, satPos.longitude, satPos.altitude + 10000));
+                        window.setTimeout(function () {     //delays navigator position change for smooth transition
+                            toCurrentPosition(index);
+                        }, 3000);
+                        $('#follow').text('FOLLOW ON');
+                        $('#follow').click(function () {
+                            if ($(this).text() == "FOLLOW OFF") {
+                                $(this).text("FOLLOW ON");
+                                toCurrentPosition(index);
+                            }
+                            else {
+                                $(this).text("FOLLOW OFF");
+                                endFollow();
+                            }
+                        });
+
 
                         createOrbit(index);
+                        $('#orbit').text('ORBIT ON');
                         $('#orbit').click(function () {
-                            if ($(this).text() == "Orbit Off") {
-                                $(this).text("Orbit On");
+                            if ($(this).text() == "ORBIT OFF") {
+                                $(this).text("ORBIT ON");
                                 createOrbit(index);
                             }
                             else {
-                                $(this).text("Orbit Off");
+                                $(this).text("ORBIT OFF");
                                 endOrbit();
                             }
                         });
