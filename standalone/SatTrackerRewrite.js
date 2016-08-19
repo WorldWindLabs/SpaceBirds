@@ -15,13 +15,47 @@ WorldWind.Logger.setLoggingLevel(WorldWind.Logger.LEVEL_WARNING);
 var wwd = new WorldWind.WorldWindow("canvasOne");
 //wwd.navigator.lookAtLocation.altitude = 0;
 wwd.navigator.range = 2e7;
+wwd.globe.elevationModel = new WorldWind.ZeroElevationModel();
+
+var FixedLocation = function(wwd) {
+    this._wwd = wwd;
+};
+
+FixedLocation.prototype = Object.create(WorldWind.Location.prototype);
+
+Object.defineProperties(FixedLocation.prototype, {
+
+    latitude: {
+        get: function () {
+            return WorldWind.Location.greatCircleLocation(
+                this._wwd.navigator.lookAtLocation,
+                -40,
+                1.2,
+                new WorldWind.Location()
+            ).latitude;
+        }
+    },
+
+    longitude: {
+        get: function () {
+            return WorldWind.Location.greatCircleLocation(
+                this._wwd.navigator.lookAtLocation,
+                -40,
+                1.2,
+                new WorldWind.Location()
+            ).longitude;
+        }
+    }
+
+});
 
 //Add imagery layers.
 var layers = [
   {layer: new WorldWind.BMNGOneImageLayer(), enabled: true},
+  {layer: new WorldWind.BMNGLayer(), enabled: false},
   {layer: new WorldWind.AtmosphereLayer(), enabled: false},
   {layer: new WorldWind.CoordinatesDisplayLayer(wwd), enabled: true},
-  {layer: new WorldWind.ViewControlsLayer(wwd), enabled: true}
+  {layer: new WorldWind.ViewControlsLayer(wwd), enabled: false}
 ];
 
 for (var l = 0; l < layers.length; l++) {
@@ -29,14 +63,16 @@ for (var l = 0; l < layers.length; l++) {
   wwd.addLayer(layers[l].layer);
 }
 
+// layers[2].layer.lightLocation = new FixedLocation(wwd);
 //custom layers
 var groundStationsLayer = new WorldWind.RenderableLayer();
 //var modelLayer = new WorldWind.RenderableLayer("Model");
 //var meshLayer = new WorldWind.RenderableLayer();
 //var orbitsLayer = new WorldWind.RenderableLayer("Orbit");
 var payloadLayer = new WorldWind.RenderableLayer("Payloads");
-var rocketLayer = new WorldWind.RenderableLayer("Rocket Bodies");
+var rocketLayer = new WorldWind.RenderableLayer("Rocket bodies");
 var debrisLayer = new WorldWind.RenderableLayer("Debris");
+var selectedSatsLayer = new WorldWind.RenderableLayer("Selected satellites");
 
 //Abstraction of an orbital body
 function orbitalBody(satelliteData){
@@ -123,10 +159,10 @@ function getSatellites(satData){
         rocketLayer.addRenderable(generatePlacemark(myOrbitalBody));
         allOrbitingBodies.push(myOrbitalBody);
         break;
-/*      case "DEBRIS":
+      case "DEBRIS":
         debrisLayer.addRenderable(generatePlacemark(myOrbitalBody));
         allOrbitingBodies.push(myOrbitalBody);
-        break;*/
+        break;
       }
   }
   console.log('We have ' + orbitalBodiesNumber + ' orbiting bodies');
@@ -138,11 +174,10 @@ function generatePlacemark(orbitalBody){
   var placemarkPosition = new WorldWind.Position(orbitalBody.latitude, orbitalBody.longitude, orbitalBody.altitude);
   var placemark = new WorldWind.Placemark(placemarkPosition);
   var placemarkAttributes = new WorldWind.PlacemarkAttributes(null);
-  // placemarkAttributes.labelAttributes.offset = new WorldWind.Offset(WorldWind.OFFSET_FRACTION, 0.5, WorldWind.OFFSET_FRACTION, 1.0);
-  // placemarkAttributes.labelAttributes.color = WorldWind.Color.WHITE;
 
   var highlightAttributes = new WorldWind.PlacemarkAttributes(placemarkAttributes);
   highlightAttributes.imageScale = 0.70;
+  highlightAttributes.imageSource = "assets/icons/dot-green.png";
   placemark.altitudeMode = WorldWind.RELATIVE_TO_GROUND;
 
   switch(orbitalBody.objectType) {
@@ -154,9 +189,10 @@ function generatePlacemark(orbitalBody){
       placemarkAttributes.imageSource = "assets/icons/dot-blue.png";
       placemarkAttributes.imageScale = 0.60;
       break;
-    default:
+    case "DEBRIS":
       placemarkAttributes.imageSource = "assets/icons/dot-grey.png";
       placemarkAttributes.imageScale = 0.40;
+      break;
   }
 
   placemark.attributes = placemarkAttributes;
@@ -168,7 +204,7 @@ function generatePlacemark(orbitalBody){
 function renderEverything(){
   wwd.addLayer(payloadLayer);
   wwd.addLayer(rocketLayer);
-  wwd.addLayer(debrisLayer);
+  //wwd.addLayer(debrisLayer);
 
   var start = performance.now();
   updatePositions();
@@ -238,11 +274,11 @@ function updatePositions(){
         rocketLayer.renderables[rocketCounter].position.longitude = newPosition.longitude;
         rocketLayer.renderables[rocketCounter++].position.altitude = newPosition.altitude;
         break;
-        /*      case "DEBRIS":
+      case "DEBRIS":
          debrisLayer.renderables[debrisCounter].position.latitude = newPosition.latitude;
          debrisLayer.renderables[debrisCounter].position.longitude = newPosition.longitude;
          debrisLayer.renderables[debrisCounter++].position.altitude = newPosition.altitude;
-         break;*/
+         break;
     }
     //TODO: update positions in allOrbitingBodies
 }
@@ -256,6 +292,8 @@ function mousedown(event) {
 function mouseup(event) {
   satelliteUpdating(updatePositions, satUpdateTimer, loopTime);
 }
+
+
 
 // function wheel(event) {
 //   clearInterval(satUpdateTimer);
