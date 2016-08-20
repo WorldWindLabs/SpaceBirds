@@ -2,28 +2,18 @@
 var allOrbitingBodies = []; //Global array with all the orbiting objects
 //Event handling to avoid redraw on mousedown to simulate stuttering elimination
 var satUpdateTimer = -1; //Global ID of mouse up interval. Note that mouse button IDs are 0,1,2...
-var loopTime = 5000; //Default value to update satellites position. It will get optimized in renderEverything()
+var updateloopTime = 5000; //Default value to update satellites position. It will get optimized in renderEverything()
 
+//Events for stopping satellite updating while dragging
 addEventListener("mousedown", mousedown);
 addEventListener("mouseup", mouseup);
-//addEventListener("mouseout", mouseup);
-//addEventListener("wheel", wheel);
 
 WorldWind.Logger.setLoggingLevel(WorldWind.Logger.LEVEL_WARNING);
 
 // Create the World Window.
 var wwd = new WorldWind.WorldWindow("canvasOne");
-//wwd.navigator.lookAtLocation.altitude = 0;
 wwd.navigator.range = 2e7;
 wwd.globe.elevationModel = new WorldWind.ZeroElevationModel();
-
-var FixedLocation = function(wwd) {
-    this._wwd = wwd;
-};
-
-FixedLocation.prototype = Object.create(WorldWind.Location.prototype);
-
-
 
 //Add imagery layers.
 var layers = [
@@ -39,94 +29,37 @@ for (var l = 0; l < layers.length; l++) {
   wwd.addLayer(layers[l].layer);
 }
 
+//Activate BMNGLayer in low altitudes
 layers[1].layer.maxActiveAltitude = 15e6;
 layers[2].layer.maxActiveAltitude = 15e7;
+
+//Creating lightsource for atmoshpere effect
+FixedLocation.prototype = Object.create(WorldWind.Location.prototype);
 layers[2].layer.lightLocation = new FixedLocation(wwd);
 
 //custom layers
 var groundStationsLayer = new WorldWind.RenderableLayer();
-//var modelLayer = new WorldWind.RenderableLayer("Model");
-//var meshLayer = new WorldWind.RenderableLayer();
-//var orbitsLayer = new WorldWind.RenderableLayer("Orbit");
 var payloadLayer = new WorldWind.RenderableLayer("Payloads");
 var rocketLayer = new WorldWind.RenderableLayer("Rocket bodies");
 var debrisLayer = new WorldWind.RenderableLayer("Debris");
 var selectedSatsLayer = new WorldWind.RenderableLayer("Selected satellites");
 
-//Abstraction of an orbital body
-function orbitalBody(satelliteData){
-  this.objectName = satelliteData.OBJECT_NAME;
-  this.tleLine1 = satelliteData.TLE_LINE1;
-  this.tleLine2 = satelliteData.TLE_LINE2;
-  this.intlDes = satelliteData.INTLDES;
-  this.objectType = satelliteData.OBJECT_TYPE;
-  this.orbitalPeriod = satelliteData.PERIOD;
-  this.latitude = null;
-  this.longitude = null;
-  this.altitude = null;
-  this.collada3dModel = retrieve3dModelPath(satelliteData.INTLDES);
-  this.orbitType = obtainOrbitType(satelliteData);
-  this.url = null; //to be added to satellite data. Patrick will provide URLs.
-}
-
-function deg2text(deg, letters) {
-  var letter;
-  if (deg < 0) {
-      letter = letters[1]
-  } else {
-      letter = letters[0]
-  }
-  var position = Math.abs(deg);
-  var degrees = Math.floor(position);
-  position -= degrees;
-  position *= 60;
-  var minutes = Math.floor(position);
-  position -= minutes;
-  position *= 60;
-  var seconds = Math.floor(position * 100) / 100;
-  return degrees + "° " + minutes + "' " + seconds + "\" " + letter;
-}
-
-// Orbit Propagation (MIT License, see https://github.com/shashwatak/satellite-js)
-function getPosition (satrec, time) {
-  var position_and_velocity = satellite.propagate(satrec,
-    time.getUTCFullYear(),
-    time.getUTCMonth() + 1,
-    time.getUTCDate(),
-    time.getUTCHours(),
-    time.getUTCMinutes(),
-    time.getUTCSeconds());
-  var position_eci = position_and_velocity["position"];
-
-  var gmst = satellite.gstime_from_date(time.getUTCFullYear(),
-    time.getUTCMonth() + 1,
-    time.getUTCDate(),
-    time.getUTCHours(),
-    time.getUTCMinutes(),
-    time.getUTCSeconds());
-
-  var position_gd = satellite.eci_to_geodetic(position_eci, gmst);
-  var latitude = satellite.degrees_lat(position_gd["latitude"]);
-  var longitude = satellite.degrees_long(position_gd["longitude"]);
-  var altitude = position_gd["height"] * 1000;
-
-  return new WorldWind.Position(latitude, longitude, altitude);
-};
-
 function getSatellites(satData){
   var faultySatsNumber = 0;
   var orbitalBodiesNumber = 0;
   for(var i = 0; i < satData.length; i += 1){
+    //Cleaning up satellites with problematic TLE data (probably objects that are about to deorbit)
     try{
-      var position = getPosition(satellite.twoline2satrec(satData[i].TLE_LINE1, satData[i].TLE_LINE2), new Date());
+      var initialPosition = getPosition(satellite.twoline2satrec(satData[i].TLE_LINE1, satData[i].TLE_LINE2), new Date());
     } catch (err) {
       faultySatsNumber += 1;
       continue;
     }
+    //Now that we're sure which satellites work, instantiate objects with them
     var myOrbitalBody = new orbitalBody(satData[i]);
-    myOrbitalBody.latitude = position.latitude;
-    myOrbitalBody.longitude = position.longitude;
-    myOrbitalBody.altitude = position.altitude;
+    myOrbitalBody.latitude = initialPosition.latitude;
+    myOrbitalBody.longitude = initialPosition.longitude;
+    myOrbitalBody.altitude = initialPosition.altitude;
     orbitalBodiesNumber += 1;
 
     switch (myOrbitalBody.objectType){
@@ -149,64 +82,15 @@ function getSatellites(satData){
   renderEverything();
 }
 
-function generatePlacemark(orbitalBody){
-  var placemarkPosition = new WorldWind.Position(orbitalBody.latitude, orbitalBody.longitude, orbitalBody.altitude);
-  var placemark = new WorldWind.Placemark(placemarkPosition);
-  var placemarkAttributes = new WorldWind.PlacemarkAttributes(null);
-
-  var highlightAttributes = new WorldWind.PlacemarkAttributes(placemarkAttributes);
-  highlightAttributes.imageScale = 0.70;
-  highlightAttributes.imageSource = "assets/icons/dot-green.png";
-  placemark.altitudeMode = WorldWind.RELATIVE_TO_GROUND;
-
-  switch(orbitalBody.objectType) {
-    case "PAYLOAD":
-      placemarkAttributes.imageSource = "assets/icons/dot-red.png";
-      placemarkAttributes.imageScale = 0.60;
-      break;
-    case "ROCKET BODY":
-      placemarkAttributes.imageSource = "assets/icons/dot-blue.png";
-      placemarkAttributes.imageScale = 0.60;
-      break;
-    case "DEBRIS":
-      placemarkAttributes.imageSource = "assets/icons/dot-grey.png";
-      placemarkAttributes.imageScale = 0.40;
-      break;
-  }
-
-  placemark.attributes = placemarkAttributes;
-  placemark.highlightAttributes = highlightAttributes;
-
-  return placemark;
-}
-
 function renderEverything(){
   wwd.addLayer(payloadLayer);
   wwd.addLayer(rocketLayer);
   //wwd.addLayer(debrisLayer);
 
-  var start = performance.now();
-  updatePositions();
-  var end = performance.now();
-  loopTime = end - start;
-  console.log("Updating all satellites' positions took " + loopTime + " ms. " +
-      "Now it will be updated every " + loopTime * 3 + " ms.");
-  satelliteUpdating(updatePositions, satUpdateTimer, loopTime * 3);
-}
-
-function satelliteUpdating(callbackFunction, timerID, delay){
-  clearInterval(timerID);
-  satUpdateTimer = setInterval(callbackFunction, delay);
-}
-
-function retrieve3dModelPath(intlDes){
-  var modelPath = "nothing here yet";
-  return modelPath;
-}
-
-function obtainOrbitType(satOrbit){
-  var orbitType = "nothing here yet";
-  return orbitType;
+  updateloopTime = obtainExecutionTime(updatePositions);
+  console.log("Updating all satellites' positions took " + updateloopTime + " ms. " +
+      "Now it will be updated every " + updateloopTime * 3 + " ms.");
+  satelliteUpdating(updatePositions, satUpdateTimer, updateloopTime * 3);
 }
 
 var satParserWorker = new Worker("Workers/satelliteParseWorker.js");
@@ -259,8 +143,10 @@ function updatePositions(){
          debrisLayer.renderables[debrisCounter++].position.altitude = newPosition.altitude;
          break;
     }
-    //TODO: update positions in allOrbitingBodies
-}
+    allOrbitingBodies[i].latitude = newPosition.latitude;
+    allOrbitingBodies[i].longitude = newPosition.longitude;
+    allOrbitingBodies[i].altitude = newPosition.altitude;
+  }
   wwd.redraw();
 }
 
@@ -269,7 +155,7 @@ function mousedown(event) {
 }
 
 function mouseup(event) {
-  satelliteUpdating(updatePositions, satUpdateTimer, loopTime);
+  satelliteUpdating(updatePositions, satUpdateTimer, updateloopTime);
 }
 
 Object.defineProperties(FixedLocation.prototype, {
@@ -278,8 +164,8 @@ Object.defineProperties(FixedLocation.prototype, {
         get: function () {
             return WorldWind.Location.greatCircleLocation(
                 this._wwd.navigator.lookAtLocation,
-                -40,
-                1.2,
+                -70,
+                1.1,
                 new WorldWind.Location()
             ).latitude;
         }
@@ -289,18 +175,14 @@ Object.defineProperties(FixedLocation.prototype, {
         get: function () {
             return WorldWind.Location.greatCircleLocation(
                 this._wwd.navigator.lookAtLocation,
-                -40,
-                1.2,
+                -70,
+                1.1,
                 new WorldWind.Location()
             ).longitude;
         }
     }
 
 });
-
-// function wheel(event) {
-//   clearInterval(satUpdateTimer);
-// }
 
 // $(document).ready(function() {
 //
