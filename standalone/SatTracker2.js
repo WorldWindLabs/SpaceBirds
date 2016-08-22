@@ -836,18 +836,13 @@ function getGroundStations (groundStations) {
                 everyCurrentPosition[j] = currentPosition;
                 satNames[j] = satData[j].OBJECT_NAME;
 
-            }
-
-
-                // Satellite render loop
-                for (var ind = 0; ind < satNum; ind += 1) {
                 var placemarkAttributes = new WorldWind.PlacemarkAttributes(null);
                 var highlightPlacemarkAttributes = new WorldWind.PlacemarkAttributes(placemarkAttributes);
                 highlightPlacemarkAttributes.imageScale = 0.50;
                // highlightPlacemarkAttributes.imageSource = "assets/icons/satellite.png";
 
                 //add colored image depending on sat type
-                switch(satData[ind].OBJECT_TYPE) {
+                switch(satData[j].OBJECT_TYPE) {
                     case "PAYLOAD":
                         placemarkAttributes.imageSource = "assets/icons/dot-red.png";
                         placemarkAttributes.imageScale = 0.60;
@@ -871,35 +866,35 @@ function getGroundStations (groundStations) {
                 placemarkAttributes.labelAttributes.color = WorldWind.Color.WHITE;
 
 
-                var placemark = new WorldWind.Placemark(everyCurrentPosition[ind]);
+                var placemark = new WorldWind.Placemark(everyCurrentPosition[j]);
                 placemark.altitudeMode = WorldWind.RELATIVE_TO_GROUND;
                 placemark.attributes = placemarkAttributes;
                 placemark.highlightAttributes = highlightPlacemarkAttributes;
 
 
                 //Defines orbit ranges
-                if (satData[ind].OBJECT_TYPE === "PAYLOAD") {
-                    if ((Math.round(everyCurrentPosition[ind].altitude / 10) / 100) <= 1200) {
+                if (satData[j].OBJECT_TYPE === "PAYLOAD") {
+                    if ((Math.round(everyCurrentPosition[j].altitude / 10) / 100) <= 1200) {
                         leoSatLayer.addRenderable(placemark);
-                    } else if ((Math.round(everyCurrentPosition[ind].altitude / 10) / 100) > 1200 && (Math.round(everyCurrentPosition[ind].altitude / 10) / 100) <= 35790) {
+                    } else if ((Math.round(everyCurrentPosition[j].altitude / 10) / 100) > 1200 && (Math.round(everyCurrentPosition[j].altitude / 10) / 100) <= 35790) {
                         meoSatLayer.addRenderable(placemark);
-                    } else if ((Math.round(everyCurrentPosition[ind].altitude / 10) / 100) > 35790) {
+                    } else if ((Math.round(everyCurrentPosition[j].altitude / 10) / 100) > 35790) {
                         heoSatLayer.addRenderable(placemark);
                     }
-                } else if (satData[ind].OBJECT_TYPE === "ROCKET BODY") {
-                    if ((Math.round(everyCurrentPosition[ind].altitude / 10) / 100) <= 1200) {
+                } else if (satData[j].OBJECT_TYPE === "ROCKET BODY") {
+                    if ((Math.round(everyCurrentPosition[j].altitude / 10) / 100) <= 1200) {
                         leoRocketLayer.addRenderable(placemark);
-                    } else if ((Math.round(everyCurrentPosition[ind].altitude / 10) / 100) > 1200 && (Math.round(everyCurrentPosition[ind].altitude / 10) / 100) <= 35790) {
+                    } else if ((Math.round(everyCurrentPosition[j].altitude / 10) / 100) > 1200 && (Math.round(everyCurrentPosition[j].altitude / 10) / 100) <= 35790) {
                         meoRocketLayer.addRenderable(placemark);
-                    } else if ((Math.round(everyCurrentPosition[ind].altitude / 10) / 100) > 35790) {
+                    } else if ((Math.round(everyCurrentPosition[j].altitude / 10) / 100) > 35790) {
                         heoRocketLayer.addRenderable(placemark);
                     }
-                } else if (satData[ind].OBJECT_TYPE === "DEBRIS") {
-                    if ((Math.round(everyCurrentPosition[ind].altitude / 10) / 100) <= 1200) {
+                } else if (satData[j].OBJECT_TYPE === "DEBRIS") {
+                    if ((Math.round(everyCurrentPosition[j].altitude / 10) / 100) <= 1200) {
                         leoDebrisLayer.addRenderable(placemark);
-                    } else if ((Math.round(everyCurrentPosition[ind].altitude / 10) / 100) > 1200 && (Math.round(everyCurrentPosition[ind].altitude / 10) / 100) <= 35790) {
+                    } else if ((Math.round(everyCurrentPosition[j].altitude / 10) / 100) > 1200 && (Math.round(everyCurrentPosition[j].altitude / 10) / 100) <= 35790) {
                         meoDebrisLayer.addRenderable(placemark);
-                    } else if ((Math.round(everyCurrentPosition[ind].altitude / 10) / 100) > 35790) {
+                    } else if ((Math.round(everyCurrentPosition[j].altitude / 10) / 100) > 35790) {
                         heoDebrisLayer.addRenderable(placemark);
                     }
                 }
@@ -913,7 +908,7 @@ function getGroundStations (groundStations) {
                     datatype: "json",
                     datafields: [
                         { name: 'OBJECT_NAME', type:'string'},
-                        {name: 'OBJECT_TYPE', type:'string'},
+                        {name: 'OBJECT_TYPE', type:'string'}
                     ],
                     url: url,
                     async: false
@@ -945,6 +940,7 @@ function getGroundStations (groundStations) {
                             meshToCurrentPosition(searchSat);
                             createOrbit(searchSat);
                             extraData(searchSat);
+                            createCollada(searchSat);
                             typePlaceholder.textContent = satData[searchSat].OBJECT_TYPE;
                             intldesPlaceholder.textContent = satData[searchSat].INTLDES;
                             namePlaceholder.textContent = satData[searchSat].OBJECT_NAME;
@@ -1108,6 +1104,17 @@ function getGroundStations (groundStations) {
                 clearInterval(startExtra);
             };
 
+          //create 3D collada model
+          var createCollada = function(index) {
+            var satPos = everyCurrentPosition[index];
+            var colladaLoader = new WorldWind.ColladaLoader(satPos);
+            colladaLoader.init({dirPath: 'assets/collada-models/'});
+            colladaLoader.load('ISS.dae', function (scene) {
+              scene.scale = 10000;
+              modelLayer.addRenderable(scene);
+            });
+          };
+
 
     /**
      * Click-handle
@@ -1246,13 +1253,7 @@ function getGroundStations (groundStations) {
                             }
                         });
 
-                    //create 3D collada model
-                    var colladaLoader = new WorldWind.ColladaLoader(satPos);
-                    colladaLoader.init({dirPath: 'assets/collada-models/'});
-                    colladaLoader.load('ISS.dae', function (scene) {
-                        scene.scale = 10000;
-                        modelLayer.addRenderable(scene);
-                    });
+                      createCollada();
 
                     } else {
 
