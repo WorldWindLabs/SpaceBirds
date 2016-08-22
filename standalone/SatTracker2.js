@@ -283,24 +283,34 @@ function getGroundStations (groundStations) {
                 }
             });
         });
-        var toGsStation = function(gsindex){
-            //TODO: GS information display
-            typePlaceholder.textContent= "Ground Station";
-            namePlaceholder.textContent = groundStations[gsindex].NAME;
-            intldesPlaceholder.textContent = groundStations[gsindex].ORGANIZATION;
-            latitudePlaceholder.textContent = groundStations[gsindex].LATITUDE;
-            longitudePlaceholder.textContent = groundStations[gsindex].LONGITUDE;
-            altitudePlaceholder.textContent = groundStations[gsindex].ALTITUDE;
-            wwd.goTo(new WorldWind.Location(groundStations[gsindex].latitude, groundStations[gsindex].longitude));
-            var gsAttributes = new WorldWind.ShapeAttributes(null);
-            gsAttributes.outlineColor = new WorldWind.Color(0, 255, 255, 1);
-            gsAttributes.interiorColor = new WorldWind.Color(0, 255, 255, 0.2);
+      var toGsStation = function(gsindex){
+        //TODO: GS information display
+        typePlaceholder.textContent= "Ground Station";
+        namePlaceholder.textContent = groundStations[gsindex].NAME;
+        intldesPlaceholder.textContent = groundStations[gsindex].ORGANIZATION;
+        latitudePlaceholder.textContent = groundStations[gsindex].LATITUDE;
+        longitudePlaceholder.textContent = groundStations[gsindex].LONGITUDE;
+        altitudePlaceholder.textContent = groundStations[gsindex].ALTITUDE;
+        inclinationPlaceholder.textContent = "";
+        eccentricityPlaceHolder.textContent = "";
+        revDayPlaceholder.textContent = "";
+        apogeeplaceholder.textContent = "";
+        perigeeplaceholder.textContent = "";
+        periodPlaceholder.textContent = "";
+        semiMajorAxisPlaceholder.textContent = "";
+        semiMinorAxisPlaceholder.textContent = "";
 
-            var shape = new WorldWind.SurfaceCircle(new WorldWind.Location(groundStations[gsindex].LATITUDE,
-                groundStations[gsindex].LONGITUDE), 150e4, gsAttributes);
+        wwd.goTo(new WorldWind.Location(groundStations[gsindex].LATITUDE, groundStations[gsindex].LONGITUDE));
 
-            shapeLayer.addRenderable(shape);
-        };
+        var gsAttributes = new WorldWind.ShapeAttributes(null);
+        gsAttributes.outlineColor = new WorldWind.Color(0, 255, 255, 1);
+        gsAttributes.interiorColor = new WorldWind.Color(0, 255, 255, 0.2);
+
+        var shape = new WorldWind.SurfaceCircle(new WorldWind.Location(groundStations[gsindex].LATITUDE,
+          groundStations[gsindex].LONGITUDE), 150e4, gsAttributes);
+
+        shapeLayer.addRenderable(shape);
+      };
 
         /***
          * Satellites
@@ -915,6 +925,7 @@ function getGroundStations (groundStations) {
                     }
                 }
             }
+
 
             $(document).ready(function () {
                 var url = "data/TLE.json";
