@@ -12,7 +12,6 @@ var wwd = new WorldWind.ObjectWindow("canvasOne");
 wwd.navigator.lookAtLocation.altitude = 0;
 wwd.navigator.range = 5e7;
 
-
 var viewControlsLayer = new WorldWind.ViewControlsLayer(wwd);
 viewControlsLayer.alignment = new WorldWind.Offset(WorldWind.OFFSET_FRACTION, 0.25, WorldWind.OFFSET_FRACTION, 0);
 viewControlsLayer.placement = new WorldWind.Offset(WorldWind.OFFSET_FRACTION, 0.25, WorldWind.OFFSET_FRACTION, 0);
@@ -30,8 +29,6 @@ for (var l = 0; l < layers.length; l++) {
     wwd.addLayer(layers[l].layer);
 }
 
-
-
 //custom layers
 var groundStationsLayer = new WorldWind.RenderableLayer();
 var shapeLayer = new WorldWind.RenderableLayer();
@@ -48,7 +45,6 @@ var heoRocketLayer = new WorldWind.RenderableLayer("HEO Rocket Bodies");
 var leoDebrisLayer = new WorldWind.RenderableLayer("LEO Debris");
 var meoDebrisLayer = new WorldWind.RenderableLayer("MEO Debris");
 var heoDebrisLayer = new WorldWind.RenderableLayer("HEO Debris");
-
 
 
 //add custom layers
@@ -281,8 +277,8 @@ function getGroundStations (groundStations) {
                         $("#selectionlog2").children().remove();
                         $("#selectionlog2").append(labelElement);
                         $("#selectionlog2").append(valueElement);
-                        var customGSat = gsNames.indexOf(item);
-                        toGsStation(customGSat);
+                        var searchGSat = gsNames.indexOf(item.label);
+                        toGsStation(searchGSat);
                     }
                 }
             });
@@ -295,7 +291,7 @@ function getGroundStations (groundStations) {
             latitudePlaceholder.textContent = groundStations[gsindex].LATITUDE;
             longitudePlaceholder.textContent = groundStations[gsindex].LONGITUDE;
             altitudePlaceholder.textContent = groundStations[gsindex].ALTITUDE;
-            wwd.goTo(new WorldWind.Position(groundStations[gsindex].latitude, groundStations[gsindex].longitude, groundStations[gsindex].altitude + 10000));
+            wwd.goTo(new WorldWind.Location(groundStations[gsindex].latitude, groundStations[gsindex].longitude));
             var gsAttributes = new WorldWind.ShapeAttributes(null);
             gsAttributes.outlineColor = new WorldWind.Color(0, 255, 255, 1);
             gsAttributes.interiorColor = new WorldWind.Color(0, 255, 255, 0.2);
@@ -943,15 +939,15 @@ function getGroundStations (groundStations) {
                             endMesh();
                             endOrbit();
                             endExtra();
-                            var customSat = satNames.indexOf(item.label);
-                            console.log(customSat);
-                            toCurrentPosition(customSat);
-                            meshToCurrentPosition(customSat);
-                            createOrbit(customSat);
-                            extraData(customSat);
-                            typePlaceholder.textContent = satData[customSat].OBJECT_TYPE;
-                            intldesPlaceholder.textContent = satData[customSat].INTLDES;
-                            namePlaceholder.textContent = satData[customSat].OBJECT_NAME;
+                            var searchSat = satNames.indexOf(item.label);
+                            console.log(searchSat);
+                            toCurrentPosition(searchSat);
+                            meshToCurrentPosition(searchSat);
+                            createOrbit(searchSat);
+                            extraData(searchSat);
+                            typePlaceholder.textContent = satData[searchSat].OBJECT_TYPE;
+                            intldesPlaceholder.textContent = satData[searchSat].INTLDES;
+                            namePlaceholder.textContent = satData[searchSat].OBJECT_NAME;
 
                         }
                     }
@@ -981,7 +977,8 @@ function getGroundStations (groundStations) {
             var toCurrentPosition = function (index) {
                 var satPos = everyCurrentPosition[index];
                 //Changes center point of view.
-                    startFollow = window.setInterval(function () {
+                wwd.navigator.lookAtLocation.altitude = satPos.altitude;
+                startFollow = window.setInterval(function () {
                         var position = getPosition(satellite.twoline2satrec(satData[index].TLE_LINE1, satData[index].TLE_LINE2), new Date());
                         //change view position
                         wwd.navigator.lookAtLocation.latitude = satPos.latitude;
@@ -1016,15 +1013,26 @@ function getGroundStations (groundStations) {
                 clearInterval(startMesh);
             };
 
-            //create past and future orbit on click
+            //Orbit length/time slider
+          $(document).ready(function () {
+            $("#jqxsliderEvent").jqxSlider({ theme: 'summer', value: 98, max: 10080, min: 0, mode: 'fixed', ticksFrequency: 1440 });
+            $('#jqxsliderEvent').bind('change', function (event) {
+              $('#sliderValue').html(new Date(now.getTime() + event.args.value * 60000));
+              $('#sliderValue2').html('Mins: ' + event.args.value);
+
+            });
+          });
+
+          //create past and future orbit on click
             var startOrbit;
             var createOrbit = function(index) {
                 startOrbit = window.setInterval(function() {
+                  var orbitRange = $('#jqxsliderEvent').jqxSlider('value');
                     orbitsLayer.removeAllRenderables();
                     var now = new Date();
                     var pastOrbit = [];
                     var futureOrbit = [];
-                    for (var i = -98; i <= 98; i++) {
+                    for (var i = -orbitRange; i <= orbitRange; i++) {
                         var time = new Date(now.getTime() + i * 60000);
 
                         var position = getPosition(satellite.twoline2satrec(satData[index].TLE_LINE1, satData[index].TLE_LINE2), time);
@@ -1127,6 +1135,9 @@ function getGroundStations (groundStations) {
                     endMesh();
                     endFollow();
                     endExtra();
+                    $('#follow').text('FOLLOW OFF');
+                    $('#mesh').text('MESH OFF');
+                    $('#orbit').text('ORBIT OFF');
 
                     //turns off renderables that were turned on by click
                     modelLayer.removeAllRenderables();
@@ -1153,6 +1164,9 @@ function getGroundStations (groundStations) {
                     endFollow();
                     endOrbit();
                     endMesh();
+                    $('#follow').text('FOLLOW OFF');
+                    $('#mesh').text('MESH OFF');
+                    $('#orbit').text('ORBIT OFF');
 
                     wwd.goTo(new WorldWind.Location(position.latitude, position.longitude));
 
@@ -1202,7 +1216,6 @@ function getGroundStations (groundStations) {
                             }
                         });
 
-                        wwd.navigator.lookAtLocation.altitude = satPos.altitude;
                         wwd.goTo(new WorldWind.Position(satPos.latitude, satPos.longitude, satPos.altitude + 10000));
                         window.setTimeout(function () {     //delays navigator position change for smooth transition
                             toCurrentPosition(index);
@@ -1385,7 +1398,20 @@ function getGroundStations (groundStations) {
                         updateLLA(everyCurrentPosition[index]);
                     } else {
                         var gsindex = groundStation.indexOf(position);
-                        toGsStation();
+                        typePlaceholder.textContent= "Ground Station";
+                        namePlaceholder.textContent = groundStations[gsindex].NAME;
+                        intldesPlaceholder.textContent = groundStations[gsindex].ORGANIZATION;
+                        latitudePlaceholder.textContent = groundStations[gsindex].LATITUDE;
+                        longitudePlaceholder.textContent = groundStations[gsindex].LONGITUDE;
+                        altitudePlaceholder.textContent = groundStations[gsindex].ALTITUDE;
+                        inclinationPlaceholder.textContent = "";
+                        eccentricityPlaceHolder.textContent = "";
+                        revDayPlaceholder.textContent = "";
+                        apogeeplaceholder.textContent = "";
+                        perigeeplaceholder.textContent = "";
+                        periodPlaceholder.textContent = "";
+                        semiMajorAxisPlaceholder.textContent = "";
+                        semiMinorAxisPlaceholder.textContent = "";
                     }
 
                     // Update the window if we changed anything.

@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
 
     <!--Bootstrap-->
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     <!--jQuery-->
@@ -24,6 +24,10 @@
     <script type="text/javascript" src="jqwidgets/jqxscrollbar.js"></script>
     <script type="text/javascript" src="jqwidgets/jqxlistbox.js"></script>
     <script type="text/javascript" src="jqwidgets/jqxcombobox.js"></script>
+
+    <script type="text/javascript" src="jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="jqwidgets/jqxslider.js"></script>
 
     <!--Title for Tab-->
     <title>SPACEBIRDS</title>
@@ -83,6 +87,13 @@
                 </li>
 
                 <li>
+                    <div style="color: white; font-size:12px" id="sliderValue"></div>
+                    <div style="color: white; font-size:12px" id="sliderValue2"></div>
+
+                    <div id='jqxsliderEvent'></div>
+                </li>
+
+                <li>
                     <a href="#"><spam id="leo">LEO ON</spam></a>
                 </li>
                 <li>
@@ -120,6 +131,9 @@
                     <a href="#"><spam id="gStations">GS OFF</spam></a>
                 </li>
                 <li>
+                    <a href="#"><spam id="clearStations">Clear GS</spam></a>
+                </li>
+                <li>
                     <a href="#"><strong style="color: white">GENERAL</strong> </a>
                 </li>
                 <li>
@@ -130,6 +144,7 @@
                 </li>
             </ul>
         </div>
+
     </div>
     <!--Information Sidebar-->
     <div id="wrapper-right">
@@ -168,6 +183,12 @@
      $("#menu-toggle-right").click(function(e) {
         e.preventDefault();
         $("#wrapper-right").toggleClass("toggled");
+    });
+    $(document).ready(function () {
+        $("#jqxsliderEvent").jqxSlider({ theme: 'summer', value: 98, max: 500, min: 0, mode: 'fixed' });
+        $('#jqxsliderEvent').bind('change', function (event) {
+            $('#sliderValue').html('Value: ' + event.args.value);
+        });
     });
 </script>
 <script src="util/worldwindlib.js"></script>
