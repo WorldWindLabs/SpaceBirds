@@ -820,6 +820,15 @@ function getGroundStations (groundStations) {
         });
         selectSat(satPac);
 
+
+      //TODO: add date range slider
+    /*  $(document).ready(function () {
+        $("#jqxRangeSlider").jqxSlider({ theme: 'summer', value:
+        { rangeStart: 0, rangeEnd: 44 }, rangeSlider: true });
+      });
+      var rangeStart = $("#jqxRangeSlider").jqxSlider('rangeStart');
+      var rangeEnd = $("#jqxRangeSlider").jqxSlider('rangeEnd');*/
+
         function selectSat(satData) {
             var satNames = [];
             var now = new Date();
@@ -827,6 +836,12 @@ function getGroundStations (groundStations) {
 
 
             for (var j = 0; j < satNum; j ++) {
+            /*  var satYear = satData[j].INTLDES.substring(0, 2);
+              console.log('19' + satYear);
+              if (satYear[j] < rangeStart && satYear[j] > rangeEnd){
+                  satData[j].TLE_LINE1 = "";
+                  satData[j].TLE_LINE2 = "";
+              }*/
                 var currentPosition = null;
                 var time = new Date(now.getTime() + i * 60000);
                 var position = getPosition(satellite.twoline2satrec(satData[j].TLE_LINE1, satData[j].TLE_LINE2), time);
@@ -838,22 +853,23 @@ function getGroundStations (groundStations) {
 
                 var placemarkAttributes = new WorldWind.PlacemarkAttributes(null);
                 var highlightPlacemarkAttributes = new WorldWind.PlacemarkAttributes(placemarkAttributes);
-                highlightPlacemarkAttributes.imageScale = 0.50;
+                highlightPlacemarkAttributes.imageScale = 0.1;
                // highlightPlacemarkAttributes.imageSource = "assets/icons/satellite.png";
 
                 //add colored image depending on sat type
                 switch(satData[j].OBJECT_TYPE) {
                     case "PAYLOAD":
-                        placemarkAttributes.imageSource = "assets/icons/dot-red.png";
-                        placemarkAttributes.imageScale = 0.60;
+                        placemarkAttributes.imageSource = "assets/icons/Red_dot.png";
+                        placemarkAttributes.imageScale = 0.03;
                         break;
                     case "ROCKET BODY":
-                        placemarkAttributes.imageSource = "assets/icons/dot-blue.png";
-                        placemarkAttributes.imageScale = 0.60;
+                        placemarkAttributes.imageSource = "assets/icons/green_dot.png";
+                        placemarkAttributes.imageScale = 0.03;
                         break;
                     default:
-                        placemarkAttributes.imageSource = "assets/icons/dot-gray.png";
-                        placemarkAttributes.imageScale = 0.40;
+                        placemarkAttributes.imageSource = "assets/icons/Yellow_dot.png";
+                        placemarkAttributes.imageScale = 0.08;
+                      highlightPlacemarkAttributes.imageScale = 0.3;
                 }
 
                 placemarkAttributes.imageOffset = new WorldWind.Offset(
@@ -1253,7 +1269,19 @@ function getGroundStations (groundStations) {
                             }
                         });
 
-                      createCollada();
+                      createCollada(index);
+                      $('#collada').text('3D MODEL ON');
+                      $('#collada').click(function () {
+                        if ($(this).text() == "3D MODEL OFF") {
+                          $(this).text("3D MODEL ON");
+                          createCollada(index);
+                        }
+                        else {
+                          $(this).text("3D MODEL OFF");
+                          modelLayer.removeAllRenderables();
+                        }
+                      });
+
 
                     } else {
 
