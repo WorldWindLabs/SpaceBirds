@@ -50,7 +50,6 @@ for(var i = 0, numOrbitalbodies = orbitalBodies.length; i < numOrbitalbodies; i 
     {
       //Add new keys to TLE json
       orbitalBodies[i].COUNTRY = satcat[j].COUNTRY; //Country or organization that launched the sattelite
-      orbitalBodies[i].LAUNCH_YEAR = satcat[j].LAUNCH_YEAR;
       orbitalBodies[i].LAUNCH = satcat[j].LAUNCH; //Launch full date: YYYY-MM-DD
       orbitalBodies[i].LAUNCH_NUM = satcat[j].LAUNCH_NUM; //Consecutive order of launch e.g. Sputnik 1 is launch 1 (with 2 objects)
       orbitalBodies[i].LAUNCH_YEAR = satcat[j].LAUNCH_YEAR; //Launch year only (may be useful to avoid string processing)
