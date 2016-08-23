@@ -7,6 +7,19 @@ var updateloopTime = 5000; //Default value to update satellites position. It wil
 //Events for stopping satellite updating while dragging
 addEventListener("mousedown", mousedown);
 addEventListener("mouseup", mouseup);
+addEventListener("touchstart", mousedown);
+addEventListener("touchend", mouseup);
+var timer = null;
+addEventListener("wheel", function() {
+  if(satUpdateTimer != null)
+    mousedown();
+  if(timer !== null) {
+    clearTimeout(timer);
+  }
+  timer = setTimeout(function() {
+    mouseup();
+  }, 500);
+});
 
 WorldWind.Logger.setLoggingLevel(WorldWind.Logger.LEVEL_WARNING);
 
