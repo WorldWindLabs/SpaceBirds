@@ -2,7 +2,8 @@
 var allOrbitingBodies = []; //Global array with all the orbiting objects
 //Event handling to avoid redraw on mousedown to simulate stuttering elimination
 var satUpdateTimer = -1; //Global ID of mouse up interval.
-var updateloopTime = 5000; //Default value to update satellites position. It will get optimized in renderEverything()
+var updateLoopTime = 5000; //Default value to update satellites position. It will get optimized in renderEverything()
+var updatePermission = false;
 
 //Events for stopping satellite updating while dragging
 addEventListener("mousedown", mousedown);
@@ -10,8 +11,6 @@ addEventListener("mouseup", mouseup);
 addEventListener("touchstart", mousedown);
 addEventListener("touchend", mouseup);
 var timer = null;
-//TODO: Maybe change the other event listeners to have the functions anonymously
-//declarated as the wheel one? Ask Julija's opinion about it.
 addEventListener("wheel", function() {
   if(satUpdateTimer != null)
     mousedown();
@@ -127,10 +126,10 @@ function renderEverything(){
   plotOrbit(allOrbitingBodies[350]);
   wwd.addLayer(orbitsLayer);
 
-  updateloopTime = obtainExecutionTime(updatePositions);
-  console.log("Updating all satellites' positions took " + updateloopTime + " ms. " +
-      "Now it will be updated every " + updateloopTime * 3 + " ms.");
-  satelliteUpdating(updatePositions, satUpdateTimer, updateloopTime * 3);
+  updateLoopTime = obtainExecutionTime(updatePositions);
+  console.log("Updating all satellites' positions took " + updateLoopTime + " ms. " +
+      "Now it will be updated every " + updateLoopTime * 3 + " ms.");
+  satelliteUpdating(updatePositions, satUpdateTimer, updateLoopTime * 3);
 }
 
 var satParserWorker = new Worker("Workers/satelliteParseWorker.js");
@@ -155,6 +154,7 @@ grndStationsWorker.addEventListener('message', function(event){
 
 
 function updatePositions(){
+  updatePermission = false;
   var payloadCounter = 0;
   var rocketCounter = 0;
   var debrisCounter = 0;
@@ -188,15 +188,18 @@ function updatePositions(){
     allOrbitingBodies[i].altitude = newPosition.altitude;
   }
   wwd.redraw();
+  updatePermission = true;
 }
 
 //Events to prevent stuttering (position updating) while zooming or dragging
 function mousedown(event) {
+  updatePermission = false;
   clearInterval(satUpdateTimer);
 }
 
 function mouseup(event) {
-  satelliteUpdating(updatePositions, satUpdateTimer, updateloopTime);
+  updatePermission = true;
+  satelliteUpdating(updatePositions, satUpdateTimer, updateLoopTime);
 }
 
 //Yann Voumard's function to obtain a lightsource fixed in space
@@ -271,10 +274,14 @@ function plotOrbit(orbitalBody){
   orbitsLayer.addRenderable(pastOrbitPath);
   orbitsLayer.addRenderable(futureOrbitPath);
 }
+
 //Constantly update satellite updating process time
-// setInterval(function(){
-//   updateloopTime = obtainExecutionTime(updatePositions);
-// }, 20000);
+setInterval(function(){
+  if (updatePermission) {
+    console.log("Me updating");
+    updateLoopTime = obtainExecutionTime(updatePositions);
+  }
+}, 20000);
 
 // $(document).ready(function() {
 //
