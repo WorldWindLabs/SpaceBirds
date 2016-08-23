@@ -5,7 +5,7 @@ Castillo5p4d3track
 
 
 To get the TLE data:
-curl --limit-rate 100K -c cookies.txt -b cookies.txt -k https://www.space-track.org/ajaxauth/login -d 'identity=cybermegacat@yahoo.com.mx&password=Castillo5p4d3track&query=https://www.space-track.org/basicspacedata/query/class/tle_latest/ORDINAL/1/EPOCH/>now-30/orderby/INTLDES%20desc/metadata/false' > 'unfilteredTLE.json'
+curl --limit-rate 100K -c cookies.txt -b cookies.txt -k https://www.space-track.org/ajaxauth/login -d 'identity=cybermegacat@yahoo.com.mx&password=Castillo5p4d3track&query=https://www.space-track.org/basicspacedata/query/class/tle_latest/ORDINAL/1/EPOCH/>now-30/orderby/INTLDES%20asc/metadata/false' > 'unfilteredTLE.json'
 
 To get the SATCAT Boxscore (every satellite by country/organization)
-curl --limit-rate 100K -c cookies.txt -b cookies.txt -k https://www.space-track.org/ajaxauth/login -d 'identity=cybermegacat@yahoo.com.mx&password=Castillo5p4d3track&query=https://www.space-track.org/basicspacedata/query/class/satcat/orderby/INTLDES%20desc/metadata/false' > 'SATCAT.json'
+curl --limit-rate 100K -c cookies.txt -b cookies.txt -k https://www.space-track.org/ajaxauth/login -d 'identity=cybermegacat@yahoo.com.mx&password=Castillo5p4d3track&query=https://www.space-track.org/basicspacedata/query/class/satcat/orderby/INTLDES%20asc/metadata/false' > 'SATCAT.json'
