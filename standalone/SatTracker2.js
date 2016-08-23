@@ -1066,12 +1066,14 @@ function getGroundStations (groundStations) {
             var createOrbit = function(index) {
                 startOrbit = window.setInterval(function() {
                   var orbitRange = $('#jqxsliderEvent').jqxSlider('value');
-                    orbitsLayer.removeAllRenderables();
+                  var timeSlide = $('#jqxsliderEvent2').jqxSlider('value');
+
+                  orbitsLayer.removeAllRenderables();
                     var now = new Date();
                     var pastOrbit = [];
                     var futureOrbit = [];
                     for (var i = -orbitRange; i <= orbitRange; i++) {
-                        var time = new Date(now.getTime() + i * 60000);
+                        var time = new Date(now.getTime() + (i * 60000) + (timeSlide * 60000));
 
                         var position = getPosition(satellite.twoline2satrec(satData[index].TLE_LINE1, satData[index].TLE_LINE2), time);
 
@@ -1187,6 +1189,7 @@ function getGroundStations (groundStations) {
                     $('#follow').text('FOLLOW OFF');
                     $('#mesh').text('MESH OFF');
                     $('#orbit').text('ORBIT OFF');
+                    $('#collada').text('3D MODEL OFF');
 
                     //turns off renderables that were turned on by click
                     modelLayer.removeAllRenderables();
@@ -1216,8 +1219,10 @@ function getGroundStations (groundStations) {
                     $('#follow').text('FOLLOW OFF');
                     $('#mesh').text('MESH OFF');
                     $('#orbit').text('ORBIT OFF');
+                    $('#collada').text('3D MODEL OFF');
 
-                    wwd.goTo(new WorldWind.Location(position.latitude, position.longitude));
+
+                  wwd.goTo(new WorldWind.Location(position.latitude, position.longitude));
 
                 }
 
@@ -1336,11 +1341,12 @@ function getGroundStations (groundStations) {
             var createHoverOrbit = function(index) {
                 startHoverOrbit = window.setInterval(function() {
                     orbitsHoverLayer.removeAllRenderables();
-                    var now = new Date();
+                  var timeSlide = $('#jqxsliderEvent2').jqxSlider('value');
+                  var now = new Date();
                     var pastOrbit = [];
                     var futureOrbit = [];
                     for (var i = -98; i <= 98; i++) {
-                        var time = new Date(now.getTime() + i * 60000);
+                        var time = new Date(now.getTime() + (i * 60000) + (timeSlide * 60000));
 
                         var position = getPosition(satellite.twoline2satrec(satData[index].TLE_LINE1, satData[index].TLE_LINE2), time);
 
