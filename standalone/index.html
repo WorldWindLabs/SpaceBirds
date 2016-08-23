@@ -202,12 +202,6 @@
         e.preventDefault();
         $("#wrapper-right").toggleClass("toggled");
     });
-    $(document).ready(function () {
-        $("#jqxsliderEvent").jqxSlider({ theme: 'summer', value: 98, max: 500, min: 0, mode: 'fixed' });
-        $('#jqxsliderEvent').bind('change', function (event) {
-            $('#sliderValue').html('Value: ' + event.args.value);
-        });
-    });
 </script>
 <script src="util/worldwindlib.js"></script>
 <script src="util/LayerManager.js"></script>
