@@ -982,7 +982,7 @@ function getGroundStations (groundStations) {
             wwd.redraw();
 
           $(document).ready(function () {
-            $("#jqxsliderEvent2").jqxSlider({ theme: 'summer', value: 0, max: 10080, min: -10080, mode: 'fixed', ticksFrequency: 1440 });
+            $("#jqxsliderEvent2").jqxSlider({ theme: 'summer', value: 0, max: 10080, min: -10080, mode: 'fixed', ticksFrequency: 1440, width:"915px" });
             $('#jqxsliderEvent2').bind('change', function (event) {
               $('#sliderValue2').html(new Date(now.getTime() + event.args.value * 60000));
             });
