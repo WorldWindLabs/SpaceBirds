@@ -8,6 +8,11 @@ function orbitalBody(satelliteData){
   this.intlDes = satelliteData.INTLDES;
   this.objectType = satelliteData.OBJECT_TYPE;
   this.orbitalPeriod = satelliteData.PERIOD;
+  this.countryOrOperator = satelliteData.COUNTRY;
+  this.launchDate = satelliteData.LAUNCH;
+  //this.launchYear = satelliteData.LAUNCH_YEAR; //Maybe worthwhile to avoid parsing the string of launchDate?
+  this.launchPiece = satelliteData.LAUNCH_PIECE;
+  this.launchSite = satelliteData.SITE;
   this.latitude = null;
   this.longitude = null;
   this.altitude = null;
