@@ -1,8 +1,9 @@
 "use strict";
 var allOrbitingBodies = []; //Global array with all the orbiting objects
 //Event handling to avoid redraw on mousedown to simulate stuttering elimination
-var satUpdateTimer = -1; //Global ID of mouse up interval. Note that mouse button IDs are 0,1,2...
-var updateloopTime = 5000; //Default value to update satellites position. It will get optimized in renderEverything()
+var satUpdateTimer = -1; //Global ID of mouse up interval.
+var updateLoopTime = 5000; //Default value to update satellites position. It will get optimized in renderEverything()
+var updatePermission = false;
 
 //Events for stopping satellite updating while dragging
 addEventListener("mousedown", mousedown);
@@ -26,7 +27,26 @@ WorldWind.Logger.setLoggingLevel(WorldWind.Logger.LEVEL_WARNING);
 // Create the World Window.
 var wwd = new WorldWind.WorldWindow("canvasOne");
 wwd.navigator.range = 2e7;
-wwd.globe.elevationModel = new WorldWind.ZeroElevationModel();
+
+//Settings to change projections
+var globe = wwd.globe;
+globe.elevationModel = new WorldWind.ZeroElevationModel();
+
+var map = new WorldWind.Globe2D();
+map.elevationModel = new WorldWind.ZeroElevationModel();
+map.projection = new WorldWind.ProjectionMercator();
+
+//Projection toggle
+var representationPlaceholder = document.getElementById('representation');
+function toggleRepresentation() {
+  if (wwd.globe instanceof WorldWind.Globe2D) {
+    wwd.globe = globe;
+    representationPlaceholder.textContent = '3D';
+  } else {
+    wwd.globe = map;
+    representationPlaceholder.textContent = '2D';
+  }
+}
 
 //Add imagery layers.
 var layers = [
@@ -51,17 +71,19 @@ FixedLocation.prototype = Object.create(WorldWind.Location.prototype);
 layers[2].layer.lightLocation = new FixedLocation(wwd);
 
 //custom layers
-var groundStationsLayer = new WorldWind.RenderableLayer();
-var payloadLayer = new WorldWind.RenderableLayer("Payloads");
-var rocketLayer = new WorldWind.RenderableLayer("Rocket bodies");
+var groundStationsLayer = new WorldWind.RenderableLayer("Groundstations");
+var payloadsLayer = new WorldWind.RenderableLayer("Payloads");
+var rocketsLayer = new WorldWind.RenderableLayer("Rocket bodies");
 var debrisLayer = new WorldWind.RenderableLayer("Debris");
-var selectedSatsLayer = new WorldWind.RenderableLayer("Selected satellites");
+//var selectedSatsLayer = new WorldWind.RenderableLayer("Selected satellites"); //unused as of now
+var orbitsLayer = new WorldWind.RenderableLayer("Orbits");
 
 function getSatellites(satData){
   var faultySatsNumber = 0;
   var orbitalBodiesNumber = 0;
   for(var i = 0; i < satData.length; i += 1){
     //Cleaning up satellites with problematic TLE data (probably objects that are about to deorbit)
+    //TODO: moving this to the node.js backend stuff
     try{
       var initialPosition = getPosition(satellite.twoline2satrec(satData[i].TLE_LINE1, satData[i].TLE_LINE2), new Date());
     } catch (err) {
@@ -77,11 +99,11 @@ function getSatellites(satData){
 
     switch (myOrbitalBody.objectType){
       case "PAYLOAD":
-        payloadLayer.addRenderable(generatePlacemark(myOrbitalBody));
+        payloadsLayer.addRenderable(generatePlacemark(myOrbitalBody));
         allOrbitingBodies.push(myOrbitalBody);
         break;
       case "ROCKET BODY":
-        rocketLayer.addRenderable(generatePlacemark(myOrbitalBody));
+        rocketsLayer.addRenderable(generatePlacemark(myOrbitalBody));
         allOrbitingBodies.push(myOrbitalBody);
         break;
       case "DEBRIS":
@@ -96,14 +118,18 @@ function getSatellites(satData){
 }
 
 function renderEverything(){
-  wwd.addLayer(payloadLayer);
-  wwd.addLayer(rocketLayer);
-  wwd.addLayer(debrisLayer);
+  wwd.addLayer(payloadsLayer);
+  wwd.addLayer(rocketsLayer);
+  //wwd.addLayer(debrisLayer);
 
-  updateloopTime = obtainExecutionTime(updatePositions);
-  console.log("Updating all satellites' positions took " + updateloopTime + " ms. " +
-      "Now it will be updated every " + updateloopTime * 3 + " ms.");
-  satelliteUpdating(updatePositions, satUpdateTimer, updateloopTime * 3);
+  //Temporary crap
+  plotOrbit(allOrbitingBodies[350]);
+  wwd.addLayer(orbitsLayer);
+
+  updateLoopTime = obtainExecutionTime(updatePositions);
+  console.log("Updating all satellites' positions took " + updateLoopTime + " ms. " +
+      "Now it will be updated every " + updateLoopTime * 3 + " ms.");
+  satelliteUpdating(updatePositions, satUpdateTimer, updateLoopTime * 3);
 }
 
 var satParserWorker = new Worker("Workers/satelliteParseWorker.js");
@@ -128,6 +154,7 @@ grndStationsWorker.addEventListener('message', function(event){
 
 
 function updatePositions(){
+  updatePermission = false;
   var payloadCounter = 0;
   var rocketCounter = 0;
   var debrisCounter = 0;
@@ -141,14 +168,14 @@ function updatePositions(){
 
     switch (allOrbitingBodies[i].objectType) {
       case "PAYLOAD":
-        payloadLayer.renderables[payloadCounter].position.latitude = newPosition.latitude;
-        payloadLayer.renderables[payloadCounter].position.longitude = newPosition.longitude;
-        payloadLayer.renderables[payloadCounter++].position.altitude = newPosition.altitude;
+        payloadsLayer.renderables[payloadCounter].position.latitude = newPosition.latitude;
+        payloadsLayer.renderables[payloadCounter].position.longitude = newPosition.longitude;
+        payloadsLayer.renderables[payloadCounter++].position.altitude = newPosition.altitude;
         break;
       case "ROCKET BODY":
-        rocketLayer.renderables[rocketCounter].position.latitude = newPosition.latitude;
-        rocketLayer.renderables[rocketCounter].position.longitude = newPosition.longitude;
-        rocketLayer.renderables[rocketCounter++].position.altitude = newPosition.altitude;
+        rocketsLayer.renderables[rocketCounter].position.latitude = newPosition.latitude;
+        rocketsLayer.renderables[rocketCounter].position.longitude = newPosition.longitude;
+        rocketsLayer.renderables[rocketCounter++].position.altitude = newPosition.altitude;
         break;
       case "DEBRIS":
         debrisLayer.renderables[debrisCounter].position.latitude = newPosition.latitude;
@@ -161,16 +188,22 @@ function updatePositions(){
     allOrbitingBodies[i].altitude = newPosition.altitude;
   }
   wwd.redraw();
+  updatePermission = true;
 }
 
+//Events to prevent stuttering (position updating) while zooming or dragging
 function mousedown(event) {
+  updatePermission = false;
   clearInterval(satUpdateTimer);
 }
 
 function mouseup(event) {
-  satelliteUpdating(updatePositions, satUpdateTimer, updateloopTime);
+  updatePermission = true;
+  satelliteUpdating(updatePositions, satUpdateTimer, updateLoopTime);
 }
 
+//Yann Voumard's function to obtain a lightsource fixed in space
+//lightsource position is hardcoded in here
 Object.defineProperties(FixedLocation.prototype, {
 
   latitude: {
@@ -197,10 +230,58 @@ Object.defineProperties(FixedLocation.prototype, {
 
 });
 
+function plotOrbit(orbitalBody){
+  var now = new Date();
+  var pastOrbit = [];
+  var futureOrbit = [];
+  //var currentPosition = null;
+
+  for(var i = -98; i <= 98; i++) {
+      var time = new Date(now.getTime() + i*60000);
+
+      var position = getPosition(satellite.twoline2satrec(orbitalBody.tleLine1, orbitalBody.tleLine2), time)
+
+      if(i < 0) {
+          pastOrbit.push(position);
+      } else if(i > 0) {
+          futureOrbit.push(position);
+      } else {
+          // currentPosition = new WorldWind.Position(position.latitude,
+          //                                          position.longitude,
+          //                                          position.altitude);
+          pastOrbit.push(position);
+          futureOrbit.push(position);
+      }
+  }
+
+  // Orbit Path
+  var pathAttributes = new WorldWind.ShapeAttributes(null);
+  pathAttributes.outlineColor = WorldWind.Color.RED;
+  pathAttributes.interiorColor = new WorldWind.Color(1, 0, 0, 0.5);
+
+  var pastOrbitPath = new WorldWind.Path(pastOrbit);
+  pastOrbitPath.altitudeMode = WorldWind.RELATIVE_TO_GROUND;
+  pastOrbitPath.attributes = pathAttributes;
+
+  var pathAttributes = new WorldWind.ShapeAttributes(pathAttributes);
+  pathAttributes.outlineColor = WorldWind.Color.GREEN;
+  pathAttributes.interiorColor = new WorldWind.Color(0, 1, 0, 0.5);
+
+  var futureOrbitPath = new WorldWind.Path(futureOrbit);
+  futureOrbitPath.altitudeMode = WorldWind.RELATIVE_TO_GROUND;
+  futureOrbitPath.attributes = pathAttributes;
+
+  orbitsLayer.addRenderable(pastOrbitPath);
+  orbitsLayer.addRenderable(futureOrbitPath);
+}
+
 //Constantly update satellite updating process time
-// setInterval(function(){
-//   updateloopTime = obtainExecutionTime(updatePositions);
-// }, 20000);
+setInterval(function(){
+  if (updatePermission) {
+    console.log("Me updating");
+    updateLoopTime = obtainExecutionTime(updatePositions);
+  }
+}, 20000);
 
 // $(document).ready(function() {
 //
