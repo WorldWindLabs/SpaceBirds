@@ -119,29 +119,3 @@ function obtainOrbitType(satOrbit){
 var FixedLocation = function(wwd) {
     this._wwd = wwd;
 };
-
-Object.defineProperties(FixedLocation.prototype, {
-
-    latitude: {
-        get: function () {
-            return WorldWind.Location.greatCircleLocation(
-                this._wwd.navigator.lookAtLocation,
-                -70,
-                1.1,
-                new WorldWind.Location()
-            ).latitude;
-        }
-    },
-
-    longitude: {
-        get: function () {
-            return WorldWind.Location.greatCircleLocation(
-                this._wwd.navigator.lookAtLocation,
-                -70,
-                1.1,
-                new WorldWind.Location()
-            ).longitude;
-        }
-    }
-
-});

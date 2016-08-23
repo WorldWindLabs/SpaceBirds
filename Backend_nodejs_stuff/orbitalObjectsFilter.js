@@ -1,5 +1,6 @@
 var fs = require('fs'); //IO filesystem module for node.js
-var orbitalBodies = require('./TLE.json'); //Unfiltered TLE JSON file to read
+var orbitalBodies = require('unfilteredTLE.json'); //Unfiltered TLE JSON file to read
+var satcat = require('SATCAT.JSON'); //Sattellite catalog boxscore (every sat launch, even deorbited, with country data)
 var payloads = [];
 var rocketStages = [];
 var debris = [];
@@ -40,16 +41,18 @@ for(i in orbitalBodies){
     delete this.APOGEE;
     delete this.PERIGEE;
   }
+
+
 }
 
-function printFilteredTLE(tleJson, type){
+function printFilteredFile(tleJson, type){
   var str; //To stringify JSON arrays
   str = JSON.stringify(tleJson);
   if(tleJson.length > 0){
-    fs.writeFile(type + 'TLE.json', str,
+    fs.writeFile(type + '.json', str,
       function(err){
         if(err) return console.log(err);
-        console.log('File ' + type + 'TLE.json created.');
+        console.log('File ' + type + '.json created.');
     });
   } else {
     console.log('No objects of type ' + type + ' were filtered');
@@ -57,53 +60,44 @@ function printFilteredTLE(tleJson, type){
   }
 }
 
+//Filter
+//for each option, the OBJECT_TYPE key is deleted before storing
+//it in its filtered array in order to reduce file sizes
 for(i in orbitalBodies){
+  orbitalBodies[i].clean();
   switch(orbitalBodies[i].OBJECT_TYPE){
     case "PAYLOAD":
+      payloads.push(orbitalBodies[i]);
       break;
     case "ROCKET BODY":
+      rocketStages.push(orbitalBodies[i]);
       break;
     case "DEBRIS":
+      debris.push(orbitalBodies[i]);
       break;
     case default:
+      //Unknown objects, TBA objects
+      unknown.push(orbitalBodies[i]);
       break;
   }
 }
 
 //Check out for other object types. It happens that there's a "TBA" type.
 for(var i = 1; i < orbitalBodies.length; i += 1){
-  if((orbitalBodies[i].OBJECT_TYPE !== "PAYLOAD") && (orbitalBodies[i].OBJECT_TYPE !== "ROCKET BODY") && (orbitalBodies[i].OBJECT_TYPE !== "DEBRIS") ){
-    console.log(orbitalBodies[i].OBJECT_TYPE);
-  }
+  if((orbitalBodies[i].OBJECT_TYPE !== "PAYLOAD") &&
+     (orbitalBodies[i].OBJECT_TYPE !== "ROCKET BODY") &&
+     (orbitalBodies[i].OBJECT_TYPE !== "DEBRIS") ){
+        console.log(orbitalBodies[i].OBJECT_TYPE);
+     }
 }
 
-//Filter
-//for each option, the OBJECT_TYPE key is deleted before storing
-//it in its filtered array in order to reduce file sizes
-for(i in orbitalBodies){
-  if(orbitalBodies[i].OBJECT_TYPE === "PAYLOAD" ){
-    orbitalBodies[i].clean();
-    payloads.push(orbitalBodies[i]);
-  } else if (orbitalBodies[i].OBJECT_TYPE === "ROCKET BODY") {
-    orbitalBodies[i].clean();
-    rocketStages.push(orbitalBodies[i]);
-  } else if (orbitalBodies[i].OBJECT_TYPE === "DEBRIS") {
-    orbitalBodies[i].clean();
-    debris.push(orbitalBodies[i]);
-  } else if (orbitalBodies[i].OBJECT_TYPE === "UNKNOWN"){
-    orbitalBodies[i].clean();
-    unknown.push(orbitalBodies[i]);
-  }
-}
-
-console.log("From a total of " + orbitalBodies.length + " currently orbiting bodies we have: ");
+//Counter. Note that we're wasting memory by storing the different object types
+//in their own array, but it may be useful later.
+console.log("From a total of " + orbitalBodies.length +
+ " currently orbiting bodies we have: ");
 console.log(" - " + payloads.length + " payloads");
 console.log(" - " + rocketStages.length + " rocket stages");
 console.log(" - " + debris.length + " debris objects");
 console.log(" - " + unknown.length + " uknwown objects");
 
-printFilteredTLE(orbitalBodies, 'allObjects');
-printFilteredTLE(payloads, 'payloads');
-printFilteredTLE(rocketStages, 'rocketStages');
-printFilteredTLE(debris, 'debris');
-printFilteredTLE(unknown, 'unknownObjects');
+printFilteredFile(orbitalBodies, 'TLE');

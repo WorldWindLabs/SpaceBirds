@@ -1,10 +1,11 @@
 Run this from a bash command line:
 
 cybermegacat@yahoo.com.mx
-*85*y64spacetrack*
+Castillo5p4d3track
 
 
+To get the TLE data:
+curl --limit-rate 100K -c cookies.txt -b cookies.txt -k https://www.space-track.org/ajaxauth/login -d 'identity=cybermegacat@yahoo.com.mx&password=Castillo5p4d3track&query=https://www.space-track.org/basicspacedata/query/class/tle_latest/ORDINAL/1/EPOCH/>now-30/orderby/INTLDES%20desc/metadata/false' > 'unfilteredTLE.json'
 
-
-curl --limit-rate 100K -c cookies.txt -b cookies.txt -k https://www.space-track.org/ajaxauth/login -d 'identity=cybermegacat@yahoo.com.mx&password=*85*y64spacetrack*&query=https://www.space-track.org/basicspacedata/query/class/tle_latest/ORDINAL/1/EPOCH/>now-30/orderby/NORAD_CAT_ID asc/metadata/false' > 'C:/Users/Administrator/WebstormProjects/Backend stuff/TLE.json'
-
+To get the SATCAT Boxscore (every satellite by country/organization)
+curl --limit-rate 100K -c cookies.txt -b cookies.txt -k https://www.space-track.org/ajaxauth/login -d 'identity=cybermegacat@yahoo.com.mx&password=Castillo5p4d3track&query=https://www.space-track.org/basicspacedata/query/class/satcat/orderby/INTLDES%20desc/metadata/false' > 'SATCAT.json'

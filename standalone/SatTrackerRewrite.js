@@ -138,10 +138,10 @@ function updatePositions(){
         rocketLayer.renderables[rocketCounter++].position.altitude = newPosition.altitude;
         break;
       case "DEBRIS":
-         debrisLayer.renderables[debrisCounter].position.latitude = newPosition.latitude;
-         debrisLayer.renderables[debrisCounter].position.longitude = newPosition.longitude;
-         debrisLayer.renderables[debrisCounter++].position.altitude = newPosition.altitude;
-         break;
+        debrisLayer.renderables[debrisCounter].position.latitude = newPosition.latitude;
+        debrisLayer.renderables[debrisCounter].position.longitude = newPosition.longitude;
+        debrisLayer.renderables[debrisCounter++].position.altitude = newPosition.altitude;
+        break;
     }
     allOrbitingBodies[i].latitude = newPosition.latitude;
     allOrbitingBodies[i].longitude = newPosition.longitude;
@@ -160,29 +160,34 @@ function mouseup(event) {
 
 Object.defineProperties(FixedLocation.prototype, {
 
-    latitude: {
-        get: function () {
-            return WorldWind.Location.greatCircleLocation(
-                this._wwd.navigator.lookAtLocation,
-                -70,
-                1.1,
-                new WorldWind.Location()
-            ).latitude;
-        }
-    },
-
-    longitude: {
-        get: function () {
-            return WorldWind.Location.greatCircleLocation(
-                this._wwd.navigator.lookAtLocation,
-                -70,
-                1.1,
-                new WorldWind.Location()
-            ).longitude;
-        }
+  latitude: {
+    get: function () {
+      return WorldWind.Location.greatCircleLocation(
+        this._wwd.navigator.lookAtLocation,
+        -70,
+        1.1,
+        new WorldWind.Location()
+      ).latitude;
     }
+  },
+
+  longitude: {
+    get: function () {
+      return WorldWind.Location.greatCircleLocation(
+        this._wwd.navigator.lookAtLocation,
+        -70,
+        1.1,
+        new WorldWind.Location()
+      ).longitude;
+    }
+  }
 
 });
+
+//Constantly update satellite updating process time
+// setInterval(function(){
+//   updateloopTime = obtainExecutionTime(updatePositions);
+// }, 20000);
 
 // $(document).ready(function() {
 //
