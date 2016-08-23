@@ -212,7 +212,7 @@ require(['../../src/WorldWind', '../util/ProjectionMenu'], function (ww, Project
 
                 modelScene = scene;
 
-                sliderScale .slider("option", "max", model.maxScale);
+                sliderScale.slider("option", "max", model.maxScale);
                 sliderScale.slider("option", "value", model.initialScale);
                 spanScale.html(model.initialScale);
             }

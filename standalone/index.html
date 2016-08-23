@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
 
     <!--Bootstrap-->
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     <!--jQuery-->
@@ -25,9 +25,13 @@
     <script type="text/javascript" src="jqwidgets/jqxlistbox.js"></script>
     <script type="text/javascript" src="jqwidgets/jqxcombobox.js"></script>
 
+    <script type="text/javascript" src="jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="jqwidgets/jqxslider.js"></script>
+
     <!--Title for Tab-->
     <title>SPACEBIRDS</title>
-    <link rel="shortcut icon" href="/standalone/assets/images/spacebirdlogo_dark.png" />
+    <link rel="shortcut icon" href="assets/images/spacebirdlogo_dark.png" />
 </head>
 
 <body style="background-image: url('assets/images/space.jpeg');">
@@ -35,7 +39,7 @@
         <nav class="navbar  navbar-inverse navbar-fixed-top" role="navigation" style="background-color:transparent; border-color:transparent;">
             <div class="container" style="text-align: center;">
                 <br>
-              <spam class="coolLogo" style="font-size:30px; color: white;" id="menu-toggle">SPACEBIRDS 0.4</spam>
+              <spam class="coolLogo" style="font-size:30px; color: white;" id="menu-toggle">SPACEBIRDS 0.5</spam>
             </div>
         </nav>
     </div>
@@ -64,8 +68,9 @@
                 </li>
                   <li>
                     <a href="#"><strong style="color: white">SATELLITE TRACKING</strong> </a>
-                </li>
-                <li>
+               <!-- </li>                               TODO: add date slider
+                     <div id='jqxRangeSlider'></div>
+                <li> -->
                     <a href="#"><spam id="allSats">ALL ON</spam></a>
                 </li>
                 <li>
@@ -80,6 +85,12 @@
 
                 <li>
                     <a href="#"><strong style="color: white">ORBIT RANGE</strong> </a>
+                </li>
+
+                <li>
+                    <div style="color: white; font-size:12px" id="sliderValue"></div>
+                    <div style="color: white; font-size:12px" id="sliderValue2"></div>
+                    <div id='jqxsliderEvent'></div>
                 </li>
 
                 <li>
@@ -103,6 +114,10 @@
                 </li>
                 <li>
                     <a href="#"><spam id="orbit">ORBIT OFF</spam></a>
+                </li>
+                <li>
+                    <a href="#"><spam id="collada">3D MODEL OFF</spam></a>
+
                 </li>
                 <li>
                     <a href="#"><strong style="color: white">GROUND STATIONS (GS)</strong> </a>
@@ -133,6 +148,7 @@
                 </li>
             </ul>
         </div>
+
     </div>
     <!--Information Sidebar-->
     <div id="wrapper-right">
@@ -171,6 +187,12 @@
      $("#menu-toggle-right").click(function(e) {
         e.preventDefault();
         $("#wrapper-right").toggleClass("toggled");
+    });
+    $(document).ready(function () {
+        $("#jqxsliderEvent").jqxSlider({ theme: 'summer', value: 98, max: 500, min: 0, mode: 'fixed' });
+        $('#jqxsliderEvent').bind('change', function (event) {
+            $('#sliderValue').html('Value: ' + event.args.value);
+        });
     });
 </script>
 <script src="util/worldwindlib.js"></script>
