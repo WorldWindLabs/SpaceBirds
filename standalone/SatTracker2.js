@@ -308,11 +308,12 @@ function getGroundStations (groundStations) {
 
         var shape = new WorldWind.SurfaceCircle(new WorldWind.Location(groundStations[gsindex].LATITUDE,
           groundStations[gsindex].LONGITUDE), 150e4, gsAttributes);
-
-        shapeLayer.addRenderable(shape);
+        $('#addStation').click(function(){
+          shapeLayer.addRenderable(shape);
+        });
       };
 
-        /***
+      /***
          * Satellites
          */
         var orbitToggle = {leoP:9, leoR:0, leoD:0, meoP:9, meoR:0, meoD:0, heoP:9, heoR:0, heoD:0};
@@ -980,10 +981,24 @@ function getGroundStations (groundStations) {
             // Draw
             wwd.redraw();
 
+          $(document).ready(function () {
+            $("#jqxsliderEvent2").jqxSlider({ theme: 'summer', value: 0, max: 10080, min: -10080, mode: 'fixed', ticksFrequency: 1440 });
+            $('#jqxsliderEvent2').bind('change', function (event) {
+              $('#sliderValue2').html(new Date(now.getTime() + event.args.value * 60000));
+            });
+          });
+          $('#jqxButton').on('click', function () {
+            $('#jqxsliderEvent2').jqxSlider('setValue', 0);
+          });
+
             // Update all Satellite Positions
              window.setInterval(function () {
                 for (var indx = 0; indx < satNum; indx += 1) {
-                    var position = getPosition(satellite.twoline2satrec(satData[indx].TLE_LINE1, satData[indx].TLE_LINE2), new Date());
+                  var timeSlide = $('#jqxsliderEvent2').jqxSlider('value');
+                  var now = new Date();
+                  var time = new Date(now.getTime() + timeSlide * 60000);
+
+                  var position = getPosition(satellite.twoline2satrec(satData[indx].TLE_LINE1, satData[indx].TLE_LINE2), time);
                     everyCurrentPosition[indx].latitude = position.latitude;
                     everyCurrentPosition[indx].longitude = position.longitude;
                     everyCurrentPosition[indx].altitude = position.altitude;
@@ -1041,7 +1056,7 @@ function getGroundStations (groundStations) {
             $("#jqxsliderEvent").jqxSlider({ theme: 'summer', value: 98, max: 10080, min: 0, mode: 'fixed', ticksFrequency: 1440 });
             $('#jqxsliderEvent').bind('change', function (event) {
               $('#sliderValue').html(new Date(now.getTime() + event.args.value * 60000));
-              $('#sliderValue2').html('Mins: ' + event.args.value);
+              $('#sliderValueMin').html('Mins: ' + event.args.value);
 
             });
           });
