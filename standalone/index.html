@@ -15,9 +15,9 @@
 
     <link rel="stylesheet" href="styles/style.css">
     <link rel="stylesheet" href="styles/simple-sidebar.css">
-    <link rel="stylesheet" href="assets/thirdparty/css/main.css" />
+    <link rel="stylesheet" href="assets/thirdparty/css/main.css"/>
 
-    <link rel="stylesheet" href="jqwidgets/styles/jqx.base.css" type="text/css" />
+    <link rel="stylesheet" href="jqwidgets/styles/jqx.base.css" type="text/css"/>
     <script type="text/javascript" src="jqwidgets/jqxcore.js"></script>
     <script type="text/javascript" src="jqwidgets/jqxdata.js"></script>
     <script type="text/javascript" src="jqwidgets/jqxbuttons.js"></script>
@@ -31,7 +31,7 @@
 
     <!--Title for Tab-->
     <title>SPACEBIRDS</title>
-    <link rel="shortcut icon" href="assets/images/spacebirdlogo_dark.png" />
+    <link rel="shortcut icon" href="assets/images/spacebirdlogo_dark.png"/>
 </head>
 
 <body style="background-image: url('assets/images/space.jpeg');">
@@ -39,25 +39,34 @@
 <a href="#">
     <div id='content'>
         <div id="wrapper" style="text-align: center; position: absolute; z-index: 1;">
-            <div style="color: white">Time Slider</div>
+            <div class="coolLogo" style="color: white">TIME CONTROL</div>
             <div id='jqxsliderEvent2'></div>
             <div style="color: white; font-size:20px; text-align: left" id="sliderValue2"></div>
         </div>
     </div>
 </a>
 <div id="globe">
-    <canvas id="canvasOne" style= "width: 100%; height:100%;" >
+    <canvas id="canvasOne" style="width: 100%; height:100%;">
         Your browser does not support HTML5 Canvas.
     </canvas>
     <!--Menu-->
     <div id="wrapper">
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
+                <br>
                 <li>
-                    <div class="coolLogo" style="font-size:25px; color: white;" id="menu-toggle">SPACEBIRDS<span style="font-size: 10px">0.6</span></div>
+                    <div class="coolLogo" style="font-size:25px; color: white;" id="menu-toggle">
+                        <img src="assets/images/spacebirdlogo.png" height="6%" width="6%">
+                        <u>SPACEBIRDS<span style="font-size: 10px">0.6</span></u>
+                    </div>
                 </li>
+                <br>
                 <li>
-                    <a href="#"><strong style="color: white">SEARCH</strong> </a>
+                    <a href="#">
+                        <h4 class="coolLogo" style="color: white">
+                            <u>SEARCH</u>
+                        </h4>
+                    </a>
                 </li>
                 <li>
                     <a href="#" style="padding-left: 20px">
@@ -68,29 +77,42 @@
                         </spam>
                     </a>
                 </li>
-                  <li>
-                    <a href="#"><strong style="color: white">SATELLITE TRACKING</strong> </a>
+                <li>
+                    <div id='jqxRangeSlider'></div>
                 </li>
-                     <div id='jqxRangeSlider'></div>
+                <br>
                 <li>
-                <li>
-                    <a href="#"><spam id="jqxButton">RESET TIME</spam></a>
+                    <a href="#">
+                        <h4 class="coolLogo" style="color: white">
+                            <u>TYPE</u>
+                        </h4>
+                    </a>
                 </li>
                 <li>
-                    <a href="#"><spam id="allSats">ALL ON</spam></a>
+                    <a href="#">
+                        <spam id="allSats">ALL ON</spam>
+                    </a>
                 </li>
                 <li>
                     <a href="#"><span id="payloads">PAYLOADS OFF</span></a>
                 </li>
                 <li>
-                    <a href="#"><spam id="rockets">ROCKETS OFF</spam></a>
+                    <a href="#">
+                        <spam id="rockets">ROCKETS OFF</spam>
+                    </a>
                 </li>
                 <li>
-                    <a href="#"><spam id="debris">DEBRIS OFF</spam></a>
+                    <a href="#">
+                        <spam id="debris">DEBRIS OFF</spam>
+                    </a>
                 </li>
-
+                <br>
                 <li>
-                    <a href="#"><strong style="color: white">ORBIT RANGE</strong> </a>
+                    <a href="#">
+                        <h4 class="coolLogo" style="color: white">
+                            <u>ORBIT RANGE</u>
+                        </h4>
+                    </a>
                 </li>
 
                 <li>
@@ -100,36 +122,61 @@
                 </li>
 
                 <li>
-                    <a href="#"><spam id="leo">LEO ON</spam></a>
+                    <a href="#">
+                        <spam id="leo">LEO ON</spam>
+                    </a>
                 </li>
                 <li>
-                    <a href="#"><spam id="meo">MEO ON</spam></a>
+                    <a href="#">
+                        <spam id="meo">MEO ON</spam>
+                    </a>
                 </li>
                 <li>
-                    <a href="#"><spam id="heo">HEO ON</spam></a>
+                    <a href="#">
+                        <spam id="heo">HEO ON</spam>
+                    </a>
                 </li>
+                <br>
                 <li>
-                    <a href="#"><strong style="color: white">TOOLS</strong> </a>
+                    <a href="#">
+                        <h4 class="coolLogo" style="color: white">
+                            <u>TOOLS</u>
+                        </h4>
+                    </a>
                 </li>
                 <li>
                     <a href="javascript:toggleRepresentation();" id="representation">3D</a>
                 </li>
                 <li>
-                    <a href="#"><spam id="follow">FOLLOW OFF</spam></a>
+                    <a href="#">
+                        <spam id="follow">FOLLOW OFF</spam>
+                    </a>
                 </li>
                 <li>
-                    <a href="#"><spam id="mesh">MESH OFF</spam></a>
+                    <a href="#">
+                        <spam id="mesh">MESH OFF</spam>
+                    </a>
                 </li>
                 <li>
-                    <a href="#"><spam id="orbit">ORBIT OFF</spam></a>
+                    <a href="#">
+                        <spam id="orbit">ORBIT OFF</spam>
+                    </a>
                 </li>
                 <li>
-                    <a href="#"><spam id="collada">3D MODEL OFF</spam></a>
+                    <a href="#">
+                        <spam id="collada">3D MODEL OFF</spam>
+                    </a>
 
                 </li>
+                <br>
                 <li>
-                    <a href="#"><strong style="color: white">GROUND STATIONS (GS)</strong> </a>
+                    <a href="#">
+                        <h4 class="coolLogo" style="color: white; font-size: 15px">
+                            <u>GROUND STATIONS(GS)</u>
+                        </h4>
+                    </a>
                 </li>
+                <br>
                 <li>
                     <a href="#" style="padding-left: 20px">
                         <spam id='content'>
@@ -140,45 +187,83 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#"><spam id="gStations">GS OFF</spam></a>
+                    <a href="#">
+                        <spam id="gStations">GS OFF</spam>
+                    </a>
                 </li>
                 <li>
-                    <a href="#"><spam id="addStation">ADD GS</spam></a>
+                    <a href="#">
+                        <spam id="addStation">ADD GS</spam>
+                    </a>
                 </li>
                 <li>
-                    <a href="#"><spam id="clearStations">CLEAR GS</spam></a>
+                    <a href="#">
+                        <spam id="clearStations">CLEAR GS</spam>
+                    </a>
                 </li>
+                <br>
                 <li>
-                    <a href="#"><strong style="color: white">GENERAL</strong> </a>
+                    <a href="#">
+                        <h4 class="coolLogo" style="color: white">
+                            <u>GENERAL</u>
+                        </h4>
+                    </a>
                 </li>
                 <li>
                     <a href="about.html">ABOUT</a>
                 </li>
                 <li>
-                    <a href="#" id="menu-toggle-right"><spam id="infoSidebar">INFORMATION PANEL</spam></a>
+                    <a href="#" id="menu-toggle-right">
+                        <spam id="infoSidebar">INFORMATION PANEL</spam>
+                    </a>
                 </li>
+                <br>
             </ul>
+            <br>
         </div>
 
     </div>
     <!--Information Sidebar-->
     <div id="wrapper-right">
         <div id="sidebar-wrapper-right">
-            <h4 style="color: white">SATELLITE INFORMATION</h4>
-            <p>SATELLITE TYPE: <span id="type"></span></p>
+            <br>
+            <h4 class="coolLogo" style="color: white; text-align: center">
+                <a href="#">
+                    <spam id="jqxButton">RESET TIME</spam>
+                </a>
+            </h4>
+            <br>
+            <h3 style="color: white" class="coolLogo">
+                <img src="assets/images/spacebirdlogo.png" height="5%" width="5%">
+                <u>INFORMATION</u>
+                <img src="assets/images/spacebirdlogo.png" height="5%" width="5%">
+            </h3>
+            <p>TYPE: <span id="type"></span></p>
             <p>INTLDES: <span id="intldes"></span></p>
             <p>NAME: <span id="name"></span></p>
             <br>
-            <h4 style="color: white">SATELLITE POSITION</h4>
+            <h4 style="color: white" class="coolLogo">
+                <img src="assets/images/spacebirdlogo.png" height="5%" width="5%">
+                <u>POSITION</u>
+                <img src="assets/images/spacebirdlogo.png" height="5%" width="5%">
+            </h4>
             <p>LATITUDE: <span id="latitude"></span></p>
             <p>LONGITUDE: <span id="longitude"></span></p>
             <p>ALTITUDE: <span id="altitude"></span></p>
             <br>
-            <h4 style="color: white">AXIS</h4>
+            <h4 style="color: white" class="coolLogo">
+                <img src="assets/images/spacebirdlogo.png" height="5%" width="5%">
+                <u>AXIS</u>
+                <img src="assets/images/spacebirdlogo.png" height="5%" width="5%">
+            </h4>
             <p>SEMI-MAJOR: <span id="majorAxis"></span></p>
             <p>SEMI-MINOR: <span id="minorAxis"></span></p>
             <br>
-            <h4 style="color: white">EXTRA DATA</h4>
+            <h4 style="color: white" class="coolLogo">
+                <img src="assets/images/spacebirdlogo.png" height="5%" width="5%">
+                <u>EXTRA DATA</u>
+                <img src="assets/images/spacebirdlogo.png" height="5%" width="5%">
+            </h4>
             <p>INCLINE: <span id="inclination"></span></p>
             <p>ECCENTRICITY: <span id="eccentricity"></span></p>
             <p>REV/DAY: <span id="revDay"></span></p>
@@ -189,16 +274,13 @@
     </div>
     <br>
 </div>
-        <div class="container" style="text-align: right; padding-right: 40px; bottom: 5px">
-            <img src="assets/images/spacebirdlogo.png" height="5%" width="5%">
-        </div>
 </body>
 <script>
-    $("#menu-toggle").click(function(e) {
+    $("#menu-toggle").click(function (e) {
         e.preventDefault();
         $("#wrapper").toggleClass("toggled");
     });
-     $("#menu-toggle-right").click(function(e) {
+    $("#menu-toggle-right").click(function (e) {
         e.preventDefault();
         $("#wrapper-right").toggleClass("toggled");
     });

@@ -1083,7 +1083,8 @@ function getGroundStations(groundStations) {
           max: 10080,
           min: 0,
           mode: 'fixed',
-          ticksFrequency: 1440
+          ticksFrequency: 1440,
+          width: 250
         });
         $('#jqxsliderEvent').bind('change', function (event) {
           $('#sliderValue').html(new Date(now.getTime() + event.args.value * 60000));
