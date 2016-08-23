@@ -1,15 +1,16 @@
 var fs = require('fs'); //IO filesystem module for node.js
 var orbitalBodies = require('./unfilteredTLE.json'); //Currently orbiting satellites' TLE
 var satcat = require('./SATCAT.json'); //Catalog with every sat launch in history, with country data
+var launchSites = require('./launchSites.json')
+
+//Arrays to store objects by object type. Unnecesary as of now but may be useful later.
 var payloads = [];
 var rocketStages = [];
 var debris = [];
 var unknown = [];
-var everythingButDebris = [];
-
 
 //Crap and unnecesary OOP implementation of a cleaning function
-//wastes a lot of memory/CPU but it keeps the main loop easy to understand.
+//wastes a lot of memory/CPU but it keeps the main filter easy to understand.
 for(i in orbitalBodies){
   orbitalBodies[i].clean = function(){
     delete this.ORDINAL;
@@ -43,26 +44,35 @@ for(i in orbitalBodies){
   }
 }
 
+//TODO: Stop using slow, awful linear search. It takes ages to execute. Should use something better later.
+// this thing is easily readable, though.
 for(var i = 0, numOrbitalbodies = orbitalBodies.length; i < numOrbitalbodies; i += 1){
   var start = clock();
   for (var j = 0, numSatcat = satcat.length; j < numSatcat; j += 1){
+    //Adding new fields from SATCAT.json to our customized TLE.json
     if(orbitalBodies[i].NORAD_CAT_ID === satcat[j].NORAD_CAT_ID)
     {
       //Add new keys to TLE json
-      orbitalBodies[i].COUNTRY = satcat[j].COUNTRY; //Country or organization that launched the sattelite
+      orbitalBodies[i].COUNTRY = satcat[j].COUNTRY; //Country or organization that launched the satellite
       orbitalBodies[i].LAUNCH = satcat[j].LAUNCH; //Launch full date: YYYY-MM-DD
       orbitalBodies[i].LAUNCH_NUM = satcat[j].LAUNCH_NUM; //Consecutive order of launch e.g. Sputnik 1 is launch 1 (with 2 objects)
       orbitalBodies[i].LAUNCH_YEAR = satcat[j].LAUNCH_YEAR; //Launch year only (may be useful to avoid string processing)
       orbitalBodies[i].LAUNCH_PIECE = satcat[j].LAUNCH_PIECE; //Pieces in orbit of the same launch e.g. Sputnik 1 had 2 pieces: rocket and payload
-      orbitalBodies[i].SITE = satcat[j].SITE; //Launch site. We don't have the codes yet
+      //Retrieve the launch site name from the file launchSites.json
+      //Still linear search crap, but the launchSites .json file is short
+      for(var k = 0, numLaunchSites = launchSites.length; k < numLaunchSites; k += 1){
+        if(satcat[j].SITE === launchSites[k].SITE_CODE){
+          orbitalBodies[i].LAUNCH_SITE = launchSites[k].LAUNCH_SITE;
+        }
+      }
     }
   }
-  var duration = clock(start);
-  console.log('Time spent on ' + i + ' cycle ' + duration);
+  //var duration = clock(start);
+  //console.log('Time spent on ' + i + ' cycle ' + duration);
 }
 
 
-function printFilteredFile(tleJson, type, finishingFunction){
+function printFilteredFile(tleJson, type, finishingCallback){
   var str; //To stringify JSON arrays
   str = JSON.stringify(tleJson);
   if(tleJson.length > 0){
@@ -70,7 +80,7 @@ function printFilteredFile(tleJson, type, finishingFunction){
       function(err){
         if(err) return console.log(err);
         console.log('File ' + type + '.json created.');
-        finishingFunction();
+        finishingCallback();
     });
   } else {
     console.log('No objects of type ' + type + ' were filtered');
@@ -100,7 +110,7 @@ for(var i = 0; i < orbitalBodies.length; i+= 1){
   }
 }
 
-//Check out for other object types. It happens that there's a "TBA" type.
+//Check out for other object types. For instance, it happens that there's a "TBA" type.
 // for(var i = 1; i < orbitalBodies.length; i += 1){
 //   if((orbitalBodies[i].OBJECT_TYPE !== "PAYLOAD") &&
 //      (orbitalBodies[i].OBJECT_TYPE !== "ROCKET BODY") &&
@@ -110,7 +120,7 @@ for(var i = 0; i < orbitalBodies.length; i+= 1){
 // }
 
 //Counter. Note that we're wasting memory by storing the different object types
-//in their own array, but it may be useful later.
+//in their own array, but it may be useful later to provide different json files.
 console.log("From a total of " + orbitalBodies.length +
  " currently orbiting bodies we have: ");
 console.log(" - " + payloads.length + " payloads");
@@ -119,17 +129,8 @@ console.log(" - " + debris.length + " debris objects");
 console.log(" - " + unknown.length + " uknwown objects");
 
 printFilteredFile(orbitalBodies, 'TLE', function(){
-  console.log(" + - + - + - + - + - + - + - + - + - + - + ")
+  console.log(" + - + - + - + - + - FINISHED - + - + - + - + - + - + ")
 });
-
-function obtainExecutionTime(functionToMeasure){
-  var timeSpent;
-  var start = performance.now();
-  functionToMeasure();
-  var end = performance.now();
-  timeSpent = end - start;
-  return timeSpent;
-}
 
 function clock(start) {
     if ( !start ) return process.hrtime();

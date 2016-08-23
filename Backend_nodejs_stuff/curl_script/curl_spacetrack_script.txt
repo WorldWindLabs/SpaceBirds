@@ -9,3 +9,6 @@ curl --limit-rate 100K -c cookies.txt -b cookies.txt -k https://www.space-track.
 
 To get the SATCAT Boxscore (every satellite by country/organization)
 curl --limit-rate 100K -c cookies.txt -b cookies.txt -k https://www.space-track.org/ajaxauth/login -d 'identity=cybermegacat@yahoo.com.mx&password=Castillo5p4d3track&query=https://www.space-track.org/basicspacedata/query/class/satcat/orderby/INTLDES%20asc/metadata/false' > 'SATCAT.json'
+
+To get the launch sites names (the SATCAT only has codes)
+curl --limit-rate 100K -c cookies.txt -b cookies.txt -k https://www.space-track.org/ajaxauth/login -d 'identity=cybermegacat@yahoo.com.mx&password=Castillo5p4d3track&query=https://www.space-track.org/basicspacedata/query/class/launch_site/orderby/SITE_CODE%20asc/metadata/false' > 'launchSites.json'

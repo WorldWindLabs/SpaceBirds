@@ -98,7 +98,7 @@ function getSatellites(satData){
 function renderEverything(){
   wwd.addLayer(payloadLayer);
   wwd.addLayer(rocketLayer);
-  //wwd.addLayer(debrisLayer);
+  wwd.addLayer(debrisLayer);
 
   updateloopTime = obtainExecutionTime(updatePositions);
   console.log("Updating all satellites' positions took " + updateloopTime + " ms. " +
