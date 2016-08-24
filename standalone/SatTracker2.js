@@ -65,6 +65,7 @@ wwd.addLayer(modelLayer);
 wwd.addLayer(orbitsLayer);
 
 //Events to handle updating
+var updateTime = 3000;
 var updatePermission = true;
 addEventListener("mousedown", mouseDown);
 addEventListener("mouseup", mouseUp);
@@ -123,6 +124,7 @@ function sanitizeSatellites(objectArray) {
   var resultArray = [];
   var maxSats = objectArray.length;
   //console.log('Array size before splicing is ' + objectArray.length);
+  updateTime = performance.now();
   for (var i = 0; i < maxSats; i += 1) {
     try {
       var position = getPosition(satellite.twoline2satrec(objectArray[i].TLE_LINE1, objectArray[i].TLE_LINE2), new Date());
@@ -137,6 +139,7 @@ function sanitizeSatellites(objectArray) {
   // console.log('we have ' + objectArray.length + ' total satellites');
   // console.log(faultySatellites + ' do not work');
   // console.log('We will keep ' + resultArray.length + ' sanitized satellites.');
+  updateTime = performance.now() - updateTime;
   return resultArray;
 }
 
@@ -1043,7 +1046,7 @@ function getGroundStations(groundStations) {
       });
 
       // Update all Satellite Positions
-      setInterval(function () {
+      var updatePositions = setInterval(function () {
         if (!updatePermission)
           return;
 
@@ -1058,7 +1061,7 @@ function getGroundStations(groundStations) {
           everyCurrentPosition[indx].altitude = position.altitude;
         }
         wwd.redraw();
-      }, 1000);
+      }, updateTime * 1.5);
 
       /****
        * Satellite click-handle functions
