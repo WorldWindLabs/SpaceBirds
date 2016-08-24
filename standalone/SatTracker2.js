@@ -64,6 +64,29 @@ wwd.addLayer(meshLayer);
 wwd.addLayer(modelLayer);
 wwd.addLayer(orbitsLayer);
 
+//Events to handle updating
+var updatePermission = true;
+addEventListener("mousedown", mouseDown);
+addEventListener("mouseup", mouseUp);
+addEventListener("touchstart", mouseDown);
+addEventListener("touchend", mouseUp);
+var timer = null;
+addEventListener("wheel", function() {
+  mouseDown()
+  if(timer !== null) {
+    clearTimeout(timer);
+  }
+  timer = setTimeout(mouseUp, 200);
+});
+
+function mouseDown(){
+  updatePermission = false;
+}
+
+function mouseUp(){
+  updatePermission = true;
+}
+
 
 var payloads = [];
 var rocketbodies = [];
@@ -1020,7 +1043,10 @@ function getGroundStations(groundStations) {
       });
 
       // Update all Satellite Positions
-      window.setInterval(function () {
+      setInterval(function () {
+        if (!updatePermission)
+          return;
+
         for (var indx = 0; indx < satNum; indx += 1) {
           var timeSlide = $('#jqxsliderEvent2').jqxSlider('value');
           var now = new Date();
