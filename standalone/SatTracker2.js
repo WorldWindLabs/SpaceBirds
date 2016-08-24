@@ -141,20 +141,6 @@ function getGroundStations(groundStations) {
     //console.log(satPac[0].OBJECT_NAME);
 
     for (var i = 0; i < satPac.length; i++) {
-      //TODO: add date range slider
-      /*   $(document).ready(function () {
-       $("#jqxRangeSlider").jqxSlider({ theme: 'summer', value:
-       { rangeStart: 1950, rangeEnd: 1960 }, rangeSlider: true });
-       });
-       var rangeStart = $("#jqxRangeSlider").jqxSlider('rangeStart');
-       var rangeEnd = $("#jqxRangeSlider").jqxSlider('rangeEnd');
-
-       var satYear = parseFloat(satPac[i].LAUNCH_YEAR);
-       console.log(typeof satYear);
-       if (satYear < rangeStart && satYear > rangeEnd){
-       satPac[j].TLE_LINE1 = "";
-       satPac[j].TLE_LINE2 = "";
-       }*/
       switch (satPac[i].OBJECT_TYPE) {
         case 'PAYLOAD':
           payloads.push(satPac[i]);
@@ -856,7 +842,24 @@ function getGroundStations(groundStations) {
     });
     selectSat(satPac);
 
+    $(document).ready(function () {
+      $("#jqxRangeSlider").jqxSlider({ theme: 'summer', value:
+      { rangeStart: 1950, rangeEnd: 2016 }, rangeSlider: true });
+    });
+    var rangeStart = $("#jqxRangeSlider").jqxSlider('rangeStart');
+    var rangeEnd = $("#jqxRangeSlider").jqxSlider('rangeEnd');
+
     function selectSat(satData) {
+
+      //TODO: add date range slider
+
+      var satYear = parseFloat(satData[i].LAUNCH_YEAR);
+      if (satYear < rangeStart && satYear > rangeEnd){
+        satData[i].TLE_LINE1 = "";
+        satData[i].TLE_LINE2 = "";
+        return
+      }
+
       var satNames = [];
       var now = new Date();
       var everyCurrentPosition = [];
@@ -934,6 +937,7 @@ function getGroundStations(groundStations) {
             heoDebrisLayer.addRenderable(placemark);
           }
         }
+        wwd.redraw();
       }
 
 
@@ -1302,10 +1306,7 @@ function getGroundStations(groundStations) {
               }
             });
 
-            wwd.goTo(new WorldWind.Position(satPos.latitude, satPos.longitude, satPos.altitude + 10000));
-            window.setTimeout(function () {     //delays navigator position change for smooth transition
               toCurrentPosition(index);
-            }, 3000);
             $('#follow').text('FOLLOW ON');
             $('#follow').click(function () {
               if ($(this).text() == "FOLLOW OFF") {
