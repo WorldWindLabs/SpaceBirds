@@ -38,15 +38,14 @@
 
 <body style="background-image: url('assets/images/space.jpeg');">
 <!--time bar-->
-<a href="#">
-    <div id='content'>
-        <div id="timeBar">
-            <div class="coolLogo" style="color: white">TIME CONTROL</div>
-            <div id='jqxsliderEvent2'></div>
-            <div style="color: white; font-size:20px; text-align: left" id="sliderValue2"></div>
-        </div>
-    </div>
-</a>
+
+<div id="timeBar">
+    <div class="coolLogo" style="color: white">TIME CONTROL</div>
+    <div id='jqxsliderEvent2'></div>
+    <div style="color: white; font-size:20px; text-align: left" id="sliderValue2"></div>
+</div>
+
+
 <div id="globe">
     <canvas id="canvasOne" style="width: 100%; height:100%;">
         Your browser does not support HTML5 Canvas.
@@ -57,9 +56,12 @@
             <ul class="sidebar-nav">
                 <br>
                 <li>
-                    <div class="coolLogo" style="font-size:25px; color: white;" id="menu-toggle">
+                    <div class="coolLogo" style="font-size:25px; color: white;" >
                         <img src="assets/images/spacebirdlogo.png" height="6%" width="6%">
-                        <u>SPACEBIRDS<span style="font-size: 10px">0.6</span></u>
+                        <u style="font-size: 20px; display: inline">SPACEBIRDS<span style="font-size: 8px !important;">0.6</span>
+                            <div id="min_button" style="right: 10px!important;cursor:pointer;font-size:25px; display: inline; position: absolute">-</div>
+
+                        </u>
                     </div>
                 </li>
                 <br>
@@ -79,9 +81,9 @@
                         </spam>
                     </a>
                 </li>
-                <li>
-                    <div id='jqxRangeSlider'></div>
-                </li>
+                <!--<li>-->
+                    <!--<div id='jqxRangeSlider'></div>-->
+                <!--</li>-->
                 <br>
                 <li>
                     <a href="#">
