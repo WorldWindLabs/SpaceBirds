@@ -104,6 +104,16 @@ $("#min_button").click(function(){
   $("#box").slideToggle();
 });
 
+$("#min_button_right").click(function(){
+  if($(this).html() == "-"){
+    $(this).html("+");
+  }
+  else{
+    $(this).html("-");
+  }
+  $("#box_right").slideToggle();
+});
+
 var payloads = [];
 var rocketbodies = [];
 var debris = [];
