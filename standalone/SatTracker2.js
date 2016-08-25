@@ -45,6 +45,7 @@ var heoRocketLayer = new WorldWind.RenderableLayer("HEO Rocket Bodies");
 var leoDebrisLayer = new WorldWind.RenderableLayer("LEO Debris");
 var meoDebrisLayer = new WorldWind.RenderableLayer("MEO Debris");
 var heoDebrisLayer = new WorldWind.RenderableLayer("HEO Debris");
+var satByYearLayer = new WorldWind.RenderableLayer("Sat by Year")
 
 
 //add custom layers
@@ -290,23 +291,10 @@ function getGroundStations(groundStations) {
     });
 
     $(document).ready(function () {
-      var url = "data/groundstations.json";
-      // prepare the data
-      var source =
-      {
-        datatype: "json",
-        datafields: [
-          {name: 'NAME', type: 'string'},
-          {name: 'ORGANIZATION', type: 'string'}
-        ],
-        url: url,
-        async: false
-      };
-      var dataAdapter = new $.jqx.dataAdapter(source);
       // Create a jqxComboBox
       $("#jqxWidget2").jqxComboBox({
         selectedIndex: 0,
-        source: dataAdapter,
+        source: groundStations,
         displayMember: "NAME",
         valueMember: "ORGANIZATION",
         width: 220,
@@ -882,28 +870,15 @@ function getGroundStations(groundStations) {
     });
     selectSat(satPac);
 
-    $(document).ready(function () {
-      $("#jqxRangeSlider").jqxSlider({ theme: 'summer', value:
-      { rangeStart: 1950, rangeEnd: 2016 }, rangeSlider: true, width: "viewport" });
-    });
-    var rangeStart = $("#jqxRangeSlider").jqxSlider('rangeStart');
-    var rangeEnd = $("#jqxRangeSlider").jqxSlider('rangeEnd');
 
     function selectSat(satData) {
-
-      //TODO: add date range slider
-
-      var satYear = parseFloat(satData[i].LAUNCH_YEAR);
-      if (satYear < rangeStart && satYear > rangeEnd){
-        satData[i].TLE_LINE1 = "";
-        satData[i].TLE_LINE2 = "";
-        return
-      }
 
       var satNames = [];
       var now = new Date();
       var everyCurrentPosition = [];
       for (var j = 0; j < satNum; j++) {
+
+       // satByYear(satData[j]);
 
         var currentPosition = null;
         var time = new Date(now.getTime() + i * 60000);
@@ -980,25 +955,100 @@ function getGroundStations(groundStations) {
         wwd.redraw();
       }
 
+      //TODO add year range
+     /* $(document).ready(function () {
+        $("#jqxRangeSlider").jqxSlider({
+          theme: 'summer',
+          value: {rangeStart: 1950, rangeEnd: 1960},
+          rangeSlider: true,
+          width: "viewport",
+          min: 1950,
+          max: 2016
+        });
+      });
+      var rangeStart = $("#jqxRangeSlider").jqxSlider('rangeStart');
+
+      satByYearLayer.enabled = false;
+      function satByYear(sat){
+
+        var intldes = sat.INTLDES;
+        var searchSat = satNames.indexOf(sat.OBJECT_NAME);
+
+        if (intldes.substring(0,2) < 45){
+          var yearPartOne = 20;
+          createSatByYear(yearPartOne);
+        } else {
+          yearPartOne = 19;
+          createSatByYear(yearPartOne);
+        }
+
+        function createSatByYear(yearPartOne){
+          var satYear = yearPartOne + intldes.substring(0,2);
+          var rangeStart = $("#jqxRangeSlider").jqxSlider('rangeStart');
+          var rangeEnd = $("#jqxRangeSlider").jqxSlider('rangeEnd');
+          console.log(satYear, rangeEnd);
+        if (satYear < value.rangeStart && satYear > value.rangeEnd) {
+          console.log(sat.OBJECT_NAME);
+          var placemarkAttributes = new WorldWind.PlacemarkAttributes(null);
+          var highlightPlacemarkAttributes = new WorldWind.PlacemarkAttributes(placemarkAttributes);
+          highlightPlacemarkAttributes.imageScale = 0.1;
+          // highlightPlacemarkAttributes.imageSource = "assets/icons/satellite.png";
+
+          //add colored image depending on sat type
+          switch (sat.OBJECT_TYPE) {
+            case "PAYLOAD":
+              placemarkAttributes.imageSource = "assets/icons/red_dot.png";
+              placemarkAttributes.imageScale = 0.03;
+              break;
+            case "ROCKET BODY":
+              placemarkAttributes.imageSource = "assets/icons/green_dot.png";
+              placemarkAttributes.imageScale = 0.03;
+              break;
+            default:
+              placemarkAttributes.imageSource = "assets/icons/yellow_dot.png";
+              placemarkAttributes.imageScale = 0.08;
+              highlightPlacemarkAttributes.imageScale = 0.3;
+          }
+
+          placemarkAttributes.imageOffset = new WorldWind.Offset(
+            WorldWind.OFFSET_FRACTION, 0.5,
+            WorldWind.OFFSET_FRACTION, 0.5);
+          placemarkAttributes.imageColor = WorldWind.Color.WHITE;
+          placemarkAttributes.labelAttributes.offset = new WorldWind.Offset(
+            WorldWind.OFFSET_FRACTION, 0.5,
+            WorldWind.OFFSET_FRACTION, 1.0);
+          placemarkAttributes.labelAttributes.color = WorldWind.Color.WHITE;
+
+
+          var placemark = new WorldWind.Placemark(everyCurrentPosition[searchSat]);
+          placemark.altitudeMode = WorldWind.RELATIVE_TO_GROUND;
+          placemark.attributes = placemarkAttributes;
+          placemark.highlightAttributes = highlightPlacemarkAttributes;
+
+          satByYearLayer.addRenderable(placemark);
+          }
+        }
+
+      }
+
+      $('#satByYear').click(function () {
+        if ($(this).text() == "YEAR OFF") {
+          $(this).text("YEAR ON");
+          satByYearLayer.enabled = true;
+        }
+        else {
+          $(this).text("YEAR OFF");
+          satByYearLayer.enabled = false;
+        }
+      });*/
+
+
 
       $(document).ready(function () {
-        var url = "data/TLE.json";
-        // prepare the data
-        var source =
-        {
-          datatype: "json",
-          datafields: [
-            {name: 'OBJECT_NAME', type: 'string'},
-            {name: 'OBJECT_TYPE', type: 'string'}
-          ],
-          url: url,
-          async: false
-        };
-        var dataAdapter = new $.jqx.dataAdapter(source);
         // Create a jqxComboBox
         $("#jqxWidget").jqxComboBox({
           selectedIndex: 0,
-          source: dataAdapter,
+          source: satData,
           displayMember: "OBJECT_NAME",
           valueMember: "OBJECT_TYPE",
           width: 220,
