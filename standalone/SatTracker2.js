@@ -93,6 +93,17 @@ function mouseUp(){
 $('#sidebar-wrapper').perfectScrollbar();
 $('#sidebar-wrapper-right').perfectScrollbar();
 
+
+$("#min_button").click(function(){
+  if($(this).html() == "-"){
+    $(this).html("+");
+  }
+  else{
+    $(this).html("-");
+  }
+  $("#box").slideToggle();
+});
+
 var payloads = [];
 var rocketbodies = [];
 var debris = [];
