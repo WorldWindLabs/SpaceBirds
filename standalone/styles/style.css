@@ -59,3 +59,10 @@ body {
 .coolLogo{
     font-family: 'riko';
 }
+#timeBar {
+    text-align: center;
+    position: absolute;
+    z-index: 1;
+    left: 250px;
+    right: 250px;
+}

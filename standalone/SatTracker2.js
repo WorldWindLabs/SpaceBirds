@@ -844,7 +844,7 @@ function getGroundStations(groundStations) {
 
     $(document).ready(function () {
       $("#jqxRangeSlider").jqxSlider({ theme: 'summer', value:
-      { rangeStart: 1950, rangeEnd: 2016 }, rangeSlider: true });
+      { rangeStart: 1950, rangeEnd: 2016 }, rangeSlider: true, width: "viewport" });
     });
     var rangeStart = $("#jqxRangeSlider").jqxSlider('rangeStart');
     var rangeEnd = $("#jqxRangeSlider").jqxSlider('rangeEnd');
@@ -1009,7 +1009,7 @@ function getGroundStations(groundStations) {
           min: -10080,
           mode: 'fixed',
           ticksFrequency: 1440,
-          width: "915px"
+          width: "viewport"
         });
         $('#jqxsliderEvent2').bind('change', function (event) {
           $('#sliderValue2').html(new Date(now.getTime() + event.args.value * 60000));
@@ -1088,7 +1088,7 @@ function getGroundStations(groundStations) {
           min: 0,
           mode: 'fixed',
           ticksFrequency: 1440,
-          width: 250
+          width: "viewport"
         });
         $('#jqxsliderEvent').bind('change', function (event) {
           $('#sliderValue').html(new Date(now.getTime() + event.args.value * 60000));
