@@ -88,6 +88,9 @@ function mouseUp(){
   updatePermission = true;
 }
 
+// Implementing the perfect scrollbar
+$('#sidebar-wrapper').perfectScrollbar();
+$('#sidebar-wrapper-right').perfectScrollbar();
 
 var payloads = [];
 var rocketbodies = [];
