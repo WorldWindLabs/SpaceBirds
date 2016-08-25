@@ -278,7 +278,6 @@ function plotOrbit(orbitalBody){
 //Constantly update satellite updating process time
 setInterval(function(){
   if (updatePermission) {
-    console.log("Me updating");
     updateLoopTime = obtainExecutionTime(updatePositions);
   }
 }, 20000);
