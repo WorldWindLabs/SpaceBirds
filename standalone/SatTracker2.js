@@ -20,8 +20,8 @@ viewControlsLayer.placement = new WorldWind.Offset(WorldWind.OFFSET_FRACTION, 0.
 var layers = [
   {layer: new WorldWind.BMNGLayer(), enabled: true},
   //{layer: new WorldWind.CompassLayer(), enabled: true},
-  {layer: new WorldWind.CoordinatesDisplayLayer(wwd), enabled: true},
-  {layer: viewControlsLayer, enabled: true}
+  {layer: new WorldWind.CoordinatesDisplayLayer(wwd), enabled: false},
+  {layer: viewControlsLayer, enabled: false}
 ];
 
 for (var l = 0; l < layers.length; l++) {
@@ -102,6 +102,16 @@ $("#min_button").click(function(){
     $(this).html("-");
   }
   $("#box").slideToggle();
+});
+
+$("#min_button_right").click(function(){
+  if($(this).html() == "-"){
+    $(this).html("+");
+  }
+  else{
+    $(this).html("-");
+  }
+  $("#box_right").slideToggle();
 });
 
 var payloads = [];
@@ -212,13 +222,6 @@ function getGroundStations(groundStations) {
     var semiMajorAxisPlaceholder = document.getElementById('majorAxis');
     var semiMinorAxisPlaceholder = document.getElementById('minorAxis');
 
-    //TODO: ground station info
-    var gsNamePlaceHolder = document.getElementById('gsName');
-    var gsOrgPlaceHolder = document.getElementById('gsOrg');
-    var gsLatPlaceHolder = document.getElementById('gsLat');
-    var gsLongPlaceHolder = document.getElementById('gsLong');
-    var gsAltPlaceHolder = document.getElementById('gsAlt');
-
     function deg2text(deg, letters) {
       var letter;
       if (deg < 0) {
@@ -290,7 +293,6 @@ function getGroundStations(groundStations) {
       shapeLayer.removeAllRenderables();
     });
 
-    $(document).ready(function () {
       // Create a jqxComboBox
       $("#jqxWidget2").jqxComboBox({
         selectedIndex: 0,
@@ -317,7 +319,6 @@ function getGroundStations(groundStations) {
           }
         }
       });
-    });
     var toGsStation = function (gsindex) {
       //TODO: GS information display
       typePlaceholder.textContent = "Ground Station";
@@ -878,7 +879,7 @@ function getGroundStations(groundStations) {
       var everyCurrentPosition = [];
       for (var j = 0; j < satNum; j++) {
 
-       // satByYear(satData[j]);
+        //satByYear(satData[j]);
 
         var currentPosition = null;
         var time = new Date(now.getTime() + i * 60000);
@@ -955,61 +956,44 @@ function getGroundStations(groundStations) {
         wwd.redraw();
       }
 
-      //TODO add year range
-     /* $(document).ready(function () {
-        $("#jqxRangeSlider").jqxSlider({
-          theme: 'summer',
-          value: {rangeStart: 1950, rangeEnd: 1960},
-          rangeSlider: true,
-          width: "viewport",
-          min: 1950,
-          max: 2016
-        });
+     /* //TODO add year range
+      $("#jqxRangeSlider").jqxSlider({
+        theme: 'summer',
+        value: {rangeStart: 1950, rangeEnd: 1960},
+        rangeSlider: true,
+        width: "viewport",
+        min: 1950,
+        max: 2016
       });
-      var rangeStart = $("#jqxRangeSlider").jqxSlider('rangeStart');
 
       satByYearLayer.enabled = false;
       function satByYear(sat){
 
         var intldes = sat.INTLDES;
-        var searchSat = satNames.indexOf(sat.OBJECT_NAME);
-
         if (intldes.substring(0,2) < 45){
           var yearPartOne = 20;
-          createSatByYear(yearPartOne);
         } else {
           yearPartOne = 19;
-          createSatByYear(yearPartOne);
         }
+        var satYear = yearPartOne + intldes.substring(0, 2);
+        createSatByYear(sat, satYear);
 
-        function createSatByYear(yearPartOne){
-          var satYear = yearPartOne + intldes.substring(0,2);
-          var rangeStart = $("#jqxRangeSlider").jqxSlider('rangeStart');
-          var rangeEnd = $("#jqxRangeSlider").jqxSlider('rangeEnd');
-          console.log(satYear, rangeEnd);
-        if (satYear < value.rangeStart && satYear > value.rangeEnd) {
-          console.log(sat.OBJECT_NAME);
+      }
+      function createSatByYear(sat, satYear) {
+        $('#jqxRangeSlider').jqxSlider({values: [1950, 1960]});
+        var range = $("#jqxRangeSlider").jqxSlider('values');
+        if (range[0] < satYear && range[1] > satyea) {
+          var searchSat = satNames.indexOf(sat.OBJECT_NAME);
+          console.log(searchSat);
+
           var placemarkAttributes = new WorldWind.PlacemarkAttributes(null);
           var highlightPlacemarkAttributes = new WorldWind.PlacemarkAttributes(placemarkAttributes);
           highlightPlacemarkAttributes.imageScale = 0.1;
           // highlightPlacemarkAttributes.imageSource = "assets/icons/satellite.png";
 
-          //add colored image depending on sat type
-          switch (sat.OBJECT_TYPE) {
-            case "PAYLOAD":
-              placemarkAttributes.imageSource = "assets/icons/red_dot.png";
-              placemarkAttributes.imageScale = 0.03;
-              break;
-            case "ROCKET BODY":
-              placemarkAttributes.imageSource = "assets/icons/green_dot.png";
-              placemarkAttributes.imageScale = 0.03;
-              break;
-            default:
-              placemarkAttributes.imageSource = "assets/icons/yellow_dot.png";
-              placemarkAttributes.imageScale = 0.08;
-              highlightPlacemarkAttributes.imageScale = 0.3;
-          }
 
+          placemarkAttributes.imageSource = "assets/icons/red_dot.png";
+          placemarkAttributes.imageScale = 0.03;
           placemarkAttributes.imageOffset = new WorldWind.Offset(
             WorldWind.OFFSET_FRACTION, 0.5,
             WorldWind.OFFSET_FRACTION, 0.5);
@@ -1026,9 +1010,7 @@ function getGroundStations(groundStations) {
           placemark.highlightAttributes = highlightPlacemarkAttributes;
 
           satByYearLayer.addRenderable(placemark);
-          }
         }
-
       }
 
       $('#satByYear').click(function () {
@@ -1043,8 +1025,6 @@ function getGroundStations(groundStations) {
       });*/
 
 
-
-      $(document).ready(function () {
         // Create a jqxComboBox
         $("#jqxWidget").jqxComboBox({
           selectedIndex: 0,
@@ -1086,12 +1066,10 @@ function getGroundStations(groundStations) {
             }
           }
         });
-      });
 
       // Draw
       wwd.redraw();
 
-      $(document).ready(function () {
         $("#jqxsliderEvent2").jqxSlider({
           theme: 'summer',
           value: 0,
@@ -1104,7 +1082,6 @@ function getGroundStations(groundStations) {
         $('#jqxsliderEvent2').bind('change', function (event) {
           $('#sliderValue2').html(new Date(now.getTime() + event.args.value * 60000));
         });
-      });
       $('#jqxButton').on('click', function () {
         $('#jqxsliderEvent2').jqxSlider('setValue', 0);
       });
@@ -1173,7 +1150,6 @@ function getGroundStations(groundStations) {
       };
 
       //Orbit length/time slider
-      $(document).ready(function () {
         $("#jqxsliderEvent").jqxSlider({
           theme: 'summer',
           value: 98,
@@ -1188,7 +1164,6 @@ function getGroundStations(groundStations) {
           $('#sliderValueMin').html('Mins: ' + event.args.value);
 
         });
-      });
 
       //create past and future orbit on click
       var startOrbit;
