@@ -1,6 +1,6 @@
 var fs = require('fs'); //IO filesystem module for node.js
-var orbitalBodies = require('./testTLE.json'); //Currently orbiting satellites' TLE
-//var orbitalBodies = require('./basicTLE.json'); //Currently orbiting satellites' TLE
+//var orbitalBodies = require('./testTLE.json'); //FOR TESTING Currently orbiting satellites' TLE
+var orbitalBodies = require('./basicTLE.json'); //Currently orbiting satellites' TLE
 var satcat = require('./SATCAT.json'); //Catalog with every sat launch in history, with country data
 var launchSites = require('./launchSites.json'); //To retrieve launch site names from SATCAT codes
 var countries = require('./countries.json'); //To retrieve country/owner name from SATCAT codes
@@ -20,27 +20,27 @@ var unknown = [];
 //TODO: Stop using slow, awful linear search. It takes ages to execute. Should use something better later.
 // this thing is easily readable, though.
 console.log('Adding additional data to TLE ...');
-for(var i = 0; numOrbitalbodies = orbitalBodies.length; i < numOrbitalbodies; i += 1){
+for(var i = 0, numOrbitalbodies = orbitalBodies.length; i < numOrbitalbodies; i += 1){
   var start = clock();
-  for (var j = 0; numSatcat = satcat.length; j < numSatcat; j += 1){
+  for (var j = 0, numSatcat = satcat.length; j < numSatcat; j += 1){
     //Adding new fields from SATCAT.json to our customized TLE.json
     if(orbitalBodies[i].NORAD_CAT_ID === satcat[j].NORAD_CAT_ID)
     {
       //Add new keys to TLE json
-      orbitalBodies[i].LAUNCH = satcat[j].LAUNCH; //Launch full date: YYYY-MM-DD
+      orbitalBodies[i].LAUNCH_DATE = satcat[j].LAUNCH; //Launch full date: YYYY-MM-DD
       orbitalBodies[i].LAUNCH_NUM = satcat[j].LAUNCH_NUM; //Consecutive order of launch e.g. Sputnik 1 is launch 1 (with 2 objects)
       orbitalBodies[i].LAUNCH_YEAR = satcat[j].LAUNCH_YEAR; //Launch year only (may be useful to avoid string processing)
       orbitalBodies[i].LAUNCH_PIECE = satcat[j].LAUNCH_PIECE; //Pieces in orbit of the same launch e.g. Sputnik 1 had 2 pieces: rocket and payload
 
       //Retrieve the launch site name from the file launchSites.json
-      for(var k = 0; numLaunchSites = launchSites.length; k < numLaunchSites; k += 1){
+      for(var k = 0, numLaunchSites = launchSites.length; k < numLaunchSites; k += 1){
         if(satcat[j].SITE === launchSites[k].SITE_CODE){
           orbitalBodies[i].LAUNCH_SITE = launchSites[k].LAUNCH_SITE;
         }
       }
 
       //Retrieve the owner name from the file countries.json
-      for(var n = 0; numCountries = countries.length; n < numCountries; n += 1){
+      for(var n = 0, numCountries = countries.length; n < numCountries; n += 1){
         if(satcat[j].COUNTRY === countries[n].SPADOC_CD){
           orbitalBodies[i].OWNER = countries[n].COUNTRY;
         }
@@ -53,7 +53,7 @@ for(var i = 0; numOrbitalbodies = orbitalBodies.length; i < numOrbitalbodies; i 
 console.log('Owner, country, launch site and launch details added to TLE data.');
 
 //Assign orbit type
-for(var i = 0; numOrbitalbodies = orbitalBodies.length; i < numOrbitalbodies; i += 1){
+for(var i = 0, numOrbitalbodies = orbitalBodies.length; i < numOrbitalbodies; i += 1){
   var satellite = orbitalBodies[i]
 
   if(//GEO: 0.99 <= Mean Motion <= 1.01 and Eccentricity < 0.01
@@ -76,13 +76,13 @@ for(var i = 0; numOrbitalbodies = orbitalBodies.length; i < numOrbitalbodies; i 
 
   else if(//LEO: Mean Motion > 11.25 & Eccentricity < 0.25
     (satellite.MEAN_MOTION >= 11.25) &&
-    (satellite.ECCENTRICITY < 0.25) &&
+    (satellite.ECCENTRICITY < 0.25)
   ){
     satellite.ORBIT_TYPE = "Low Earth Orbit";
   }
 
   else if(//HEO: Eccentricity > 0.25
-    (satellite.ECCENTRICITY > 0.25) &&
+    (satellite.ECCENTRICITY > 0.25)
   ){
     satellite.ORBIT_TYPE = "Highly Elliptical Orbit";
   }
@@ -95,7 +95,7 @@ for(var i = 0; numOrbitalbodies = orbitalBodies.length; i < numOrbitalbodies; i 
 //Filter
 //for each option, the OBJECT_TYPE key is deleted before storing
 //it in its filtered array in order to reduce file sizes
-for(var i = 0; numOrbitalbodies = orbitalBodies.length; i < numOrbitalbodies; i += 1){
+for(var i = 0, numOrbitalbodies = orbitalBodies.length; i < numOrbitalbodies; i += 1){
   switch(orbitalBodies[i].OBJECT_TYPE){
     case "PAYLOAD":
       payloads.push(orbitalBodies[i]);
@@ -131,7 +131,7 @@ console.log(" - " + rocketStages.length + " rocket stages");
 console.log(" - " + debris.length + " debris objects");
 console.log(" - " + unknown.length + " uknwown objects");
 
-printFilteredFile(orbitalBodies, 'updatedTLE', function(){
+printFilteredFile(orbitalBodies, 'TLE', function(){
   console.log(" + - + - + - + - + - FINISHED - + - + - + - + - + - + ")
 });
 
