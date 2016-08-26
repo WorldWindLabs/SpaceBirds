@@ -1113,7 +1113,7 @@ grndStationsWorker.addEventListener('message', function (event) {
           if (satData[j].ORBIT_TYPE === "Low Earth Orbit") {
             leoRocketLayer.addRenderable(placemark);
           } else if (satData[j].ORBIT_TYPE === "Middle Earth Orbit") {
-            meoSatLayer.addRenderable(placemark);
+            meoRocketLayer.addRenderable(placemark);
           } else if (satData[j].ORBIT_TYPE === "Geosynchronous") {
             geoRocketLayer.addRenderable(placemark);
           } else if (satData[j].ORBIT_TYPE === "Highly Elliptical Orbit") {
