@@ -99,6 +99,7 @@ var ownerPlaceholder = document.getElementById('owner');
 var launchPlaceholder = document.getElementById('launch');
 var orbitPlaceholder = document.getElementById('orbitType');
 var operationPlaceholder = document.getElementById('operation');
+var trackedPlaceholder = document.getElementById('tracked');
 
 
 //Events to handle updating
@@ -1141,6 +1142,8 @@ grndStationsWorker.addEventListener('message', function (event) {
 
         wwd.redraw();
       }
+
+      trackedPlaceholder.textContent = satData.length;
 
       // Update all Satellite Positions
       var updatePositions = setInterval(function () {
