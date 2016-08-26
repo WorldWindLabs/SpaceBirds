@@ -1340,15 +1340,13 @@ function getGroundStations(groundStations) {
         if (pickList.objects.length == 1 && pickList.objects[0]) {
           var position = pickList.objects[0].position;
           if (position.altitude > 1000) {
-            var index = everyCurrentPosition.indexOf(position);
-            var satPos = everyCurrentPosition[index];
-            orbitsHoverLayer.enabled = false;
-
             endFollow();
             endHoverOrbit();
             endMesh();
             endExtra();
             endOrbit();
+            var index = everyCurrentPosition.indexOf(position);
+            orbitsHoverLayer.enabled = false;
 
             extraData(index);
             $('#mesh').text("MESH ON");
