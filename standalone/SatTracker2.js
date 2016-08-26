@@ -1509,17 +1509,6 @@ grndStationsWorker.addEventListener('message', function (event) {
         if (pickList.objects.length == 1 && pickList.objects[0]) {
           var position = pickList.objects[0].position;
           if (position.altitude > 1000) {
-            typePlaceholder.textContent = satData[index].OBJECT_TYPE;
-            idPlaceholder.textContent = satData[index].OBJECT_ID;
-            namePlaceholder.textContent = satData[index].OBJECT_NAME;
-            ownerPlaceholder.textContent = satData[index].OWNER;
-            launchPlaceholder.textContent = satData[index].LAUNCH_SITE;
-            orbitPlaceholder.textContent = satData[index].ORBIT_TYPE;
-            inclinationPlaceholder.textContent = satData[index].INCLINATION;
-            eccentricityPlaceHolder.textContent = satData[index].ECCENTRICITY;
-            apogeeplaceholder.textContent = satData[index].APOGEE;
-            perigeeplaceholder.textContent = satData[index].PERIGEE;
-            periodPlaceholder.textContent = satData[index].PERIOD;
             //operationPlaceholder.textContent = satData[index].OPERATIONAL_STATUS;
             endFollow();
             endHoverOrbit();
