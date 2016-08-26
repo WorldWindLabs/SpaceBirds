@@ -1235,6 +1235,7 @@ grndStationsWorker.addEventListener('message', function (event) {
           }
         });
 
+
         //Time Control slider
         $("#jqxsliderEvent2").jqxSlider({
           theme: 'summer',
@@ -1243,7 +1244,10 @@ grndStationsWorker.addEventListener('message', function (event) {
           min: -10080,
           mode: 'fixed',
           ticksFrequency: 1440,
-          width: "viewport"
+          width: "viewport",
+          showMinorTicks: true,
+          minorTicksFrequency: 240,
+          showTickLabels: true
         });
         $('#jqxsliderEvent2').bind('change', function (event) {
           $('#sliderValue2').html(new Date(now.getTime() + event.args.value * 60000));
@@ -1733,7 +1737,7 @@ grndStationsWorker.addEventListener('message', function (event) {
               apogeeplaceholder.textContent = satData[index].APOGEE;
               perigeeplaceholder.textContent = satData[index].PERIGEE;
               periodPlaceholder.textContent = satData[index].PERIOD;
-              //operationPlaceholder.textContent = satData[index].OPERATIONAL_STATUS;
+              operationPlaceholder.textContent = satData[index].OPERATIONAL_STATUS;
 
             } catch (err) {
               console.log('error in index ' + index);
