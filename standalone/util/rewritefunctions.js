@@ -2,23 +2,28 @@
 
 //Abstraction of an orbital body
 function orbitalBody(satelliteData){
+  this.intlDes = satelliteData.OBJECT_ID;
   this.objectName = satelliteData.OBJECT_NAME;
-  this.tleLine1 = satelliteData.TLE_LINE1;
-  this.tleLine2 = satelliteData.TLE_LINE2;
-  this.intlDes = satelliteData.INTLDES;
+  this.noradID = satelliteData.NORAD_CAT_ID;
   this.objectType = satelliteData.OBJECT_TYPE;
   this.orbitalPeriod = satelliteData.PERIOD;
-  this.countryOrOperator = satelliteData.COUNTRY;
-  this.launchDate = satelliteData.LAUNCH;
-  //this.launchYear = satelliteData.LAUNCH_YEAR; //Maybe worthwhile to avoid parsing the string of launchDate?
-  this.launchPiece = satelliteData.LAUNCH_PIECE;
-  this.launchSite = satelliteData.SITE;
+  this.inclination = satelliteData.INCLINATION;
+  this.apogee = satelliteData.APOGEE;
+  this.perigee = satelliteData.PERIGEE;
+  this.eccentricity = satelliteData.ECCENTRICITY;
+  this.meanMotion = satelliteData.MEAN_MOTION;
+  this.tleLine1 = satelliteData.TLE_LINE1;
+  this.tleLine2 = satelliteData.TLE_LINE2;
+  this.launchDate = satelliteData.LAUNCH_DATE;
+  this.launchSite = satelliteData.LAUNCH_SITE;
+  this.owner = satelliteData.OWNER;
+  this.orbitType = satelliteData.ORBIT_TYPE;
+  this.operationalStatus = satelliteData.OPERATIONAL_STATUS;
+
   this.latitude = null;
   this.longitude = null;
   this.altitude = null;
-  this.collada3dModel = retrieve3dModelPath(satelliteData.INTLDES);
-  this.orbitType = obtainOrbitType(satelliteData);
-  this.url = null; //to be added to satellite data. Patrick will provide URLs.
+  this.collada3dModel = retrieve3dModelPath(satelliteData.OBJECT_ID);
 }
 
 
@@ -114,11 +119,6 @@ function satelliteUpdating(callbackFunction, timerID, delay){
 function retrieve3dModelPath(intlDes){
   var modelPath = "nothing here yet";
   return modelPath;
-}
-
-function obtainOrbitType(satOrbit){
-  var orbitType = "nothing here yet";
-  return orbitType;
 }
 
 var FixedLocation = function(wwd) {

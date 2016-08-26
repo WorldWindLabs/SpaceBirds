@@ -1061,21 +1061,21 @@ grndStationsWorker.addEventListener('message', function (event) {
 
         var placemarkAttributes = new WorldWind.PlacemarkAttributes(null);
         var highlightPlacemarkAttributes = new WorldWind.PlacemarkAttributes(placemarkAttributes);
-        highlightPlacemarkAttributes.imageScale = 0.1;
+        highlightPlacemarkAttributes.imageScale = 0.5;
 
         //add colored image depending on sat type
         switch (satData[j].OBJECT_TYPE) {
           case "PAYLOAD":
             placemarkAttributes.imageSource = "assets/icons/red_dot.png";
-            placemarkAttributes.imageScale = 0.03;
+            placemarkAttributes.imageScale = 0.3;
             break;
           case "ROCKET BODY":
             placemarkAttributes.imageSource = "assets/icons/green_dot.png";
-            placemarkAttributes.imageScale = 0.03;
+            placemarkAttributes.imageScale = 0.3;
             break;
           default:
-            placemarkAttributes.imageSource = "assets/icons/yellow_dot.png";
-            placemarkAttributes.imageScale = 0.08;
+            placemarkAttributes.imageSource = "assets/icons/grey_dot.png";
+            placemarkAttributes.imageScale = 0.2;
             highlightPlacemarkAttributes.imageScale = 0.3;
         }
 
