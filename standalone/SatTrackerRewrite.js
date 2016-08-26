@@ -81,7 +81,7 @@ var orbitsLayer = new WorldWind.RenderableLayer("Orbits");
 function getSatellites(satData){
   var faultySatsNumber = 0;
   var orbitalBodiesNumber = 0;
-  for(var i = 0; i < satData.length; i += 1){
+  for(var i = 0, numSatData = satData.length; i < numSatData; i += 1){
     //Cleaning up satellites with problematic TLE data (probably objects that are about to deorbit)
     //TODO: moving this to the node.js backend stuff
     try{
@@ -159,7 +159,7 @@ function updatePositions(){
   var rocketCounter = 0;
   var debrisCounter = 0;
 
-  for (var i = 0; i < allOrbitingBodies.length; i += 1) {
+  for (var i = 0, numallOrbitingBodies = allOrbitingBodies.length; i < numallOrbitingBodies; i += 1) {
     var newPosition = getPosition(
       satellite.twoline2satrec(
         allOrbitingBodies[i].tleLine1,
