@@ -40,9 +40,14 @@
 <!--time bar-->
 
 <div id="timeBar">
-    <div class="coolLogo" style="color: white">TIME CONTROL</div>
+    <div class="coolLogo" style="color: white; display: inline;">TIME CONTROL
+        <button style="font-size:65%; right: 20px; position: absolute; width: 65px; height: 25px; max-height:25px; background-color: #d1d1d1; color: black; padding: 0.1em 0.1em 0.1em 0.1em"
+                id="jqxButton">To Date
+        </button>
+    </div>
     <div id='jqxsliderEvent2'></div>
     <div style="color: white; font-size:20px; text-align: left" id="sliderValue2"></div>
+
 </div>
 
 
@@ -56,10 +61,13 @@
             <ul>
                 <br>
                 <li>
-                    <div class="coolLogo" style="font-size:25px; color: white;" >
+                    <div class="coolLogo" style="font-size:25px; color: white;">
                         <img src="assets/images/spacebirdlogo.png" height="6%" width="6%">
                         <u style="font-size: 20px; display: inline">SPACEBIRDS<span style="font-size: 8px !important;">0.6</span>
-                            <div id="min_button" style="right: 10px!important;cursor:pointer;font-size:35px; display: inline; position: absolute">-</div>
+                            <div id="min_button"
+                                 style="right: 10px!important;cursor:pointer;font-size:35px; display: inline; position: absolute">
+                                -
+                            </div>
                         </u>
                     </div>
                 </li>
@@ -74,11 +82,11 @@
                 </li>
                 <li>
                     <a href="#" style="padding-left: 20px">
-                        <spam id='content'>
+                        <span id='content'>
                             <div id='jqxWidget'>
                             </div>
                             <div style="font-size: 12px; font-family: Verdana;" id="selectionlog"></div>
-                        </spam>
+                        </span>
                     </a>
                 </li>
                 <li>
@@ -94,7 +102,7 @@
                 </li>
                 <li>
                     <a href="#">
-                        <spam id="allSats">ALL ON</spam>
+                        <span id="allSats">ALL ON</span>
                     </a>
                 </li>
                 <li>
@@ -102,18 +110,18 @@
                 </li>
                 <li>
                     <a href="#">
-                        <spam id="rockets">ROCKETS OFF</spam>
+                        <span id="rockets">ROCKETS OFF</span>
                     </a>
                 </li>
                 <li>
                     <a href="#">
-                        <spam id="debris">DEBRIS OFF</spam>
+                        <span id="debris">DEBRIS OFF</span>
                     </a>
                 </li>
                 <br>
                 <li>
                     <a href="#">
-                        <spam id="satByYear">YEAR OFF</spam>
+                        <span id="satByYear">YEAR OFF</span>
                     </a>
                 </li>
                 <br>
@@ -125,108 +133,108 @@
                     </a>
                 </li>
 
-                <li>
-                    <div id='jqxsliderEvent'></div>
-                    <div style="color: white; font-size:12px" id="sliderValue"></div>
-                    <div style="color: white; font-size:12px" id="sliderValueMin"></div>
-                </li>
+                    <li>
+                        <div id='jqxsliderEvent'></div>
+                        <div style="color: white; font-size:12px" id="sliderValue"></div>
+                        <div style="color: white; font-size:12px" id="sliderValueMin"></div>
+                    </li>
 
-                <li>
-                    <a href="#">
-                        <spam id="leo">LEO ON</spam>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <spam id="meo">MEO ON</spam>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <spam id="heo">HEO ON</spam>
-                    </a>
-                </li>
-                <br>
-                <li>
-                    <a href="#">
-                        <h4 class="coolLogo" style="color: white">
-                            <u>TOOLS</u>
-                        </h4>
-                    </a>
-                </li>
-                <li>
-                    <a href="javascript:toggleRepresentation();" id="representation">3D</a>
-                </li>
-                <li>
-                    <a href="#">
-                        <spam id="follow">FOLLOW OFF</spam>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <spam id="mesh">MESH OFF</spam>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <spam id="orbit">ORBIT OFF</spam>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <spam id="collada">3D MODEL OFF</spam>
-                    </a>
+                    <li>
+                        <a href="#">
+                            <span id="leo">LEO ON</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span id="meo">MEO ON</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span id="heo">HEO ON</span>
+                        </a>
+                    </li>
+                    <br>
+                    <li>
+                        <a href="#">
+                            <h4 class="coolLogo" style="color: white">
+                                <u>TOOLS</u>
+                            </h4>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:toggleRepresentation();" id="representation">3D</a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span id="follow">FOLLOW OFF</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span id="mesh">MESH OFF</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span id="orbit">ORBIT OFF</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span id="collada">3D MODEL OFF</span>
+                        </a>
 
-                </li>
-                <br>
-                <li>
-                    <a href="#">
-                        <h4 class="coolLogo" style="color: white; font-size: 15px">
-                            <u>GROUND STATIONS(GS)</u>
-                        </h4>
-                    </a>
-                </li>
-                <li>
-                    <a href="#" style="padding-left: 20px">
-                        <spam id='content'>
-                            <div id='jqxWidget2'>
-                            </div>
-                            <div style="font-size: 12px; font-family: Verdana;" id="selectionlog2"></div>
-                        </spam>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <spam id="gStations">GS OFF</spam>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <spam id="addStation">ADD GS</spam>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <spam id="clearStations">CLEAR GS</spam>
-                    </a>
-                </li>
-                <br>
-                <li>
-                    <a href="#">
-                        <h4 class="coolLogo" style="color: white">
-                            <u>GENERAL</u>
-                        </h4>
-                    </a>
-                </li>
-                <li>
-                    <a href="about.html">ABOUT</a>
-                </li>
-                <li>
-                    <a href="#" id="menu-toggle-right">
-                        <spam id="infoSidebar">INFORMATION PANEL</spam>
-                    </a>
-                </li>
-                <br>
+                    </li>
+                    <br>
+                    <li>
+                        <a href="#">
+                            <h4 class="coolLogo" style="color: white; font-size: 15px">
+                                <u>GROUND STATIONS(GS)</u>
+                            </h4>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" style="padding-left: 20px">
+                            <span id='content'>
+                                <div id='jqxWidget2'>
+                                </div>
+                                <div style="font-size: 12px; font-family: Verdana;" id="selectionlog2"></div>
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span id="gStations">GS OFF</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span id="addStation">ADD GS</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span id="clearStations">CLEAR GS</span>
+                        </a>
+                    </li>
+                    <br>
+                    <li>
+                        <a href="#">
+                            <h4 class="coolLogo" style="color: white">
+                                <u>GENERAL</u>
+                            </h4>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="about.html">ABOUT</a>
+                    </li>
+                    <li>
+                        <a href="#" id="menu-toggle-right">
+                            <span id="infoSidebar">INFORMATION PANEL</span>
+                        </a>
+                    </li>
+                    <br>
                 </div>
             </ul>
             <br>
@@ -235,19 +243,23 @@
     </div>
     <!--Information Sidebar-->
     <div id="wrapper-right">
-        <div id="sidebar-wrapper-right">
+        <div id="sidebar-wrapper-right" style="background-color: transparent">
+
             <br>
-            <h4 class="coolLogo" style="color: white; text-align: center">
-                <a href="#">
-                    <spam id="jqxButton">RESET TIME</spam>
-                </a>
-            </h4>
-            <br>
+
             <h3 style="color: white" class="coolLogo">
                 <img src="assets/images/spacebirdlogo.png" height="5%" width="5%">
-                <u>INFORMATION</u>
+                <u>INFORMATION
+                    <div id="min_button_right"
+                         style="right: 10px!important;cursor:pointer;font-size:35px; display: inline; position: absolute">
+                        -
+                    </div>
+                </u>
                 <img src="assets/images/spacebirdlogo.png" height="5%" width="5%">
             </h3>
+
+                <div id="box_right" style="background-color: rgba(0, 0, 0, 0.5)">
+
             <p>TYPE: <span id="type"></span></p>
             <p>INTLDES: <span id="intldes"></span></p>
             <p>NAME: <span id="name"></span></p>
@@ -280,6 +292,8 @@
             <p>APOGEE: <span id="apogee"></span></p>
             <p>PERIGEE: <span id="perigee"></span></p>
             <p>PERIOD: <span id="period"></span></p>
+                </div>
+
         </div>
     </div>
     <br>

@@ -20,8 +20,8 @@ viewControlsLayer.placement = new WorldWind.Offset(WorldWind.OFFSET_FRACTION, 0.
 var layers = [
   {layer: new WorldWind.BMNGLayer(), enabled: true},
   //{layer: new WorldWind.CompassLayer(), enabled: true},
-  {layer: new WorldWind.CoordinatesDisplayLayer(wwd), enabled: true},
-  {layer: viewControlsLayer, enabled: true}
+  {layer: new WorldWind.CoordinatesDisplayLayer(wwd), enabled: false},
+  {layer: viewControlsLayer, enabled: false}
 ];
 
 for (var l = 0; l < layers.length; l++) {
@@ -102,6 +102,16 @@ $("#min_button").click(function(){
     $(this).html("-");
   }
   $("#box").slideToggle();
+});
+
+$("#min_button_right").click(function(){
+  if($(this).html() == "-"){
+    $(this).html("+");
+  }
+  else{
+    $(this).html("-");
+  }
+  $("#box_right").slideToggle();
 });
 
 var payloads = [];

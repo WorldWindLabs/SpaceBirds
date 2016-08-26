@@ -63,6 +63,7 @@ body {
     text-align: center;
     position: absolute;
     z-index: 1;
+    bottom: 30px;
     left: 250px;
     right: 250px;
 }
