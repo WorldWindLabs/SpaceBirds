@@ -4,13 +4,13 @@ cybermegacat@yahoo.com.mx
 Castillo5p4d3track
 
 Limited TLE for quick tests. DO NOT USE THIS IN PRODUCTION:
-curl --limit-rate 100K -c cookies.txt -b cookies.txt -k https://www.space-track.org/ajaxauth/login -d 'identity=cybermegacat@yahoo.com.mx&password=Castillo5p4d3track&query=https://www.space-track.org/basicspacedata/query/class/tle_latest/predicates/OBJECT_ID,OBJECT_NAME,NORAD_CAT_ID,OBJECT_TYPE,PERIOD,INCLINATION,APOGEE,PERIGEE,ECCENTRICITY,MEAN_MOTION,TLE_LINE1,TLE_LINE2/ORDINAL/1/EPOCH/%3Enow-30/orderby/NORAD_CAT_ID/limit/20/format/json' > 'testTLE.json'
+curl --limit-rate 100K -c cookies.txt -b cookies.txt -k https://www.space-track.org/ajaxauth/login -d 'identity=cybermegacat@yahoo.com.mx&password=Castillo5p4d3track&query=https://www.space-track.org/basicspacedata/query/class/tle_latest/predicates/OBJECT_ID,OBJECT_NAME,NORAD_CAT_ID,OBJECT_TYPE,PERIOD,INCLINATION,APOGEE,PERIGEE,ECCENTRICITY,MEAN_MOTION,TLE_LINE1,TLE_LINE2/ORDINAL/1/EPOCH/%3Enow-30/orderby/NORAD_CAT_ID/limit/100/format/json' > 'testTLE.json'
 
 To get the TLE data:
 curl --limit-rate 100K -c cookies.txt -b cookies.txt -k https://www.space-track.org/ajaxauth/login -d 'identity=cybermegacat@yahoo.com.mx&password=Castillo5p4d3track&query=https://www.space-track.org/basicspacedata/query/class/tle_latest/predicates/OBJECT_ID,OBJECT_NAME,NORAD_CAT_ID,OBJECT_TYPE,PERIOD,INCLINATION,APOGEE,PERIGEE,ECCENTRICITY,MEAN_MOTION,TLE_LINE1,TLE_LINE2/ORDINAL/1/EPOCH/%3Enow-30/orderby/NORAD_CAT_ID/format/json' > 'basicTLE.json'
 
 SATCAT Boxscore (every satellite by country/organization, only has codes)
-curl --limit-rate 100K -c cookies.txt -b cookies.txt -k https://www.space-track.org/ajaxauth/login -d 'identity=cybermegacat@yahoo.com.mx&password=Castillo5p4d3track&query=https://www.space-track.org/basicspacedata/query/class/satcat/predicates/NORAD_CAT_ID,SATNAME,COUNTRY,LAUNCH,SITE,LAUNCH_YEAR,LAUNCH_NUM,LAUNCH_PIECE/orderby/NORAD_CAT_ID/metadata/false' > 'SATCAT.json'
+curl --limit-rate 100K -c cookies.txt -b cookies.txt -k https://www.space-track.org/ajaxauth/login -d 'identity=cybermegacat@yahoo.com.mx&password=Castillo5p4d3track&query=https://www.space-track.org/basicspacedata/query/class/satcat/predicates/NORAD_CAT_ID,SATNAME,COUNTRY,LAUNCH,SITE/orderby/NORAD_CAT_ID/metadata/false' > 'SATCAT.json'
 
 Launch sites names (the SATCAT only has codes)
 curl --limit-rate 100K -c cookies.txt -b cookies.txt -k https://www.space-track.org/ajaxauth/login -d 'identity=cybermegacat@yahoo.com.mx&password=Castillo5p4d3track&query=https://www.space-track.org/basicspacedata/query/class/launch_site/orderby/SITE_CODE%20asc/metadata/false' > 'launchSites.json'
@@ -32,5 +32,5 @@ curl --limit-rate 100K -c cookies.txt -b cookies.txt -k https://www.space-track.
 
 (TODO: Automate this).
 To get the operational status of the satellites, download data from: https://celestrak.com/satcat/search.asp
-with "active" filter. Too bad it doesn't support JSON download. It needs to be converted from an HTML table to JSON.
+with "payloads" and "on orbit" filter. Too bad it doesn't support JSON download. It needs to be converted from an HTML table to JSON.
 Operational codes are here: https://celestrak.com/satcat/status.asp
