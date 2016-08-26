@@ -1,5 +1,6 @@
 var fs = require('fs'); //IO filesystem module for node.js
-var orbitalBodies = require('./basicTLE.json'); //Currently orbiting satellites' TLE
+var orbitalBodies = require('./testTLE.json'); //Currently orbiting satellites' TLE
+//var orbitalBodies = require('./basicTLE.json'); //Currently orbiting satellites' TLE
 var satcat = require('./SATCAT.json'); //Catalog with every sat launch in history, with country data
 var launchSites = require('./launchSites.json'); //To retrieve launch site names from SATCAT codes
 var countries = require('./countries.json'); //To retrieve country/owner name from SATCAT codes
@@ -53,10 +54,43 @@ console.log('Owner, country, launch site and launch details added to TLE data.')
 
 //Assign orbit type
 for(var i = 0; numOrbitalbodies = orbitalBodies.length; i < numOrbitalbodies; i += 1){
+  var satellite = orbitalBodies[i]
 
+  if(//GEO: 0.99 <= Mean Motion <= 1.01 and Eccentricity < 0.01
+    (satellite.MEAN_MOTION >= 0.99) &&
+    (satellite.MEAN_MOTION <= 1.01) &&
+    (satellite.ECCENTRICITY < 0.01)
+   ){
+    satellite.ORBIT_TYPE = "Geosynchronous";
+  }
+
+  else if(//MEO: 600 minutes <= Period <= 800 minutes & Eccentricity < 0.25
+    // (satellite.MEAN_MOTION >= 1.8) &&
+    // (satellite.MEAN_MOTION <= 2.39) &&
+    (satellite.PERIOD >= 600) &&
+    (satellite.PERIOD <= 800) &&
+    (satellite.ECCENTRICITY < 0.25)
+  ){
+    satellite.ORBIT_TYPE = "Middle Earth Orbit";
+  }
+
+  else if(//LEO: Mean Motion > 11.25 & Eccentricity < 0.25
+    (satellite.MEAN_MOTION >= 11.25) &&
+    (satellite.ECCENTRICITY < 0.25) &&
+  ){
+    satellite.ORBIT_TYPE = "Low Earth Orbit";
+  }
+
+  else if(//HEO: Eccentricity > 0.25
+    (satellite.ECCENTRICITY > 0.25) &&
+  ){
+    satellite.ORBIT_TYPE = "Highly Elliptical Orbit";
+  }
+
+  else{
+    satellite.ORBIT_TYPE = "Unclassified orbit";
+  }
 }
-
-
 
 //Filter
 //for each option, the OBJECT_TYPE key is deleted before storing
