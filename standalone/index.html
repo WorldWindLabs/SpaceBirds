@@ -41,13 +41,27 @@
 
 <div id="timeBar">
     <div style="color: white; font-size:20px; text-align: left; right: 650px" id="sliderValue2"></div>
-    <div class="coolLogo" style="color: white; display: inline;">TIME CONTROL
-        <button style="font-size:65%; right: 20px; position: absolute; width: 65px; height: 25px; max-height:25px; background-color: #d1d1d1; color: black; padding: 0.1em 0.1em 0.1em 0.1em"
+    <div class="coolLogo" style="color: white; text-align: left">TIME CONTROL
+        <button style="font-size:65%; width: 65px; height: 25px; max-height:25px; background-color: #d1d1d1; color: black; padding: 0.1em 0.1em 0.1em 0.1em"
                 id="jqxButton">To Date
         </button>
+        <span style="float: right">
+        <button style="font-size:55%; width: 65px; height: 25px; max-height:25px; background-color: #d1d1d1; color: black; padding: 0.1em 0.1em 0.1em 0.1em">
+        <a href="javascript:toggleRepresentation();" id="representation">3D</a>
+        </button>
+        <a href="#" style="align-content: right">
+            <button style="font-size:55%; width: 80px; height: 25px; max-height:25px; background-color: #d1d1d1; color: black; padding: 0.1em 0.1em 0.1em 0.1em"
+                    id="follow">FOLLOW OFF</button>
+            <button style="font-size:55%; width: 70px; height: 25px; max-height:25px; background-color: #d1d1d1; color: black; padding: 0.1em 0.1em 0.1em 0.1em"
+                    id="mesh">MESH OFF</button>
+            <button style="font-size:55%; width: 70px; height: 25px; max-height:25px; background-color: #d1d1d1; color: black; padding: 0.1em 0.1em 0.1em 0.1em"
+                    id="orbit">ORBIT OFF</button>
+            <button style="font-size:55%; width: 70px; height: 25px; max-height:25px; background-color: #d1d1d1; color: black; padding: 0.1em 0.1em 0.1em 0.1em"
+                    id="collada">MODEL OFF</button>
+        </a>
+            </span>
     </div>
     <div style="color: white;" id='jqxsliderEvent2'></div>
-
 </div>
 
 
@@ -126,9 +140,9 @@
                 </li>
 
                 <li>
-                    <li id='jqxsliderEvent'></li>
-                    <li style="color: white; font-size:12px" id="sliderValue"></li>
-                    <li style="color: white; font-size:12px" id="sliderValueMin"></li>
+                <li id='jqxsliderEvent'></li>
+                <li style="color: white; font-size:12px" id="sliderValue"></li>
+                <li style="color: white; font-size:12px" id="sliderValueMin"></li>
                 </li>
 
                 <li>
@@ -155,38 +169,6 @@
                     <a href="#">
                         <span id="unclassified">UNCLASSIFIED ON</span>
                     </a>
-                </li>
-                <br>
-                <li>
-                    <a href="#">
-                        <h4 class="coolLogo" style="color: white">
-                            <u>TOOLS</u>
-                        </h4>
-                    </a>
-                </li>
-                <li>
-                    <a href="javascript:toggleRepresentation();" id="representation">3D</a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span id="follow">FOLLOW OFF</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span id="mesh">MESH OFF</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span id="orbit">ORBIT OFF</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span id="collada">3D MODEL OFF</span>
-                    </a>
-
                 </li>
                 <br>
                 <li>

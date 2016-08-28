@@ -14,7 +14,7 @@ body {
 
 #canvas-holder {
     padding: 0;
-     padding-bottom: 0;
+    padding-bottom: 0;
     padding-top: 0;
     padding-left: 0;
     padding-right: 0;
@@ -22,7 +22,7 @@ body {
     overflow: hidden;
 }
 
-.dropdown>li.clear-option {
+.dropdown > li.clear-option {
     background: #511;
     display: none;
 }
@@ -30,6 +30,7 @@ body {
 .container {
     position: absolute;
 }
+
 #overlay {
     position: absolute;
     left: 10px;
@@ -41,6 +42,7 @@ body {
     right: 300px;
     top: 10px;
 }
+
 #infoBox {
     position: fixed;
     top: 1px;
@@ -52,13 +54,16 @@ body {
     padding-bottom: 10px;
     color: white;
 }
-  @font-face {
-      font-family: 'riko';
-      src: url('../assets/fonts/rikos.regular.ttf') format('truetype');
+
+@font-face {
+    font-family: 'riko';
+    src: url('../assets/fonts/rikos.regular.ttf') format('truetype');
 }
-.coolLogo{
+
+.coolLogo {
     font-family: 'riko';
 }
+
 #timeBar {
     text-align: center;
     position: absolute;
@@ -67,3 +72,4 @@ body {
     left: 250px;
     right: 250px;
 }
+

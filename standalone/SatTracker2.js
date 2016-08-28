@@ -14,8 +14,8 @@ wwd.navigator.range = 5e7;
 
 //Move view controls
 var viewControlsLayer = new WorldWind.ViewControlsLayer(wwd);
-viewControlsLayer.alignment = new WorldWind.Offset(WorldWind.OFFSET_FRACTION, 0.80, WorldWind.OFFSET_FRACTION, 1);
-viewControlsLayer.placement = new WorldWind.Offset(WorldWind.OFFSET_FRACTION, 0.80, WorldWind.OFFSET_FRACTION, 1);
+viewControlsLayer.alignment = new WorldWind.Offset(WorldWind.OFFSET_FRACTION, 0.80, WorldWind.OFFSET_FRACTION, 0.96);
+viewControlsLayer.placement = new WorldWind.Offset(WorldWind.OFFSET_FRACTION, 0.80, WorldWind.OFFSET_FRACTION, 0.96);
 
 var coordinates = new WorldWind.CoordinatesDisplayLayer(wwd);
 coordinates.latText.attributes.color = WorldWind.Color.WHITE;
@@ -223,7 +223,6 @@ function getVelocity(satrec , time) {
     vy * vy +
     vz * vz
   );
-  console.log(satVelocity);
   return satVelocity;
 }
 
@@ -1470,6 +1469,8 @@ grndStationsWorker.addEventListener('message', function (event) {
           revDayPlaceholder.textContent = extra.meanMotion + "rev/day";
           semiMajorAxisPlaceholder.textContent = extra.semiMajorAxis + "km";
           semiMinorAxisPlaceholder.textContent = extra.semiMinorAxis + "km";
+          velocityPlaceholder.textContent = satVelocity[index];
+
         });
       };
       var endExtra = function () {
@@ -1625,14 +1626,14 @@ grndStationsWorker.addEventListener('message', function (event) {
             });
 
             createCollada(index);
-            $('#collada').text('3D MODEL ON');
+            $('#collada').text('MODEL ON');
             $('#collada').click(function () {
-              if ($(this).text() == "3D MODEL OFF") {
-                $(this).text("3D MODEL ON");
+              if ($(this).text() == "MODEL OFF") {
+                $(this).text("MODEL ON");
                 createCollada(index);
               }
               else {
-                $(this).text("3D MODEL OFF");
+                $(this).text("MODEL OFF");
                 modelLayer.removeAllRenderables();
               }
             });
@@ -1803,7 +1804,6 @@ grndStationsWorker.addEventListener('message', function (event) {
               perigeeplaceholder.textContent = satData[index].PERIGEE + "rev/day";
               periodPlaceholder.textContent = satData[index].PERIOD + "hh:mm:ss";
               operationPlaceholder.textContent = satData[index].OPERATIONAL_STATUS;
-              velocityPlaceholder.textContent = satVelocity[index];
 
 
             } catch (err) {
