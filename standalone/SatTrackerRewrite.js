@@ -122,13 +122,13 @@ function getSatellites(satData){
 }
 
 function renderEverything(){
-  //wwd.addLayer(payloadsLayer);
-  //wwd.addLayer(rocketsLayer);
-  //wwd.addLayer(debrisLayer);
+  wwd.addLayer(payloadsLayer);
+  wwd.addLayer(rocketsLayer);
+  wwd.addLayer(debrisLayer);
 
   //Temporary crap
-  plotOrbit(allOrbitingBodies[350]);
-  wwd.addLayer(orbitsLayer);
+  //plotOrbit(allOrbitingBodies[350]);
+  //wwd.addLayer(orbitsLayer);
 
   updateLoopTime = obtainExecutionTime(updatePositions);
   console.log("Updating all satellites' positions took " + updateLoopTime + " ms. " +
@@ -258,7 +258,7 @@ function plotOrbit(orbitalBody){
   var pathAttributes = new WorldWind.ShapeAttributes(null);
   pathAttributes.outlineColor = WorldWind.Color.RED;
   pathAttributes.interiorColor = new WorldWind.Color(1, 0, 0, 0.5);
-  pathAttributes.drawVerticals = true;
+  //pathAttributes.drawVerticals = false;
 
 
   var pastOrbitPath = new WorldWind.Path(pastOrbit);
