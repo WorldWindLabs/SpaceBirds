@@ -92,16 +92,16 @@ function generatePlacemark(orbitalBody){
 
   switch(orbitalBody.objectType) {
     case "PAYLOAD":
-      placemarkAttributes.imageSource = "assets/icons/dot-red.png";
-      placemarkAttributes.imageScale = 0.70;
+      placemarkAttributes.imageSource = "assets/icons/blue_dot.png";
+      placemarkAttributes.imageScale = 0.3;
       break;
     case "ROCKET BODY":
-      placemarkAttributes.imageSource = "assets/icons/dot-blue.png";
-      placemarkAttributes.imageScale = 0.70;
+      placemarkAttributes.imageSource = "assets/icons/yellow_dot.png";
+      placemarkAttributes.imageScale = 0.3;
       break;
     case "DEBRIS":
-      placemarkAttributes.imageSource = "assets/icons/dot-grey.png";
-      placemarkAttributes.imageScale = 0.50;
+      placemarkAttributes.imageSource = "assets/icons/red_dot.png";
+      placemarkAttributes.imageScale = 0.2;
       break;
   }
 

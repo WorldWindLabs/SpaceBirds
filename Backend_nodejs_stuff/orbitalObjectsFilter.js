@@ -1,11 +1,53 @@
 var fs = require('fs'); //IO filesystem module for node.js
+var satellite = require('./Satellite.js');
 
-var orbitalBodies = require('./testTLE.json'); //FOR TESTING Currently orbiting satellites' TLE
-//var orbitalBodies = require('./basicTLE.json'); //Currently orbiting satellites' TLE
+//var orbitalBodies = require('./testTLE.json'); //FOR TESTING Currently orbiting satellites' TLE
+var orbitalBodies = require('./basicTLE.json'); //Currently orbiting satellites' TLE
 var satcat = require('./SATCAT.json'); //Catalog with every sat launch in history, with country data
 var launchSites = require('./launchSites.json'); //To retrieve launch site names from SATCAT codes
 var countries = require('./countries.json'); //To retrieve country/owner name from SATCAT codes
 var operationalSats = require('./non_automated_data/operationalSats.json'); //To retrieve operational status
+
+console.log('Removing faulty sats...');
+
+for(var i = 0, n = orbitalBodies.length; i < n; i += 1){
+  try{
+    getPosition(
+      satellite.twoline2satrec(
+        orbitalBodies[i].tleLine1,
+        orbitalBodies[i].tleLine2),
+      new Date());
+  } catch (error){
+    console.log(error);
+    console.log('Object ' + orbitalBodies[i].NORAD_CAT_ID + ' had an error. Removing it..');
+    orbitalBodies.splice(i,1);
+    break;
+  }
+}
+
+  function getPosition (satrec, time) {
+    var position_and_velocity = satellite.propagate(satrec,
+      time.getUTCFullYear(),
+      time.getUTCMonth() + 1,
+      time.getUTCDate(),
+      time.getUTCHours(),
+      time.getUTCMinutes(),
+      time.getUTCSeconds());
+    var position_eci = position_and_velocity["position"];
+
+    var gmst = satellite.gstime_from_date(time.getUTCFullYear(),
+      time.getUTCMonth() + 1,
+      time.getUTCDate(),
+      time.getUTCHours(),
+      time.getUTCMinutes(),
+      time.getUTCSeconds());
+
+    var position_gd = satellite.eci_to_geodetic(position_eci, gmst);
+    var latitude = satellite.degrees_lat(position_gd["latitude"]);
+    var longitude = satellite.degrees_long(position_gd["longitude"]);
+    var altitude = position_gd["height"] * 1000;
+  };
+
 
 //Many many counters.
 var payloads,

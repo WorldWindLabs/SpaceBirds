@@ -1086,8 +1086,15 @@ grndStationsWorker.addEventListener('message', function (event) {
         var currentPosition = null;
         var time = new Date(now.getTime() + i * 60000);
         getVelocity(satellite.twoline2satrec(satData[j].TLE_LINE1, satData[j].TLE_LINE2), time);
-        satVelocity[j] = satVelocity;
         var position = getPosition(satellite.twoline2satrec(satData[j].TLE_LINE1, satData[j].TLE_LINE2), time);
+        try{
+          satVelocity[j] = satVelocity;
+          var position = getPosition(satellite.twoline2satrec(satData[j].TLE_LINE1, satData[j].TLE_LINE2), time);
+        }catch(err){
+          console.log(err + ' in renderSats, sat ' + j);
+          continue;
+        }
+
         currentPosition = new WorldWind.Position(position.latitude,
           position.longitude,
           position.altitude);
@@ -1188,13 +1195,19 @@ grndStationsWorker.addEventListener('message', function (event) {
           var timeSlide = $('#jqxsliderEvent2').jqxSlider('value');
           var now = new Date();
           var time = new Date(now.getTime() + timeSlide * 60000);
+          try{
+            var position = getPosition(satellite.twoline2satrec(satData[indx].TLE_LINE1, satData[indx].TLE_LINE2), time);
+            satVelocity[indx] = getVelocity(satellite.twoline2satrec(satData[indx].TLE_LINE1, satData[indx].TLE_LINE2), time);
 
-          var position = getPosition(satellite.twoline2satrec(satData[indx].TLE_LINE1, satData[indx].TLE_LINE2), time);
+          }catch(err){
+            console.log(err + ' in updatePositions interval, sat ' + indx);
+            continue;
+          }
+
           everyCurrentPosition[indx].latitude = position.latitude;
           everyCurrentPosition[indx].longitude = position.longitude;
           everyCurrentPosition[indx].altitude = position.altitude;
 
-          satVelocity[indx] = getVelocity(satellite.twoline2satrec(satData[indx].TLE_LINE1, satData[indx].TLE_LINE2), time);
         }
         wwd.redraw();
       }, updateTime * 1.5);
@@ -1334,7 +1347,12 @@ grndStationsWorker.addEventListener('message', function (event) {
         //Changes center point of view.
         wwd.navigator.lookAtLocation.altitude = satPos.altitude;
         startFollow = window.setInterval(function () {
-          var position = getPosition(satellite.twoline2satrec(satData[index].TLE_LINE1, satData[index].TLE_LINE2), new Date());
+          try{
+            var position = getPosition(satellite.twoline2satrec(satData[index].TLE_LINE1, satData[index].TLE_LINE2), new Date());
+          }catch(err){
+            console.log(err + ' in toCurrentPosition, sat ' + indx);
+            //continue;
+          }
           //change view position
           wwd.navigator.lookAtLocation.latitude = satPos.latitude;
           wwd.navigator.lookAtLocation.longitude = satPos.longitude;
@@ -1383,8 +1401,12 @@ grndStationsWorker.addEventListener('message', function (event) {
           var futureOrbit = [];
           for (var i = -orbitRange; i <= orbitRange; i++) {
             var time = new Date(now.getTime() + (i * 60000) + (timeSlide * 60000));
-
-            var position = getPosition(satellite.twoline2satrec(satData[index].TLE_LINE1, satData[index].TLE_LINE2), time);
+            try{
+              var position = getPosition(satellite.twoline2satrec(satData[index].TLE_LINE1, satData[index].TLE_LINE2), time);
+            }catch(err){
+              console.log(err + ' in createOrbit, sat ' + index);
+              continue;
+            }
 
             if (i <= 0) {
               pastOrbit.push(position);
@@ -1668,8 +1690,12 @@ grndStationsWorker.addEventListener('message', function (event) {
           var futureOrbit = [];
           for (var i = -98; i <= 98; i++) {
             var time = new Date(now.getTime() + (i * 60000) + (timeSlide * 60000));
-
-            var position = getPosition(satellite.twoline2satrec(satData[index].TLE_LINE1, satData[index].TLE_LINE2), time);
+            try{
+              var position = getPosition(satellite.twoline2satrec(satData[index].TLE_LINE1, satData[index].TLE_LINE2), time);
+            }catch(err){
+              console.log(err + ' in createHoverOrbit, sat ' + index);
+              continue;
+            }
 
             if (i < 0) {
               pastOrbit.push(position);
