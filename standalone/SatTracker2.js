@@ -1055,8 +1055,8 @@ grndStationsWorker.addEventListener('message', function (event) {
         try{
           var position = getPosition(satellite.twoline2satrec(satData[j].TLE_LINE1, satData[j].TLE_LINE2), time);
         }catch(err){
-          console.log(err + 'in renderSats, sat ' + j);
-          //continue;
+          console.log(err + ' in renderSats, sat ' + j);
+          continue;
         }
 
         currentPosition = new WorldWind.Position(position.latitude,
@@ -1160,8 +1160,8 @@ grndStationsWorker.addEventListener('message', function (event) {
           try{
             var position = getPosition(satellite.twoline2satrec(satData[indx].TLE_LINE1, satData[indx].TLE_LINE2), time);
           }catch(err){
-            console.log(err + 'in updatePositions, sat ' + indx);
-            //continue;
+            console.log(err + ' in updatePositions interval, sat ' + indx);
+            continue;
           }
 
           everyCurrentPosition[indx].latitude = position.latitude;
@@ -1304,9 +1304,8 @@ grndStationsWorker.addEventListener('message', function (event) {
         startFollow = window.setInterval(function () {
           try{
             var position = getPosition(satellite.twoline2satrec(satData[index].TLE_LINE1, satData[index].TLE_LINE2), new Date());
-
           }catch(err){
-            console.log(err + 'in toCurrentPosition, sat ' + indx);
+            console.log(err + ' in toCurrentPosition, sat ' + indx);
             //continue;
           }
           //change view position
@@ -1360,8 +1359,8 @@ grndStationsWorker.addEventListener('message', function (event) {
             try{
               var position = getPosition(satellite.twoline2satrec(satData[index].TLE_LINE1, satData[index].TLE_LINE2), time);
             }catch(err){
-              console.log(err + 'in createOrbit, sat ' + index);
-              //continue;
+              console.log(err + ' in createOrbit, sat ' + index);
+              continue;
             }
 
             if (i <= 0) {
@@ -1649,8 +1648,8 @@ grndStationsWorker.addEventListener('message', function (event) {
             try{
               var position = getPosition(satellite.twoline2satrec(satData[index].TLE_LINE1, satData[index].TLE_LINE2), time);
             }catch(err){
-              console.log(err + 'in createHoverOrbit, sat ' + index);
-              //continue;
+              console.log(err + ' in createHoverOrbit, sat ' + index);
+              continue;
             }
 
             if (i < 0) {
