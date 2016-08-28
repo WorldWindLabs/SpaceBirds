@@ -48,6 +48,8 @@ var orbitsHoverLayer = new WorldWind.RenderableLayer();
 var modelLayer = new WorldWind.RenderableLayer("Model");
 var meshLayer = new WorldWind.RenderableLayer();
 var orbitsLayer = new WorldWind.RenderableLayer("Orbit");
+var customOrbitLayer = new WorldWind.RenderableLayer("Orbit");
+var customSatLayer = new WorldWind.RenderableLayer("custom");
 var leoSatLayer = new WorldWind.RenderableLayer("LEO Payloads");
 var meoSatLayer = new WorldWind.RenderableLayer("MEO Payloads");
 var heoSatLayer = new WorldWind.RenderableLayer("HEO Payloads");
@@ -68,6 +70,7 @@ var unclassifiedDebrisLayer = new WorldWind.RenderableLayer("UnclassifiedDebris"
 wwd.addLayer(groundStationsLayer);
 wwd.addLayer(shapeLayer);
 wwd.addLayer(orbitsHoverLayer);
+wwd.addLayer(customSatLayer);
 wwd.addLayer(leoSatLayer);
 wwd.addLayer(meoSatLayer);
 wwd.addLayer(heoSatLayer);
@@ -394,6 +397,7 @@ grndStationsWorker.addEventListener('message', function (event) {
     meoDebrisLayer.enabled = false;
     heoDebrisLayer.enabled = false;
     unclassifiedDebrisLayer.enabled = false;
+    customSatLayer.enabled = false;
 
     var satNum = satPac.length;
     //Sat Type toggles
@@ -1064,6 +1068,15 @@ grndStationsWorker.addEventListener('message', function (event) {
         unclassifiedToggleOff();
       }
     });
+    $('#custom').click(function(){
+      if ($(this).text() == "CUSTOM OFF") {
+        $(this).text("CUSTOM ON");
+        customSatLayer.enabled = true;
+      } else {
+        $(this).text("CUSTOM OFF");
+        customSatLayer.enabled = false;
+      }
+    });
 
     $('#gStations').click(function () {
       if ($(this).text() == "GS OFF") {
@@ -1078,6 +1091,7 @@ grndStationsWorker.addEventListener('message', function (event) {
 
     //plots all sats
     function renderSats(satData) {
+      trackedPlaceholder.textContent = satData.length;
       var satNames = [];
       var now = new Date();
       var everyCurrentPosition = [];
@@ -1086,10 +1100,10 @@ grndStationsWorker.addEventListener('message', function (event) {
         var time = new Date(now.getTime() + i * 60000);
         getVelocity(satellite.twoline2satrec(satData[j].TLE_LINE1, satData[j].TLE_LINE2), time);
         var position = getPosition(satellite.twoline2satrec(satData[j].TLE_LINE1, satData[j].TLE_LINE2), time);
-        try{
+        try {
           satVelocity[j] = satVelocity;
           var position = getPosition(satellite.twoline2satrec(satData[j].TLE_LINE1, satData[j].TLE_LINE2), time);
-        }catch(err){
+        } catch (err) {
           console.log(err + ' in renderSats, sat ' + j);
           continue;
         }
@@ -1147,7 +1161,7 @@ grndStationsWorker.addEventListener('message', function (event) {
             heoSatLayer.addRenderable(placemark);
           } else if (satData[j].ORBIT_TYPE === "Unclassified") {
             unclassifiedSatLayer.addRenderable(placemark);
-          }else{
+          } else {
             console.log(satData[j].ORBIT_TYPE);
           }
         } else if (satData[j].OBJECT_TYPE === "ROCKET BODY") {
@@ -1161,7 +1175,7 @@ grndStationsWorker.addEventListener('message', function (event) {
             heoRocketLayer.addRenderable(placemark);
           } else if (satData[j].ORBIT_TYPE === "Unclassified") {
             unclassifiedRocketLayer.addRenderable(placemark);
-          }else{
+          } else {
             console.log(satData[j].ORBIT_TYPE);
           }
         } else if (satData[j].OBJECT_TYPE === "DEBRIS") {
@@ -1175,7 +1189,7 @@ grndStationsWorker.addEventListener('message', function (event) {
             heoDebrisLayer.addRenderable(placemark);
           } else if (satData[j].ORBIT_TYPE === "Unclassified") {
             unclassifiedDebrisLayer.addRenderable(placemark);
-          }else {
+          } else {
             console.log(satData[j].ORBIT_TYPE);
           }
         }
@@ -1183,7 +1197,55 @@ grndStationsWorker.addEventListener('message', function (event) {
         wwd.redraw();
       }
 
-      trackedPlaceholder.textContent = satData.length;
+      var customSats = [];
+      var customSatStuff = function (index) {
+        customSats.push(satData[index]);
+        createCustom(index);
+      };
+      var createCustom = function(index){
+        for (var j = 0; j < customSats.length; j++) {
+          var placemarkAttributes = new WorldWind.PlacemarkAttributes(null);
+          var highlightPlacemarkAttributes = new WorldWind.PlacemarkAttributes(placemarkAttributes);
+          highlightPlacemarkAttributes.imageScale = 0.5;
+
+          //add colored image depending on sat type
+          switch (satData[index].OBJECT_TYPE) {
+            case "PAYLOAD":
+              placemarkAttributes.imageSource = "assets/icons/red_dot.png";
+              placemarkAttributes.imageScale = 0.4;
+              break;
+            case "ROCKET BODY":
+              placemarkAttributes.imageSource = "assets/icons/green_dot.png";
+              placemarkAttributes.imageScale = 0.4;
+              break;
+            default:
+              placemarkAttributes.imageSource = "assets/icons/grey_dot.png";
+              placemarkAttributes.imageScale = 0.35;
+              highlightPlacemarkAttributes.imageScale = 0.3;
+          }
+
+          placemarkAttributes.imageOffset = new WorldWind.Offset(
+            WorldWind.OFFSET_FRACTION, 0.5,
+            WorldWind.OFFSET_FRACTION, 0.5);
+          placemarkAttributes.imageColor = WorldWind.Color.WHITE;
+          placemarkAttributes.labelAttributes.offset = new WorldWind.Offset(
+            WorldWind.OFFSET_FRACTION, 0.5,
+            WorldWind.OFFSET_FRACTION, 1.0);
+          placemarkAttributes.labelAttributes.color = WorldWind.Color.WHITE;
+
+
+          var placemark = new WorldWind.Placemark(everyCurrentPosition[index]);
+          placemark.altitudeMode = WorldWind.RELATIVE_TO_GROUND;
+          placemark.attributes = placemarkAttributes;
+          placemark.highlightAttributes = highlightPlacemarkAttributes;
+
+          console.log("added" + satData[index].OBJECT_NAME);
+
+          customSatLayer.addRenderable(placemark);
+        }
+        wwd.redraw();
+      };
+
 
       // Update all Satellite Positions
       var updatePositions = setInterval(function () {
@@ -1194,11 +1256,11 @@ grndStationsWorker.addEventListener('message', function (event) {
           var timeSlide = $('#jqxsliderEvent2').jqxSlider('value');
           var now = new Date();
           var time = new Date(now.getTime() + timeSlide * 60000);
-          try{
+          try {
             var position = getPosition(satellite.twoline2satrec(satData[indx].TLE_LINE1, satData[indx].TLE_LINE2), time);
             satVelocity[indx] = getVelocity(satellite.twoline2satrec(satData[indx].TLE_LINE1, satData[indx].TLE_LINE2), time);
 
-          }catch(err){
+          } catch (err) {
             console.log(err + ' in updatePositions interval, sat ' + indx);
             continue;
           }
@@ -1212,9 +1274,9 @@ grndStationsWorker.addEventListener('message', function (event) {
       }, updateTime * 1.5);
 
 
-/***
- * HTML interface Controls *
- * ***/
+      /***
+       * HTML interface Controls *
+       * ***/
 
       // Create search box for GS's
       $("#jqxWidget2").jqxComboBox({
@@ -1244,65 +1306,66 @@ grndStationsWorker.addEventListener('message', function (event) {
         }
       });
 
-        // Create search box for Satellites
-        $("#jqxWidget").jqxComboBox({
-          selectedIndex: 0,
-          source: satData,
-          displayMember: "OBJECT_NAME",
-          valueMember: "OBJECT_TYPE",
-          width: 220,
-          height: 30
-        });
-        // trigger the select event.
-        $("#jqxWidget").on('select', function (event) {
-          if (event.args) {
-            var item = event.args.item;
-            if (item) {
-              var valueElement = $("<div></div>");
-              valueElement.text("Type: " + item.value);
-              var labelElement = $("<div></div>");
-              labelElement.text("Name: " + item.label);
-              $("#selectionlog").children().remove();
-              $("#selectionlog").append(labelElement);
-              $("#selectionlog").append(valueElement);
-              console.log(item.label);
-              console.log(satNames[1]);
-              endFollow();
-              endMesh();
-              endOrbit();
-              endExtra();
-              var searchSat = satNames.indexOf(item.label);
-              console.log(searchSat);
-              toCurrentPosition(searchSat);
-              meshToCurrentPosition(searchSat);
-              createOrbit(searchSat);
-              extraData(searchSat);
-              createCollada(searchSat);
-              typePlaceholder.textContent = satData[searchSat].OBJECT_TYPE;
-              idPlaceholder.textContent = satData[searchSat].OBJECT_ID;
-              namePlaceholder.textContent = satData[searchSat].OBJECT_NAME;
+      // Create search box for Satellites
+      $("#jqxWidget").jqxComboBox({
+        selectedIndex: 0,
+        source: satData,
+        displayMember: "OBJECT_NAME",
+        valueMember: "OWNER",
+        width: 220,
+        height: 30,
+        placeHolder: "SATELLITE NAME"
+      });
+      // trigger the select event.
+      $("#jqxWidget").on('select', function (event) {
+        if (event.args) {
+          var item = event.args.item;
+          if (item) {
+            var valueElement = $("<div></div>");
+            valueElement.text("Owner: " + item.value);
+            var labelElement = $("<div></div>");
+            labelElement.text("Name: " + item.label);
+            $("#selectionlog").children().remove();
+            $("#selectionlog").append(labelElement);
+            $("#selectionlog").append(valueElement);
+            console.log(item.label);
+            console.log(satNames[1]);
+            endFollow();
+            endMesh();
+            endOrbit();
+            endExtra();
+            var searchSat = satNames.indexOf(item.label);
+            console.log(searchSat);
+            toCurrentPosition(searchSat);
+            meshToCurrentPosition(searchSat);
+            createOrbit(searchSat);
+            extraData(searchSat);
+            createCollada(searchSat);
+            typePlaceholder.textContent = satData[searchSat].OBJECT_TYPE;
+            idPlaceholder.textContent = satData[searchSat].OBJECT_ID;
+            namePlaceholder.textContent = satData[searchSat].OBJECT_NAME;
 
-            }
           }
-        });
+        }
+      });
 
 
-        //Time Control slider
-        $("#jqxsliderEvent2").jqxSlider({
-          theme: 'summer',
-          value: 0,
-          max: 10080,
-          min: -10080,
-          mode: 'fixed',
-          ticksFrequency: 1440,
-          width: "viewport",
-          showMinorTicks: true,
-          minorTicksFrequency: 240,
-          showTickLabels: true
-        });
-        $('#jqxsliderEvent2').bind('change', function (event) {
-          $('#sliderValue2').html(new Date(now.getTime() + event.args.value * 60000));
-        });
+      //Time Control slider
+      $("#jqxsliderEvent2").jqxSlider({
+        theme: 'summer',
+        value: 0,
+        max: 10080,
+        min: -10080,
+        mode: 'fixed',
+        ticksFrequency: 1440,
+        width: "viewport",
+        showMinorTicks: true,
+        minorTicksFrequency: 240,
+        showTickLabels: true
+      });
+      $('#jqxsliderEvent2').bind('change', function (event) {
+        $('#sliderValue2').html(new Date(now.getTime() + event.args.value * 60000));
+      });
       $('#jqxButton').on('click', function () {
         $('#jqxsliderEvent2').jqxSlider('setValue', 0);
       });
@@ -1333,8 +1396,6 @@ grndStationsWorker.addEventListener('message', function (event) {
        max: 2016
        }); */
 
-
-
 /****
  * Click-handle functions
  */
@@ -1356,6 +1417,9 @@ grndStationsWorker.addEventListener('message', function (event) {
           wwd.navigator.lookAtLocation.latitude = satPos.latitude;
           wwd.navigator.lookAtLocation.longitude = satPos.longitude;
           updateLLA(position);
+        });
+        $('#customSat').click(function () {
+          customSatStuff(index);
         });
       };
       var endFollow = function () {     //ends startFollow window.setInterval
