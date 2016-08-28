@@ -374,7 +374,7 @@ grndStationsWorker.addEventListener('message', function (event) {
         //moves to GS location
         wwd.goTo(new WorldWind.Location(groundStations[groundsIndex[0]].LATITUDE, groundStations[groundsIndex[0]].LONGITUDE));
 
-        //TODO: turn on shape for current GS
+        //turn on shape for current GS
         $('#addStation').click(function () {
           var gsAttributes = new WorldWind.ShapeAttributes(null);
           gsAttributes.outlineColor = new WorldWind.Color(0, 255, 255, 1);
@@ -501,19 +501,14 @@ grndStationsWorker.addEventListener('message', function (event) {
           orbitToggle.unclassifiedR = 0;
           orbitToggle.unclassifiedD = 0;
 
-          // leoSatLayer.enabled = false;
           leoRocketLayer.enabled = false;
           leoDebrisLayer.enabled = false;
-          // meoSatLayer.enabled = false;
           meoRocketLayer.enabled = false;
           meoDebrisLayer.enabled = false;
-          // heoSatLayer.enabled = false;
           heoRocketLayer.enabled = false;
           heoDebrisLayer.enabled = false;
-          // geoSatLayer.enabled = false;
           geoRocketLayer.enabled = false;
           geoDebrisLayer.enabled = false;
-          //unclassifiedSatLayer.enabled = false;
           unclassifiedRocketLayer.enabled = false;
           unclassifiedDebrisLayer.enabled = false;
         }
@@ -570,19 +565,14 @@ grndStationsWorker.addEventListener('message', function (event) {
           orbitToggle.unclassifiedR = 0;
           orbitToggle.unclassifiedD = 0;
           leoSatLayer.enabled = false;
-          //leoRocketLayer.enabled = false;
           leoDebrisLayer.enabled = false;
           meoSatLayer.enabled = false;
-          // meoRocketLayer.enabled = false;
           meoDebrisLayer.enabled = false;
           heoSatLayer.enabled = false;
-          //heoRocketLayer.enabled = false;
           heoDebrisLayer.enabled = false;
           geoSatLayer.enabled = false;
-          //geoRocketLayer.enabled = false;
           geoDebrisLayer.enabled = false;
           unclassifiedSatLayer.enabled = false;
-         // unclassifiedRocketLayer.enabled = false;
           unclassifiedDebrisLayer.enabled = false;
         }
         $('#allSats').text("ALL OFF");
@@ -638,19 +628,14 @@ grndStationsWorker.addEventListener('message', function (event) {
           orbitToggle.unclassifiedD = 0;
           leoSatLayer.enabled = false;
           leoRocketLayer.enabled = false;
-          //leoDebrisLayer.enabled = false;
           meoSatLayer.enabled = false;
           meoRocketLayer.enabled = false;
-          // meoDebrisLayer.enabled = false;
           heoSatLayer.enabled = false;
           heoRocketLayer.enabled = false;
-          // heoDebrisLayer.enabled = false;
           geoSatLayer.enabled = false;
           geoRocketLayer.enabled = false;
-          //geoDebrisLayer.enabled = false;
           unclassifiedSatLayer.enabled = false;
           unclassifiedRocketLayer.enabled = false;
-          //unclassifiedDebrisLayer.enabled = false;
         }
         $('#allSats').text("ALL OFF");
         $('#leo').text("LEO ON");
