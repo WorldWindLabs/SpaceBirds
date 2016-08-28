@@ -10,79 +10,143 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js" type="text/javascript"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="perfectscrollbar/perfect-scrollbar.min.css"/>
+
+    <script src="perfectscrollbar/perfect-scrollbar.jquery.min.js"></script>
+    <title>SPACEBIRDS</title>
 </head>
 <body>
-<div id="globe" class="container; width: 100%; height: auto">
-  <div>Representation: <a href="javascript:toggleRepresentation();" id="representation">3D</a></div>
-  <canvas id="canvasOne" width="1280" height="720" style= "color:white; background-image: url('assets/images/space.jpeg'); width: 100%; height: 100%" >
-      Your browser does not support HTML5 Canvas.
-  </canvas>
-  <!-- <div id="overlay">
-      <header style="color:white">
-        <h1 style="text-align: left">SpaceBirds Satellite tracker</h1>
-        <div style="color:black">
-          <button class="allSats">ALL OFF</button>
-          <button class="payloads">PAYLOADS OFF</button>
-          <button class="rockets">ROCKETS OFF</button>
-          <button class="debris">DEBRIS OFF</button>
-          <button class="unknown">UNKNOWN OFF</button>
-        </div>
-        <br>
-        <div style="color:black">
-          <h4 style="color:white">Orbit Range:</h4>
-          <button class="leo">LEO ON</button>
-          <button class="meo">MEO ON</button>
-          <button class="heo">HEO ON</button>
-        </div>
-        <br>
-        <div style="color:black">
-          <h4 style="color: white">Tools:</h4>
-          <button class='follow'>Follow On</button>
-          <button class='mesh'>Mesh On</button>
-        </div>
-        <br>
-        <div style="color: black">
-          <h4 style="color: white">Ground Stations</h4>
-          <button class='gStations'>GS OFF</button>
-        </div>
-      </header>
-  </div>
-    <div id="overlay2" style="color: black">
-      <div class="col-sm-2" style="width: 150px">
-        <h4>Projection</h4>
-        <div class="dropdown" id="projectionDropdown">
-        </div>
-      </div>
+<style media="screen" type="text/css" scoped>
+    body {
+        background: url('assets/images/space.jpeg') no-repeat center center fixed;
+        -moz-background-size: cover;
+        -webkit-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+    }
+</style>
+<div>
+<canvas id="canvasOne" width="1280" height="720"
+        style="color:white; width: 100%; height: 100%; z-index: 100;">
+    Your browser does not support HTML5 Canvas.
+</canvas>
+
+
+    <!--<div>Representation: <a href="javascript:toggleRepresentation();" id="representation">3D</a></div>-->
+    <br/>
+    <div class="coolLogo" style="z-index: 500">
+        <img src="assets/images/spacebirdlogo.png" width="25px">
+        <h3 style="font-size: 20px; display: inline;">SPACEBIRDS</h3>
     </div>
-    <div id="infoBox">
-      <h4 style="color: white">Sat Info:</h4>
-      <p>SAT TYPE: <span id="type"></span></p>
-      <p>INTLDES: <span id="intldes"></span></p>
-      <p>NAME: <span id="name"></span></p>
-      <br>
-      <h4>Sat Position:</h4>
-      <p>LATITUDE: <span id="latitude"></span></p>
-      <p>LONGITUDE: <span id="longitude"></span></p>
-      <p>ALTITUDE: <span id="altitude"></span></p>
-      <br>
-      <h4>AXIS:</h4>
-      <p>SEMI-MAJOR: <span id="majorAxis"></span></p>
-      <p>SEMI-MINOR: <span id="minorAxis"></span></p>
-      <br>
-      <h4>Extra Data:</h4>
-      <p>INCLINE: <span id="inclination"></span></p>
-      <p>ECCENTRICITY: <span id="eccentricity"></span></p>
-      <p>REV/DAY: <span id="revDay"></span></p>
-      <p>APOGEE: <span id="apogee"></span></p>
-      <p>PERIGEE: <span id="perigee"></span></p>
-      <p>PERIOD: <span id="period"></span></p>
+
+    <br/>
+
+    <div id="custom-search-input" style="z-index: 500">
+        <div class="input-group col-md-12">
+            <input type="text" class="search-query form-control" placeholder="Search" style="color: rgb(230,230,230)" />
+        </div>
     </div>
-  <br> -->
+
+    <br/>
+
+    <div  style="width: 15%; background-color: rgba(91, 91, 91, 0.41); z-index: 500">
+        <div class="panel panel-default " style="text-indent: 0px; height: 34px !important;">
+            <!-- Default panel contents -->
+            <div class="coolLogo" style="display: inline; color: rgb(230,230,230)">Types
+                <span id="type_heading" class="glyphicon glyphicon-plus"
+                     style="float: right;cursor:pointer">
+                </span>
+            </div>
+
+            <!-- List group -->
+
+            <ul class="list-group panel panel-default" style="background-color: rgba(91, 91, 91, 0.41) !important; position: absolute; left: 15%; display: inline">
+                <div id="type_body" style="display: none;width: 150px">
+                <li class="list-group-item">
+                    Rockets
+                    <div class="material-switch pull-right">
+                        <input id="type_rockets" name="someSwitchOption001" type="checkbox"/>
+                        <label for="type_rockets" class="label-default"></label>
+                    </div>
+                </li>
+                <li class="list-group-item">
+                    Payloads
+                    <div class="material-switch pull-right">
+                        <input id="type_payloads" name="someSwitchOption001" type="checkbox"/>
+                        <label for="type_payloads" class="label-default"></label>
+                    </div>
+                </li>
+                <li class="list-group-item">
+                    Debris
+                    <div class="material-switch pull-right">
+                        <input id="type_debris" name="someSwitchOption001" type="checkbox"/>
+                        <label for="type_debris" class="label-default"></label>
+                    </div>
+                </li>
+                </div>
+            </ul>
+
+        </div>
+    </div>
+
+    <div  style="width: 15%; background-color: rgba(91, 91, 91, 0.41)">
+        <div class="panel panel-default " style="text-indent: 0px; height: 34px !important;">
+            <!-- Default panel contents -->
+            <div class="coolLogo" style="display: inline; color: rgb(230,230,230)">Orbit Range
+                <span id="orbit_heading" class="glyphicon glyphicon-plus"
+                      style="float: right;cursor:pointer">
+                </span>
+            </div>
+
+            <!-- List group -->
+
+            <ul class="list-group panel panel-default" style="background-color: rgba(91, 91, 91, 0.41) !important; position: absolute; left: 15%; display: inline;">
+                <div id="orbit_body" style="display: none; width: 150px">
+                    <li class="list-group-item">
+                        LEO
+                        <div class="material-switch pull-right">
+                            <input id="leo" name="someSwitchOption001" type="checkbox"/>
+                            <label for="leo" class="label-default"></label>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        MEO
+                        <div class="material-switch pull-right">
+                            <input id="meo" name="someSwitchOption001" type="checkbox"/>
+                            <label for="meo" class="label-default"></label>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        HEO
+                        <div class="material-switch pull-right">
+                            <input id="heo" name="someSwitchOption001" type="checkbox"/>
+                            <label for="heo" class="label-default"></label>
+                        </div>
+                    </li>
+                </div>
+            </ul>
+
+        </div>
+    </div>
+
+
+    <div class="dropdown">
+        <button class="btn btn-default dropdown-toggle coolLogo" type="button" id="type_dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            Type
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="type_dropdown">
+            <li><a href="#">Rockets</a></li>
+            <li><a href="#">Payloads</a></li>
+            <li><a href="#">Debris</a></li>
+        </ul>
+    </div>
 </div>
+
 </body>
-  <script src="util/lastworldwindlib.js"></script>
-  <script src="util/LayerManager.js"></script>
-  <script src="util/Satellite.js"></script>
-  <script src="util/rewritefunctions.js"></script>
-  <script src="SatTrackerRewrite.js"></script>
+<script src="util/lastworldwindlib.js"></script>
+<script src="util/LayerManager.js"></script>
+<script src="util/Satellite.js"></script>
+<script src="util/rewritefunctions.js"></script>
+<script src="SatTrackerRewrite.js"></script>
 </html>

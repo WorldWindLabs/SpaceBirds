@@ -122,13 +122,13 @@ function getSatellites(satData){
 }
 
 function renderEverything(){
-  //wwd.addLayer(payloadsLayer);
-  //wwd.addLayer(rocketsLayer);
-  //wwd.addLayer(debrisLayer);
+  wwd.addLayer(payloadsLayer);
+  wwd.addLayer(rocketsLayer);
+  wwd.addLayer(debrisLayer);
 
   //Temporary crap
-  plotOrbit(allOrbitingBodies[350]);
-  wwd.addLayer(orbitsLayer);
+  //plotOrbit(allOrbitingBodies[350]);
+  //wwd.addLayer(orbitsLayer);
 
   updateLoopTime = obtainExecutionTime(updatePositions);
   console.log("Updating all satellites' positions took " + updateLoopTime + " ms. " +
@@ -258,7 +258,7 @@ function plotOrbit(orbitalBody){
   var pathAttributes = new WorldWind.ShapeAttributes(null);
   pathAttributes.outlineColor = WorldWind.Color.RED;
   pathAttributes.interiorColor = new WorldWind.Color(1, 0, 0, 0.5);
-  pathAttributes.drawVerticals = true;
+  //pathAttributes.drawVerticals = false;
 
 
   var pastOrbitPath = new WorldWind.Path(pastOrbit);
@@ -297,3 +297,48 @@ setInterval(function(){
 // $(document).ready(function() {
 //
 // });
+$(document).ready(function() {
+
+  // toggle display on/off for list items when header is clicked
+    var typeHeading= $("#type_heading");
+    var typeBody=$("#type_body");
+    var orbitHeading= $("#orbit_heading");
+    var orbitBody = $("#orbit_body");
+
+    typeHeading.click(function(){
+    if($(this).hasClass("glyphicon-plus")){
+      $(this).removeClass("glyphicon-plus");
+      $(this).addClass("glyphicon-minus");
+    }
+    else if($(this).hasClass("glyphicon-minus")){
+      $(this).removeClass("glyphicon-minus");
+      $(this).addClass("glyphicon-plus");
+    }
+    typeBody.toggle("slide");
+    orbitBody.css("display","none")
+    if (orbitHeading.hasClass("glyphicon-minus")){
+        orbitHeading.removeClass("glyphicon-minus");
+        orbitHeading.addClass("glyphicon-plus");
+    }
+  });
+
+  orbitHeading.click(function(){
+    if($(this).hasClass("glyphicon-plus")){
+      $(this).removeClass("glyphicon-plus");
+      $(this).addClass("glyphicon-minus");
+    }
+    else if($(this).hasClass("glyphicon-minus")){
+      $(this).removeClass("glyphicon-minus");
+      $(this).addClass("glyphicon-plus");
+    }
+    orbitBody.toggle("fast");
+    typeBody.css("display","none")
+
+    if(typeHeading.hasClass("glyphicon-minus")){
+        typeHeading.removeClass("glyphicon-minus");
+        typeHeading.addClass("glyphicon-plus");
+
+    }
+  });
+
+});
