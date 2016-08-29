@@ -39,7 +39,7 @@ The application is still in its alpha stage as it still contains some bugs and i
 
 ###Clicking on an object
 
-* A wide range of information about the clicked object is displayed in the right-hand column of the app, including its name, type, position, velocity ...etc. 
+* A wide range of information about the clicked object is displayed in the right-hand column of the app, including its name, type, position, velocity, etc. 
 * A "Horizon" circle is drawn on the globe which accurately represents the view (coverage area) of the particular satellite.
 * An accurate orbit of the satellite is plotted. The red section of the orbit represents a path that has already been traversed, and the green section represents the path to be taken in the future. 
 * A "Follow" function is turned on, which allows you to track the object as it moves. 
@@ -47,7 +47,7 @@ The application is still in its alpha stage as it still contains some bugs and i
     * Toggling the *Follow On* button controls whether or not the object will be followed, and so will clicking anywhere else on the globe. 
     * Toggling the *Horizon On* button controls whether or not the horizon circle is displayed.
     * Toggling the *Orbit On* button controls  whether or not the orbit path is displayed.
-    * Toggling the *Model On* button controls whether or not the 3D model of the object is displayed (Note that the model is only visible if the object is zoomed into*
+    * Toggling the *Model On* button controls whether or not the 3D model of the object is displayed (Note that the model is only visible if the object is zoomed into)
     * Clicking on the *Add to Custom* button adds the object to your own Custom Group, which you can view separately by turning "Custom On" in the "Type" window in the left-hand column.
  
 ###Searching for a satellite
