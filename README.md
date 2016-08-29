@@ -1,7 +1,9 @@
-#SpaceBirds 
-<a href="http://worldwind.arc.nasa.gov/spacebirds/"><img src="https://github.com/NASAWorldWindResearch/SpaceBirds/blob/master/spacebirdsheader.png" alt="Click to begin" /></a>
+<a href="http://worldwind.arc.nasa.gov/spacebirds/"><img src="https://github.com/NASAWorldWindResearch/SpaceBirds/blob/master/spacebirdsheader.png" alt="Click to begin" align="center" /></a>
 
-##The World of Satellites at your Fingertips
+##Video Tutorial: 
+[![SpaceBirds video tutorial](https://img.youtube.com/vi/ojp8Tqf2j0k/0.jpg)](https://www.youtube.com/watch?v=ojp8Tqf2j0k)
+
+##SpaceBirds: The World of Satellites at your Fingertips
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/NASA_logo.svg/200px-NASA_logo.svg.png" height="100px" /><img src="http://oykun.com/images/journal-header-whitespace.png" width="30px" /><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/ESA_logo_simple.svg/200px-ESA_logo_simple.svg.png" height="100px" />
 
