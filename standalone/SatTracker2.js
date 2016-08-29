@@ -1127,22 +1127,22 @@ grndStationsWorker.addEventListener('message', function (event) {
 
         var placemarkAttributes = new WorldWind.PlacemarkAttributes(null);
         var highlightPlacemarkAttributes = new WorldWind.PlacemarkAttributes(placemarkAttributes);
-        highlightPlacemarkAttributes.imageScale = 0.5;
+        highlightPlacemarkAttributes.imageScale = 0.4;
 
         //add colored image depending on sat type
         switch (satData[j].OBJECT_TYPE) {
           case "PAYLOAD":
             placemarkAttributes.imageSource = "assets/icons/red_dot.png";
-            placemarkAttributes.imageScale = 0.2;
+            placemarkAttributes.imageScale = 0.25;
             break;
           case "ROCKET BODY":
             placemarkAttributes.imageSource = "assets/icons/green_dot.png";
-            placemarkAttributes.imageScale = 0.2;
+            placemarkAttributes.imageScale = 0.25;
             break;
           default:
             placemarkAttributes.imageSource = "assets/icons/grey_dot.png";
-            placemarkAttributes.imageScale = 0.15;
-            highlightPlacemarkAttributes.imageScale = 0.3;
+            placemarkAttributes.imageScale = 0.17;
+            highlightPlacemarkAttributes.imageScale = 0.25;
         }
 
         placemarkAttributes.imageOffset = new WorldWind.Offset(
@@ -1308,8 +1308,8 @@ grndStationsWorker.addEventListener('message', function (event) {
             var labelElement = $("<div></div>");
             labelElement.text("Name: " + item.label);
             $("#selectionlog2").children().remove();
-            $("#selectionlog2").append(labelElement);
-            $("#selectionlog2").append(valueElement);
+            // $("#selectionlog2").append(labelElement);
+            // $("#selectionlog2").append(valueElement);
             var searchGSat = gsNames.indexOf(item.label);
             endFollow();
             toGsStation(searchGSat);
@@ -1337,8 +1337,8 @@ grndStationsWorker.addEventListener('message', function (event) {
             var labelElement = $("<div></div>");
             labelElement.text("Name: " + item.label);
             $("#selectionlog").children().remove();
-            $("#selectionlog").append(labelElement);
-            $("#selectionlog").append(valueElement);
+            //$("#selectionlog").append(labelElement);
+            //$("#selectionlog").append(valueElement);
             console.log(item.label);
             console.log(satNames[1]);
             endFollow();
@@ -1454,9 +1454,12 @@ grndStationsWorker.addEventListener('message', function (event) {
           var earthRadius = WorldWind.WWMath.max(
                             globe.equatorialRadius,
                             globe.polarRadius);
-          var radiusToHorizon = WorldWind.WWMath.horizonDistanceForGlobeRadius(
+          var radiusToHorizon = Math.abs(WorldWind.WWMath.horizonDistanceForGlobeRadius(
                                 earthRadius,
-                                everyCurrentPosition[index].altitude);
+                                everyCurrentPosition[index].altitude));
+          if(radiusToHorizon > earthRadius){
+            radiusToHorizon = earthRadius;
+          }
           var shape = new WorldWind.SurfaceCircle(new WorldWind.Location(
                       everyCurrentPosition[index].latitude,
                       everyCurrentPosition[index].longitude),
@@ -1893,6 +1896,10 @@ grndStationsWorker.addEventListener('message', function (event) {
         if (pickList.objects.length == 1 && pickList.objects[0]) {
           var position = pickList.objects[0].position;
           //console.log(position);
+          try{var uselessVar = position.altitude;
+          }catch(error){
+            console.log(error + ' in object ' + pickList.objects[0]);
+          }
           if (position.altitude > 1000) {
             var index = everyCurrentPosition.indexOf(position);
             try {
