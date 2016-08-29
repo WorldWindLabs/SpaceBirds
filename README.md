@@ -16,7 +16,7 @@
     6. [Time Control](#time-control)
 
 ##Introduction
-An amazing amount of objects is orbiting our planet, from the International Space Station to random debris, both organic and inorganic. For most, it is difficult to imagine this amount of objects floating around us, as well as their placement and trajectories.
+There is an amazing amount of objects orbiting our planet, from the International Space Station to random debris, both organic and inorganic. For most, it is difficult to imagine this amount of objects floating around us, as well as their placement and trajectories.
 
 SpaceBirds, a new innovative application intended as both a visual and educational application as well as a powerful tracking tool, can be used by professionals, students, and enthusiasts alike. The app is developed using NASA Web World Wind, and consists of an easy to use interface that allows the user to display all known tracked orbital objects and ground stations, and display their relative information, such as type, orbital period, low, medium, and high earth orbit, country of origin, and use, all in a 3D environment.
 
