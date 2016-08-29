@@ -20,8 +20,8 @@ viewControlsLayer.placement = new WorldWind.Offset(WorldWind.OFFSET_FRACTION, 0.
 var layers = [
   {layer: new WorldWind.BMNGLayer(), enabled: true},
   //{layer: new WorldWind.CompassLayer(), enabled: true},
-  {layer: new WorldWind.CoordinatesDisplayLayer(wwd), enabled: false},
-  {layer: viewControlsLayer, enabled: false}
+  {layer: new WorldWind.CoordinatesDisplayLayer(wwd), enabled: true},
+  {layer: viewControlsLayer, enabled: true}
 ];
 
 for (var l = 0; l < layers.length; l++) {
