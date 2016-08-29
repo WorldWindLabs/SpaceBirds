@@ -16,7 +16,7 @@
     6. [Time Control](#time-control)
 
 ##Introduction
-An amazing amount of objects is orbiting our planet, from the International Space Station to random debris, both organic and inorganic. For most, it is difficult to imagine this amount of objects floating around us, as well as their placement and trajectories.
+There is an amazing amount of objects orbiting our planet, from the International Space Station to random debris, both organic and inorganic. For most, it is difficult to imagine this amount of objects floating around us, as well as their placement and trajectories.
 
 SpaceBirds, a new innovative application intended as both a visual and educational application as well as a powerful tracking tool, can be used by professionals, students, and enthusiasts alike. The app is developed using NASA Web World Wind, and consists of an easy to use interface that allows the user to display all known tracked orbital objects and ground stations, and display their relative information, such as type, orbital period, low, medium, and high earth orbit, country of origin, and use, all in a 3D environment.
 
@@ -39,7 +39,7 @@ The application is still in its alpha stage as it still contains some bugs and i
 
 ###Clicking on an object
 
-* A wide range of information about the clicked object is displayed in the right-hand column of the app, including its name, type, position, velocity ...etc. 
+* A wide range of information about the clicked object is displayed in the right-hand column of the app, including its name, type, position, velocity, etc. 
 * A "Horizon" circle is drawn on the globe which accurately represents the view (coverage area) of the particular satellite.
 * An accurate orbit of the satellite is plotted. The red section of the orbit represents a path that has already been traversed, and the green section represents the path to be taken in the future. 
 * A "Follow" function is turned on, which allows you to track the object as it moves. 
@@ -47,7 +47,7 @@ The application is still in its alpha stage as it still contains some bugs and i
     * Toggling the *Follow On* button controls whether or not the object will be followed, and so will clicking anywhere else on the globe. 
     * Toggling the *Horizon On* button controls whether or not the horizon circle is displayed.
     * Toggling the *Orbit On* button controls  whether or not the orbit path is displayed.
-    * Toggling the *Model On* button controls whether or not the 3D model of the object is displayed (Note that the model is only visible if the object is zoomed into*
+    * Toggling the *Model On* button controls whether or not the 3D model of the object is displayed (Note that the model is only visible if the object is zoomed into)
     * Clicking on the *Add to Custom* button adds the object to your own Custom Group, which you can view separately by turning "Custom On" in the "Type" window in the left-hand column.
  
 ###Searching for a satellite
