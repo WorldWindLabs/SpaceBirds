@@ -5460,10 +5460,11 @@ a.nav-item.is-tab.is-active {
 }
 
 .panel-block {
-  color: #222324;
+  color: #d9d9d9;
   display: block;
   line-height: 16px;
   padding: 10px;
+  background-color: rgba(0, 0, 0, 0.6);
 }
 
 .panel-block:not(:last-child) {
@@ -5471,7 +5472,8 @@ a.nav-item.is-tab.is-active {
 }
 
 a.panel-block:hover {
-  background-color: #f5f7fa;
+  /*background-color: black;*/
+  /*color: white;*/
 }
 
 .panel {
