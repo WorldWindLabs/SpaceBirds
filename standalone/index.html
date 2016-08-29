@@ -88,147 +88,134 @@
             </div>
             <div id="box" class="sidebar-nav">
                 <li style="color: white">OBJECTS TRACKED: <span id="tracked"></span></li>
-                <li>
-                    <a href="#">
-                        <h4 class="coolLogo" style="color: white">
-                            <u>SEARCH</u>
-                        </h4>
-                    </a>
-                </li>
-                <li>
-                    <a href="#" style="padding-left: 20px">
-                        <span id='content'>
-                            <div id='jqxWidget'>
-                            </div>
-                            <div style="font-size: 12px; font-family: Verdana;" id="selectionlog"></div>
-                        </span>
-                    </a>
-                </li>
-                <li>
-                    <div id='jqxRangeSlider'></div>
-                </li>
-                <br>
-                <li>
-                    <a href="#">
-                        <h4 class="coolLogo" style="color: white">
-                            <u>TYPE</u>
-                        </h4>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span id="allSats">ALL ON</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#"><span id="payloads">PAYLOADS OFF</span></a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span id="rockets">ROCKETS OFF</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span id="debris">DEBRIS OFF</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#"><spam id="custom">CUSTOM OFF</spam></a>
-
-                </li>
-                <br>
-                <li>
-                    <a href="#">
-                        <h4 class="coolLogo" style="color: white">
-                            <u>ORBIT RANGE</u>
-                        </h4>
-                    </a>
-                </li>
 
                 <li>
-                <li id='jqxsliderEvent'></li>
-                <li style="color: white; font-size:12px" id="sliderValue"></li>
-                <li style="color: white; font-size:12px" id="sliderValueMin"></li>
+                    <nav class="panel" style="left: 10px;right: 10px; position: relative; width: 230px">
+                        <p class="panel-heading coolLogo">
+                            Search
+                        </p>
+                        <div style="width: 100%" id='jqxWidget'></div>
+                        <div style="width: 100%;font-size: 12px; font-family: Verdana;" id="selectionlog"></div>
+
+                    </nav>
+
                 </li>
+                <br/>
 
                 <li>
-                    <a href="#">
-                        <span id="leo">LEO ON</span>
-                    </a>
+                    <nav class="panel" style="left: 10px;right: 10px; position: relative; width: 230px">
+                        <p class="panel-heading coolLogo">
+                            Type
+                        </p>
+                        <a id="allSats" class="panel-block is-active">
+                            ALL ON
+                        </a>
+                        <a id="payloads" class="panel-block">
+                            PAYLOADS OFF
+                        </a>
+                        <a id="rockets" class="panel-block">
+                            ROCKETS OFF
+                        </a>
+                        <a id="debris" class="panel-block">
+                            DEBRIS OFF
+                        </a>
+                        <a id="custom" class="panel-block">
+                            CUSTOM OFF
+                        </a>
+                    </nav>
+
                 </li>
+                <br/>
                 <li>
-                    <a href="#">
-                        <span id="meo">MEO ON</span>
-                    </a>
+                    <nav class="panel" style="left: 10px;right: 10px; position: relative; width: 230px">
+                        <p class="panel-heading coolLogo">
+                            ORBIT RANGE
+                        </p>
+                        <a id='jqxsliderEvent' class="panel-block is-active">
+                        </a>
+                        <p style="color: white; font-size:12px" id="sliderValue"></p>
+                        <p style="color: white; font-size:12px" id="sliderValueMin"></p>
+                        <a id="leo" class="panel-block is-active">
+                            LEO ON
+                        </a>
+                        <a id="meo" class="panel-block">
+                            MEO ON
+                        </a>
+                        <a id="geo" class="panel-block">
+                            GEO ON
+                        </a>
+                        <a id="heo" class="panel-block">
+                            HEO ON
+                        </a>
+                        <a id="unclassified" class="panel-block">
+                            UNCLASSIFIED ON
+                        </a>
+                    </nav>
+
                 </li>
+                <br/>
                 <li>
-                    <a href="#">
-                        <span id="geo">GEO ON</span>
-                    </a>
+                    <nav class="panel" style="left: 10px;right: 10px; position: relative; width: 230px">
+                        <p class="panel-heading coolLogo">
+                            GROUND STATIONS (GS)
+                        </p>
+                        <div id='jqxWidget2'>
+                        </div>
+                        <div style="font-size: 12px; font-family: Verdana;" id="selectionlog2"></div>
+
+                        <a id="gStations" class="panel-block is-active">
+                            GS OFF
+                        </a>
+                        <a id="addStation" class="panel-block">
+                            ADD GS
+                        </a>
+                        <a id="clearStations" class="panel-block">
+                            CLEAR GS
+                        </a>
+                    </nav>
+
                 </li>
+                <br/>
+                <!--<li>-->
+                <!--<nav class="panel" style="left: 10px;right: 10px; position: relative; width: 230px">-->
+                <!--<p class="panel-heading coolLogo">-->
+                <!--Satellite Controls-->
+                <!--</p>-->
+                <!--<a href="javascript:toggleRepresentation();" id="representation" class="panel-block is-active">-->
+                <!--3D-->
+                <!--</a>-->
+                <!--<a id="follow" class="panel-block">-->
+                <!--FOLLOW OFF-->
+                <!--</a>-->
+                <!--<a id="orbit" class="panel-block">-->
+                <!--ORBIT OFF-->
+                <!--</a>-->
+                <!--<a id="collada" class="panel-block">-->
+                <!--MODEL OFF-->
+                <!--</a>-->
+                <!--<a id="customSat" class="panel-block">-->
+                <!--ADD TO CUSTOM-->
+                <!--</a>-->
+                <!--</nav>-->
+
+                <!--</li>-->
+                <!--<br/>-->
                 <li>
-                    <a href="#">
-                        <span id="heo">HEO ON</span>
-                    </a>
+                    <nav class="panel" style="left: 10px;right: 10px; position: relative; width: 230px">
+                        <p class="panel-heading coolLogo">
+                            GENERAL
+                        </p>
+                        <a href="about.html" class="panel-block is-active">
+                            ABOUT
+                        </a>
+                        <a id="menu-toggle-right" class="panel-block">
+                            <span id="infoSidebar">INFORMATION PANEL</span>
+                        </a>
+                    </nav>
+
                 </li>
-                <li>
-                    <a href="#">
-                        <span id="unclassified">UNCLASSIFIED ON</span>
-                    </a>
-                </li>
-                <br>
-                <li>
-                    <a href="#">
-                        <h4 class="coolLogo" style="color: white; font-size: 15px">
-                            <u>GROUND STATIONS(GS)</u>
-                        </h4>
-                    </a>
-                </li>
-                <li>
-                    <a href="#" style="padding-left: 20px">
-                            <span id='content'>
-                                <div id='jqxWidget2'>
-                                </div>
-                                <div style="font-size: 12px; font-family: Verdana;" id="selectionlog2"></div>
-                            </span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span id="gStations">GS OFF</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span id="addStation">ADD GS</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span id="clearStations">CLEAR GS</span>
-                    </a>
-                </li>
-                <br>
-                <li>
-                    <a href="#">
-                        <h4 class="coolLogo" style="color: white">
-                            <u>GENERAL</u>
-                        </h4>
-                    </a>
-                </li>
-                <li>
-                    <a href="about.html">ABOUT</a>
-                </li>
-                <li>
-                    <a href="#" id="menu-toggle-right">
-                        <span id="infoSidebar">INFORMATION PANEL</span>
-                    </a>
-                </li>
-                <br>
             </div>
             </ul>
-            <br>
         </div>
 
     </div>
@@ -240,50 +227,127 @@
 
             <h3 style="color: white" class="coolLogo">
                 <img src="assets/images/spacebirdlogo.png" height="5%" width="5%">
-                <u>INFORMATION
+                <u>
                     <div id="min_button_right"
                          style="right: 10px!important;cursor:pointer;font-size:35px; display: inline; position: absolute">
                         -
                     </div>
                 </u>
             </h3>
-
+            <br/>
+            <br/>
+            <br/>
             <div id="box_right" style="background-color: rgba(0, 0, 0, 0.5); font-size: 15px">
                 <ul>
-                    <li>NAME: <span id="name"></span></li>
-                    <li>TYPE: <span id="type"></span></li>
-                    <li>SOURCE: <span id="owner"></span></li>
-                    <li>ID: <span id="id"></span></li>
-                    <li>LAUNCH SITE: <span id="launch"></span></li>
-                    <li>STATUS: <span id="operation"></span></li>
+                    <li>
+                        <nav class="panel"
+                             style="left: 0px; right: 10px; position: relative; width: 230px; color: #999999">
+                            <p class="panel-heading coolLogo">
+                                Information
+                            </p>
+                            <a class="panel-block is-active" style="color: #999999">
+                                NAME:
+                                <span style="color: #999999" id="name"></span>
+                            </a>
+                            <a class="panel-block is-active" style="color: #999999">
+                                TYPE:
+                                <span style="color: #999999" id="type"></span>
+                            </a>
+                            <a class="panel-block is-active" style="color: #999999">
+                                OWNER:
+                                <span style="color: #999999" id="owner"></span>
+                            </a>
+                            <a class="panel-block is-active" style="color: #999999">
+                                ID:
+                                <span style="color: #999999" id="id"></span>
+                            </a>
+                            <a class="panel-block is-active" style="color: #999999">
+                                SITE:
+                                <span style="color: #999999" id="launch"></span>
+                            </a>
+                            <a class="panel-block is-active" style="color: #999999">
+                                STATUS:
+                                <span style="color: #999999" id="operation"></span>
+                            </a>
+                        </nav>
+                    </li>
+
+                    <br/>
+
+                    <li>
+                        <nav class="panel"
+                             style="left: 0px; right: 10px; position: relative; width: 230px; color: #999999">
+                            <p class="panel-heading coolLogo">
+                                POSITION
+                            </p>
+                            <a class="panel-block is-active" style="color: #999999">
+                                ORBIT TYPE:
+                                <span style="color: #999999" id="orbitType"></span>
+                            </a>
+                            <a class="panel-block is-active" style="color: #999999">
+                                LATITUDE:
+                                <span style="color: #999999" id="latitude"></span>
+                            </a>
+                            <a class="panel-block is-active" style="color: #999999">
+                                LONGITUDE:
+                                <span style="color: #999999" id="longitude"></span>
+                            </a>
+                            <a class="panel-block is-active" style="color: #999999">
+                                ALTITUDE:
+                                <span style="color: #999999" id="altitude"></span>
+                            </a>
+                        </nav>
+                    </li>
+                    <br/>
+
+                    <li>
+                        <nav class="panel"
+                             style="left: 0px; right: 10px; position: relative; width: 230px; color: #999999">
+                            <p class="panel-heading coolLogo">
+                                EXTRA DATA
+                            </p>
+                            <a class="panel-block is-active" style="color: #999999">
+                                INCLINE:
+                                <span style="color: #999999" id="inclination"></span>
+                            </a>
+                            <a class="panel-block is-active" style="color: #999999">
+                                ECCENTRICITY:
+                                <span style="color: #999999" id="eccentricity"></span>
+                            </a>
+                            <a class="panel-block is-active" style="color: #999999">
+                                MEAN MOTION:
+                                <span style="color: #999999" id="revDay"></span>
+                            </a>
+                            <a class="panel-block is-active" style="color: #999999">
+                                VELOCITY:
+                                <span style="color: #999999" id="velocity"></span>
+                            </a>
+                            <a class="panel-block is-active" style="color: #999999">
+                                APOGEE:
+                                <span style="color: #999999" id="apogee"></span>
+                            </a>
+                            <a class="panel-block is-active" style="color: #999999">
+                                PERIGEE:
+                                <span style="color: #999999" id="perigee"></span>
+                            </a>
+                            <a class="panel-block is-active" style="color: #999999">
+                                PERIOD:
+                                <span style="color: #999999" id="period"></span>
+                            </a>
+                            <a class="panel-block is-active" style="color: #999999">
+                                SEMI-MAJOR:
+                                <span style="color: #999999" id="majorAxis"></span>
+                            </a>
+                            <a class="panel-block is-active" style="color: #999999">
+                                SEMI-MINOR::
+                                <span style="color: #999999" id="minorAxis"></span>
+                            </a>
+
+                        </nav>
+                    </li>
+
                 </ul>
-                <h4 style="color: white" class="coolLogo">
-                    <img src="assets/images/spacebirdlogo.png" height="5%" width="5%">
-                    <u>POSITION</u>
-                    <img src="assets/images/spacebirdlogo.png" height="5%" width="5%">
-                </h4>
-                <ul>
-                    <li>ORBIT TYPE: <span id="orbitType"></span></li>
-                    <li>LATITUDE: <span id="latitude"></span></li>
-                    <li>LONGITUDE: <span id="longitude"></span></li>
-                    <li>ALTITUDE: <span id="altitude"></span></li>
-                </ul>
-                <h4 style="color: white" class="coolLogo">
-                    <img src="assets/images/spacebirdlogo.png" height="5%" width="5%">
-                    <u>EXTRA DATA</u>
-                    <img src="assets/images/spacebirdlogo.png" height="5%" width="5%">
-                </h4>
-                <ul>
-                    <li>INCLINATION: <span id="inclination"></span></li>
-                    <li>ECCENTRICITY: <span id="eccentricity"></span></li>
-                    <li>MEAN MOTION: <span id="revDay"></span></li>
-                    <li>VELOCITY: <span id="velocity"></span></li>
-                    <li>APOGEE: <span id="apogee"></span></li>
-                    <li>PERIGEE: <span id="perigee"></span></li>
-                    <li>PERIOD: <span id="period"></span></li>
-                    <li>SEMI-MAJOR AXIS: <span id="majorAxis"></span></li>
-                    <li>SEMI-MINOR AXIS: <span id="minorAxis"></span></li>
-                </ul>
+
             </div>
 
         </div>
