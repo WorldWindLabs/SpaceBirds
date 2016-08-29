@@ -1,4 +1,6 @@
 #SpaceBirds 
+<a href="http://worldwind.arc.nasa.gov/spacebirds/"><img src="https://github.com/NASAWorldWindResearch/SpaceBirds/blob/master/spacebirdsheader.png" alt="Click to begin" /></a>
+
 ##The World of Satellites at your Fingertips
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/NASA_logo.svg/200px-NASA_logo.svg.png" height="100px" /><img src="http://oykun.com/images/journal-header-whitespace.png" width="30px" /><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/ESA_logo_simple.svg/200px-ESA_logo_simple.svg.png" height="100px" />
@@ -16,11 +18,11 @@
     6. [Time Control](#time-control)
 
 ##Introduction
-There is an amazing amount of objects orbiting our planet, from the International Space Station to random debris, both organic and inorganic. For most, it is difficult to imagine this amount of objects floating around us, as well as their placement and trajectories.
+There is an amazing amount of objects orbiting our planet, from the International Space Station to random debris. For most, it is difficult to imagine this amount of objects floating around us, as well as their placement and trajectories.
 
-SpaceBirds, a new innovative application intended as both a visual and educational application as well as a powerful tracking tool, can be used by professionals, students, and enthusiasts alike. The app is developed using NASA Web World Wind, and consists of an easy to use interface that allows the user to display all known tracked orbital objects and ground stations, and display their relative information, such as type, orbital period, low, medium, and high earth orbit, country of origin, and use, all in a 3D environment.
+SpaceBirds, an application intended as both a visual and educational tool, as well as a satellite tracking application, can be used by professionals, students, and enthusiasts alike. The app is developed using NASA Web World Wind , and consists of an easy to use interface that allows the user to display all known tracked orbital objects and ground stations, and display their relative information, such as type, orbital period, low, medium, and high earth orbit, country of origin, and use, all in a 3D environment.
 
-The user will have access to over 15,000 orbitals and their information. He/She will be able to group satellites by classification and even create and store their own custom groups through a streamline search ability or merely by clicking on them, in order to gain information and closely follow individual satellites and groups.
+The user will have access to over 15,000 satellites and their information. He/She will be able to group them by classification and even create and store their own custom groups through a streamline search ability or merely by clicking on them, in order to gain information and closely follow individual satellites and groups.
 
 The app will offer fun and exciting visual interactivity, by providing 3D models, visual fields of satellites, and future and past orbit paths, while providing a powerful tool, allowing the user to work with orbital bodies and corresponding ground stations, track satellite trajectory and position, provide heat maps of satellites past and future coverage of the earth’s surface, and act as a warning system for potential collisions with the earths surface and other orbital objects.
 
@@ -75,7 +77,7 @@ The Slider at the bottom of the screen allows you to change the date and time to
 
 **Organization:** NASA Ames Research Center (PX)**
 
-**Manager:** Patrick Hogan, Yann Voumard**
+**Manager:** Patrick Hogan, Yann Voumard, Florin Draghici**
 
 **Authors:** Miguel Del Castillo, Bert Stewart, Julija Semenenko**
 
