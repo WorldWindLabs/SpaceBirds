@@ -172,6 +172,7 @@
 @media(min-width:768px) {
     #wrapper-right {
         padding-right: 250px;
+
     }
 
     #wrapper-right.toggled {
@@ -180,6 +181,7 @@
 
     #sidebar-wrapper-right {
         width: 250px;
+        top: 10%;
     }
 
     #wrapper-right.toggled #sidebar-wrapper-right {
