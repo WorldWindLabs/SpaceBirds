@@ -1351,11 +1351,11 @@ function getGroundStations(groundStations) {
       $("#jqxWidget").jqxComboBox({
         selectedIndex: 0,
         source: satData,
+        placeHolder: "SATELLITE NAME",
         displayMember: "OBJECT_NAME",
         valueMember: "OWNER",
         width: 220,
-        height: 30,
-        placeHolder: "SATELLITE NAME"
+        height: 30
       });
       // trigger the select event.
       $("#jqxWidget").on('select', function (event) {
@@ -1951,7 +1951,7 @@ function getGroundStations(groundStations) {
             var gsindex = groundStation.indexOf(position);
             typePlaceholder.textContent = "Ground Station";
             namePlaceholder.textContent = groundStations[gsindex].NAME;
-            ownerPlaceholder.textContent = groundStations[gsindex].OWNER;
+            ownerPlaceholder.textContent = groundStations[gsindex].ORGANIZATION;
             idPlaceholder.textContent = "";
             latitudePlaceholder.textContent = groundStations[gsindex].LATITUDE;
             longitudePlaceholder.textContent = groundStations[gsindex].LONGITUDE;
@@ -1964,6 +1964,10 @@ function getGroundStations(groundStations) {
             periodPlaceholder.textContent = "";
             semiMajorAxisPlaceholder.textContent = "";
             semiMinorAxisPlaceholder.textContent = "";
+            velocityPlaceholder.textContent = "";
+            launchPlaceholder.textContent = "";
+            operationPlaceholder.textContent = "";
+            orbitPlaceholder.textContent = "";
           }
 
           // Update the window if we changed anything.
