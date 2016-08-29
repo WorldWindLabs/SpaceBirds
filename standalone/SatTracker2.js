@@ -200,6 +200,14 @@ function jday(year, mon, day, hr, minute, sec){
   );
 }
 
+function roundToTwo(num) {
+    return +(Math.round(num + "e+2")  + "e-2");
+}
+
+function roundToFour(num) {
+    return +(Math.round(num + "e+4")  + "e-4");
+}
+
 var satVelocity = [];
 function getVelocity(satrec , time) {
 
@@ -1098,9 +1106,10 @@ grndStationsWorker.addEventListener('message', function (event) {
       for (var j = 0; j < satNum; j++) {
         var currentPosition = null;
         var time = new Date(now.getTime() + i * 60000);
-        getVelocity(satellite.twoline2satrec(satData[j].TLE_LINE1, satData[j].TLE_LINE2), time);
-        var position = getPosition(satellite.twoline2satrec(satData[j].TLE_LINE1, satData[j].TLE_LINE2), time);
+
+        //var position = getPosition(satellite.twoline2satrec(satData[j].TLE_LINE1, satData[j].TLE_LINE2), time);
         try {
+          getVelocity(satellite.twoline2satrec(satData[j].TLE_LINE1, satData[j].TLE_LINE2), time);
           satVelocity[j] = satVelocity;
           var position = getPosition(satellite.twoline2satrec(satData[j].TLE_LINE1, satData[j].TLE_LINE2), time);
         } catch (err) {
@@ -1494,11 +1503,13 @@ grndStationsWorker.addEventListener('message', function (event) {
           var pastOrbitPath = new WorldWind.Path(pastOrbit);
           pastOrbitPath.altitudeMode = WorldWind.RELATIVE_TO_GROUND;
           pastOrbitPath.attributes = pastOrbitPathAttributes;
+          pastOrbitPath.useSurfaceShapeFor2D = true;
 
 
           var futureOrbitPath = new WorldWind.Path(futureOrbit);
           futureOrbitPath.altitudeMode = WorldWind.RELATIVE_TO_GROUND;
           futureOrbitPath.attributes = futureOrbitPathAttributes;
+          futureOrbitPath.useSurfaceShapeFor2D = true;
 
           orbitsLayer.addRenderable(pastOrbitPath);
           orbitsLayer.addRenderable(futureOrbitPath);
@@ -1514,29 +1525,39 @@ grndStationsWorker.addEventListener('message', function (event) {
       var startExtra;
       var extraData = function (index) {
         startExtra = window.setInterval(function () {
-          var satStuff = satellite.twoline2satrec( //perform and store sat init calcs
+          try {var satStuff = satellite.twoline2satrec( //perform and store sat init calcs
             satData[index].TLE_LINE1, satData[index].TLE_LINE2);
+          } catch (err){
+            console.log('Possible deorbiting sat: ' + satData[index].NORAD_CAT_ID + ' in startExtra interval');
+          }
           var extra = {};
           //keplerian elements
-          extra.inclination = satStuff.inclo;  //rads
-          extra.eccentricity = satStuff.ecco;
-          extra.raan = satStuff.nodeo;   //rads
-          extra.argPe = satStuff.argpo;  //rads
-          extra.meanMotion = satStuff.no * 60 * 24 / (2 * Math.PI);     // convert rads/minute to rev/day
-
+          // extra.inclination = satStuff.inclo;  //rads
+          // extra.eccentricity = satStuff.ecco;
+          // extra.raan = satStuff.nodeo;   //rads
+          // extra.argPe = satStuff.argpo;  //rads
+          // extra.meanMotion = satStuff.no * 60 * 24 / (2 * Math.PI);     // convert rads/minute to rev/day
+          extra.inclination = satData[index].INCLINATION;  //rads
+          extra.eccentricity = satData[index].ECCENTRICITY;
+          // extra.raan = satStuff.nodeo;   //rads
+          // extra.argPe = satStuff.argpo;  //rads
+          extra.meanMotion = satData[index].MEAN_MOTION;
           //fun other data
+          // extra.semiMajorAxis = Math.pow(8681663.653 / extra.meanMotion, (2 / 3));
+          // extra.semiMinorAxis = extra.semiMajorAxis * Math.sqrt(1 - Math.pow(extra.eccentricity, 2));
+          // extra.apogee = extra.semiMajorAxis * (1 + extra.eccentricity) - 6371;
+          // extra.perigee = extra.semiMajorAxis * (1 - extra.eccentricity) - 6371;
+          // extra.period = 1440.0 / extra.meanMotion;
           extra.semiMajorAxis = Math.pow(8681663.653 / extra.meanMotion, (2 / 3));
           extra.semiMinorAxis = extra.semiMajorAxis * Math.sqrt(1 - Math.pow(extra.eccentricity, 2));
-          extra.apogee = extra.semiMajorAxis * (1 + extra.eccentricity) - 6371;
-          extra.perigee = extra.semiMajorAxis * (1 - extra.eccentricity) - 6371;
-          extra.period = 1440.0 / extra.meanMotion;
+          extra.apogee = satData[index].APOGEE;
+          extra.perigee = satData[index].PERIGEE;
+          extra.period = satData[index].PERIOD;
 
-
-          revDayPlaceholder.textContent = extra.meanMotion + "rev/day";
-          semiMajorAxisPlaceholder.textContent = extra.semiMajorAxis + "km";
-          semiMinorAxisPlaceholder.textContent = extra.semiMinorAxis + "km";
-          velocityPlaceholder.textContent = satVelocity[index];
-
+          revDayPlaceholder.textContent = roundToTwo(extra.meanMotion) + " rev/day";
+          semiMajorAxisPlaceholder.textContent = roundToTwo(extra.semiMajorAxis) + " km";
+          semiMinorAxisPlaceholder.textContent = roundToTwo(extra.semiMinorAxis) + " km";
+          velocityPlaceholder.textContent = (roundToTwo(satVelocity[index])) + " km/s";
         });
       };
       var endExtra = function () {
@@ -1791,11 +1812,14 @@ grndStationsWorker.addEventListener('message', function (event) {
           var pastOrbitPath = new WorldWind.Path(pastOrbit);
           pastOrbitPath.altitudeMode = WorldWind.RELATIVE_TO_GROUND;
           pastOrbitPath.attributes = pastOrbitPathAttributes;
+          pastOrbitPath.useSurfaceShapeFor2D = true;
+
 
 
           var futureOrbitPath = new WorldWind.Path(futureOrbit);
           futureOrbitPath.altitudeMode = WorldWind.RELATIVE_TO_GROUND;
           futureOrbitPath.attributes = futureOrbitPathAttributes;
+          futureOrbitPath.useSurfaceShapeFor2D = true;
 
           orbitsHoverLayer.addRenderable(pastOrbitPath);
           orbitsHoverLayer.addRenderable(futureOrbitPath);
@@ -1858,7 +1882,7 @@ grndStationsWorker.addEventListener('message', function (event) {
 
         if (pickList.objects.length == 1 && pickList.objects[0]) {
           var position = pickList.objects[0].position;
-          console.log(position);
+          //console.log(position);
           if (position.altitude > 1000) {
             var index = everyCurrentPosition.indexOf(position);
             try {
@@ -1868,11 +1892,11 @@ grndStationsWorker.addEventListener('message', function (event) {
               ownerPlaceholder.textContent = satData[index].OWNER;
               launchPlaceholder.textContent = satData[index].LAUNCH_SITE;
               orbitPlaceholder.textContent = satData[index].ORBIT_TYPE;
-              inclinationPlaceholder.textContent = satData[index].INCLINATION + "Deg";
-              eccentricityPlaceHolder.textContent = satData[index].ECCENTRICITY;
-              apogeeplaceholder.textContent = satData[index].APOGEE + "rev/day";
-              perigeeplaceholder.textContent = satData[index].PERIGEE + "rev/day";
-              periodPlaceholder.textContent = satData[index].PERIOD + "hh:mm:ss";
+              inclinationPlaceholder.textContent = roundToTwo(Number(satData[index].INCLINATION)) + " °";
+              eccentricityPlaceHolder.textContent = roundToFour(Number(satData[index].ECCENTRICITY));
+              apogeeplaceholder.textContent = roundToTwo(Number(satData[index].APOGEE)) + " km";
+              perigeeplaceholder.textContent = roundToTwo(Number(satData[index].PERIGEE)) + " km";
+              periodPlaceholder.textContent = roundToTwo(Number(satData[index].PERIOD)) + " minutes";
               operationPlaceholder.textContent = satData[index].OPERATIONAL_STATUS;
 
 

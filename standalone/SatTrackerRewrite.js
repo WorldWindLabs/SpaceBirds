@@ -124,7 +124,7 @@ function getSatellites(satData){
 function renderEverything(){
   wwd.addLayer(payloadsLayer);
   wwd.addLayer(rocketsLayer);
-  wwd.addLayer(debrisLayer);
+  //wwd.addLayer(debrisLayer);
 
   //Temporary crap
   //plotOrbit(allOrbitingBodies[350]);
@@ -294,9 +294,6 @@ setInterval(function(){
 //   orbitsLayer.refresh();
 // }, updateLoopTime);
 
-// $(document).ready(function() {
-//
-// });
 $(document).ready(function() {
 
   // toggle display on/off for list items when header is clicked
