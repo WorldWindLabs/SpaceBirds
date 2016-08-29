@@ -1,7 +1,11 @@
-<a href="http://worldwind.arc.nasa.gov/spacebirds/"><img src="https://github.com/NASAWorldWindResearch/SpaceBirds/blob/master/spacebirdsheader.png" alt="Click to begin" align="center" /></a>
+<p align="center">
+<a href="http://worldwind.arc.nasa.gov/spacebirds/"><img src="https://github.com/NASAWorldWindResearch/SpaceBirds/blob/master/spacebirdsheader.png" alt="Click to begin"/></a>
+</p>
 
 ##Video Tutorial: 
-[![SpaceBirds video tutorial](https://img.youtube.com/vi/ojp8Tqf2j0k/0.jpg)](https://www.youtube.com/watch?v=ojp8Tqf2j0k)
+<p align="center">
+<a href="https://www.youtube.com/watch?v=ojp8Tqf2j0k"><img src="https://img.youtube.com/vi/ojp8Tqf2j0k/0.jpg" alt="SpaceBirds video tutorial"/></a>
+</p>
 
 ##SpaceBirds: The World of Satellites at your Fingertips
 
