@@ -1403,6 +1403,8 @@ grndStationsWorker.addEventListener('message', function (event) {
         // Move to sat position on click and redefine navigator positioning
       var startFollow;
       var toCurrentPosition = function (index) {
+        var toggleButtons = document.getElementById('buttonToggle');
+        toggleButtons.style.display = "inline";
         var satPos = everyCurrentPosition[index];
         //Changes center point of view.
         wwd.navigator.lookAtLocation.altitude = satPos.altitude;
@@ -1573,6 +1575,8 @@ grndStationsWorker.addEventListener('message', function (event) {
         // De-highlight any highlighted placemarks.
         index = null;
         for (var h = 0; h < highlightedItems.length; h++) {
+          var toggleButtons = document.getElementById('buttonToggle');
+          toggleButtons.style.display = "none";
           highlightedItems[h].highlighted = false;
           orbitsHoverLayer.enabled = true;
           endHoverOrbit();
@@ -1601,6 +1605,8 @@ grndStationsWorker.addEventListener('message', function (event) {
 
         // If only one thing is picked and it is the terrain, tell the world window to go to the picked location.
         if (pickList.objects.length == 1 && pickList.objects[0].isTerrain) {
+          var toggleButtons = document.getElementById('buttonToggle');
+          toggleButtons.style.display = "none";
           var position = pickList.objects[0].position;
           index = null;
           orbitsHoverLayer.removeAllRenderables();
