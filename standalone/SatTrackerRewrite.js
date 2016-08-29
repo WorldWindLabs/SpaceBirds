@@ -26,6 +26,7 @@ WorldWind.Logger.setLoggingLevel(WorldWind.Logger.LEVEL_WARNING);
 
 // Create the World Window.
 var wwd = new WorldWind.WorldWindow("canvasOne");
+var highlightController = new WorldWind.HighlightController(wwd);
 wwd.navigator.range = 2e7;
 
 //Settings to change projections
@@ -73,15 +74,18 @@ layers[2].layer.lightLocation = new FixedLocation(wwd);
 //custom layers
 var groundStationsLayer = new WorldWind.RenderableLayer("Groundstations");
 var payloadsLayer = new WorldWind.RenderableLayer("Payloads");
+payloadsLayer.pickEnabled = true;
 var rocketsLayer = new WorldWind.RenderableLayer("Rocket bodies");
+rocketsLayer.pickEnabled = true;
 var debrisLayer = new WorldWind.RenderableLayer("Debris");
 //var selectedSatsLayer = new WorldWind.RenderableLayer("Selected satellites"); //unused as of now
 var orbitsLayer = new WorldWind.RenderableLayer("Orbits");
 
+
 function getSatellites(satData){
   var faultySatsNumber = 0;
   var orbitalBodiesNumber = 0;
-  for(var i = 0; i < satData.length; i += 1){
+  for(var i = 0, numSatData = satData.length; i < numSatData; i += 1){
     //Cleaning up satellites with problematic TLE data (probably objects that are about to deorbit)
     //TODO: moving this to the node.js backend stuff
     try{
@@ -120,11 +124,11 @@ function getSatellites(satData){
 function renderEverything(){
   wwd.addLayer(payloadsLayer);
   wwd.addLayer(rocketsLayer);
-  //wwd.addLayer(debrisLayer);
+  wwd.addLayer(debrisLayer);
 
   //Temporary crap
-  plotOrbit(allOrbitingBodies[350]);
-  wwd.addLayer(orbitsLayer);
+  //plotOrbit(allOrbitingBodies[350]);
+  //wwd.addLayer(orbitsLayer);
 
   updateLoopTime = obtainExecutionTime(updatePositions);
   console.log("Updating all satellites' positions took " + updateLoopTime + " ms. " +
@@ -159,7 +163,7 @@ function updatePositions(){
   var rocketCounter = 0;
   var debrisCounter = 0;
 
-  for (var i = 0; i < allOrbitingBodies.length; i += 1) {
+  for (var i = 0, numallOrbitingBodies = allOrbitingBodies.length; i < numallOrbitingBodies; i += 1) {
     var newPosition = getPosition(
       satellite.twoline2satrec(
         allOrbitingBodies[i].tleLine1,
@@ -234,10 +238,9 @@ function plotOrbit(orbitalBody){
   var now = new Date();
   var pastOrbit = [];
   var futureOrbit = [];
-  //var currentPosition = null;
-
-  for(var i = -98; i <= 98; i++) {
-      var time = new Date(now.getTime() + i*60000);
+  var period = Math.round(orbitalBody.orbitalPeriod); //In minutes, rounded so we can get i === 0
+  for(var i = -period; i <= period; i++) {
+      var time = new Date(now.getTime() + i*60000); //conversion from milliseconds to minutes
 
       var position = getPosition(satellite.twoline2satrec(orbitalBody.tleLine1, orbitalBody.tleLine2), time)
 
@@ -246,9 +249,6 @@ function plotOrbit(orbitalBody){
       } else if(i > 0) {
           futureOrbit.push(position);
       } else {
-          // currentPosition = new WorldWind.Position(position.latitude,
-          //                                          position.longitude,
-          //                                          position.altitude);
           pastOrbit.push(position);
           futureOrbit.push(position);
       }
@@ -258,10 +258,14 @@ function plotOrbit(orbitalBody){
   var pathAttributes = new WorldWind.ShapeAttributes(null);
   pathAttributes.outlineColor = WorldWind.Color.RED;
   pathAttributes.interiorColor = new WorldWind.Color(1, 0, 0, 0.5);
+  //pathAttributes.drawVerticals = false;
+
 
   var pastOrbitPath = new WorldWind.Path(pastOrbit);
   pastOrbitPath.altitudeMode = WorldWind.RELATIVE_TO_GROUND;
   pastOrbitPath.attributes = pathAttributes;
+  pastOrbitPath.extrude = true;
+  pastOrbitPath.useSurfaceShapeFor2D = true;
 
   var pathAttributes = new WorldWind.ShapeAttributes(pathAttributes);
   pathAttributes.outlineColor = WorldWind.Color.GREEN;
@@ -270,6 +274,8 @@ function plotOrbit(orbitalBody){
   var futureOrbitPath = new WorldWind.Path(futureOrbit);
   futureOrbitPath.altitudeMode = WorldWind.RELATIVE_TO_GROUND;
   futureOrbitPath.attributes = pathAttributes;
+  futureOrbitPath.extrude = true;
+  futureOrbitPath.useSurfaceShapeFor2D = true;
 
   orbitsLayer.addRenderable(pastOrbitPath);
   orbitsLayer.addRenderable(futureOrbitPath);
@@ -282,6 +288,15 @@ setInterval(function(){
   }
 }, 20000);
 
+// var refreshLayers = setInterval(function(){
+//   plotOrbit(allOrbitingBodies[350]);
+//   //orbitsLayer.removeRenderable(0);
+//   orbitsLayer.refresh();
+// }, updateLoopTime);
+
+// $(document).ready(function() {
+//
+// });
 $(document).ready(function() {
 
   // toggle display on/off for list items when header is clicked

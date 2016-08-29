@@ -1,24 +1,35 @@
 var fs = require('fs'); //IO filesystem module for node.js
+var satellite = require('./Satellite.js');
+
 //var orbitalBodies = require('./testTLE.json'); //FOR TESTING Currently orbiting satellites' TLE
 var orbitalBodies = require('./basicTLE.json'); //Currently orbiting satellites' TLE
 var satcat = require('./SATCAT.json'); //Catalog with every sat launch in history, with country data
 var launchSites = require('./launchSites.json'); //To retrieve launch site names from SATCAT codes
 var countries = require('./countries.json'); //To retrieve country/owner name from SATCAT codes
 var operationalSats = require('./non_automated_data/operationalSats.json'); //To retrieve operational status
-//Sats categorized by orbit types. It's probably better to calculate this in the app instead.
-// var geoSats = require('./GEO.json');
-// var heoSats = require('./HEO.json');
-// var meoSats = require('./MEO.json');
-// var leoSats = require('./LEO.json');
 
-//Arrays to store objects by object type. Unnecesary as of now but may be useful later.
-var payloads = [];
-var rocketStages = [];
-var debris = [];
-var unknown = [];
+//Many many counters.
+var payloads,
+    rocketStages,
+    debris,
+    unknownType;
+
+var operational,
+    nonoperational,
+    partOperational,
+    backup,
+    spare,
+    extended,
+    partial,
+    unknownStatus;
+
+//Initialize counters
+payloads = rocketStages = debris = unknownType = 0
+operational = nonoperational = partOperational = backup = spare = extended = decayed = unknownStatus = 0;
 
 //TODO: Stop using slow, awful linear search. It takes ages to execute. Should use something better later.
 // this thing is easily readable, though.
+console.log(" ");
 console.log('Adding additional data to TLE ...');
 for(var i = 0, numOrbitalbodies = orbitalBodies.length; i < numOrbitalbodies; i += 1){
   var start = clock();
@@ -28,9 +39,6 @@ for(var i = 0, numOrbitalbodies = orbitalBodies.length; i < numOrbitalbodies; i 
     {
       //Add new keys to TLE json
       orbitalBodies[i].LAUNCH_DATE = satcat[j].LAUNCH; //Launch full date: YYYY-MM-DD
-      orbitalBodies[i].LAUNCH_NUM = satcat[j].LAUNCH_NUM; //Consecutive order of launch e.g. Sputnik 1 is launch 1 (with 2 objects)
-      orbitalBodies[i].LAUNCH_YEAR = satcat[j].LAUNCH_YEAR; //Launch year only (may be useful to avoid string processing)
-      orbitalBodies[i].LAUNCH_PIECE = satcat[j].LAUNCH_PIECE; //Pieces in orbit of the same launch e.g. Sputnik 1 had 2 pieces: rocket and payload
 
       //Retrieve the launch site name from the file launchSites.json
       for(var k = 0, numLaunchSites = launchSites.length; k < numLaunchSites; k += 1){
@@ -51,6 +59,7 @@ for(var i = 0, numOrbitalbodies = orbitalBodies.length; i < numOrbitalbodies; i 
   //console.log('Time spent on ' + i + ' cycle ' + duration);
 }
 console.log('Owner, country, launch site and launch details added to TLE data.');
+console.log('Obtaining orbit type...');
 
 //Assign orbit type
 for(var i = 0, numOrbitalbodies = orbitalBodies.length; i < numOrbitalbodies; i += 1){
@@ -65,8 +74,8 @@ for(var i = 0, numOrbitalbodies = orbitalBodies.length; i < numOrbitalbodies; i 
   }
 
   else if(//MEO: 600 minutes <= Period <= 800 minutes & Eccentricity < 0.25
-    // (satellite.MEAN_MOTION >= 1.8) &&
-    // (satellite.MEAN_MOTION <= 2.39) &&
+    // (satellite.MEAN_MOTION >= 1.8) && //Space-track uses this in queries, but not in description
+    // (satellite.MEAN_MOTION <= 2.39) && //TODO: Re-review definitions of MEO parameters
     (satellite.PERIOD >= 600) &&
     (satellite.PERIOD <= 800) &&
     (satellite.ECCENTRICITY < 0.25)
@@ -86,10 +95,58 @@ for(var i = 0, numOrbitalbodies = orbitalBodies.length; i < numOrbitalbodies; i 
   ){
     satellite.ORBIT_TYPE = "Highly Elliptical Orbit";
   }
-
   else{
-    satellite.ORBIT_TYPE = "Unclassified orbit";
+    satellite.ORBIT_TYPE = "Unclassified";
   }
+}
+console.log('Orbit type calculated');
+console.log('Obtaining operational status...');
+
+function obtainOperationalStatus(payload){
+  var status;
+  for(var j = 0, numOperationalSats = operationalSats.length; j < numOperationalSats; j += 1){
+
+    if(operationalSats[j].NORAD_CAT_ID === parseInt(payload.NORAD_CAT_ID)){
+
+      switch(operationalSats[j].OPERATIONAL_STATUS){
+        case "+":
+          status = "Operational";
+          operational++;
+          break;
+        case "-":
+          status = "Nonoperational";
+          nonoperational++;
+          break;
+        case "P":
+          status = "Partially operational";
+          partOperational++;
+          break;
+        case "B":
+          status = "Backup/Standby";
+          backup++;
+          break;
+        case "S":
+          status = "Operational (spare)";
+          spare++;
+          break;
+        case "X":
+          status = "Operational (extended mission)";
+          extended++;
+          break;
+        case "D":
+          status = "Decayed";
+          console.log('Why am I here? <-----------------');
+          decayed++;
+          break;
+        default:
+          status = "Unknown";
+          unknownStatus++;
+      }
+
+    }
+
+  }
+  return status;
 }
 
 //Filter
@@ -98,18 +155,20 @@ for(var i = 0, numOrbitalbodies = orbitalBodies.length; i < numOrbitalbodies; i 
 for(var i = 0, numOrbitalbodies = orbitalBodies.length; i < numOrbitalbodies; i += 1){
   switch(orbitalBodies[i].OBJECT_TYPE){
     case "PAYLOAD":
-      payloads.push(orbitalBodies[i]);
+      orbitalBodies[i].OPERATIONAL_STATUS = obtainOperationalStatus(orbitalBodies[i]);
+      payloads++;
       break;
     case "ROCKET BODY":
-      rocketStages.push(orbitalBodies[i]);
+      orbitalBodies[i].OPERATIONAL_STATUS = "N/A, derelict rocket body";
+      rocketStages++;
       break;
     case "DEBRIS":
-      debris.push(orbitalBodies[i]);
+      orbitalBodies[i].OPERATIONAL_STATUS = "N/A, space debris";
+      debris++;
       break;
     default:
-      //Unknown objects, TBA objects
-      unknown.push(orbitalBodies[i]);
-      break;
+      orbitalBodies[i].OPERATIONAL_STATUS = "N/A";
+      unknownType++; //Unknown objects, TBA objects
   }
 }
 
@@ -122,17 +181,30 @@ for(var i = 0, numOrbitalbodies = orbitalBodies.length; i < numOrbitalbodies; i 
 //      }
 // }
 
-//Counter. Note that we're wasting memory by storing the different object types
-//in their own array, but it may be useful later to provide different json files.
+//Results
+console.log(" ");
 console.log("From a total of " + orbitalBodies.length +
  " currently orbiting bodies we have: ");
-console.log(" - " + payloads.length + " payloads");
-console.log(" - " + rocketStages.length + " rocket stages");
-console.log(" - " + debris.length + " debris objects");
-console.log(" - " + unknown.length + " uknwown objects");
+console.log(" - " + payloads + " payloads");
+console.log(" - " + rocketStages + " rocket stages");
+console.log(" - " + debris + " debris objects");
+console.log(" - " + unknownType + " uknwown objects");
+console.log(" ");
+console.log("From the payloads: ");
+console.log(" - " + operational + " are operational");
+console.log(" - " + nonoperational + " are nonoperational");
+console.log(" - " + partOperational + " are partially operational");
+console.log(" - " + backup + " are backups or in standby mode");
+console.log(" - " + spare + " are operational");
+console.log(" - " + extended + " are nonoperational");
+console.log(" - " + decayed + " are partially operational");
+console.log(" - " + unknownStatus + " are backups or in standby mode");
 
-printFilteredFile(orbitalBodies, 'TLE', function(){
-  console.log(" + - + - + - + - + - FINISHED - + - + - + - + - + - + ")
+printFilteredFile(orbitalBodies, 'sampleTLE', function(){
+  console.log(" ");
+  console.log(" + - + - + - + - + - FINISHED - + - + - + - + - + - + ");
+  console.log(" ");
+
 });
 
 function clock(start) {
@@ -149,6 +221,7 @@ function printFilteredFile(tleJson, type, finishingCallback){
       function(err){
         if(err) return console.log(err);
         console.log('File ' + type + '.json created.');
+        console.log(" ");
         finishingCallback();
     });
   } else {

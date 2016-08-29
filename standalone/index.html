@@ -40,14 +40,28 @@
 <!--time bar-->
 
 <div id="timeBar">
-    <div class="coolLogo" style="color: white; display: inline;">TIME CONTROL
-        <button style="font-size:65%; right: 20px; position: absolute; width: 65px; height: 25px; max-height:25px; background-color: #d1d1d1; color: black; padding: 0.1em 0.1em 0.1em 0.1em"
+    <div style="color: white; font-size:20px; text-align: left; right: 650px" id="sliderValue2"></div>
+    <div class="coolLogo" style="color: white; text-align: left">TIME CONTROL
+        <button style="font-size:65%; width: 65px; height: 25px; max-height:25px; background-color: #d1d1d1; color: black; padding: 0.1em 0.1em 0.1em 0.1em"
                 id="jqxButton">To Date
         </button>
+        <span style="float: right">
+        <button style="font-size:55%; width: 65px; height: 25px; max-height:25px; background-color: #d1d1d1; color: black; padding: 0.1em 0.1em 0.1em 0.1em">
+        <a href="javascript:toggleRepresentation();" id="representation">3D</a>
+        </button>
+        <a href="#" style="align-content: right">
+            <button style="font-size:55%; width: 80px; height: 25px; max-height:25px; background-color: #d1d1d1; color: black; padding: 0.1em 0.1em 0.1em 0.1em"
+                    id="follow">FOLLOW OFF</button>
+            <button style="font-size:55%; width: 70px; height: 25px; max-height:25px; background-color: #d1d1d1; color: black; padding: 0.1em 0.1em 0.1em 0.1em"
+                    id="mesh">MESH OFF</button>
+            <button style="font-size:55%; width: 70px; height: 25px; max-height:25px; background-color: #d1d1d1; color: black; padding: 0.1em 0.1em 0.1em 0.1em"
+                    id="orbit">ORBIT OFF</button>
+            <button style="font-size:55%; width: 70px; height: 25px; max-height:25px; background-color: #d1d1d1; color: black; padding: 0.1em 0.1em 0.1em 0.1em"
+                    id="collada">MODEL OFF</button>
+        </a>
+            </span>
     </div>
-    <div id='jqxsliderEvent2'></div>
-    <div style="color: white; font-size:20px; text-align: left" id="sliderValue2"></div>
-
+    <div style="color: white;" id='jqxsliderEvent2'></div>
 </div>
 
 
@@ -58,21 +72,19 @@
     <!--Menu-->
     <div id="wrapper">
         <div id="sidebar-wrapper">
-            <ul>
-                <br>
-                <li>
-                    <div class="coolLogo" style="font-size:25px; color: white;">
-                        <img src="assets/images/spacebirdlogo.png" height="6%" width="6%">
-                        <u style="font-size: 20px; display: inline">SPACEBIRDS<span style="font-size: 8px !important;">0.6</span>
-                            <div id="min_button"
-                                 style="right: 10px!important;cursor:pointer;font-size:35px; display: inline; position: absolute">
-                                -
-                            </div>
-                        </u>
+            <br>
+            <div class="coolLogo" style="font-size:25px; color: white;">
+                <img src="assets/images/spacebirdlogo.png" height="6%" width="6%">
+                <u style="font-size: 25px; display: inline">SPACEBIRDS<span
+                        style="font-size: 8px !important;">0.6</span>
+                    <div id="min_button"
+                         style="right: 10px!important;cursor:pointer;font-size:35px; display: inline; position: absolute">
+                        -
                     </div>
-                </li>
-                <div id="box" class="sidebar-nav">
-                <br>
+                </u>
+            </div>
+            <div id="box" class="sidebar-nav">
+                <li style="color: white">OBJECTS TRACKED: <span id="tracked"></span></li>
                 <li>
                     <a href="#">
                         <h4 class="coolLogo" style="color: white">
@@ -121,121 +133,93 @@
                 <br>
                 <li>
                     <a href="#">
-                        <span id="satByYear">YEAR OFF</span>
-                    </a>
-                </li>
-                <br>
-                <li>
-                    <a href="#">
                         <h4 class="coolLogo" style="color: white">
                             <u>ORBIT RANGE</u>
                         </h4>
                     </a>
                 </li>
 
-                    <li>
-                        <div id='jqxsliderEvent'></div>
-                        <div style="color: white; font-size:12px" id="sliderValue"></div>
-                        <div style="color: white; font-size:12px" id="sliderValueMin"></div>
-                    </li>
+                <li>
+                <li id='jqxsliderEvent'></li>
+                <li style="color: white; font-size:12px" id="sliderValue"></li>
+                <li style="color: white; font-size:12px" id="sliderValueMin"></li>
+                </li>
 
-                    <li>
-                        <a href="#">
-                            <span id="leo">LEO ON</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <span id="meo">MEO ON</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <span id="heo">HEO ON</span>
-                        </a>
-                    </li>
-                    <br>
-                    <li>
-                        <a href="#">
-                            <h4 class="coolLogo" style="color: white">
-                                <u>TOOLS</u>
-                            </h4>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="javascript:toggleRepresentation();" id="representation">3D</a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <span id="follow">FOLLOW OFF</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <span id="mesh">MESH OFF</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <span id="orbit">ORBIT OFF</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <span id="collada">3D MODEL OFF</span>
-                        </a>
-
-                    </li>
-                    <br>
-                    <li>
-                        <a href="#">
-                            <h4 class="coolLogo" style="color: white; font-size: 15px">
-                                <u>GROUND STATIONS(GS)</u>
-                            </h4>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" style="padding-left: 20px">
+                <li>
+                    <a href="#">
+                        <span id="leo">LEO ON</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span id="meo">MEO ON</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span id="geo">GEO ON</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span id="heo">HEO ON</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span id="unclassified">UNCLASSIFIED ON</span>
+                    </a>
+                </li>
+                <br>
+                <li>
+                    <a href="#">
+                        <h4 class="coolLogo" style="color: white; font-size: 15px">
+                            <u>GROUND STATIONS(GS)</u>
+                        </h4>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" style="padding-left: 20px">
                             <span id='content'>
                                 <div id='jqxWidget2'>
                                 </div>
                                 <div style="font-size: 12px; font-family: Verdana;" id="selectionlog2"></div>
                             </span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <span id="gStations">GS OFF</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <span id="addStation">ADD GS</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <span id="clearStations">CLEAR GS</span>
-                        </a>
-                    </li>
-                    <br>
-                    <li>
-                        <a href="#">
-                            <h4 class="coolLogo" style="color: white">
-                                <u>GENERAL</u>
-                            </h4>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="about.html">ABOUT</a>
-                    </li>
-                    <li>
-                        <a href="#" id="menu-toggle-right">
-                            <span id="infoSidebar">INFORMATION PANEL</span>
-                        </a>
-                    </li>
-                    <br>
-                </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span id="gStations">GS OFF</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span id="addStation">ADD GS</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span id="clearStations">CLEAR GS</span>
+                    </a>
+                </li>
+                <br>
+                <li>
+                    <a href="#">
+                        <h4 class="coolLogo" style="color: white">
+                            <u>GENERAL</u>
+                        </h4>
+                    </a>
+                </li>
+                <li>
+                    <a href="about.html">ABOUT</a>
+                </li>
+                <li>
+                    <a href="#" id="menu-toggle-right">
+                        <span id="infoSidebar">INFORMATION PANEL</span>
+                    </a>
+                </li>
+                <br>
+            </div>
             </ul>
             <br>
         </div>
@@ -255,44 +239,45 @@
                         -
                     </div>
                 </u>
-                <img src="assets/images/spacebirdlogo.png" height="5%" width="5%">
             </h3>
 
-                <div id="box_right" style="background-color: rgba(0, 0, 0, 0.5)">
-
-            <p>TYPE: <span id="type"></span></p>
-            <p>INTLDES: <span id="intldes"></span></p>
-            <p>NAME: <span id="name"></span></p>
-            <br>
-            <h4 style="color: white" class="coolLogo">
-                <img src="assets/images/spacebirdlogo.png" height="5%" width="5%">
-                <u>POSITION</u>
-                <img src="assets/images/spacebirdlogo.png" height="5%" width="5%">
-            </h4>
-            <p>LATITUDE: <span id="latitude"></span></p>
-            <p>LONGITUDE: <span id="longitude"></span></p>
-            <p>ALTITUDE: <span id="altitude"></span></p>
-            <br>
-            <h4 style="color: white" class="coolLogo">
-                <img src="assets/images/spacebirdlogo.png" height="5%" width="5%">
-                <u>AXIS</u>
-                <img src="assets/images/spacebirdlogo.png" height="5%" width="5%">
-            </h4>
-            <p>SEMI-MAJOR: <span id="majorAxis"></span></p>
-            <p>SEMI-MINOR: <span id="minorAxis"></span></p>
-            <br>
-            <h4 style="color: white" class="coolLogo">
-                <img src="assets/images/spacebirdlogo.png" height="5%" width="5%">
-                <u>EXTRA DATA</u>
-                <img src="assets/images/spacebirdlogo.png" height="5%" width="5%">
-            </h4>
-            <p>INCLINE: <span id="inclination"></span></p>
-            <p>ECCENTRICITY: <span id="eccentricity"></span></p>
-            <p>REV/DAY: <span id="revDay"></span></p>
-            <p>APOGEE: <span id="apogee"></span></p>
-            <p>PERIGEE: <span id="perigee"></span></p>
-            <p>PERIOD: <span id="period"></span></p>
-                </div>
+            <div id="box_right" style="background-color: rgba(0, 0, 0, 0.5); font-size: 15px">
+                <ul>
+                    <li>NAME: <span id="name"></span></li>
+                    <li>TYPE: <span id="type"></span></li>
+                    <li>OWNER: <span id="owner"></span></li>
+                    <li>ID: <span id="id"></span></li>
+                    <li>SITE: <span id="launch"></span></li>
+                    <li>STATUS: <span id="operation"></span></li>
+                </ul>
+                <h4 style="color: white" class="coolLogo">
+                    <img src="assets/images/spacebirdlogo.png" height="5%" width="5%">
+                    <u>POSITION</u>
+                    <img src="assets/images/spacebirdlogo.png" height="5%" width="5%">
+                </h4>
+                <ul>
+                    <li>ORBIT TYPE: <span id="orbitType"></span></li>
+                    <li>LATITUDE: <span id="latitude"></span></li>
+                    <li>LONGITUDE: <span id="longitude"></span></li>
+                    <li>ALTITUDE: <span id="altitude"></span></li>
+                </ul>
+                <h4 style="color: white" class="coolLogo">
+                    <img src="assets/images/spacebirdlogo.png" height="5%" width="5%">
+                    <u>EXTRA DATA</u>
+                    <img src="assets/images/spacebirdlogo.png" height="5%" width="5%">
+                </h4>
+                <ul>
+                    <li>INCLINE: <span id="inclination"></span></li>
+                    <li>ECCENTRICITY: <span id="eccentricity"></span></li>
+                    <li>MEAN MOTION: <span id="revDay"></span></li>
+                    <li>VELOCITY: <span id="velocity"></span></li>
+                    <li>APOGEE: <span id="apogee"></span></li>
+                    <li>PERIGEE: <span id="perigee"></span></li>
+                    <li>PERIOD: <span id="period"></span></li>
+                    <li>SEMI-MAJOR: <span id="majorAxis"></span></li>
+                    <li>SEMI-MINOR: <span id="minorAxis"></span></li>
+                </ul>
+            </div>
 
         </div>
     </div>
