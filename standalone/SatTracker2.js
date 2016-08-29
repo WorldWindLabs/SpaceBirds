@@ -1501,11 +1501,13 @@ grndStationsWorker.addEventListener('message', function (event) {
           var pastOrbitPath = new WorldWind.Path(pastOrbit);
           pastOrbitPath.altitudeMode = WorldWind.RELATIVE_TO_GROUND;
           pastOrbitPath.attributes = pastOrbitPathAttributes;
+          pastOrbitPath.useSurfaceShapeFor2D = true;
 
 
           var futureOrbitPath = new WorldWind.Path(futureOrbit);
           futureOrbitPath.altitudeMode = WorldWind.RELATIVE_TO_GROUND;
           futureOrbitPath.attributes = futureOrbitPathAttributes;
+          futureOrbitPath.useSurfaceShapeFor2D = true;
 
           orbitsLayer.addRenderable(pastOrbitPath);
           orbitsLayer.addRenderable(futureOrbitPath);
@@ -1804,11 +1806,14 @@ grndStationsWorker.addEventListener('message', function (event) {
           var pastOrbitPath = new WorldWind.Path(pastOrbit);
           pastOrbitPath.altitudeMode = WorldWind.RELATIVE_TO_GROUND;
           pastOrbitPath.attributes = pastOrbitPathAttributes;
+          pastOrbitPath.useSurfaceShapeFor2D = true;
+
 
 
           var futureOrbitPath = new WorldWind.Path(futureOrbit);
           futureOrbitPath.altitudeMode = WorldWind.RELATIVE_TO_GROUND;
           futureOrbitPath.attributes = futureOrbitPathAttributes;
+          futureOrbitPath.useSurfaceShapeFor2D = true;
 
           orbitsHoverLayer.addRenderable(pastOrbitPath);
           orbitsHoverLayer.addRenderable(futureOrbitPath);
