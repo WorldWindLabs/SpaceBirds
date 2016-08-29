@@ -79,7 +79,7 @@ The Slider at the bottom of the screen allows you to change the date and time to
 
 **Organization:** NASA Ames Research Center (PX)**
 
-**Manager:** Patrick Hogan, Yann Voumard, Florin Draghici**
+**Tutors:** Yann Voumard, Florin Draghici**
 
 **Authors:** Miguel Del Castillo, Bert Stewart, Julija Semenenko**
 
