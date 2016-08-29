@@ -44,7 +44,7 @@
     <div style="color: white; font-size:20px; text-align: left; right: 650px" id="sliderValue2"></div>
     <div class="coolLogo" style="color: white; text-align: left">TIME CONTROL
         <button style="font-size:65%; width: 65px; height: 25px; max-height:25px; background-color: #d1d1d1; color: black; padding: 0.1em 0.1em 0.1em 0.1em"
-                id="jqxButton">To current date
+                id="jqxButton">Current date
         </button>
         <button style="font-size:55%; width: 65px; height: 25px; max-height:25px; background-color: #d1d1d1; color: black; padding: 0.1em 0.1em 0.1em 0.1em">
         <a href="javascript:toggleRepresentation();" id="representation" style="color: black">3D</a>
@@ -76,22 +76,27 @@
     <div id="wrapper">
         <div id="sidebar-wrapper">
             <br>
-            <div class="coolLogo" style="font-size:25px; color: white;">
+
+            <div class="coolLogo" style="font-size:27px; color: white;">
                 <img src="assets/images/spacebirdlogo.png" height="10%" width="10%">
                 <p style="font-size: 25px; display: inline">
                   SPACEBIRDS
                   <!-- <span style="font-size: 8px !important;">
                     0.6
                   </span> -->
-                    <div id="min_button" style="right: 10px!important;cursor:pointer;font-size:35px; display: inline; position: absolute">-</div>
                 </p>
             </div>
+            <h3 style="color: white" class="coolLogo">
+              <u>
+                <div id="min_button" style="right: 10px!important;cursor:pointer;font-size:35px; display: inline; position: absolute">-</div>
+              </u>
+            </h3>
             <div id="box" class="sidebar-nav">
                 <li style="color: white">OBJECTS TRACKED: <span id="tracked"></span></li>
 
                 <li>
                     <nav class="panel" style="left: 10px;right: 10px; position: relative; width: 230px">
-                        <p class="panel-heading coolLogo">
+                        <p class="panel-heading coolLogo" style="color: #A9A9A9">
                             SEARCH
                         </p>
                         <div style="width: 100%" id='jqxWidget'></div>
@@ -104,7 +109,7 @@
 
                 <li>
                     <nav class="panel" style="left: 10px;right: 10px; position: relative; width: 230px">
-                        <p class="panel-heading coolLogo">
+                        <p class="panel-heading coolLogo" style="color: #A9A9A9">
                             TYPE
                         </p>
                         <a id="allSats" class="panel-block is-active">
@@ -128,7 +133,7 @@
                 <br/>
                 <li>
                     <nav class="panel" style="left: 10px;right: 10px; position: relative; width: 230px">
-                        <p class="panel-heading coolLogo">
+                        <p class="panel-heading coolLogo" style="color: #A9A9A9">
                           ORBIT RANGE
                         </p>
                         <a id='jqxsliderEvent' class="panel-block is-active">
@@ -156,7 +161,7 @@
                 <br/>
                 <li>
                     <nav class="panel" style="left: 10px;right: 10px; position: relative; width: 230px">
-                        <p class="panel-heading coolLogo">
+                        <p class="panel-heading coolLogo" style="color: #A9A9A9">
                             GROUNDSTATIONS
                         </p>
                         <div id='jqxWidget2'>
@@ -202,7 +207,7 @@
                 <!--<br/>-->
                 <li>
                     <nav class="panel" style="left: 10px;right: 10px; position: relative; width: 230px">
-                        <p class="panel-heading coolLogo">
+                        <p class="panel-heading coolLogo" style="color: #A9A9A9">
                             GENERAL
                         </p>
                         <a href="about.html" class="panel-block is-active">
@@ -238,7 +243,7 @@
                     <li>
                         <nav class="panel"
                              style="left: 0px; right: 10px; position: relative; width: 230px; color: #999999">
-                            <p class="panel-heading coolLogo">
+                            <p class="panel-heading coolLogo" style="color: #A9A9A9">
                                 INFORMATION
                             </p>
                             <a class="panel-block is-active" style="color: #999999">
@@ -273,7 +278,7 @@
                     <li>
                         <nav class="panel"
                              style="left: 0px; right: 10px; position: relative; width: 230px; color: #999999">
-                            <p class="panel-heading coolLogo">
+                            <p class="panel-heading coolLogo" style="color: #A9A9A9">
                                 POSITION
                             </p>
                             <a class="panel-block is-active" style="color: #999999">
@@ -299,7 +304,7 @@
                     <li>
                         <nav class="panel"
                              style="left: 0px; right: 10px; position: relative; width: 230px; color: #999999">
-                            <p class="panel-heading coolLogo">
+                            <p class="panel-heading coolLogo" style="color: #A9A9A9">
                                 EXTRA DATA
                             </p>
                             <a class="panel-block is-active" style="color: #999999">
