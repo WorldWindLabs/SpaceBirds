@@ -170,6 +170,7 @@ a{
     }
  /*end of checkbox*/
 #customStatus{
+    font-size: 20px;
     position: absolute;
     bottom: 95px;
     right: 250px;

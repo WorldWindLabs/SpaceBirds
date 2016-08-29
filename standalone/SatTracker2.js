@@ -1288,7 +1288,9 @@ function getGroundStations(groundStations) {
           customSats = null;
           customSatLayer.removeAllRenderables();
         $('#customStatus').text("Cleared Custom Layer");
-
+        window.setTimeout(function(){
+          $('#customStatus').text("");
+        }, 2000)
       });
 
       // Update all Satellite Positions
