@@ -367,19 +367,24 @@ function getGroundStations(groundStations) {
       groundsIndex[0] = gsindex;
       //GS information display
       typePlaceholder.textContent = "Ground Station";
-      namePlaceholder.textContent = groundStations[groundsIndex[0]].NAME;
-      ownerPlaceholder.textContent = groundStations[groundsIndex[0]].ORGANIZATION;
-      latitudePlaceholder.textContent = groundStations[groundsIndex[0]].LATITUDE;
-      longitudePlaceholder.textContent = groundStations[groundsIndex[0]].LONGITUDE;
-      altitudePlaceholder.textContent = groundStations[groundsIndex[0]].ALTITUDE;
-      inclinationPlaceholder.textContent = "N/A";
-      eccentricityPlaceHolder.textContent = "N/A";
-      revDayPlaceholder.textContent = "N/A";
-      apogeeplaceholder.textContent = "N/A";
-      perigeeplaceholder.textContent = "N/A";
-      periodPlaceholder.textContent = "N/A";
-      semiMajorAxisPlaceholder.textContent = "N/A";
-      semiMinorAxisPlaceholder.textContent = "N/A";
+      namePlaceholder.textContent = groundStations[gsindex].NAME;
+      ownerPlaceholder.textContent = groundStations[gsindex].ORGANIZATION;
+      idPlaceholder.textContent = "";
+      latitudePlaceholder.textContent = groundStations[gsindex].LATITUDE;
+      longitudePlaceholder.textContent = groundStations[gsindex].LONGITUDE;
+      altitudePlaceholder.textContent = groundStations[gsindex].ALTITUDE;
+      inclinationPlaceholder.textContent = "";
+      eccentricityPlaceHolder.textContent = "";
+      revDayPlaceholder.textContent = "";
+      apogeeplaceholder.textContent = "";
+      perigeeplaceholder.textContent = "";
+      periodPlaceholder.textContent = "";
+      semiMajorAxisPlaceholder.textContent = "";
+      semiMinorAxisPlaceholder.textContent = "";
+      velocityPlaceholder.textContent = "";
+      launchPlaceholder.textContent = "";
+      operationPlaceholder.textContent = "";
+      orbitPlaceholder.textContent = "";
 
       //moves to GS location
       wwd.goTo(new WorldWind.Location(groundStations[groundsIndex[0]].LATITUDE, groundStations[groundsIndex[0]].LONGITUDE));
@@ -1146,17 +1151,17 @@ function getGroundStations(groundStations) {
         //add colored image depending on sat type
         switch (satData[j].OBJECT_TYPE) {
           case "PAYLOAD":
-            placemarkAttributes.imageSource = "assets/icons/red_dot.png";
-            placemarkAttributes.imageScale = 0.25;
+            placemarkAttributes.imageSource = "assets/icons/blue_dot.png";
+            placemarkAttributes.imageScale = 0.3;
             break;
           case "ROCKET BODY":
-            placemarkAttributes.imageSource = "assets/icons/green_dot.png";
-            placemarkAttributes.imageScale = 0.25;
+            placemarkAttributes.imageSource = "assets/icons/yellow_dot.png";
+            placemarkAttributes.imageScale = 0.3;
             break;
           default:
-            placemarkAttributes.imageSource = "assets/icons/grey_dot.png";
-            placemarkAttributes.imageScale = 0.17;
-            highlightPlacemarkAttributes.imageScale = 0.25;
+            placemarkAttributes.imageSource = "assets/icons/red_dot.png";
+            placemarkAttributes.imageScale = 0.2;
+            highlightPlacemarkAttributes.imageScale = 0.3;
         }
 
         placemarkAttributes.imageOffset = new WorldWind.Offset(
@@ -1236,15 +1241,15 @@ function getGroundStations(groundStations) {
           //add colored image depending on sat type
           switch (satData[index].OBJECT_TYPE) {
             case "PAYLOAD":
-              placemarkAttributes.imageSource = "assets/icons/red_dot.png";
+              placemarkAttributes.imageSource = "assets/icons/blue_dot.png";
               placemarkAttributes.imageScale = 0.4;
               break;
             case "ROCKET BODY":
-              placemarkAttributes.imageSource = "assets/icons/green_dot.png";
+              placemarkAttributes.imageSource = "assets/icons/yellow_dot.png";
               placemarkAttributes.imageScale = 0.4;
               break;
             default:
-              placemarkAttributes.imageSource = "assets/icons/grey_dot.png";
+              placemarkAttributes.imageSource = "assets/icons/red_dot.png";
               placemarkAttributes.imageScale = 0.35;
               highlightPlacemarkAttributes.imageScale = 0.3;
           }
@@ -1268,7 +1273,7 @@ function getGroundStations(groundStations) {
 
           customSatLayer.addRenderable(placemark);
 
-          $('#customStatus').text("Added " + satData[index].OBJECT_NAME + " to custom layer");
+          $('#customStatus').text("Added " + satData[index].OBJECT_NAME + " to Custom Layer");
           window.setTimeout(function(){
             $('#customStatus').text("");
           }, 2000)
@@ -1278,7 +1283,7 @@ function getGroundStations(groundStations) {
       $('#clearCustom').click(function () {
           customSats = null;
           customSatLayer.removeAllRenderables();
-        $('#customStatus').text("Cleared custom layer");
+        $('#customStatus').text("Cleared Custom Layer");
 
       });
 
@@ -1761,7 +1766,7 @@ function getGroundStations(groundStations) {
             gsindex = groundStation.indexOf(position);
             typePlaceholder.textContent = "Ground Station";
             namePlaceholder.textContent = groundStations[gsindex].NAME;
-            ownerPlaceholder.textContent = groundStations[gsindex].OWNER;
+            ownerPlaceholder.textContent = groundStations[gsindex].ORGANIZATION;
             idPlaceholder.textContent = "";
             latitudePlaceholder.textContent = groundStations[gsindex].LATITUDE;
             longitudePlaceholder.textContent = groundStations[gsindex].LONGITUDE;
@@ -1774,6 +1779,10 @@ function getGroundStations(groundStations) {
             periodPlaceholder.textContent = "";
             semiMajorAxisPlaceholder.textContent = "";
             semiMinorAxisPlaceholder.textContent = "";
+            velocityPlaceholder.textContent = "";
+            launchPlaceholder.textContent = "";
+            operationPlaceholder.textContent = "";
+            orbitPlaceholder.textContent = "";
           }
         }
 
