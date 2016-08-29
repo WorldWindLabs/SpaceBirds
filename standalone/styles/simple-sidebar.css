@@ -182,6 +182,8 @@
     #sidebar-wrapper-right {
         width: 250px;
         top: 10%;
+        height: 100%;
+        bottom: 5%;
     }
 
     #wrapper-right.toggled #sidebar-wrapper-right {
