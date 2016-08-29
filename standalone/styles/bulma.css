@@ -5464,6 +5464,7 @@ a.nav-item.is-tab.is-active {
   display: block;
   line-height: 16px;
   padding: 10px;
+  background-color: rgba(0, 0, 0, 0.6);
 }
 
 .panel-block:not(:last-child) {
@@ -5471,7 +5472,7 @@ a.nav-item.is-tab.is-active {
 }
 
 a.panel-block:hover {
-  background-color: black;
+  /*background-color: black;*/
   /*color: white;*/
 }
 
