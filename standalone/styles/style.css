@@ -169,3 +169,8 @@ a{
         background-color: rgba(91, 91, 91, 0.41) !important;
     }
  /*end of checkbox*/
+#customStatus{
+    bottom: 60px;
+    right: 250px;
+    text-align: right;
+}

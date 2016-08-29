@@ -48,8 +48,6 @@ var orbitsHoverLayer = new WorldWind.RenderableLayer();
 var modelLayer = new WorldWind.RenderableLayer("Model");
 var meshLayer = new WorldWind.RenderableLayer();
 var orbitsLayer = new WorldWind.RenderableLayer("Orbit");
-var customOrbitLayer = new WorldWind.RenderableLayer("Orbit");
-var customSatLayer = new WorldWind.RenderableLayer("custom");
 var leoSatLayer = new WorldWind.RenderableLayer("LEO Payloads");
 var meoSatLayer = new WorldWind.RenderableLayer("MEO Payloads");
 var heoSatLayer = new WorldWind.RenderableLayer("HEO Payloads");
@@ -65,12 +63,12 @@ var meoDebrisLayer = new WorldWind.RenderableLayer("MEO Debris");
 var heoDebrisLayer = new WorldWind.RenderableLayer("HEO Debris");
 var geoDebrisLayer = new WorldWind.RenderableLayer("GEO Debris");
 var unclassifiedDebrisLayer = new WorldWind.RenderableLayer("UnclassifiedDebris");
+var customSatLayer = new WorldWind.RenderableLayer("custom");
 
 //add custom layers
 wwd.addLayer(groundStationsLayer);
 wwd.addLayer(shapeLayer);
 wwd.addLayer(orbitsHoverLayer);
-wwd.addLayer(customSatLayer);
 wwd.addLayer(leoSatLayer);
 wwd.addLayer(meoSatLayer);
 wwd.addLayer(heoSatLayer);
@@ -89,6 +87,7 @@ wwd.addLayer(unclassifiedDebrisLayer);
 wwd.addLayer(geoRocketLayer);
 wwd.addLayer(geoDebrisLayer);
 wwd.addLayer(geoSatLayer);
+wwd.addLayer(customSatLayer);
 
 //Latitude, Longitude, and Altitude
 var latitudePlaceholder = document.getElementById('latitude');
@@ -121,19 +120,19 @@ addEventListener("mouseup", mouseUp);
 addEventListener("touchstart", mouseDown);
 addEventListener("touchend", mouseUp);
 var timer = null;
-addEventListener("wheel", function() {
+addEventListener("wheel", function () {
   mouseDown();
-  if(timer !== null) {
+  if (timer !== null) {
     clearTimeout(timer);
   }
   timer = setTimeout(mouseUp, 200);
 });
 
-function mouseDown(){
+function mouseDown() {
   updatePermission = false;
 }
 
-function mouseUp(){
+function mouseUp() {
   updatePermission = true;
 }
 
@@ -142,22 +141,24 @@ $('#sidebar-wrapper').perfectScrollbar();
 $('#sidebar-wrapper-right').perfectScrollbar();
 
 //toggle minimization of left nav bar
-$("#min_button").click(function(){
-  if($(this).html() == "-"){
+$("#min_button").click(function () {
+  console.log("in");
+  if ($(this).html() == "-") {
+    console.log("inner");
     $(this).html("+");
   }
-  else{
+  else {
     $(this).html("-");
   }
   $("#box").slideToggle();
 });
 
 //toggle minimization of right nav bar
-$("#min_button_right").click(function(){
-  if($(this).html() == "-"){
+$("#min_button_right").click(function () {
+  if ($(this).html() == "-") {
     $(this).html("+");
   }
-  else{
+  else {
     $(this).html("-");
   }
   $("#box_right").slideToggle();
@@ -189,11 +190,11 @@ function getPosition(satrec, time) {
   return new WorldWind.Position(latitude, longitude, altitude);
 }
 
-function jday(year, mon, day, hr, minute, sec){
+function jday(year, mon, day, hr, minute, sec) {
   'use strict';
   return (367.0 * year -
     Math.floor((7 * (year + Math.floor((mon + 9) / 12.0))) * 0.25) +
-    Math.floor( 275 * mon / 9.0 ) +
+    Math.floor(275 * mon / 9.0) +
     day + 1721013.5 +
     ((sec / 60.0 + minute) / 60.0 + hr) / 24.0  //  ut in days
     //#  - 0.5*sgn(100.0*year + mon - 190002.5) + 0.5;
@@ -201,15 +202,15 @@ function jday(year, mon, day, hr, minute, sec){
 }
 
 function roundToTwo(num) {
-    return +(Math.round(num + "e+2")  + "e-2");
+  return +(Math.round(num + "e+2") + "e-2");
 }
 
 function roundToFour(num) {
-    return +(Math.round(num + "e+4")  + "e-4");
+  return +(Math.round(num + "e+4") + "e-4");
 }
 
 var satVelocity = [];
-function getVelocity(satrec , time) {
+function getVelocity(satrec, time) {
 
   var j = jday(time.getUTCFullYear(),
     time.getUTCMonth() + 1, // Note, this function requires months in range 1-12.
@@ -220,14 +221,13 @@ function getVelocity(satrec , time) {
   j += time.getUTCMilliseconds() * 1.15741e-8;
 
 
+  var m = (j - satrec.jdsatepoch) * 1440.0;
+  var pv = satellite.sgp4(satrec, m);
+  var vx, vy, vz;
 
-    var m = (j - satrec.jdsatepoch) * 1440.0;
-    var pv = satellite.sgp4(satrec, m);
-    var vx,vy,vz;
-
-      vx = pv.velocity.x;
-      vy = pv.velocity.y;
-      vz = pv.velocity.z;
+  vx = pv.velocity.x;
+  vy = pv.velocity.y;
+  vz = pv.velocity.z;
 
   var satVelocity = Math.sqrt(
     vx * vx +
@@ -271,15 +271,15 @@ grndStationsWorker.addEventListener('message', function (event) {
   getGroundStations(event.data);
 }, false);
 
-  function getGroundStations(groundStations) {
-    var satParserWorker = new Worker("Workers/satelliteParseWorker.js");
-    satParserWorker.postMessage("work, satellite parser, work!");
-    //Retrieval of JSON file data from worker threads. Also, closing such threads.
-    satParserWorker.addEventListener('message', function (event) {
-      //var satData = event.data;
-      satParserWorker.postMessage('close');
-      getSatellites(event.data);
-    }, false);
+function getGroundStations(groundStations) {
+  var satParserWorker = new Worker("Workers/satelliteParseWorker.js");
+  satParserWorker.postMessage("work, satellite parser, work!");
+  //Retrieval of JSON file data from worker threads. Also, closing such threads.
+  satParserWorker.addEventListener('message', function (event) {
+    //var satData = event.data;
+    satParserWorker.postMessage('close');
+    getSatellites(event.data);
+  }, false);
 
 
   function getSatellites(satellites) {
@@ -320,9 +320,9 @@ grndStationsWorker.addEventListener('message', function (event) {
       altitudePlaceholder.textContent = (Math.round(position.altitude / 10) / 100) + "km";
     }
 
-/***
- Ground Stations Layer
- ***/
+    /***
+     Ground Stations Layer
+     ***/
     var gsPlacemarkAttributes = new WorldWind.PlacemarkAttributes(null);
     var gsHighlightPlacemarkAttributes = new WorldWind.PlacemarkAttributes(gsPlacemarkAttributes);
 
@@ -364,43 +364,59 @@ grndStationsWorker.addEventListener('message', function (event) {
 
     var groundsIndex = [];
     var toGsStation = function (gsindex) {
-        groundsIndex[0] = gsindex;
-        //GS information display
-        typePlaceholder.textContent = "Ground Station";
-        namePlaceholder.textContent = groundStations[groundsIndex[0]].NAME;
-        ownerPlaceholder.textContent = groundStations[groundsIndex[0]].ORGANIZATION;
-        latitudePlaceholder.textContent = groundStations[groundsIndex[0]].LATITUDE;
-        longitudePlaceholder.textContent = groundStations[groundsIndex[0]].LONGITUDE;
-        altitudePlaceholder.textContent = groundStations[groundsIndex[0]].ALTITUDE;
-        inclinationPlaceholder.textContent = "N/A";
-        eccentricityPlaceHolder.textContent = "N/A";
-        revDayPlaceholder.textContent = "N/A";
-        apogeeplaceholder.textContent = "N/A";
-        perigeeplaceholder.textContent = "N/A";
-        periodPlaceholder.textContent = "N/A";
-        semiMajorAxisPlaceholder.textContent = "N/A";
-        semiMinorAxisPlaceholder.textContent = "N/A";
+      groundsIndex[0] = gsindex;
+      //GS information display
+      typePlaceholder.textContent = "Ground Station";
+      namePlaceholder.textContent = groundStations[groundsIndex[0]].NAME;
+      ownerPlaceholder.textContent = groundStations[groundsIndex[0]].ORGANIZATION;
+      latitudePlaceholder.textContent = groundStations[groundsIndex[0]].LATITUDE;
+      longitudePlaceholder.textContent = groundStations[groundsIndex[0]].LONGITUDE;
+      altitudePlaceholder.textContent = groundStations[groundsIndex[0]].ALTITUDE;
+      inclinationPlaceholder.textContent = "N/A";
+      eccentricityPlaceHolder.textContent = "N/A";
+      revDayPlaceholder.textContent = "N/A";
+      apogeeplaceholder.textContent = "N/A";
+      perigeeplaceholder.textContent = "N/A";
+      periodPlaceholder.textContent = "N/A";
+      semiMajorAxisPlaceholder.textContent = "N/A";
+      semiMinorAxisPlaceholder.textContent = "N/A";
 
-        //moves to GS location
-        wwd.goTo(new WorldWind.Location(groundStations[groundsIndex[0]].LATITUDE, groundStations[groundsIndex[0]].LONGITUDE));
+      //moves to GS location
+      wwd.goTo(new WorldWind.Location(groundStations[groundsIndex[0]].LATITUDE, groundStations[groundsIndex[0]].LONGITUDE));
 
-        //turn on shape for current GS
-        $('#addStation').click(function () {
-          var gsAttributes = new WorldWind.ShapeAttributes(null);
-          gsAttributes.outlineColor = new WorldWind.Color(0, 255, 255, 1);
-          gsAttributes.interiorColor = new WorldWind.Color(0, 255, 255, 0.2);
+      //turn on shape for current GS
+      $('#addStation').click(function () {
+        var gsAttributes = new WorldWind.ShapeAttributes(null);
+        gsAttributes.outlineColor = new WorldWind.Color(0, 255, 255, 1);
+        gsAttributes.interiorColor = new WorldWind.Color(0, 255, 255, 0.2);
 
-          var shape = new WorldWind.SurfaceCircle(new WorldWind.Location(groundStations[groundsIndex[0]].LATITUDE,
-            groundStations[groundsIndex[0]].LONGITUDE), 150e4, gsAttributes);
-          shapeLayer.addRenderable(shape);
-        });
+        var shape = new WorldWind.SurfaceCircle(new WorldWind.Location(groundStations[groundsIndex[0]].LATITUDE,
+          groundStations[groundsIndex[0]].LONGITUDE), 150e4, gsAttributes);
+        shapeLayer.addRenderable(shape);
+      });
     };
 
-/***
- * Satellites
- */
-    //Swtich Board for Sat Types
-    var orbitToggle = {leoP: 9, leoR: 0, leoD: 0, meoP: 9, meoR: 0, meoD: 0, heoP: 9, heoR: 0, heoD: 0, geoP: 9, geoR: 0, geoD: 0, unclassifiedP: 0, unclassifiedR: 0, unclassifiedD: 0};
+    /***
+     * Satellites
+     */
+      //Swtich Board for Sat Types
+    var orbitToggle = {
+        leoP: 9,
+        leoR: 0,
+        leoD: 0,
+        meoP: 9,
+        meoR: 0,
+        meoD: 0,
+        heoP: 9,
+        heoR: 0,
+        heoD: 0,
+        geoP: 9,
+        geoR: 0,
+        geoD: 0,
+        unclassifiedP: 0,
+        unclassifiedR: 0,
+        unclassifiedD: 0
+      };
     leoDebrisLayer.enabled = false;
     meoDebrisLayer.enabled = false;
     heoDebrisLayer.enabled = false;
@@ -1076,7 +1092,7 @@ grndStationsWorker.addEventListener('message', function (event) {
         unclassifiedToggleOff();
       }
     });
-    $('#custom').click(function(){
+    $('#custom').click(function () {
       if ($(this).text() == "CUSTOM OFF") {
         $(this).text("CUSTOM ON");
         customSatLayer.enabled = true;
@@ -1125,22 +1141,22 @@ grndStationsWorker.addEventListener('message', function (event) {
 
         var placemarkAttributes = new WorldWind.PlacemarkAttributes(null);
         var highlightPlacemarkAttributes = new WorldWind.PlacemarkAttributes(placemarkAttributes);
-        highlightPlacemarkAttributes.imageScale = 0.5;
+        highlightPlacemarkAttributes.imageScale = 0.4;
 
         //add colored image depending on sat type
         switch (satData[j].OBJECT_TYPE) {
           case "PAYLOAD":
             placemarkAttributes.imageSource = "assets/icons/red_dot.png";
-            placemarkAttributes.imageScale = 0.2;
+            placemarkAttributes.imageScale = 0.25;
             break;
           case "ROCKET BODY":
             placemarkAttributes.imageSource = "assets/icons/green_dot.png";
-            placemarkAttributes.imageScale = 0.2;
+            placemarkAttributes.imageScale = 0.25;
             break;
           default:
             placemarkAttributes.imageSource = "assets/icons/grey_dot.png";
-            placemarkAttributes.imageScale = 0.15;
-            highlightPlacemarkAttributes.imageScale = 0.3;
+            placemarkAttributes.imageScale = 0.17;
+            highlightPlacemarkAttributes.imageScale = 0.25;
         }
 
         placemarkAttributes.imageOffset = new WorldWind.Offset(
@@ -1208,10 +1224,10 @@ grndStationsWorker.addEventListener('message', function (event) {
 
       var customSats = [];
       var customSatStuff = function (index) {
-        customSats.push(satData[index]);
+        customSats.push(everyCurrentPosition[index]);
         createCustom(index);
       };
-      var createCustom = function(index){
+      var createCustom = function (index) {
         for (var j = 0; j < customSats.length; j++) {
           var placemarkAttributes = new WorldWind.PlacemarkAttributes(null);
           var highlightPlacemarkAttributes = new WorldWind.PlacemarkAttributes(placemarkAttributes);
@@ -1243,7 +1259,7 @@ grndStationsWorker.addEventListener('message', function (event) {
           placemarkAttributes.labelAttributes.color = WorldWind.Color.WHITE;
 
 
-          var placemark = new WorldWind.Placemark(everyCurrentPosition[index]);
+          var placemark = new WorldWind.Placemark(customSats[j]);
           placemark.altitudeMode = WorldWind.RELATIVE_TO_GROUND;
           placemark.attributes = placemarkAttributes;
           placemark.highlightAttributes = highlightPlacemarkAttributes;
@@ -1254,7 +1270,10 @@ grndStationsWorker.addEventListener('message', function (event) {
         }
         wwd.redraw();
       };
-
+      $('#clearCustom').click(function () {
+          customSats = null;
+          customSatLayer.removeAllRenderables();
+      });
 
       // Update all Satellite Positions
       var updatePositions = setInterval(function () {
@@ -1306,8 +1325,8 @@ grndStationsWorker.addEventListener('message', function (event) {
             var labelElement = $("<div></div>");
             labelElement.text("Name: " + item.label);
             $("#selectionlog2").children().remove();
-            $("#selectionlog2").append(labelElement);
-            $("#selectionlog2").append(valueElement);
+            // $("#selectionlog2").append(labelElement);
+            // $("#selectionlog2").append(valueElement);
             var searchGSat = gsNames.indexOf(item.label);
             endFollow();
             toGsStation(searchGSat);
@@ -1335,8 +1354,8 @@ grndStationsWorker.addEventListener('message', function (event) {
             var labelElement = $("<div></div>");
             labelElement.text("Name: " + item.label);
             $("#selectionlog").children().remove();
-            $("#selectionlog").append(labelElement);
-            $("#selectionlog").append(valueElement);
+            //$("#selectionlog").append(labelElement);
+            //$("#selectionlog").append(valueElement);
             console.log(item.label);
             console.log(satNames[1]);
             endFollow();
@@ -1395,19 +1414,10 @@ grndStationsWorker.addEventListener('message', function (event) {
 
       });
 
-      /* //TODO add year range
-       $("#jqxRangeSlider").jqxSlider({
-       theme: 'summer',
-       value: {rangeStart: 1950, rangeEnd: 1960},
-       rangeSlider: true,
-       width: "viewport",
-       min: 1950,
-       max: 2016
-       }); */
 
-/****
- * Click-handle functions
- */
+      /****
+       * Click-handle functions
+       */
         //follow satellite on click
         // Move to sat position on click and redefine navigator positioning
       var startFollow;
@@ -1418,9 +1428,9 @@ grndStationsWorker.addEventListener('message', function (event) {
         //Changes center point of view.
         wwd.navigator.lookAtLocation.altitude = satPos.altitude;
         startFollow = window.setInterval(function () {
-          try{
+          try {
             var position = getPosition(satellite.twoline2satrec(satData[index].TLE_LINE1, satData[index].TLE_LINE2), new Date());
-          }catch(err){
+          } catch (err) {
             console.log(err + ' in toCurrentPosition, sat ' + indx);
             //continue;
           }
@@ -1429,6 +1439,17 @@ grndStationsWorker.addEventListener('message', function (event) {
           wwd.navigator.lookAtLocation.longitude = satPos.longitude;
           updateLLA(position);
         });
+        $('#follow').text('FOLLOW ON');
+        $('#follow').click(function () {
+          if ($(this).text() == "FOLLOW OFF") {
+            $(this).text("FOLLOW ON");
+            toCurrentPosition(index);
+          }
+          else {
+            $(this).text("FOLLOW OFF");
+            endFollow();
+          }
+        });
         $('#customSat').click(function () {
           customSatStuff(index);
         });
@@ -1436,10 +1457,6 @@ grndStationsWorker.addEventListener('message', function (event) {
       var endFollow = function () {     //ends startFollow window.setInterval
         clearInterval(startFollow);
       };
-      $('#follow').click(function () {
-        endFollow();
-      });
-
 
       //Mesh-cone to follow sat position
       var startMesh;                                    //allows to end window interval
@@ -1449,16 +1466,27 @@ grndStationsWorker.addEventListener('message', function (event) {
           var attributes = new WorldWind.ShapeAttributes(null);
           attributes.outlineColor = new WorldWind.Color(28, 255, 47, 1);
           attributes.interiorColor = new WorldWind.Color(28, 255, 47, 0.1);
-
-          var shape = new WorldWind.SurfaceCircle(new WorldWind.Location(everyCurrentPosition[index].latitude,
-            everyCurrentPosition[index].longitude), 150e4, attributes);
+          var earthRadius = WorldWind.WWMath.max(
+            globe.equatorialRadius,
+            globe.polarRadius);
+          var radiusToHorizon = Math.abs(WorldWind.WWMath.horizonDistanceForGlobeRadius(
+            earthRadius,
+            everyCurrentPosition[index].altitude));
+          if (radiusToHorizon > earthRadius) {
+            radiusToHorizon = earthRadius;
+          }
+          var shape = new WorldWind.SurfaceCircle(new WorldWind.Location(
+            everyCurrentPosition[index].latitude,
+            everyCurrentPosition[index].longitude),
+            radiusToHorizon,
+            attributes);
 
           meshLayer.addRenderable(shape);
         });
       };
       var endMesh = function () {
-        meshLayer.removeAllRenderables();
         clearInterval(startMesh);
+        meshLayer.removeAllRenderables();
       };
 
 
@@ -1475,9 +1503,9 @@ grndStationsWorker.addEventListener('message', function (event) {
           var futureOrbit = [];
           for (var i = -orbitRange; i <= orbitRange; i++) {
             var time = new Date(now.getTime() + (i * 60000) + (timeSlide * 60000));
-            try{
+            try {
               var position = getPosition(satellite.twoline2satrec(satData[index].TLE_LINE1, satData[index].TLE_LINE2), time);
-            }catch(err){
+            } catch (err) {
               console.log(err + ' in createOrbit, sat ' + index);
               continue;
             }
@@ -1516,8 +1544,8 @@ grndStationsWorker.addEventListener('message', function (event) {
         });
       };
       var endOrbit = function () {
-        orbitsLayer.removeAllRenderables();
         clearInterval(startOrbit);
+        orbitsLayer.removeAllRenderables();
       };
 
 
@@ -1525,9 +1553,10 @@ grndStationsWorker.addEventListener('message', function (event) {
       var startExtra;
       var extraData = function (index) {
         startExtra = window.setInterval(function () {
-          try {var satStuff = satellite.twoline2satrec( //perform and store sat init calcs
-            satData[index].TLE_LINE1, satData[index].TLE_LINE2);
-          } catch (err){
+          try {
+            var satStuff = satellite.twoline2satrec( //perform and store sat init calcs
+              satData[index].TLE_LINE1, satData[index].TLE_LINE2);
+          } catch (err) {
             console.log('Possible deorbiting sat: ' + satData[index].NORAD_CAT_ID + ' in startExtra interval');
           }
           var extra = {};
@@ -1606,7 +1635,7 @@ grndStationsWorker.addEventListener('message', function (event) {
           endFollow();
           endExtra();
           $('#follow').text('FOLLOW OFF');
-          $('#mesh').text('MESH OFF');
+          $('#mesh').text('HORIZON OFF');
           $('#orbit').text('ORBIT OFF');
           $('#collada').text('3D MODEL OFF');
 
@@ -1626,19 +1655,19 @@ grndStationsWorker.addEventListener('message', function (event) {
 
         // If only one thing is picked and it is the terrain, tell the world window to go to the picked location.
         if (pickList.objects.length == 1 && pickList.objects[0].isTerrain) {
+          endFollow();
+          endOrbit();
+          endMesh();
+          endHoverOrbit();
+          endExtra();
           var toggleButtons = document.getElementById('buttonToggle');
           toggleButtons.style.display = "none";
           var position = pickList.objects[0].position;
           index = null;
           orbitsHoverLayer.removeAllRenderables();
           orbitsHoverLayer.enabled = true;
-          endHoverOrbit();
-          endExtra();
-          endFollow();
-          endOrbit();
-          endMesh();
           $('#follow').text('FOLLOW OFF');
-          $('#mesh').text('MESH OFF');
+          $('#mesh').text('HORIZON OFF');
           $('#orbit').text('ORBIT OFF');
           $('#collada').text('3D MODEL OFF');
 
@@ -1665,42 +1694,30 @@ grndStationsWorker.addEventListener('message', function (event) {
 
         if (pickList.objects.length == 1 && pickList.objects[0]) {
           var position = pickList.objects[0].position;
+          endFollow();
+          endMesh();
+          endHoverOrbit();
+          endExtra();
+          endOrbit();
           if (position.altitude > 1000) {
-            //operationPlaceholder.textContent = satData[index].OPERATIONAL_STATUS;
-            endFollow();
-            endHoverOrbit();
-            endMesh();
-            endExtra();
-            endOrbit();
             var index = everyCurrentPosition.indexOf(position);
             orbitsHoverLayer.enabled = false;
 
             extraData(index);
-            $('#mesh').text("MESH ON");
+            $('#mesh').text("HORIZON ON");
             meshToCurrentPosition(index);
             $('#mesh').click(function () {
-              if ($(this).text() == "MESH OFF") {
-                $(this).text("MESH ON");
+              if ($(this).text() == "HORIZON OFF") {
+                $(this).text("HORIZON ON");
                 meshToCurrentPosition(index);
               }
               else {
-                $(this).text("MESH OFF");
+                $(this).text("HORIZON OFF");
                 endMesh();
               }
             });
 
-              toCurrentPosition(index);
-            $('#follow').text('FOLLOW ON');
-            $('#follow').click(function () {
-              if ($(this).text() == "FOLLOW OFF") {
-                $(this).text("FOLLOW ON");
-                toCurrentPosition(index);
-              }
-              else {
-                $(this).text("FOLLOW OFF");
-                endFollow();
-              }
-            });
+            toCurrentPosition(index);
 
 
             createOrbit(index);
@@ -1766,12 +1783,11 @@ grndStationsWorker.addEventListener('message', function (event) {
       var tapRecognizer = new WorldWind.TapRecognizer(wwd, handleClick);
 
 
-
-/**
- * Pick-Handle Functions
- *
- */
-      //Generate pick handle orbit separately as to not interfere with click handle orbit
+      /**
+       * Pick-Handle Functions
+       *
+       */
+        //Generate pick handle orbit separately as to not interfere with click handle orbit
       var startHoverOrbit;
       var createHoverOrbit = function (index) {
         startHoverOrbit = window.setInterval(function () {
@@ -1782,9 +1798,9 @@ grndStationsWorker.addEventListener('message', function (event) {
           var futureOrbit = [];
           for (var i = -98; i <= 98; i++) {
             var time = new Date(now.getTime() + (i * 60000) + (timeSlide * 60000));
-            try{
+            try {
               var position = getPosition(satellite.twoline2satrec(satData[index].TLE_LINE1, satData[index].TLE_LINE2), time);
-            }catch(err){
+            } catch (err) {
               console.log(err + ' in createHoverOrbit, sat ' + index);
               continue;
             }
@@ -1815,7 +1831,6 @@ grndStationsWorker.addEventListener('message', function (event) {
           pastOrbitPath.useSurfaceShapeFor2D = true;
 
 
-
           var futureOrbitPath = new WorldWind.Path(futureOrbit);
           futureOrbitPath.altitudeMode = WorldWind.RELATIVE_TO_GROUND;
           futureOrbitPath.attributes = futureOrbitPathAttributes;
@@ -1831,10 +1846,10 @@ grndStationsWorker.addEventListener('message', function (event) {
       };
 
 
-/**
- * Pick-handle
- *
- */
+      /**
+       * Pick-handle
+       *
+       */
         //Highlight on hover
         // Now set up to handle picking.
       var highlightedItems = [];
@@ -1883,6 +1898,11 @@ grndStationsWorker.addEventListener('message', function (event) {
         if (pickList.objects.length == 1 && pickList.objects[0]) {
           var position = pickList.objects[0].position;
           //console.log(position);
+          try {
+            var uselessVar = position.altitude;
+          } catch (error) {
+            console.log(error + ' in object ' + pickList.objects[0]);
+          }
           if (position.altitude > 1000) {
             var index = everyCurrentPosition.indexOf(position);
             try {
@@ -1959,6 +1979,7 @@ map.elevationModel = new WorldWind.ZeroElevationModel();
 map.projection = new WorldWind.ProjectionEquirectangular();
 
 var representationPlaceholder = document.getElementById('representation');
+
 function toggleRepresentation() {
   if (wwd.globe instanceof WorldWind.Globe2D) {
     wwd.globe = globe;
