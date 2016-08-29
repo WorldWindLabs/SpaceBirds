@@ -77,12 +77,12 @@ The Slider at the bottom of the screen allows you to change the date and time to
 
 ***
 
-**Organization:** NASA Ames Research Center (PX)**
+**Organization:** NASA Ames Research Center (PX)
 
-**Tutors:** Yann Voumard, Florin Draghici**
+**Tutors:** Yann Voumard, Florin Draghici
 
-**Authors:** Miguel Del Castillo, Bert Stewart, Julija Semenenko**
+**Authors:** Miguel Del Castillo, Bert Stewart, Julija Semenenko
 
-**Developers:** Farah Salah, Enika Biswas, Nidhi Jain, Jenipher Gonzalez, Nancy Hernandez**
+**Developers:** Farah Salah, Enika Biswas, Nidhi Jain, Jenipher Gonzalez, Nancy Hernandez
 
-**Acknowledgements:** Benjamin Chang, Gabriel Militão, Khaled Sharif**
+**Acknowledgements:** Benjamin Chang, Gabriel Militão, Khaled Sharif, Shawn Gano
