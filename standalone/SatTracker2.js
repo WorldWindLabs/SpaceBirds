@@ -430,6 +430,7 @@ function getGroundStations(groundStations) {
 
     var satNum = satPac.length;
     //Sat Type toggles
+    $('#allSats').text('ALL OFF');
     $('#allSats').click(function () {
       if ($(this).text() == "ALL OFF") {
         $(this).text("ALL ON");
@@ -478,7 +479,7 @@ function getGroundStations(groundStations) {
         $('#meo').text("MEO OFF");
         $('#heo').text("HEO OFF");
         $('#geo').text("GEO OFF");
-        $('#unclassified').text("UNCLASSIFIED ON");
+        $('#unclassified').text("UNCLASSIFIED OFF");
         leoSatLayer.enabled = false;
         leoRocketLayer.enabled = false;
         leoDebrisLayer.enabled = false;
