@@ -143,7 +143,9 @@ $('#sidebar-wrapper-right').perfectScrollbar();
 
 //toggle minimization of left nav bar
 $("#min_button").click(function(){
+  console.log("in");
   if($(this).html() == "-"){
+    console.log("inner");
     $(this).html("+");
   }
   else{
