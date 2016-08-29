@@ -747,7 +747,7 @@ function getGroundStations(groundStations) {
           meoRocketLayer.enabled = true;
           break;
         case 6:
-          leoSatLayer.enabled = true;
+          meoSatLayer.enabled = true;
           meoDebrisLayer.enabled = true;
           break;
         case 8:
@@ -1267,12 +1267,19 @@ function getGroundStations(groundStations) {
           console.log("added" + satData[index].OBJECT_NAME);
 
           customSatLayer.addRenderable(placemark);
+
+          $('#customStatus').text("Added " + satData[index].OBJECT_NAME + " to custom layer");
+          window.setTimeout(function(){
+            $('#customStatus').text("");
+          }, 2000)
         }
         wwd.redraw();
       };
       $('#clearCustom').click(function () {
           customSats = null;
           customSatLayer.removeAllRenderables();
+        $('#customStatus').text("Cleared custom layer");
+
       });
 
       // Update all Satellite Positions
