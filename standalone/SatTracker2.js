@@ -418,13 +418,15 @@ function getGroundStations(groundStations) {
         geoP: 9,
         geoR: 0,
         geoD: 0,
-        unclassifiedP: 9,
+        unclassifiedP: 0,
         unclassifiedR: 0,
         unclassifiedD: 0
       };
+
     leoDebrisLayer.enabled = false;
     meoDebrisLayer.enabled = false;
     heoDebrisLayer.enabled = false;
+    geoDebrisLayer.enabled = false;
     unclassifiedDebrisLayer.enabled = false;
     customSatLayer.enabled = false;
 
