@@ -1451,9 +1451,17 @@ grndStationsWorker.addEventListener('message', function (event) {
           var attributes = new WorldWind.ShapeAttributes(null);
           attributes.outlineColor = new WorldWind.Color(28, 255, 47, 1);
           attributes.interiorColor = new WorldWind.Color(28, 255, 47, 0.1);
-
-          var shape = new WorldWind.SurfaceCircle(new WorldWind.Location(everyCurrentPosition[index].latitude,
-            everyCurrentPosition[index].longitude), 150e4, attributes);
+          var earthRadius = WorldWind.WWMath.max(
+                            globe.equatorialRadius,
+                            globe.polarRadius);
+          var radiusToHorizon = WorldWind.WWMath.horizonDistanceForGlobeRadius(
+                                earthRadius,
+                                everyCurrentPosition[index].altitude);
+          var shape = new WorldWind.SurfaceCircle(new WorldWind.Location(
+                      everyCurrentPosition[index].latitude,
+                      everyCurrentPosition[index].longitude),
+                      radiusToHorizon,
+                      attributes);
 
           meshLayer.addRenderable(shape);
         });
@@ -1608,7 +1616,7 @@ grndStationsWorker.addEventListener('message', function (event) {
           endFollow();
           endExtra();
           $('#follow').text('FOLLOW OFF');
-          $('#mesh').text('MESH OFF');
+          $('#mesh').text('HORIZON OFF');
           $('#orbit').text('ORBIT OFF');
           $('#collada').text('3D MODEL OFF');
 
@@ -1640,7 +1648,7 @@ grndStationsWorker.addEventListener('message', function (event) {
           endOrbit();
           endMesh();
           $('#follow').text('FOLLOW OFF');
-          $('#mesh').text('MESH OFF');
+          $('#mesh').text('HORIZON OFF');
           $('#orbit').text('ORBIT OFF');
           $('#collada').text('3D MODEL OFF');
 
@@ -1678,15 +1686,15 @@ grndStationsWorker.addEventListener('message', function (event) {
             orbitsHoverLayer.enabled = false;
 
             extraData(index);
-            $('#mesh').text("MESH ON");
+            $('#mesh').text("HORIZON ON");
             meshToCurrentPosition(index);
             $('#mesh').click(function () {
-              if ($(this).text() == "MESH OFF") {
-                $(this).text("MESH ON");
+              if ($(this).text() == "HORIZON OFF") {
+                $(this).text("HORIZON ON");
                 meshToCurrentPosition(index);
               }
               else {
-                $(this).text("MESH OFF");
+                $(this).text("HORIZON OFF");
                 endMesh();
               }
             });
