@@ -14,7 +14,9 @@ The application is still in its alpha stage as it still contains some bugs and i
 
 ###SCREEN SHOTS:
 
-<img src="http://i.imgur.com/SJ38jpL.png"/>
+![image](https://cloud.githubusercontent.com/assets/19692086/18044330/2fc07996-6d82-11e6-8d3e-2b8e084fab7b.png)
+
+![image](https://cloud.githubusercontent.com/assets/19692086/18044175/534d5db2-6d81-11e6-9e09-e1931e266171.png)
 
 <img src="http://i.imgur.com/KhmyPZ1.png"/>
 
@@ -79,6 +81,6 @@ Ground stations can be rendered by selecting the Ground Stations button at the b
 
 **Authors:** Miguel Del Castillo, Bert Stewart**
 
-**Developers:** Enika Biswas, Nidhi Jain, Jenipher Gonzalez, Nancy Hernandez**
+**Developers:** Farah Salah, Enika Biswas, Nidhi Jain, Jenipher Gonzalez, Nancy Hernandez**
 
-**Acknowledgements:** Benjamin Chang, Gabriel Militão, Farah Salah, Khaled Sharif**
+**Acknowledgements:** Benjamin Chang, Gabriel Militão, Khaled Sharif**
