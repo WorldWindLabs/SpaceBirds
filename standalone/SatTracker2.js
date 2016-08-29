@@ -418,7 +418,7 @@ function getGroundStations(groundStations) {
         geoP: 9,
         geoR: 0,
         geoD: 0,
-        unclassifiedP: 0,
+        unclassifiedP: 9,
         unclassifiedR: 0,
         unclassifiedD: 0
       };
@@ -1212,7 +1212,8 @@ function getGroundStations(groundStations) {
           if (satData[j].ORBIT_TYPE === "Low Earth Orbit") {
             leoDebrisLayer.addRenderable(placemark);
           } else if (satData[j].ORBIT_TYPE === "Middle Earth Orbit") {
-            meoSatLayer.addRenderable(placemark);
+            console.log(satData.OBJECT_NAME);
+            meoDebrisLayer.addRenderable(placemark);
           } else if (satData[j].ORBIT_TYPE === "Geosynchronous") {
             geoDebrisLayer.addRenderable(placemark);
           } else if (satData[j].ORBIT_TYPE === "Highly Elliptical Orbit") {
