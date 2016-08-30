@@ -26,7 +26,8 @@ coordinates.eyeText.attributes.color = WorldWind.Color.WHITE;
 //Add imagery layers.
 var layers = [
   {layer: new WorldWind.BMNGOneImageLayer(), enabled: true},
-  {layer: new WorldWind.BMNGLayer(), enabled: true},
+  //{layer: new WorldWind.BMNGLayer(), enabled: true},
+  {layer: new WorldWind.BingAerialLayer(null), enabled: true},
   {layer: coordinates, enabled: true},
   {layer: viewControlsLayer, enabled: true}
 ];
@@ -37,8 +38,9 @@ for (var l = 0; l < layers.length; l++) {
 }
 
 //Activate BMNGLayer in low altitudes
-layers[1].layer.maxActiveAltitude = 15e6;
-layers[2].layer.maxActiveAltitude = 15e7;
+layers[1].layer.maxActiveAltitude = 5e6;
+//layers[2].layer.maxActiveAltitude = 15e7;
+layers[2].layer.minActiveAltitude = 5e6;
 
 
 //custom layers
@@ -346,7 +348,7 @@ function getGroundStations(groundStations) {
 
       groundStation[i] = new WorldWind.Position(groundStations[i].LATITUDE,
         groundStations[i].LONGITUDE,
-        1e3);
+        groundStations[i].ALTITUDE);
       var gsPlacemark = new WorldWind.Placemark(groundStation[i]);
 
       gsPlacemark.altitudeMode = WorldWind.RELATIVE_TO_GROUND;
@@ -417,7 +419,7 @@ function getGroundStations(groundStations) {
         gsPlacemarkAttributes.labelAttributes.color = WorldWind.Color.WHITE;
 
           var gsPlacemark = new WorldWind.Placemark(new WorldWind.Position(groundStations[groundsIndex[0]].LATITUDE,
-            groundStations[groundsIndex[0]].LONGITUDE, 1e3));
+            groundStations[groundsIndex[0]].LONGITUDE, groundStations[groundsIndex[0]].ALTITUDE));
 
           gsPlacemark.altitudeMode = WorldWind.RELATIVE_TO_GROUND;
           gsPlacemark.label = groundStation.NAME;
@@ -1260,7 +1262,6 @@ function getGroundStations(groundStations) {
           if (satData[j].ORBIT_TYPE === "Low Earth Orbit") {
             leoDebrisLayer.addRenderable(placemark);
           } else if (satData[j].ORBIT_TYPE === "Middle Earth Orbit") {
-            console.log(satData.OBJECT_NAME);
             meoDebrisLayer.addRenderable(placemark);
           } else if (satData[j].ORBIT_TYPE === "Geosynchronous") {
             geoDebrisLayer.addRenderable(placemark);
@@ -1337,6 +1338,8 @@ function getGroundStations(groundStations) {
           $('#customStatus').text("");
         }, 2000)
       });
+
+      //console.log(satData[0].LONGITUDE);
 
       // Update all Satellite Positions
       var updatePositions = setInterval(function () {
@@ -1810,7 +1813,7 @@ function getGroundStations(groundStations) {
             });
 
 
-          } else {
+          } else if (position.altitude <= 1000){
 
             var gsindex = groundStation.indexOf(position);
             toGsStation(gsindex);
@@ -1963,7 +1966,8 @@ function getGroundStations(groundStations) {
 
         if (pickList.objects.length == 1 && pickList.objects[0]) {
           var position = pickList.objects[0].position;
-          console.log(position);
+          //console.log(position);
+
           try {
             var uselessVar = position.altitude;
           } catch (error) {
@@ -1998,7 +2002,7 @@ function getGroundStations(groundStations) {
 
             updateLLA(everyCurrentPosition[index]);
 
-          } else {
+          } else if (position.altitude <= 1000){
 
             var gsindex = groundStation.indexOf(position);
             typePlaceholder.textContent = "Ground Station";
