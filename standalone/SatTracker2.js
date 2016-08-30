@@ -1111,12 +1111,12 @@ function getGroundStations(groundStations) {
     });
 
     $('#gStations').click(function () {
-      if ($(this).text() == "GS OFF") {
-        $(this).text("GS ON");
-        groundStationsLayer.enabled = true;
-      } else {
+      if ($(this).text() == "GS ON") {
         $(this).text("GS OFF");
         groundStationsLayer.enabled = false;
+      } else {
+        $(this).text("GS ON");
+        groundStationsLayer.enabled = true;
       }
     });
     renderSats(satPac);
