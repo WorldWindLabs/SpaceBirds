@@ -39,6 +39,7 @@ map.projection = new WorldWind.ProjectionMercator();
 
 //Projection toggle
 var representationPlaceholder = document.getElementById('representation');
+
 function toggleRepresentation() {
   if (wwd.globe instanceof WorldWind.Globe2D) {
     wwd.globe = globe;
@@ -122,13 +123,31 @@ function getSatellites(satData){
 }
 
 function renderEverything(){
-  wwd.addLayer(payloadsLayer);
-  wwd.addLayer(rocketsLayer);
+  //wwd.addLayer(payloadsLayer);
+  //wwd.addLayer(rocketsLayer);
   //wwd.addLayer(debrisLayer);
 
   //Temporary crap
-  //plotOrbit(allOrbitingBodies[350]);
-  //wwd.addLayer(orbitsLayer);
+  var hello = {
+    hello: 'world',
+    foo: 'bar'
+  };
+  var qaz = {
+      hello: 'stevie',
+      foo: 'baz'
+  }
+
+  var myArray = [];
+  myArray.push(hello,qaz);
+  
+  var stupidIndex = myArray.indexOf('stevie','hello');
+  console.log(stupidIndex);
+
+  var whateverName = allOrbitingBodies[45].OBJECT_NAME;
+  var issIndex = allOrbitingBodies.indexOf('VANGUARD 1', 'OBJECT_NAME');
+  console.log('index ' + issIndex);
+  plotOrbit(issIndex);
+  wwd.addLayer(orbitsLayer);
 
   updateLoopTime = obtainExecutionTime(updatePositions);
   console.log("Updating all satellites' positions took " + updateLoopTime + " ms. " +
