@@ -1754,21 +1754,21 @@ function getGroundStations(groundStations) {
               pickList.objects[p].userObject.highlighted = true;
               highlightedItems.push(pickList.objects[p].userObject);
             }
-
           }
         }
 
         if (pickList.objects.length == 1 && pickList.objects[0]) {
-          var position = pickList.objects[0].position;
+          var position = pickList.objects[0].position,
+              gsIndex = groundStation.indexOf(position),
+              index = everyCurrentPosition.indexOf(position);
           endFollow();
           endMesh();
           endHoverOrbit();
           endExtra();
           endOrbit();
-          if (position.altitude > 1000) {
-            var index = everyCurrentPosition.indexOf(position);
-            orbitsHoverLayer.enabled = false;
 
+          if (index > -1) {
+            orbitsHoverLayer.enabled = false;
             extraData(index);
             $('#mesh').text("HORIZON ON");
             meshToCurrentPosition(index);
@@ -1810,8 +1810,7 @@ function getGroundStations(groundStations) {
               }
             });
           }
-          else if (position.altitude <= 1000){
-            var gsIndex = groundStation.indexOf(position);
+          else if (gsIndex  > -1){
             toGsStation(gsIndex);
           }
         }
