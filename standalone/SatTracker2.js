@@ -357,52 +357,34 @@ function getGroundStations(groundStations) {
       gsPlacemark.highlightAttributes = gsHighlightPlacemarkAttributes;
       groundStationsLayer.addRenderable(gsPlacemark);
     }
+
+
     // Add the path to a layer and the layer to the World Window's layer list.
-    groundStationsLayer.displayName = "Ground Stations";
     groundStationsLayer.enabled = false;
-
-
     $('#clearStations').click(function () {
       customGSLayer.removeAllRenderables();
+      $('#customStatus').text("CLEARED GS LAYER");
     });
 
     var groundsIndex = [];
     var toGsStation = function (gsind) {
       groundsIndex[0] = gsind;
+
       //GS information display
-      typePlaceholder.textContent = "Ground Station";
-      namePlaceholder.textContent = groundStations[gsind].NAME;
-      ownerPlaceholder.textContent = groundStations[gsind].ORGANIZATION;
-      idPlaceholder.textContent = "";
-      latitudePlaceholder.textContent = groundStations[gsind].LATITUDE;
-      longitudePlaceholder.textContent = groundStations[gsind].LONGITUDE;
-      altitudePlaceholder.textContent = groundStations[gsind].ALTITUDE;
-      inclinationPlaceholder.textContent = "";
-      eccentricityPlaceHolder.textContent = "";
-      revDayPlaceholder.textContent = "";
-      apogeeplaceholder.textContent = "";
-      perigeeplaceholder.textContent = "";
-      periodPlaceholder.textContent = "";
-      semiMajorAxisPlaceholder.textContent = "";
-      semiMinorAxisPlaceholder.textContent = "";
-      velocityPlaceholder.textContent = "";
-      launchPlaceholder.textContent = "";
-      operationPlaceholder.textContent = "";
-      orbitPlaceholder.textContent = "";
+      populateGSInfo(groundStations[groundsIndex[0]]);
 
       //moves to GS location
       wwd.goTo(new WorldWind.Location(groundStations[groundsIndex[0]].LATITUDE, groundStations[groundsIndex[0]].LONGITUDE));
 
+
       //turn on shape for current GS
       $('#addStation').click(function () {
-
         var gsAttributes = new WorldWind.ShapeAttributes(null);
         gsAttributes.outlineColor = new WorldWind.Color(0, 255, 255, 1);
         gsAttributes.interiorColor = new WorldWind.Color(0, 255, 255, 0.2);
 
         var shape = new WorldWind.SurfaceCircle(new WorldWind.Location(groundStations[groundsIndex[0]].LATITUDE,
           groundStations[groundsIndex[0]].LONGITUDE), 150e4, gsAttributes);
-        customGSLayer.addRenderable(shape);
 
         var gsPlacemarkAttributes = new WorldWind.PlacemarkAttributes(null);
         var gsHighlightPlacemarkAttributes = new WorldWind.PlacemarkAttributes(gsPlacemarkAttributes);
@@ -425,12 +407,18 @@ function getGroundStations(groundStations) {
           gsPlacemark.label = groundStation.NAME;
           gsPlacemark.attributes = gsPlacemarkAttributes;
           gsPlacemark.highlightAttributes = gsHighlightPlacemarkAttributes;
-          customGSLayer.addRenderable(gsPlacemark);
 
-        $('#customStatus').text("Added " + groundStations[groundsIndex[0]].NAME + " to Custom GS Layer");
-        window.setTimeout(function(){
-          $('#customStatus').text("");
-        }, 2000)
+        for (var i = 0, len = groundStations.length; i < len; i++) {
+          if (groundStations[groundsIndex[0]].NAME !== gsPlacemark[i].NAME) {
+            customGSLayer.addRenderable(gsPlacemark);
+            customGSLayer.addRenderable(shape);
+
+            $('#customStatus').text("ADDED " + groundStations[groundsIndex[0]].NAME.toUpperCase() + " TO CUSTOM GS LAYER");
+            window.setTimeout(function () {
+              $('#customStatus').text("");
+            }, 2000)
+          }
+        }
       });
     };
     $('#customGS').click(function () {
@@ -1940,7 +1928,7 @@ function getGroundStations(groundStations) {
           }
         }
 
-        if (pickList.objects.length == 1 && pickList.objects[0]) {
+        if (pickList.objects.length > 1 && pickList.objects[0]) {
           var position = pickList.objects[0].position,
               satIndex = everyCurrentPosition.indexOf(position),
               gsIndex = groundStation.indexOf(position);
@@ -1977,9 +1965,9 @@ function getGroundStations(groundStations) {
 }
 
 function populateGSInfo(groundStation){
-  typePlaceholder.textContent = "Ground Station";
-  namePlaceholder.textContent = groundStation.NAME;
-  ownerPlaceholder.textContent = groundStation.ORGANIZATION;
+  typePlaceholder.textContent = "GROUND STATION";
+  namePlaceholder.textContent = groundStation.NAME.toUpperCase();
+  ownerPlaceholder.textContent = groundStation.ORGANIZATION.toUpperCase();
   idPlaceholder.textContent = "";
   latitudePlaceholder.textContent = groundStation.LATITUDE;
   longitudePlaceholder.textContent = groundStation.LONGITUDE;
