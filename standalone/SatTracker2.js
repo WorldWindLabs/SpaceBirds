@@ -246,7 +246,6 @@ function sanitizeSatellites(objectArray) {
   var faultySatellites = 0;
   var resultArray = [];
   var maxSats = objectArray.length;
-  //console.log('Array size before splicing is ' + objectArray.length);
   updateTime = performance.now();
   for (var i = 0; i < maxSats; i += 1) {
     try {
@@ -289,7 +288,6 @@ function getGroundStations(groundStations) {
   function getSatellites(satellites) {
     var satPac = sanitizeSatellites(satellites);
     satPac.satDataString = JSON.stringify(satPac);
-    //console.log(satPac[0].OBJECT_NAME);
 
 //convert degrees into a string for textContent
     function deg2text(deg, letters) {
@@ -1339,8 +1337,6 @@ function getGroundStations(groundStations) {
         }, 2000)
       });
 
-      //console.log(satData[0].LONGITUDE);
-
       // Update all Satellite Positions
       var updatePositions = setInterval(function () {
         if (!updatePermission)
@@ -1358,11 +1354,13 @@ function getGroundStations(groundStations) {
             console.log(err + ' in updatePositions interval, sat ' + indx);
             continue;
           }
-
-          everyCurrentPosition[indx].latitude = position.latitude;
-          everyCurrentPosition[indx].longitude = position.longitude;
-          everyCurrentPosition[indx].altitude = position.altitude;
-
+          try {
+            everyCurrentPosition[indx].latitude = position.latitude;
+            everyCurrentPosition[indx].longitude = position.longitude;
+            everyCurrentPosition[indx].altitude = position.altitude;
+          } catch (err){
+            //TODO: Handle deorbited sats
+          }
         }
         wwd.redraw();
       }, updateTime * 1.5);
@@ -1757,7 +1755,7 @@ function getGroundStations(groundStations) {
           }
         }
 
-        if (pickList.objects.length == 1 && pickList.objects[0]) {
+        if (pickList.objects.length > 0) {
           var position = pickList.objects[0].position,
               gsIndex = groundStation.indexOf(position),
               index = everyCurrentPosition.indexOf(position);
@@ -1810,7 +1808,7 @@ function getGroundStations(groundStations) {
               }
             });
           }
-          else if (gsIndex  > -1){
+          else if (gsIndex > -1){
             toGsStation(gsIndex);
           }
         }
@@ -1875,7 +1873,6 @@ function getGroundStations(groundStations) {
           pastOrbitPath.attributes = pastOrbitPathAttributes;
           pastOrbitPath.useSurfaceShapeFor2D = true;
 
-
           var futureOrbitPath = new WorldWind.Path(futureOrbit);
           futureOrbitPath.altitudeMode = WorldWind.RELATIVE_TO_GROUND;
           futureOrbitPath.attributes = futureOrbitPathAttributes;
@@ -1912,7 +1909,6 @@ function getGroundStations(groundStations) {
           highlightedItems[h].highlighted = false;
           endExtra();
           endHoverOrbit();
-
         }
         highlightedItems = [];
 
@@ -1924,45 +1920,36 @@ function getGroundStations(groundStations) {
             2 * rectRadius, 2 * rectRadius);
 
         var pickList = wwd.pickShapesInRegion(pickRectangle);
-        if (pickList.objects.length > 0) {
-          redrawRequired = true;
-        }
 
-
-        // Highlight the items picked.
         if (pickList.objects.length > 0) {
           for (var p = 0; p < pickList.objects.length; p++) {
             if (pickList.objects[p].isOnTop) {
+              // Highlight the items picked.
               pickList.objects[p].userObject.highlighted = true;
               highlightedItems.push(pickList.objects[p].userObject);
+
+              //Populate Info window with proper data
+              var position = pickList.objects[p].position,
+                  satIndex = everyCurrentPosition.indexOf(position),
+                  gsIndex = groundStation.indexOf(position);
+              if (satIndex > -1) {
+                populateSatInfo(satData[satIndex]);
+                endExtra();
+                endHoverOrbit();
+                extraData(satIndex);
+                createHoverOrbit(satIndex);
+                updateLLA(everyCurrentPosition[satIndex]);
+              }
+              else if (gsIndex > -1){
+                populateGSInfo(groundStations[gsIndex]);
+              }
+
+              //Redraw highlighted items
+              wwd.redraw();
             }
           }
         }
-
-        if (pickList.objects.length == 1 && pickList.objects[0]) {
-          var position = pickList.objects[0].position,
-              satIndex = everyCurrentPosition.indexOf(position),
-              gsIndex = groundStation.indexOf(position);
-
-          if (satIndex != -1) {
-            populateSatInfo(satData[satIndex]);
-            endExtra();
-            endHoverOrbit();
-            extraData(satIndex);
-            createHoverOrbit(satIndex);
-            updateLLA(everyCurrentPosition[satIndex]);
-          }
-          else if (gsIndex != -1){
-            populateGSInfo(groundStations[gsIndex]);
-          }
-
-          // Update the window if we changed anything.
-          if (redrawRequired) {
-            wwd.redraw();
-          }
-        }
       };
-
 
       // Listen for mouse moves and highlight the placemarks that the cursor rolls over.
       wwd.addEventListener("mousemove", handlePick);
