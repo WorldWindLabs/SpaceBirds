@@ -54,10 +54,8 @@
         <button style="font-size:55%; width: 65px; height: 25px; max-height:25px; background-color: #d1d1d1; color: black; padding: 0.1em 0.1em 0.1em 0.1em">
         <a href="javascript:toggleRepresentation();" id="representation" style="color: black">3D</a>
         </button>
-        <button style="font-size:55%; width: 80px; height: 25px; max-height:25px; background-color: #d1d1d1; color: black; padding: 0.1em 0.1em 0.1em 0.1em"
-                id="clearCustom">CLEAR CUSTOM</button>
-        <span style="float: right;display: none" id="buttonToggle">
         <a href="#" style="align-content: right;">
+        <span style="float: right;display: none" id="buttonToggle">
             <button style="font-size:55%; width: 80px; height: 25px; max-height:25px; background-color: #d1d1d1; color: black; padding: 0.1em 0.1em 0.1em 0.1em"
                     id="follow">FOLLOW OFF</button>
             <button style="font-size:55%; width: 70px; height: 25px; max-height:25px; background-color: #d1d1d1; color: black; padding: 0.1em 0.1em 0.1em 0.1em"
@@ -68,8 +66,13 @@
                     id="collada">MODEL OFF</button>
             <button style="font-size:55%; width: 70px; height: 25px; max-height:25px; background-color: #d1d1d1; color: black; padding: 0.1em 0.1em 0.1em 0.1em"
                     id="customSat">ADD TO CUSTOM</button>
-        </a>
         </span>
+        <span style="float: right;display: none; padding-right: 8px" id="gsButtonToggle">
+             <button id="addStation" style="font-size:55%; width: 70px; height: 25px; max-height:25px; background-color: #d1d1d1; color: black; padding: 0.1em 0.1em 0.1em 0.1em">
+                            ADD CUSTOM GS
+             </button>
+        </span>
+        </a>
     </div>
     <div style="color: white;" id='jqxsliderEvent2'></div>
 </div>
@@ -130,6 +133,9 @@
                         <a id="custom" class="panel-block" style="color: #d9d9d9">
                             CUSTOM OFF
                         </a>
+                        <a id="clearCustom" class="panel-block" style="color: #d9d9d9">
+                            CLEAR CUSTOM
+                        </a>
                     </nav>
 
                 </li>
@@ -174,11 +180,11 @@
                         <a id="gStations" class="panel-block is-active" style="color: #d9d9d9">
                             GS OFF
                         </a>
-                        <a id="addStation" class="panel-block" style="color: #d9d9d9">
-                            ADD GS HORIZON
+                        <a id="customGS" class="panel-block" style="color: #d9d9d9">
+                            CUSTOM GS OFF
                         </a>
                         <a id="clearStations" class="panel-block" style="color: #d9d9d9">
-                            CLEAR GS HORIZON
+                            CLEAR CUSTOM GS
                         </a>
                     </nav>
 

@@ -1,5 +1,16 @@
-#SpaceBirds 
-##The World of Satellites at your Fingertips
+##Link to the application:
+<p align="center">
+<a href="http://worldwind.arc.nasa.gov/spacebirds/"><img src="https://github.com/NASAWorldWindResearch/SpaceBirds/blob/master/spacebirdsheader.png" alt="Click to begin"/></a>
+</p>
+
+
+
+##Video Tutorial: 
+<p align="center">
+<a href="https://www.youtube.com/watch?v=ojp8Tqf2j0k"><img src="https://img.youtube.com/vi/ojp8Tqf2j0k/0.jpg" alt="SpaceBirds video tutorial"/></a>
+</p>
+
+##SpaceBirds: The World of Satellites at your Fingertips
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/NASA_logo.svg/200px-NASA_logo.svg.png" height="100px" /><img src="http://oykun.com/images/journal-header-whitespace.png" width="30px" /><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/ESA_logo_simple.svg/200px-ESA_logo_simple.svg.png" height="100px" />
 
@@ -26,14 +37,33 @@ The app will offer fun and exciting visual interactivity, by providing 3D models
 
 The application is still in its alpha stage as it still contains some bugs and is lacking some features we plan to incorporate.
 
+<p align="center">
+<img src="http://i.imgur.com/MSHkL2G.png" alt="All payloads and rocket bodies"/>
+</p>
+
+<p align="center">
+<img src="http://i.imgur.com/mAEFR8q.png" alt="International Space Station"/>
+</p>
+
+<p align="center">
+<img src="http://i.imgur.com/y5GUXC5.jpg" alt="Hubble Space Telescope groundtrack"/>
+</p>
+
+<p align="center">
+<img src="http://i.imgur.com/iVOPajp.png" alt="Geosynchronous and navigation satellites"/>
+</p>
+
 ![image](https://cloud.githubusercontent.com/assets/19692086/18044330/2fc07996-6d82-11e6-8d3e-2b8e084fab7b.png)
 
 ![image](https://cloud.githubusercontent.com/assets/19692086/18044175/534d5db2-6d81-11e6-9e09-e1931e266171.png)
 
+<p align="center">
 <img src="http://i.imgur.com/KhmyPZ1.png"/>
+</p>
 
+<p align="center">
 <img src="http://i.imgur.com/trhnhue.png"/>
-
+</p>
 
 ##Application Walk-Through:
 
@@ -47,7 +77,7 @@ The application is still in its alpha stage as it still contains some bugs and i
     * Toggling the *Follow On* button controls whether or not the object will be followed, and so will clicking anywhere else on the globe. 
     * Toggling the *Horizon On* button controls whether or not the horizon circle is displayed.
     * Toggling the *Orbit On* button controls  whether or not the orbit path is displayed.
-    * Toggling the *Model On* button controls whether or not the 3D model of the object is displayed (Note that the model is only visible if the object is zoomed into)
+    * Toggling the *Model On* button controls whether or not the 3D model of the object is displayed (Note that the model is only visible if the object is zoomed into).
     * Clicking on the *Add to Custom* button adds the object to your own Custom Group, which you can view separately by turning "Custom On" in the "Type" window in the left-hand column.
  
 ###Searching for a satellite
@@ -64,7 +94,7 @@ Using the window in the left-hand column titled "Orbit Range", you can select on
 
 ###Ground Stations
 
-Using the window titled Ground Stations, you can search for a certain ground station by name, turn ground stations on and off, and add the horizon of the view of a ground station, or clear it. 
+Using the window titled "Ground Stations", you can search for a certain ground station by name, turn ground stations on and off, add the horizon of the view of a ground station or clear it. 
 
 ###Time Control
 
@@ -73,12 +103,13 @@ The Slider at the bottom of the screen allows you to change the date and time to
 
 ***
 
-**Organization:** NASA Ames Research Center (PX)**
+**Organization:** NASA Ames Research Center (PX)
 
-**Manager:** Patrick Hogan, Yann Voumard**
+**Tutor:** Yann Voumard
 
-**Authors:** Miguel Del Castillo, Bert Stewart, Julija Semenenko**
+**Authors:** Miguel Del Castillo, Bert Stewart, Julija Semenenko
 
-**Developers:** Farah Salah, Enika Biswas, Nidhi Jain, Jenipher Gonzalez, Nancy Hernandez**
+**Developers:** Farah Salah, Enika Biswas, Nidhi Jain, Jenipher Gonzalez, Nancy Hernandez
 
-**Acknowledgements:** Benjamin Chang, Gabriel Militão, Khaled Sharif**
+**Acknowledgements:** Benjamin Chang, Gabriel Militão, Khaled Sharif
+

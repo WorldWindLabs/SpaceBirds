@@ -26,7 +26,8 @@ coordinates.eyeText.attributes.color = WorldWind.Color.WHITE;
 //Add imagery layers.
 var layers = [
   {layer: new WorldWind.BMNGOneImageLayer(), enabled: true},
-  {layer: new WorldWind.BMNGLayer(), enabled: true},
+  //{layer: new WorldWind.BMNGLayer(), enabled: true},
+  {layer: new WorldWind.BingAerialLayer(null), enabled: true},
   {layer: coordinates, enabled: true},
   {layer: viewControlsLayer, enabled: true}
 ];
@@ -37,8 +38,9 @@ for (var l = 0; l < layers.length; l++) {
 }
 
 //Activate BMNGLayer in low altitudes
-layers[1].layer.maxActiveAltitude = 15e6;
-layers[2].layer.maxActiveAltitude = 15e7;
+layers[1].layer.maxActiveAltitude = 5e6;
+//layers[2].layer.maxActiveAltitude = 15e7;
+layers[2].layer.minActiveAltitude = 5e6;
 
 
 //custom layers
@@ -64,8 +66,10 @@ var heoDebrisLayer = new WorldWind.RenderableLayer("HEO Debris");
 var geoDebrisLayer = new WorldWind.RenderableLayer("GEO Debris");
 var unclassifiedDebrisLayer = new WorldWind.RenderableLayer("UnclassifiedDebris");
 var customSatLayer = new WorldWind.RenderableLayer("custom");
+var customGSLayer = new WorldWind.RenderableLayer("customGS");
 
 //add custom layers
+wwd.addLayer(customGSLayer);
 wwd.addLayer(groundStationsLayer);
 wwd.addLayer(shapeLayer);
 wwd.addLayer(orbitsHoverLayer);
@@ -344,7 +348,7 @@ function getGroundStations(groundStations) {
 
       groundStation[i] = new WorldWind.Position(groundStations[i].LATITUDE,
         groundStations[i].LONGITUDE,
-        1e3);
+        groundStations[i].ALTITUDE);
       var gsPlacemark = new WorldWind.Placemark(groundStation[i]);
 
       gsPlacemark.altitudeMode = WorldWind.RELATIVE_TO_GROUND;
@@ -359,20 +363,20 @@ function getGroundStations(groundStations) {
 
 
     $('#clearStations').click(function () {
-      shapeLayer.removeAllRenderables();
+      customGSLayer.removeAllRenderables();
     });
 
     var groundsIndex = [];
-    var toGsStation = function (gsindex) {
-      groundsIndex[0] = gsindex;
+    var toGsStation = function (gsind) {
+      groundsIndex[0] = gsind;
       //GS information display
       typePlaceholder.textContent = "Ground Station";
-      namePlaceholder.textContent = groundStations[gsindex].NAME;
-      ownerPlaceholder.textContent = groundStations[gsindex].ORGANIZATION;
+      namePlaceholder.textContent = groundStations[gsind].NAME;
+      ownerPlaceholder.textContent = groundStations[gsind].ORGANIZATION;
       idPlaceholder.textContent = "";
-      latitudePlaceholder.textContent = groundStations[gsindex].LATITUDE;
-      longitudePlaceholder.textContent = groundStations[gsindex].LONGITUDE;
-      altitudePlaceholder.textContent = groundStations[gsindex].ALTITUDE;
+      latitudePlaceholder.textContent = groundStations[gsind].LATITUDE;
+      longitudePlaceholder.textContent = groundStations[gsind].LONGITUDE;
+      altitudePlaceholder.textContent = groundStations[gsind].ALTITUDE;
       inclinationPlaceholder.textContent = "";
       eccentricityPlaceHolder.textContent = "";
       revDayPlaceholder.textContent = "";
@@ -391,15 +395,53 @@ function getGroundStations(groundStations) {
 
       //turn on shape for current GS
       $('#addStation').click(function () {
+
         var gsAttributes = new WorldWind.ShapeAttributes(null);
         gsAttributes.outlineColor = new WorldWind.Color(0, 255, 255, 1);
         gsAttributes.interiorColor = new WorldWind.Color(0, 255, 255, 0.2);
 
         var shape = new WorldWind.SurfaceCircle(new WorldWind.Location(groundStations[groundsIndex[0]].LATITUDE,
           groundStations[groundsIndex[0]].LONGITUDE), 150e4, gsAttributes);
-        shapeLayer.addRenderable(shape);
+        customGSLayer.addRenderable(shape);
+
+        var gsPlacemarkAttributes = new WorldWind.PlacemarkAttributes(null);
+        var gsHighlightPlacemarkAttributes = new WorldWind.PlacemarkAttributes(gsPlacemarkAttributes);
+
+        gsPlacemarkAttributes.imageSource = "assets/icons/ground-station.png";
+        gsPlacemarkAttributes.imageScale = 0.25;
+        gsPlacemarkAttributes.imageOffset = new WorldWind.Offset(
+          WorldWind.OFFSET_FRACTION, 0.3,
+          WorldWind.OFFSET_FRACTION, 0.0);
+        gsPlacemarkAttributes.imageColor = WorldWind.Color.WHITE;
+        gsPlacemarkAttributes.labelAttributes.offset = new WorldWind.Offset(
+          WorldWind.OFFSET_FRACTION, 0.5,
+          WorldWind.OFFSET_FRACTION, 1.0);
+        gsPlacemarkAttributes.labelAttributes.color = WorldWind.Color.WHITE;
+
+          var gsPlacemark = new WorldWind.Placemark(new WorldWind.Position(groundStations[groundsIndex[0]].LATITUDE,
+            groundStations[groundsIndex[0]].LONGITUDE, groundStations[groundsIndex[0]].ALTITUDE));
+
+          gsPlacemark.altitudeMode = WorldWind.RELATIVE_TO_GROUND;
+          gsPlacemark.label = groundStation.NAME;
+          gsPlacemark.attributes = gsPlacemarkAttributes;
+          gsPlacemark.highlightAttributes = gsHighlightPlacemarkAttributes;
+          customGSLayer.addRenderable(gsPlacemark);
+
+        $('#customStatus').text("Added " + groundStations[groundsIndex[0]].NAME + " to Custom GS Layer");
+        window.setTimeout(function(){
+          $('#customStatus').text("");
+        }, 2000)
       });
     };
+    $('#customGS').click(function () {
+      if ($(this).text() == "CUSTOM GS ON") {
+        $(this).text("CUSTOM GS OFF");
+        customGSLayer.enabled = false;
+      } else {
+        $(this).text("CUSTOM GS ON");
+        customGSLayer.enabled = true;
+      }
+    });
 
     /***
      * Satellites
@@ -429,6 +471,7 @@ function getGroundStations(groundStations) {
     geoDebrisLayer.enabled = false;
     unclassifiedDebrisLayer.enabled = false;
     customSatLayer.enabled = false;
+    customGSLayer.enabled = false;
 
     var satNum = satPac.length;
     //Sat Type toggles
@@ -1111,12 +1154,16 @@ function getGroundStations(groundStations) {
     });
 
     $('#gStations').click(function () {
-      if ($(this).text() == "GS OFF") {
-        $(this).text("GS ON");
-        groundStationsLayer.enabled = true;
-      } else {
+      if ($(this).text() == "GS ON") {
         $(this).text("GS OFF");
         groundStationsLayer.enabled = false;
+        var gsToggleButtons = document.getElementById('gsButtonToggle');
+        gsToggleButtons.style.display = "none";
+      } else {
+        $(this).text("GS ON");
+        groundStationsLayer.enabled = true;
+        var gsToggleButtons = document.getElementById('gsButtonToggle');
+        gsToggleButtons.style.display = "inline";
       }
     });
     renderSats(satPac);
@@ -1215,7 +1262,6 @@ function getGroundStations(groundStations) {
           if (satData[j].ORBIT_TYPE === "Low Earth Orbit") {
             leoDebrisLayer.addRenderable(placemark);
           } else if (satData[j].ORBIT_TYPE === "Middle Earth Orbit") {
-            console.log(satData.OBJECT_NAME);
             meoDebrisLayer.addRenderable(placemark);
           } else if (satData[j].ORBIT_TYPE === "Geosynchronous") {
             geoDebrisLayer.addRenderable(placemark);
@@ -1288,8 +1334,12 @@ function getGroundStations(groundStations) {
           customSats = null;
           customSatLayer.removeAllRenderables();
         $('#customStatus').text("Cleared Custom Layer");
-
+        window.setTimeout(function(){
+          $('#customStatus').text("");
+        }, 2000)
       });
+
+      //console.log(satData[0].LONGITUDE);
 
       // Update all Satellite Positions
       var updatePositions = setInterval(function () {
@@ -1704,21 +1754,21 @@ function getGroundStations(groundStations) {
               pickList.objects[p].userObject.highlighted = true;
               highlightedItems.push(pickList.objects[p].userObject);
             }
-
           }
         }
 
         if (pickList.objects.length == 1 && pickList.objects[0]) {
-          var position = pickList.objects[0].position;
+          var position = pickList.objects[0].position,
+              gsIndex = groundStation.indexOf(position),
+              index = everyCurrentPosition.indexOf(position);
           endFollow();
           endMesh();
           endHoverOrbit();
           endExtra();
           endOrbit();
-          if (position.altitude > 1000) {
-            var index = everyCurrentPosition.indexOf(position);
-            orbitsHoverLayer.enabled = false;
 
+          if (index > -1) {
+            orbitsHoverLayer.enabled = false;
             extraData(index);
             $('#mesh').text("HORIZON ON");
             meshToCurrentPosition(index);
@@ -1732,9 +1782,7 @@ function getGroundStations(groundStations) {
                 endMesh();
               }
             });
-
             toCurrentPosition(index);
-
 
             createOrbit(index);
             $('#orbit').text('ORBIT ON');
@@ -1761,32 +1809,9 @@ function getGroundStations(groundStations) {
                 modelLayer.removeAllRenderables();
               }
             });
-
-
-          } else {
-
-            var gsindex = groundStation.indexOf(position);
-            toGsStation(gsindex);
-            gsindex = groundStation.indexOf(position);
-            typePlaceholder.textContent = "Ground Station";
-            namePlaceholder.textContent = groundStations[gsindex].NAME;
-            ownerPlaceholder.textContent = groundStations[gsindex].ORGANIZATION;
-            idPlaceholder.textContent = "";
-            latitudePlaceholder.textContent = groundStations[gsindex].LATITUDE;
-            longitudePlaceholder.textContent = groundStations[gsindex].LONGITUDE;
-            altitudePlaceholder.textContent = groundStations[gsindex].ALTITUDE;
-            inclinationPlaceholder.textContent = "";
-            eccentricityPlaceHolder.textContent = "";
-            revDayPlaceholder.textContent = "";
-            apogeeplaceholder.textContent = "";
-            perigeeplaceholder.textContent = "";
-            periodPlaceholder.textContent = "";
-            semiMajorAxisPlaceholder.textContent = "";
-            semiMinorAxisPlaceholder.textContent = "";
-            velocityPlaceholder.textContent = "";
-            launchPlaceholder.textContent = "";
-            operationPlaceholder.textContent = "";
-            orbitPlaceholder.textContent = "";
+          }
+          else if (gsIndex  > -1){
+            toGsStation(gsIndex);
           }
         }
 
@@ -1911,66 +1936,24 @@ function getGroundStations(groundStations) {
               pickList.objects[p].userObject.highlighted = true;
               highlightedItems.push(pickList.objects[p].userObject);
             }
-
           }
         }
 
         if (pickList.objects.length == 1 && pickList.objects[0]) {
-          var position = pickList.objects[0].position;
-          //console.log(position);
-          try {
-            var uselessVar = position.altitude;
-          } catch (error) {
-            console.log(error + ' in object ' + pickList.objects[0]);
-          }
-          if (position.altitude > 1000) {
-            var index = everyCurrentPosition.indexOf(position);
-            try {
-              typePlaceholder.textContent = satData[index].OBJECT_TYPE;
-              idPlaceholder.textContent = satData[index].OBJECT_ID;
-              namePlaceholder.textContent = satData[index].OBJECT_NAME;
-              ownerPlaceholder.textContent = satData[index].OWNER;
-              launchPlaceholder.textContent = satData[index].LAUNCH_SITE;
-              orbitPlaceholder.textContent = satData[index].ORBIT_TYPE;
-              inclinationPlaceholder.textContent = roundToTwo(Number(satData[index].INCLINATION)) + " °";
-              eccentricityPlaceHolder.textContent = roundToFour(Number(satData[index].ECCENTRICITY));
-              apogeeplaceholder.textContent = roundToTwo(Number(satData[index].APOGEE)) + " km";
-              perigeeplaceholder.textContent = roundToTwo(Number(satData[index].PERIGEE)) + " km";
-              periodPlaceholder.textContent = roundToTwo(Number(satData[index].PERIOD)) + " minutes";
-              operationPlaceholder.textContent = satData[index].OPERATIONAL_STATUS;
+          var position = pickList.objects[0].position,
+              satIndex = everyCurrentPosition.indexOf(position),
+              gsIndex = groundStation.indexOf(position);
 
-
-            } catch (err) {
-              console.log('error in index ' + index);
-            }
+          if (satIndex != -1) {
+            populateSatInfo(satData[satIndex]);
             endExtra();
             endHoverOrbit();
-            extraData(index);
-
-            createHoverOrbit(index);
-
-            updateLLA(everyCurrentPosition[index]);
-          } else {
-            var gsindex = groundStation.indexOf(position);
-            typePlaceholder.textContent = "Ground Station";
-            namePlaceholder.textContent = groundStations[gsindex].NAME;
-            ownerPlaceholder.textContent = groundStations[gsindex].ORGANIZATION;
-            idPlaceholder.textContent = "";
-            latitudePlaceholder.textContent = groundStations[gsindex].LATITUDE;
-            longitudePlaceholder.textContent = groundStations[gsindex].LONGITUDE;
-            altitudePlaceholder.textContent = groundStations[gsindex].ALTITUDE;
-            inclinationPlaceholder.textContent = "";
-            eccentricityPlaceHolder.textContent = "";
-            revDayPlaceholder.textContent = "";
-            apogeeplaceholder.textContent = "";
-            perigeeplaceholder.textContent = "";
-            periodPlaceholder.textContent = "";
-            semiMajorAxisPlaceholder.textContent = "";
-            semiMinorAxisPlaceholder.textContent = "";
-            velocityPlaceholder.textContent = "";
-            launchPlaceholder.textContent = "";
-            operationPlaceholder.textContent = "";
-            orbitPlaceholder.textContent = "";
+            extraData(satIndex);
+            createHoverOrbit(satIndex);
+            updateLLA(everyCurrentPosition[satIndex]);
+          }
+          else if (gsIndex != -1){
+            populateGSInfo(groundStations[gsIndex]);
           }
 
           // Update the window if we changed anything.
@@ -1990,6 +1973,43 @@ function getGroundStations(groundStations) {
       wwd.redraw();
     }
   }
+}
+
+function populateGSInfo(groundStation){
+  typePlaceholder.textContent = "Ground Station";
+  namePlaceholder.textContent = groundStation.NAME;
+  ownerPlaceholder.textContent = groundStation.ORGANIZATION;
+  idPlaceholder.textContent = "";
+  latitudePlaceholder.textContent = groundStation.LATITUDE;
+  longitudePlaceholder.textContent = groundStation.LONGITUDE;
+  altitudePlaceholder.textContent = groundStation.ALTITUDE;
+  inclinationPlaceholder.textContent = "";
+  eccentricityPlaceHolder.textContent = "";
+  revDayPlaceholder.textContent = "";
+  apogeeplaceholder.textContent = "";
+  perigeeplaceholder.textContent = "";
+  periodPlaceholder.textContent = "";
+  semiMajorAxisPlaceholder.textContent = "";
+  semiMinorAxisPlaceholder.textContent = "";
+  velocityPlaceholder.textContent = "";
+  launchPlaceholder.textContent = "";
+  operationPlaceholder.textContent = "";
+  orbitPlaceholder.textContent = "";
+}
+
+function populateSatInfo(satellite){
+    typePlaceholder.textContent = satellite.OBJECT_TYPE;
+    idPlaceholder.textContent = satellite.OBJECT_ID;
+    namePlaceholder.textContent = satellite.OBJECT_NAME;
+    ownerPlaceholder.textContent = satellite.OWNER;
+    launchPlaceholder.textContent = satellite.LAUNCH_SITE;
+    orbitPlaceholder.textContent = satellite.ORBIT_TYPE;
+    inclinationPlaceholder.textContent = roundToTwo(Number(satellite.INCLINATION)) + " °";
+    eccentricityPlaceHolder.textContent = roundToFour(Number(satellite.ECCENTRICITY));
+    apogeeplaceholder.textContent = roundToTwo(Number(satellite.APOGEE)) + " km";
+    perigeeplaceholder.textContent = roundToTwo(Number(satellite.PERIGEE)) + " km";
+    periodPlaceholder.textContent = roundToTwo(Number(satellite.PERIOD)) + " minutes";
+    operationPlaceholder.textContent = satellite.OPERATIONAL_STATUS;
 }
 
 /** projection toggle**/
