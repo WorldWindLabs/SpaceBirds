@@ -6,9 +6,10 @@
     <!--NOTE: Most Web World Wind examples use jquery, Bootstrap and requirejs but those technologies are NOT-->
     <!--required by Web World Wind. See SimplestExample.html for an example of using Web World Wind without them.-->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"> -->
+     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <link rel="stylesheet" href="styles/style.css">
     <link rel="stylesheet" href="perfectscrollbar/perfect-scrollbar.min.css"/>
+    <link rel="stylesheet" href="styles/bulma.css"/>
 
     <script src="perfectscrollbar/perfect-scrollbar.jquery.min.js"></script>
     <title>SPACEBIRDS</title>
@@ -23,22 +24,22 @@
         background-size: cover;
     }
 </style>
-<div>
-  Representation: <a href="javascript:toggleRepresentation();" id="representation">3D</a>
-<canvas id="canvasOne" width="1280" height="720"
-        style="color:white; width: 100%; height: 100%; z-index: 100;">
+<canvas id="canvasOne" style="width: 100%; height:100%;">
     Your browser does not support HTML5 Canvas.
 </canvas>
 
+<div>
+    Representation: <a href="javascript:toggleRepresentation();" id="representation">3D</a>
+</div>
     <br/>
 
-    <div class="coolLogo" style="z-index: 500">
+    <div class="coolLogo">
         <img src="assets/images/spacebirdlogo.png" width="25px">
         <h3 style="font-size: 20px; display: inline;">SPACEBIRDS</h3>
     </div>
 
     <br/>
-    <div id="custom-search-input" style="z-index: 500">
+    <div id="custom-search-input">
         <div class="input-group col-md-12">
             <input type="text" class="search-query form-control" placeholder="Search" style="color: rgb(230,230,230)" />
         </div>
@@ -46,7 +47,7 @@
 
     <br/>
 
-    <div  style="width: 15%; background-color: rgba(91, 91, 91, 0.41); z-index: 500">
+    <div  style="width: 15%; background-color: rgba(91, 91, 91, 0.41);">
         <div class="panel panel-default " style="text-indent: 0px; height: 34px !important;">
             <!-- Default panel contents -->
             <div class="coolLogo" style="display: inline; color: rgb(230,230,230)">Types
@@ -58,11 +59,11 @@
             <!-- List group -->
 
             <ul class="list-group panel panel-default" style="background-color: rgba(91, 91, 91, 0.41) !important; position: absolute; left: 15%; display: inline">
-                <div id="type_body" style="display: none;width: 150px">
+                <div id="type_body" style="display: none;width: 150px;">
                 <li class="list-group-item">
                     Rockets
                     <div class="material-switch pull-right">
-                        <input id="type_rockets" name="someSwitchOption001" type="checkbox"/>
+                        <input id="type_rockets" name="type_rockets" type="checkbox"/>
                         <label for="type_rockets" class="label-default"></label>
                     </div>
                 </li>
@@ -138,7 +139,7 @@
             <li><a href="#">Debris</a></li>
         </ul>
     </div>
-</div>
+
 
 </body>
 

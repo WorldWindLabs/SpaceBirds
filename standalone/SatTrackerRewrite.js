@@ -123,8 +123,8 @@ function getSatellites(satData){
 }
 
 function renderEverything(){
-  //wwd.addLayer(payloadsLayer);
-  //wwd.addLayer(rocketsLayer);
+  wwd.addLayer(payloadsLayer);
+  wwd.addLayer(rocketsLayer);
   //wwd.addLayer(debrisLayer);
 
   //Temporary crap
