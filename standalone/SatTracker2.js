@@ -246,7 +246,6 @@ function sanitizeSatellites(objectArray) {
   var faultySatellites = 0;
   var resultArray = [];
   var maxSats = objectArray.length;
-  //console.log('Array size before splicing is ' + objectArray.length);
   updateTime = performance.now();
   for (var i = 0; i < maxSats; i += 1) {
     try {
@@ -259,9 +258,6 @@ function sanitizeSatellites(objectArray) {
     }
     resultArray.push(objectArray[i]);
   }
-  // console.log('we have ' + objectArray.length + ' total satellites');
-  // console.log(faultySatellites + ' do not work');
-  // console.log('We will keep ' + resultArray.length + ' sanitized satellites.');
   updateTime = performance.now() - updateTime;
   return resultArray;
 }
@@ -289,7 +285,6 @@ function getGroundStations(groundStations) {
   function getSatellites(satellites) {
     var satPac = sanitizeSatellites(satellites);
     satPac.satDataString = JSON.stringify(satPac);
-    //console.log(satPac[0].OBJECT_NAME);
 
 //convert degrees into a string for textContent
     function deg2text(deg, letters) {
@@ -363,22 +358,29 @@ function getGroundStations(groundStations) {
     groundStationsLayer.enabled = false;
     $('#clearStations').click(function () {
       customGSLayer.removeAllRenderables();
+      while(groundsIndex.length >0){
+        groundsIndex.pop();
+      }
       $('#customStatus').text("CLEARED GS LAYER");
+      window.setTimeout(function () {
+        $('#customStatus').text("");
+      }, 2000)
     });
 
     var groundsIndex = [];
     var toGsStation = function (gsind) {
-      groundsIndex[0] = gsind;
-
       //GS information display
-      populateGSInfo(groundStations[groundsIndex[0]]);
+      populateGSInfo(groundStations[gsind]);
 
       //moves to GS location
-      wwd.goTo(new WorldWind.Location(groundStations[groundsIndex[0]].LATITUDE, groundStations[groundsIndex[0]].LONGITUDE));
+      wwd.goTo(new WorldWind.Location(groundStations[gsind].LATITUDE, groundStations[gsind].LONGITUDE));
 
 
       //turn on shape for current GS
       $('#addStation').click(function () {
+        var indexCheck = groundsIndex.indexOf(gsind);
+        if (indexCheck === -1) {
+          groundsIndex.unshift(gsind);
         var gsAttributes = new WorldWind.ShapeAttributes(null);
         gsAttributes.outlineColor = new WorldWind.Color(0, 255, 255, 1);
         gsAttributes.interiorColor = new WorldWind.Color(0, 255, 255, 0.2);
@@ -408,8 +410,6 @@ function getGroundStations(groundStations) {
           gsPlacemark.attributes = gsPlacemarkAttributes;
           gsPlacemark.highlightAttributes = gsHighlightPlacemarkAttributes;
 
-        for (var i = 0, len = groundStations.length; i < len; i++) {
-          if (groundStations[groundsIndex[0]].NAME !== gsPlacemark[i].NAME) {
             customGSLayer.addRenderable(gsPlacemark);
             customGSLayer.addRenderable(shape);
 
@@ -417,7 +417,11 @@ function getGroundStations(groundStations) {
             window.setTimeout(function () {
               $('#customStatus').text("");
             }, 2000)
-          }
+          } else {
+          $('#customStatus').text("ALREADY ON CUSTOM LAYER");
+          window.setTimeout(function () {
+            $('#customStatus').text("");
+          }, 2000)
         }
       });
     };
@@ -738,7 +742,6 @@ function getGroundStations(groundStations) {
 
     //Switch Board for Orbit Types
     function leoToggleOn() {
-      console.log(orbitToggle.leoP + orbitToggle.leoR + orbitToggle.leoD);
       switch (orbitToggle.leoP + orbitToggle.leoR + orbitToggle.leoD) {
         case 1:
           leoSatLayer.enabled = true;
@@ -770,7 +773,6 @@ function getGroundStations(groundStations) {
     }
 
     function meoToggleOn() {
-      console.log(orbitToggle.meoP + orbitToggle.meoR + orbitToggle.meoD);
       switch (orbitToggle.meoP + orbitToggle.meoR + orbitToggle.meoD) {
         case 1:
           meoSatLayer.enabled = true;
@@ -802,7 +804,6 @@ function getGroundStations(groundStations) {
     }
 
     function heoToggleOn() {
-      console.log(orbitToggle.heoP + orbitToggle.heoR + orbitToggle.heoD);
       switch (orbitToggle.heoP + orbitToggle.heoR + orbitToggle.heoD) {
         case 1:
           heoSatLayer.enabled = true;
@@ -896,7 +897,6 @@ function getGroundStations(groundStations) {
     }
 
     function leoToggleOff() {
-      console.log(orbitToggle.leoP + orbitToggle.leoR + orbitToggle.leoD);
       switch (orbitToggle.leoP + orbitToggle.leoR + orbitToggle.leoD) {
         case 0:
           leoSatLayer.enabled = false;
@@ -1010,7 +1010,6 @@ function getGroundStations(groundStations) {
     }
 
     function geoToggleOff() {
-      console.log(orbitToggle.unclassifiedP + orbitToggle.unclassifiedR + orbitToggle.unclassifiedD);
       switch (orbitToggle.unclassifiedP + orbitToggle.unclassifiedR + orbitToggle.unclassifiedD) {
         case 0:
           geoSatLayer.enabled = false;
@@ -1048,7 +1047,7 @@ function getGroundStations(groundStations) {
     }
 
     function unclassifiedToggleOff() {
-      console.log(orbitToggle.unclassifiedP + orbitToggle.unclassifiedR + orbitToggle.unclassifiedD);
+     // console.log(orbitToggle.unclassifiedP + orbitToggle.unclassifiedR + orbitToggle.unclassifiedD);
       switch (orbitToggle.unclassifiedP + orbitToggle.unclassifiedR + orbitToggle.unclassifiedD) {
         case 0:
           unclassifiedSatLayer.enabled = false;
@@ -1132,12 +1131,12 @@ function getGroundStations(groundStations) {
       }
     });
     $('#custom').click(function () {
-      if ($(this).text() == "CUSTOM OFF") {
-        $(this).text("CUSTOM ON");
-        customSatLayer.enabled = true;
-      } else {
+      if ($(this).text() == "CUSTOM ON") {
         $(this).text("CUSTOM OFF");
         customSatLayer.enabled = false;
+      } else {
+        $(this).text("CUSTOM ON");
+        customSatLayer.enabled = true;
       }
     });
 
@@ -1265,19 +1264,34 @@ function getGroundStations(groundStations) {
         wwd.redraw();
       }
 
-      var customSats = [];
-      var customSatStuff = function (index) {
-        customSats.push(everyCurrentPosition[index]);
-        createCustom(index);
-      };
-      var createCustom = function (index) {
-        for (var j = 0; j < customSats.length; j++) {
+      $('#clearCustom').click(function () {
+        while(customSats.length >0){
+          customSats.pop();
+        }
+        customSatLayer.removeAllRenderables();
+        $('#customStatus').text("CLEARED CUSTOM LAYER");
+        window.setTimeout(function(){
+          $('#customStatus').text("");
+        }, 2000)
+      });
+
+      var indexCheck = [];
+      var indexChecked = null;
+      var addCustomSat = function (index) {
+        console.log("blah")
+        console.log(index);
+        indexChecked = indexCheck.indexOf(index);
+        console.log(indexChecked);
+        if (indexChecked === -1) {
+          indexCheck.unshift(index);
+          console.log(indexCheck[0]);
+
           var placemarkAttributes = new WorldWind.PlacemarkAttributes(null);
           var highlightPlacemarkAttributes = new WorldWind.PlacemarkAttributes(placemarkAttributes);
           highlightPlacemarkAttributes.imageScale = 0.5;
 
           //add colored image depending on sat type
-          switch (satData[index].OBJECT_TYPE) {
+          switch (satData[indexCheck[0]].OBJECT_TYPE) {
             case "PAYLOAD":
               placemarkAttributes.imageSource = "assets/icons/blue_dot.png";
               placemarkAttributes.imageScale = 0.4;
@@ -1302,32 +1316,26 @@ function getGroundStations(groundStations) {
           placemarkAttributes.labelAttributes.color = WorldWind.Color.WHITE;
 
 
-          var placemark = new WorldWind.Placemark(customSats[j]);
+          var placemark = new WorldWind.Placemark(everyCurrentPosition[indexCheck[0]]);
           placemark.altitudeMode = WorldWind.RELATIVE_TO_GROUND;
           placemark.attributes = placemarkAttributes;
           placemark.highlightAttributes = highlightPlacemarkAttributes;
 
-          console.log("added" + satData[index].OBJECT_NAME);
-
           customSatLayer.addRenderable(placemark);
 
-          $('#customStatus').text("Added " + satData[index].OBJECT_NAME + " to Custom Layer");
-          window.setTimeout(function(){
-            $('#customStatus').text("");
-          }, 2000)
-        }
-        wwd.redraw();
-      };
-      $('#clearCustom').click(function () {
-          customSats = null;
-          customSatLayer.removeAllRenderables();
-        $('#customStatus').text("Cleared Custom Layer");
-        window.setTimeout(function(){
-          $('#customStatus').text("");
-        }, 2000)
-      });
 
-      //console.log(satData[0].LONGITUDE);
+          $('#customStatus').text("ADDED " + satData[indexCheck[0]].OBJECT_NAME + " TO CUSTOM LAYER");
+          window.setTimeout(function () {
+            $('#customStatus').text("");
+          }, 2000);
+        } else {
+          $('#customStatus').text("ALREADY ADDED TO CUSTOM LAYER");
+          window.setTimeout(function () {
+            $('#customStatus').text("");
+          }, 2000);
+        }
+      };
+
 
       // Update all Satellite Positions
       var updatePositions = setInterval(function () {
@@ -1338,6 +1346,7 @@ function getGroundStations(groundStations) {
           var timeSlide = $('#jqxsliderEvent2').jqxSlider('value');
           var now = new Date();
           var time = new Date(now.getTime() + timeSlide * 60000);
+          $('#sliderValue2').html(new Date(now.getTime() + timeSlide * 60000));
           try {
             var position = getPosition(satellite.twoline2satrec(satData[indx].TLE_LINE1, satData[indx].TLE_LINE2), time);
             satVelocity[indx] = getVelocity(satellite.twoline2satrec(satData[indx].TLE_LINE1, satData[indx].TLE_LINE2), time);
@@ -1346,11 +1355,13 @@ function getGroundStations(groundStations) {
             console.log(err + ' in updatePositions interval, sat ' + indx);
             continue;
           }
-
-          everyCurrentPosition[indx].latitude = position.latitude;
-          everyCurrentPosition[indx].longitude = position.longitude;
-          everyCurrentPosition[indx].altitude = position.altitude;
-
+          try {
+            everyCurrentPosition[indx].latitude = position.latitude;
+            everyCurrentPosition[indx].longitude = position.longitude;
+            everyCurrentPosition[indx].altitude = position.altitude;
+          } catch (err){
+            //TODO: Handle deorbited sats
+          }
         }
         wwd.redraw();
       }, updateTime * 1.5);
@@ -1468,7 +1479,6 @@ function getGroundStations(groundStations) {
 
       });
 
-
       /****
        * Click-handle functions
        */
@@ -1476,6 +1486,7 @@ function getGroundStations(groundStations) {
         // Move to sat position on click and redefine navigator positioning
       var startFollow;
       var toCurrentPosition = function (index) {
+      //  console.log(index + " from toCurrentPos");
         var toggleButtons = document.getElementById('buttonToggle');
         toggleButtons.style.display = "inline";
         var satPos = everyCurrentPosition[index];
@@ -1503,9 +1514,6 @@ function getGroundStations(groundStations) {
             $(this).text("FOLLOW OFF");
             endFollow();
           }
-        });
-        $('#customSat').click(function () {
-          customSatStuff(index);
         });
       };
       var endFollow = function () {     //ends startFollow window.setInterval
@@ -1666,21 +1674,23 @@ function getGroundStations(groundStations) {
        */
         //Highlighting
         // Now set up to handle picking.
-      var highlightedItems = [];
+    /*  var highlightedItems = [];
 
       var handleClick = function (recognizer) {
         // The input argument is either an Event or a TapRecognizer. Both have the same properties for determining
         // the mouse or tap location.
         var x = recognizer.clientX,
           y = recognizer.clientY;
+        console.log(x, y);
 
         var redrawRequired = highlightedItems.length > 0;
 
         // De-highlight any highlighted placemarks.
-        index = null;
         for (var h = 0; h < highlightedItems.length; h++) {
+         // var satIndex = null;
           var toggleButtons = document.getElementById('buttonToggle');
           toggleButtons.style.display = "none";
+
           highlightedItems[h].highlighted = false;
           orbitsHoverLayer.enabled = true;
           endHoverOrbit();
@@ -1696,19 +1706,19 @@ function getGroundStations(groundStations) {
           //turns off renderables that were turned on by click
           modelLayer.removeAllRenderables();
         }
-        // highlightedItems = [];
+         highlightedItems = [];
 
         // Perform the pick. Must first convert from window coordinates to canvas coordinates, which are
         // relative to the upper left corner of the canvas rather than the upper left corner of the page.
-        var rectRadius = 2,
+        var rectRadius = 1,
           pickPoint = wwd.canvasCoordinates(x, y),
           pickRectangle = new WorldWind.Rectangle(pickPoint[0] - rectRadius, pickPoint[1] + rectRadius,
             2 * rectRadius, 2 * rectRadius);
 
-        var pickList = wwd.pick(wwd.canvasCoordinates(x, y));
 
         // If only one thing is picked and it is the terrain, tell the world window to go to the picked location.
         if (pickList.objects.length == 1 && pickList.objects[0].isTerrain) {
+         // satIndex = null;
           endFollow();
           endOrbit();
           endMesh();
@@ -1716,8 +1726,7 @@ function getGroundStations(groundStations) {
           endExtra();
           var toggleButtons = document.getElementById('buttonToggle');
           toggleButtons.style.display = "none";
-          var position = pickList.objects[0].position;
-          index = null;
+         // var groundPosition = pickList.objects[0].position;
           orbitsHoverLayer.removeAllRenderables();
           orbitsHoverLayer.enabled = true;
           $('#follow').text('FOLLOW OFF');
@@ -1726,7 +1735,7 @@ function getGroundStations(groundStations) {
           $('#collada').text('3D MODEL OFF');
 
 
-          wwd.goTo(new WorldWind.Location(position.latitude, position.longitude));
+          wwd.goTo(new WorldWind.Location(groundPosition.latitude, groundPosition.longitude));
 
         }
 
@@ -1742,42 +1751,48 @@ function getGroundStations(groundStations) {
               pickList.objects[p].userObject.highlighted = true;
               highlightedItems.push(pickList.objects[p].userObject);
             }
-
           }
         }
 
-        if (pickList.objects.length == 1 && pickList.objects[0]) {
+        if (pickList.objects.length > 0) {
+          console.log(pickList.objects[0].position);
           var position = pickList.objects[0].position;
+          //console.log(position);
+          var gsIndex = groundStation.indexOf(position);
+             var satIndex = everyCurrentPosition.indexOf(position);
           endFollow();
           endMesh();
           endHoverOrbit();
           endExtra();
           endOrbit();
-          if (position.altitude > 1000) {
-            var index = everyCurrentPosition.indexOf(position);
-            orbitsHoverLayer.enabled = false;
 
-            extraData(index);
+          if (satIndex > -1) {
+            $('#customSat').click(function () {
+              console.log(satIndex);
+              addCustomSat(satIndex);
+            });
+            orbitsHoverLayer.enabled = false;
+            extraData(satIndex);
             $('#mesh').text("HORIZON ON");
-            meshToCurrentPosition(index);
+            meshToCurrentPosition(satIndex);
             $('#mesh').click(function () {
               if ($(this).text() == "HORIZON OFF") {
                 $(this).text("HORIZON ON");
-                meshToCurrentPosition(index);
+                meshToCurrentPosition(satIndex);
               }
               else {
                 $(this).text("HORIZON OFF");
                 endMesh();
               }
             });
-            toCurrentPosition(index);
+            toCurrentPosition(satIndex);
 
-            createOrbit(index);
+            createOrbit(satIndex);
             $('#orbit').text('ORBIT ON');
             $('#orbit').click(function () {
               if ($(this).text() == "ORBIT OFF") {
                 $(this).text("ORBIT ON");
-                createOrbit(index);
+                createOrbit(satIndex);
               }
               else {
                 $(this).text("ORBIT OFF");
@@ -1785,25 +1800,21 @@ function getGroundStations(groundStations) {
               }
             });
 
-            createCollada(index);
+            createCollada(satIndex);
             $('#collada').text('MODEL ON');
             $('#collada').click(function () {
               if ($(this).text() == "MODEL OFF") {
                 $(this).text("MODEL ON");
-                createCollada(index);
-              }
-              else {
+                createCollada(satIndex);
+              } else {
                 $(this).text("MODEL OFF");
                 modelLayer.removeAllRenderables();
               }
             });
-          }
-          else if (position.altitude <= 1000){
-            var gsIndex = groundStation.indexOf(position);
+          } else if (gsIndex > -1){
             toGsStation(gsIndex);
           }
         }
-
         // Update the window if we changed anything.
         if (redrawRequired) {
           wwd.redraw();
@@ -1814,7 +1825,149 @@ function getGroundStations(groundStations) {
       var clickRecognizer = new WorldWind.ClickRecognizer(wwd, handleClick);
 
       // Listen for taps on mobile devices.
+      var tapRecognizer = new WorldWind.TapRecognizer(wwd, handleClick);*/
+
+      var highlightedItems = [];
+
+      var handleClick = function (recognizer) {
+        // The input argument is either an Event or a TapRecognizer. Both have the same properties for determining
+        // the mouse or tap location.
+        var x = recognizer.clientX,
+          y = recognizer.clientY;
+
+        var redrawRequired = highlightedItems.length > 0;
+
+        // De-highlight any highlighted placemarks.
+        for (var h = 0; h < highlightedItems.length; h++) {
+          highlightedItems[h].highlighted = false;
+          endExtra();
+          endFollow();
+          endOrbit();
+          endMesh();
+
+          var toggleButtons = document.getElementById('buttonToggle');
+          toggleButtons.style.display = "none";
+          orbitsHoverLayer.removeAllRenderables();
+          orbitsHoverLayer.enabled = true;
+          $('#follow').text('FOLLOW OFF');
+          $('#mesh').text('HORIZON OFF');
+          $('#orbit').text('ORBIT OFF');
+          $('#collada').text('3D MODEL OFF');
+
+        }
+        highlightedItems = [];
+
+        // Perform the pick. Must first convert from window coordinates to canvas coordinates, which are
+        // relative to the upper left corner of the canvas rather than the upper left corner of the page.
+        var rectRadius = 1,
+          pickPoint = wwd.canvasCoordinates(x, y),
+          pickRectangle = new WorldWind.Rectangle(pickPoint[0] - rectRadius, pickPoint[1] + rectRadius,
+            2 * rectRadius, 2 * rectRadius);
+
+        var pickList = wwd.pickShapesInRegion(pickRectangle);
+
+        // If only one thing is picked and it is the terrain, tell the world window to go to the picked location.
+        if (pickList.objects.length == 1 && pickList.objects[0].isTerrain) {
+          // satIndex = null;
+          endFollow();
+          endOrbit();
+          endMesh();
+          endHoverOrbit();
+          endExtra();
+          var toggleButtons = document.getElementById('buttonToggle');
+          toggleButtons.style.display = "none";
+           var groundPosition = pickList.objects[0].position;
+          orbitsHoverLayer.removeAllRenderables();
+          orbitsHoverLayer.enabled = true;
+          $('#follow').text('FOLLOW OFF');
+          $('#mesh').text('HORIZON OFF');
+          $('#orbit').text('ORBIT OFF');
+          $('#collada').text('3D MODEL OFF');
+
+
+          wwd.goTo(new WorldWind.Location(groundPosition.latitude, groundPosition.longitude));
+
+        }
+
+        if (pickList.objects.length > 0) {
+          for (var p = 0; p < pickList.objects.length; p++) {
+            if (pickList.objects[p].isOnTop) {
+              // Highlight the items picked.
+              pickList.objects[p].userObject.highlighted = true;
+              highlightedItems.push(pickList.objects[p].userObject);
+
+              //Populate Info window with proper data
+              var position = pickList.objects[p].position,
+                satIndex = everyCurrentPosition.indexOf(position),
+                gsIndex = groundStation.indexOf(position);
+              if (satIndex > -1) {
+                endHoverOrbit();
+                $('#customSat').click(function () {
+                  addCustomSat(satIndex);
+                });
+                orbitsHoverLayer.enabled = false;
+                extraData(satIndex);
+                $('#mesh').text("HORIZON ON");
+                meshToCurrentPosition(satIndex);
+                $('#mesh').click(function () {
+                  if ($(this).text() == "HORIZON OFF") {
+                    $(this).text("HORIZON ON");
+                    meshToCurrentPosition(satIndex);
+                  }
+                  else {
+                    $(this).text("HORIZON OFF");
+                    endMesh();
+                  }
+                });
+                toCurrentPosition(satIndex);
+
+                createOrbit(satIndex);
+                $('#orbit').text('ORBIT ON');
+                $('#orbit').click(function () {
+                  if ($(this).text() == "ORBIT OFF") {
+                    $(this).text("ORBIT ON");
+                    createOrbit(satIndex);
+                  }
+                  else {
+                    $(this).text("ORBIT OFF");
+                    endOrbit();
+                  }
+                });
+
+                createCollada(satIndex);
+                $('#collada').text('MODEL ON');
+                $('#collada').click(function () {
+                  if ($(this).text() == "MODEL OFF") {
+                    $(this).text("MODEL ON");
+                    createCollada(satIndex);
+                  } else {
+                    $(this).text("MODEL OFF");
+                    modelLayer.removeAllRenderables();
+                  }
+                });
+              }
+              else if (gsIndex > -1){
+                toGsStation(gsIndex);
+
+              }
+
+              //Redraw highlighted items
+              wwd.redraw();
+            }
+          }
+        }
+      };
+
+      // Listen for mouse clicks.
+      var clickRecognizer = new WorldWind.ClickRecognizer(wwd, handleClick);
+
+      // Listen for taps on mobile devices.
       var tapRecognizer = new WorldWind.TapRecognizer(wwd, handleClick);
+
+      wwd.redraw();
+
+
+
 
 
       /**
@@ -1864,7 +2017,6 @@ function getGroundStations(groundStations) {
           pastOrbitPath.attributes = pastOrbitPathAttributes;
           pastOrbitPath.useSurfaceShapeFor2D = true;
 
-
           var futureOrbitPath = new WorldWind.Path(futureOrbit);
           futureOrbitPath.altitudeMode = WorldWind.RELATIVE_TO_GROUND;
           futureOrbitPath.attributes = futureOrbitPathAttributes;
@@ -1913,45 +2065,36 @@ function getGroundStations(groundStations) {
             2 * rectRadius, 2 * rectRadius);
 
         var pickList = wwd.pickShapesInRegion(pickRectangle);
-        if (pickList.objects.length > 0) {
-          redrawRequired = true;
-        }
 
-
-        // Highlight the items picked.
         if (pickList.objects.length > 0) {
           for (var p = 0; p < pickList.objects.length; p++) {
             if (pickList.objects[p].isOnTop) {
+              // Highlight the items picked.
               pickList.objects[p].userObject.highlighted = true;
               highlightedItems.push(pickList.objects[p].userObject);
+
+              //Populate Info window with proper data
+              var position = pickList.objects[p].position,
+                  satIndex = everyCurrentPosition.indexOf(position),
+                  gsIndex = groundStation.indexOf(position);
+              if (satIndex > -1) {
+                populateSatInfo(satData[satIndex]);
+                endExtra();
+                endHoverOrbit();
+                extraData(satIndex);
+                createHoverOrbit(satIndex);
+                updateLLA(everyCurrentPosition[satIndex]);
+              }
+              else if (gsIndex > -1){
+                populateGSInfo(groundStations[gsIndex]);
+              }
+
+              //Redraw highlighted items
+              wwd.redraw();
             }
           }
         }
-
-        if (pickList.objects.length > 1 && pickList.objects[0]) {
-          var position = pickList.objects[0].position,
-              satIndex = everyCurrentPosition.indexOf(position),
-              gsIndex = groundStation.indexOf(position);
-
-          if (satIndex != -1) {
-            populateSatInfo(satData[satIndex]);
-            endExtra();
-            endHoverOrbit();
-            extraData(satIndex);
-            createHoverOrbit(satIndex);
-            updateLLA(everyCurrentPosition[satIndex]);
-          }
-          else if (gsIndex != -1){
-            populateGSInfo(groundStations[gsIndex]);
-          }
-
-          // Update the window if we changed anything.
-          if (redrawRequired) {
-            wwd.redraw();
-          }
-        }
       };
-
 
       // Listen for mouse moves and highlight the placemarks that the cursor rolls over.
       wwd.addEventListener("mousemove", handlePick);
