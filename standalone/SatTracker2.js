@@ -337,10 +337,11 @@ function getGroundStations(groundStations) {
     gsPlacemarkAttributes.labelAttributes.color = WorldWind.Color.WHITE;
 
     var gsNames = [];
+    var gsOrg = [];
     var groundStation = [];
     for (var i = 0, len = groundStations.length; i < len; i++) {
-      gsNames[i] = groundStations[i].NAME;
-
+      gsNames.push(groundStations[i].NAME);
+      gsOrg.push(groundStations[i].ORGANIZATION)
       groundStation[i] = new WorldWind.Position(groundStations[i].LATITUDE,
         groundStations[i].LONGITUDE,
         groundStations[i].ALTITUDE);
@@ -367,6 +368,53 @@ function getGroundStations(groundStations) {
       }, 2000)
     });
 
+    var addCustomGS = function (gsind) {
+      var indexCheck = groundsIndex.indexOf(gsind);
+      if (indexCheck === -1) {
+        groundsIndex.unshift(gsind);
+        var gsAttributes = new WorldWind.ShapeAttributes(null);
+        gsAttributes.outlineColor = new WorldWind.Color(0, 255, 255, 1);
+        gsAttributes.interiorColor = new WorldWind.Color(0, 255, 255, 0.2);
+
+        var shape = new WorldWind.SurfaceCircle(new WorldWind.Location(groundStations[groundsIndex[0]].LATITUDE,
+          groundStations[groundsIndex[0]].LONGITUDE), 150e4, gsAttributes);
+
+        var gsPlacemarkAttributes = new WorldWind.PlacemarkAttributes(null);
+        var gsHighlightPlacemarkAttributes = new WorldWind.PlacemarkAttributes(gsPlacemarkAttributes);
+
+        gsPlacemarkAttributes.imageSource = "assets/icons/ground-station.png";
+        gsPlacemarkAttributes.imageScale = 0.25;
+        gsPlacemarkAttributes.imageOffset = new WorldWind.Offset(
+          WorldWind.OFFSET_FRACTION, 0.3,
+          WorldWind.OFFSET_FRACTION, 0.0);
+        gsPlacemarkAttributes.imageColor = WorldWind.Color.WHITE;
+        gsPlacemarkAttributes.labelAttributes.offset = new WorldWind.Offset(
+          WorldWind.OFFSET_FRACTION, 0.5,
+          WorldWind.OFFSET_FRACTION, 1.0);
+        gsPlacemarkAttributes.labelAttributes.color = WorldWind.Color.WHITE;
+
+        var gsPlacemark = new WorldWind.Placemark(new WorldWind.Position(groundStations[groundsIndex[0]].LATITUDE,
+          groundStations[groundsIndex[0]].LONGITUDE, groundStations[groundsIndex[0]].ALTITUDE));
+
+        gsPlacemark.altitudeMode = WorldWind.RELATIVE_TO_GROUND;
+        gsPlacemark.label = groundStation.NAME;
+        gsPlacemark.attributes = gsPlacemarkAttributes;
+        gsPlacemark.highlightAttributes = gsHighlightPlacemarkAttributes;
+
+        customGSLayer.addRenderable(gsPlacemark);
+        customGSLayer.addRenderable(shape);
+
+        $('#customStatus').text("ADDED " + groundStations[groundsIndex[0]].NAME.toUpperCase() + " TO CUSTOM GS LAYER");
+        window.setTimeout(function () {
+          $('#customStatus').text("");
+        }, 2000)
+      } else {
+        $('#customStatus').text("ALREADY ON CUSTOM LAYER");
+        window.setTimeout(function () {
+          $('#customStatus').text("");
+        }, 2000)
+      }
+    };
     var groundsIndex = [];
     var toGsStation = function (gsind) {
       //GS information display
@@ -378,51 +426,7 @@ function getGroundStations(groundStations) {
 
       //turn on shape for current GS
       $('#addStation').click(function () {
-        var indexCheck = groundsIndex.indexOf(gsind);
-        if (indexCheck === -1) {
-          groundsIndex.unshift(gsind);
-          var gsAttributes = new WorldWind.ShapeAttributes(null);
-          gsAttributes.outlineColor = new WorldWind.Color(0, 255, 255, 1);
-          gsAttributes.interiorColor = new WorldWind.Color(0, 255, 255, 0.2);
-
-          var shape = new WorldWind.SurfaceCircle(new WorldWind.Location(groundStations[groundsIndex[0]].LATITUDE,
-            groundStations[groundsIndex[0]].LONGITUDE), 150e4, gsAttributes);
-
-          var gsPlacemarkAttributes = new WorldWind.PlacemarkAttributes(null);
-          var gsHighlightPlacemarkAttributes = new WorldWind.PlacemarkAttributes(gsPlacemarkAttributes);
-
-          gsPlacemarkAttributes.imageSource = "assets/icons/ground-station.png";
-          gsPlacemarkAttributes.imageScale = 0.25;
-          gsPlacemarkAttributes.imageOffset = new WorldWind.Offset(
-            WorldWind.OFFSET_FRACTION, 0.3,
-            WorldWind.OFFSET_FRACTION, 0.0);
-          gsPlacemarkAttributes.imageColor = WorldWind.Color.WHITE;
-          gsPlacemarkAttributes.labelAttributes.offset = new WorldWind.Offset(
-            WorldWind.OFFSET_FRACTION, 0.5,
-            WorldWind.OFFSET_FRACTION, 1.0);
-          gsPlacemarkAttributes.labelAttributes.color = WorldWind.Color.WHITE;
-
-          var gsPlacemark = new WorldWind.Placemark(new WorldWind.Position(groundStations[groundsIndex[0]].LATITUDE,
-            groundStations[groundsIndex[0]].LONGITUDE, groundStations[groundsIndex[0]].ALTITUDE));
-
-          gsPlacemark.altitudeMode = WorldWind.RELATIVE_TO_GROUND;
-          gsPlacemark.label = groundStation.NAME;
-          gsPlacemark.attributes = gsPlacemarkAttributes;
-          gsPlacemark.highlightAttributes = gsHighlightPlacemarkAttributes;
-
-          customGSLayer.addRenderable(gsPlacemark);
-          customGSLayer.addRenderable(shape);
-
-          $('#customStatus').text("ADDED " + groundStations[groundsIndex[0]].NAME.toUpperCase() + " TO CUSTOM GS LAYER");
-          window.setTimeout(function () {
-            $('#customStatus').text("");
-          }, 2000)
-        } else {
-          $('#customStatus').text("ALREADY ON CUSTOM LAYER");
-          window.setTimeout(function () {
-            $('#customStatus').text("");
-          }, 2000)
-        }
+        addCustomGS(gsind);
       });
     };
     $('#customGS').click(function () {
@@ -1192,7 +1196,6 @@ function getGroundStations(groundStations) {
         }
 
 
-
         var placemarkAttributes = new WorldWind.PlacemarkAttributes(null);
         var highlightPlacemarkAttributes = new WorldWind.PlacemarkAttributes(placemarkAttributes);
         highlightPlacemarkAttributes.imageScale = 0.4;
@@ -1379,13 +1382,15 @@ function getGroundStations(groundStations) {
        * HTML interface Controls *
        * ***/
 
+      function onlyUnique(value, index, self) {
+        return self.indexOf(value) === index;
+      }
+
       // Create search box for GS's
       $("#jqxWidget2").jqxComboBox({
-        selectedIndex: 0,
         source: groundStations,
         displayMember: "NAME",
-        valueMember: "ORGANIZATION",
-        placeHolder: "NAME",
+        placeHolder: "GS NAME",
         width: 220,
         height: 30,
         theme: 'shinyblack'
@@ -1395,13 +1400,9 @@ function getGroundStations(groundStations) {
         if (event.args) {
           var item = event.args.item;
           if (item) {
-            var valueElement = $("<div></div>");
-            valueElement.text("Type: " + item.value);
             var labelElement = $("<div></div>");
             labelElement.text("Name: " + item.label);
             $("#selectionlog2").children().remove();
-            // $("#selectionlog2").append(labelElement);
-            // $("#selectionlog2").append(valueElement);
             var searchGSat = gsNames.indexOf(item.label);
             endFollow();
             toGsStation(searchGSat);
@@ -1409,16 +1410,41 @@ function getGroundStations(groundStations) {
         }
       });
 
-      function onlyUnique(value, index, self) {
-        return self.indexOf(value) === index;
-      }
+      //create satellite site search
+      var org = gsOrg.filter(onlyUnique);
+      $("#jqxWidget6").jqxComboBox({
+        source: org,
+        displayMember: "ORGANIZATION",
+        placeHolder: "ORGANIZATION",
+        width: 220,
+        height: 30,
+        theme: 'shinyblack'
+      });
+      // trigger the select event.
+      $("#jqxWidget6").on('select', function (event) {
+        if (event.args) {
+          var item = event.args.item;
+          if (item) {
+            var labelElement = $("<div></div>");
+            labelElement.text("Name: " + item.label);
+            $("#selectionlog5").children().remove();
+            for (var i = 0; i < satNum; i += 1) {
+              if (gsOrg[i] === item.label) {
+                addCustomGS(i);
+              }
+            }
+            $('#customStatus').text("ADDED " + item.label + " TO CUSTOM LAYER");
+            window.setTimeout(function () {
+              $('#customStatus').text("");
+            }, 3000);
+          }
+        }
+      });
 
       //create satellite owner search
       var owner = satOwner.filter(onlyUnique); // returns ['a', 1, 2, '1'];
       $("#jqxWidget3").jqxComboBox({
-        //selectedIndex: 0,
         source: owner,
-        //displayMember: "OWNER",
         placeHolder: "OWNER",
         width: 220,
         height: 30,
@@ -1452,7 +1478,7 @@ function getGroundStations(groundStations) {
       $("#jqxWidget4").jqxComboBox({
         //selectedIndex: 0,
         source: year,
-       // displayMember: "LAUNCH YEAR",
+        // displayMember: "LAUNCH YEAR",
         placeHolder: "LAUNCH YEAR",
         width: 220,
         height: 30,
@@ -1467,7 +1493,7 @@ function getGroundStations(groundStations) {
             labelElement.text("Name: " + item.label);
             $("#selectionlog4").children().remove();
 
-            for (var i = 0; i < (satNum -1); i += 1) {
+            for (var i = 0; i < (satNum - 1); i += 1) {
               if (satDate[i] === item.label) {
                 addCustomSat(i);
               }
@@ -1485,7 +1511,7 @@ function getGroundStations(groundStations) {
       $("#jqxWidget5").jqxComboBox({
         //selectedIndex: 0,
         source: site,
-       // displayMember: "LAUNCH SITE",
+        // displayMember: "LAUNCH SITE",
         placeHolder: "LAUNCH SIGHT",
         width: 220,
         height: 30,
@@ -1514,9 +1540,9 @@ function getGroundStations(groundStations) {
 
       // Create search box for Satellites
       $("#jqxWidget").jqxComboBox({
-       // selectedIndex: 0,
+        // selectedIndex: 0,
         source: satNames,
-       // displayMember: "OBJECT_NAME",
+        // displayMember: "OBJECT_NAME",
         //valueMember: "OWNER",
         placeHolder: "SATELLITE NAME",
         width: 220,
@@ -1528,7 +1554,7 @@ function getGroundStations(groundStations) {
         if (event.args) {
           var item = event.args.item;
           if (item) {
-           // var valueElement = $("<div></div>");
+            // var valueElement = $("<div></div>");
             //valueElement.text("Owner: " + item.value);
             var labelElement = $("<div></div>");
             labelElement.text("Name: " + item.label);
@@ -1732,23 +1758,9 @@ function getGroundStations(groundStations) {
             console.log('Possible deorbiting sat: ' + satData[index].NORAD_CAT_ID + ' in startExtra interval');
           }
           var extra = {};
-          //keplerian elements
-          // extra.inclination = satStuff.inclo;  //rads
-          // extra.eccentricity = satStuff.ecco;
-          // extra.raan = satStuff.nodeo;   //rads
-          // extra.argPe = satStuff.argpo;  //rads
-          // extra.meanMotion = satStuff.no * 60 * 24 / (2 * Math.PI);     // convert rads/minute to rev/day
           extra.inclination = satData[index].INCLINATION;  //rads
           extra.eccentricity = satData[index].ECCENTRICITY;
-          // extra.raan = satStuff.nodeo;   //rads
-          // extra.argPe = satStuff.argpo;  //rads
           extra.meanMotion = satData[index].MEAN_MOTION;
-          //fun other data
-          // extra.semiMajorAxis = Math.pow(8681663.653 / extra.meanMotion, (2 / 3));
-          // extra.semiMinorAxis = extra.semiMajorAxis * Math.sqrt(1 - Math.pow(extra.eccentricity, 2));
-          // extra.apogee = extra.semiMajorAxis * (1 + extra.eccentricity) - 6371;
-          // extra.perigee = extra.semiMajorAxis * (1 - extra.eccentricity) - 6371;
-          // extra.period = 1440.0 / extra.meanMotion;
           extra.semiMajorAxis = Math.pow(8681663.653 / extra.meanMotion, (2 / 3));
           extra.semiMinorAxis = extra.semiMajorAxis * Math.sqrt(1 - Math.pow(extra.eccentricity, 2));
           extra.apogee = satData[index].APOGEE;
