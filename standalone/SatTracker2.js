@@ -358,7 +358,7 @@ function getGroundStations(groundStations) {
     groundStationsLayer.enabled = false;
     $('#clearStations').click(function () {
       customGSLayer.removeAllRenderables();
-      while(groundsIndex.length >0){
+      while (groundsIndex.length > 0) {
         groundsIndex.pop();
       }
       $('#customStatus').text("CLEARED GS LAYER");
@@ -381,26 +381,26 @@ function getGroundStations(groundStations) {
         var indexCheck = groundsIndex.indexOf(gsind);
         if (indexCheck === -1) {
           groundsIndex.unshift(gsind);
-        var gsAttributes = new WorldWind.ShapeAttributes(null);
-        gsAttributes.outlineColor = new WorldWind.Color(0, 255, 255, 1);
-        gsAttributes.interiorColor = new WorldWind.Color(0, 255, 255, 0.2);
+          var gsAttributes = new WorldWind.ShapeAttributes(null);
+          gsAttributes.outlineColor = new WorldWind.Color(0, 255, 255, 1);
+          gsAttributes.interiorColor = new WorldWind.Color(0, 255, 255, 0.2);
 
-        var shape = new WorldWind.SurfaceCircle(new WorldWind.Location(groundStations[groundsIndex[0]].LATITUDE,
-          groundStations[groundsIndex[0]].LONGITUDE), 150e4, gsAttributes);
+          var shape = new WorldWind.SurfaceCircle(new WorldWind.Location(groundStations[groundsIndex[0]].LATITUDE,
+            groundStations[groundsIndex[0]].LONGITUDE), 150e4, gsAttributes);
 
-        var gsPlacemarkAttributes = new WorldWind.PlacemarkAttributes(null);
-        var gsHighlightPlacemarkAttributes = new WorldWind.PlacemarkAttributes(gsPlacemarkAttributes);
+          var gsPlacemarkAttributes = new WorldWind.PlacemarkAttributes(null);
+          var gsHighlightPlacemarkAttributes = new WorldWind.PlacemarkAttributes(gsPlacemarkAttributes);
 
-        gsPlacemarkAttributes.imageSource = "assets/icons/ground-station.png";
-        gsPlacemarkAttributes.imageScale = 0.25;
-        gsPlacemarkAttributes.imageOffset = new WorldWind.Offset(
-          WorldWind.OFFSET_FRACTION, 0.3,
-          WorldWind.OFFSET_FRACTION, 0.0);
-        gsPlacemarkAttributes.imageColor = WorldWind.Color.WHITE;
-        gsPlacemarkAttributes.labelAttributes.offset = new WorldWind.Offset(
-          WorldWind.OFFSET_FRACTION, 0.5,
-          WorldWind.OFFSET_FRACTION, 1.0);
-        gsPlacemarkAttributes.labelAttributes.color = WorldWind.Color.WHITE;
+          gsPlacemarkAttributes.imageSource = "assets/icons/ground-station.png";
+          gsPlacemarkAttributes.imageScale = 0.25;
+          gsPlacemarkAttributes.imageOffset = new WorldWind.Offset(
+            WorldWind.OFFSET_FRACTION, 0.3,
+            WorldWind.OFFSET_FRACTION, 0.0);
+          gsPlacemarkAttributes.imageColor = WorldWind.Color.WHITE;
+          gsPlacemarkAttributes.labelAttributes.offset = new WorldWind.Offset(
+            WorldWind.OFFSET_FRACTION, 0.5,
+            WorldWind.OFFSET_FRACTION, 1.0);
+          gsPlacemarkAttributes.labelAttributes.color = WorldWind.Color.WHITE;
 
           var gsPlacemark = new WorldWind.Placemark(new WorldWind.Position(groundStations[groundsIndex[0]].LATITUDE,
             groundStations[groundsIndex[0]].LONGITUDE, groundStations[groundsIndex[0]].ALTITUDE));
@@ -410,14 +410,14 @@ function getGroundStations(groundStations) {
           gsPlacemark.attributes = gsPlacemarkAttributes;
           gsPlacemark.highlightAttributes = gsHighlightPlacemarkAttributes;
 
-            customGSLayer.addRenderable(gsPlacemark);
-            customGSLayer.addRenderable(shape);
+          customGSLayer.addRenderable(gsPlacemark);
+          customGSLayer.addRenderable(shape);
 
-            $('#customStatus').text("ADDED " + groundStations[groundsIndex[0]].NAME.toUpperCase() + " TO CUSTOM GS LAYER");
-            window.setTimeout(function () {
-              $('#customStatus').text("");
-            }, 2000)
-          } else {
+          $('#customStatus').text("ADDED " + groundStations[groundsIndex[0]].NAME.toUpperCase() + " TO CUSTOM GS LAYER");
+          window.setTimeout(function () {
+            $('#customStatus').text("");
+          }, 2000)
+        } else {
           $('#customStatus').text("ALREADY ON CUSTOM LAYER");
           window.setTimeout(function () {
             $('#customStatus').text("");
@@ -1047,7 +1047,7 @@ function getGroundStations(groundStations) {
     }
 
     function unclassifiedToggleOff() {
-     // console.log(orbitToggle.unclassifiedP + orbitToggle.unclassifiedR + orbitToggle.unclassifiedD);
+      // console.log(orbitToggle.unclassifiedP + orbitToggle.unclassifiedR + orbitToggle.unclassifiedD);
       switch (orbitToggle.unclassifiedP + orbitToggle.unclassifiedR + orbitToggle.unclassifiedD) {
         case 0:
           unclassifiedSatLayer.enabled = false;
@@ -1159,6 +1159,10 @@ function getGroundStations(groundStations) {
     function renderSats(satData) {
       trackedPlaceholder.textContent = satData.length;
       var satNames = [];
+      var satOwner = [];
+      var satDate = [];
+      //var satYear = [];
+      var satSite = [];
       var now = new Date();
       var everyCurrentPosition = [];
       for (var j = 0; j < satNum; j++) {
@@ -1178,8 +1182,17 @@ function getGroundStations(groundStations) {
         currentPosition = new WorldWind.Position(position.latitude,
           position.longitude,
           position.altitude);
-        everyCurrentPosition[j] = currentPosition;
-        satNames[j] = satData[j].OBJECT_NAME;
+        everyCurrentPosition.push(currentPosition);
+        satNames.push(satData[j].OBJECT_NAME);
+        satOwner.push(satData[j].OWNER);
+        try {
+          satDate[j] = satData[j].LAUNCH_DATE.substring(0, 4);
+        } catch (err) {
+          console.log(err + ' in renderSats, sat ' + j);
+          continue;
+        }
+
+
 
         var placemarkAttributes = new WorldWind.PlacemarkAttributes(null);
         var highlightPlacemarkAttributes = new WorldWind.PlacemarkAttributes(placemarkAttributes);
@@ -1265,12 +1278,12 @@ function getGroundStations(groundStations) {
       }
 
       $('#clearCustom').click(function () {
-        while(customSats.length >0){
-          customSats.pop();
+        while (indexCheck.length > 0) {
+          indexCheck.pop();
         }
         customSatLayer.removeAllRenderables();
         $('#customStatus').text("CLEARED CUSTOM LAYER");
-        window.setTimeout(function(){
+        window.setTimeout(function () {
           $('#customStatus').text("");
         }, 2000)
       });
@@ -1278,7 +1291,6 @@ function getGroundStations(groundStations) {
       var indexCheck = [];
       var indexChecked = null;
       var addCustomSat = function (index) {
-        console.log("blah")
         console.log(index);
         indexChecked = indexCheck.indexOf(index);
         console.log(indexChecked);
@@ -1359,7 +1371,7 @@ function getGroundStations(groundStations) {
             everyCurrentPosition[indx].latitude = position.latitude;
             everyCurrentPosition[indx].longitude = position.longitude;
             everyCurrentPosition[indx].altitude = position.altitude;
-          } catch (err){
+          } catch (err) {
             //TODO: Handle deorbited sats
           }
         }
@@ -1377,8 +1389,10 @@ function getGroundStations(groundStations) {
         source: groundStations,
         displayMember: "NAME",
         valueMember: "ORGANIZATION",
+        placeHolder: "NAME",
         width: 220,
-        height: 30
+        height: 30,
+        theme: 'shinyblack'
       });
       // trigger the select event.
       $("#jqxWidget2").on('select', function (event) {
@@ -1399,36 +1413,137 @@ function getGroundStations(groundStations) {
         }
       });
 
+      function onlyUnique(value, index, self) {
+        return self.indexOf(value) === index;
+      }
+
+      //create satellite owner search
+      var owner = satOwner.filter(onlyUnique); // returns ['a', 1, 2, '1'];
+      $("#jqxWidget3").jqxComboBox({
+        //selectedIndex: 0,
+        source: owner,
+        //displayMember: "OWNER",
+        placeHolder: "OWNER",
+        width: 220,
+        height: 30,
+        theme: 'shinyblack'
+
+      });
+      // trigger the select event.
+      $("#jqxWidget3").on('select', function (event) {
+        if (event.args) {
+          var item = event.args.item;
+          if (item) {
+            var labelElement = $("<div></div>");
+            labelElement.text("Name: " + item.label);
+            $("#selectionlog3").children().remove();
+
+            for (var i = 0; i < satNum; i += 1) {
+              if (satData[i].OWNER === item.label) {
+                addCustomSat(i);
+              }
+            }
+            $('#customStatus').text("ADDED " + item.label + " TO CUSTOM LAYER");
+            window.setTimeout(function () {
+              $('#customStatus').text("");
+            }, 3000);
+          }
+        }
+      });
+
+      //create satellite owner search
+      var year = satDate.filter(onlyUnique); // returns ['a', 1, 2, '1'];
+      $("#jqxWidget4").jqxComboBox({
+        //selectedIndex: 0,
+        source: year,
+       // displayMember: "LAUNCH YEAR",
+        placeHolder: "LAUNCH YEAR",
+        width: 220,
+        height: 30,
+        theme: 'shinyblack'
+      });
+      // trigger the select event.
+      $("#jqxWidget4").on('select', function (event) {
+        if (event.args) {
+          var item = event.args.item;
+          if (item) {
+            var labelElement = $("<div></div>");
+            labelElement.text("Name: " + item.label);
+            $("#selectionlog4").children().remove();
+
+            for (var i = 0; i < (satNum -1); i += 1) {
+              if (satDate[i] === item.label) {
+                addCustomSat(i);
+              }
+            }
+            $('#customStatus').text("ADDED " + item.label + " TO CUSTOM LAYER");
+            window.setTimeout(function () {
+              $('#customStatus').text("");
+            }, 3000);
+          }
+        }
+      });
+
+      //create satellite site search
+      var site = satSite.filter(onlyUnique);
+      $("#jqxWidget5").jqxComboBox({
+        //selectedIndex: 0,
+        source: site,
+       // displayMember: "LAUNCH SITE",
+        placeHolder: "LAUNCH SIGHT",
+        width: 220,
+        height: 30,
+        theme: 'shinyblack'
+      });
+      // trigger the select event.
+      $("#jqxWidget5").on('select', function (event) {
+        if (event.args) {
+          var item = event.args.item;
+          if (item) {
+            var labelElement = $("<div></div>");
+            labelElement.text("Name: " + item.label);
+            $("#selectionlog5").children().remove();
+            for (var i = 0; i < satNum; i += 1) {
+              if (satData[i].LAUNCH_SITE === item.label) {
+                addCustomSat(i);
+              }
+            }
+            $('#customStatus').text("ADDED " + item.label + " TO CUSTOM LAYER");
+            window.setTimeout(function () {
+              $('#customStatus').text("");
+            }, 3000);
+          }
+        }
+      });
+
       // Create search box for Satellites
       $("#jqxWidget").jqxComboBox({
-        selectedIndex: 0,
-        source: satData,
+       // selectedIndex: 0,
+        source: satNames,
+       // displayMember: "OBJECT_NAME",
+        //valueMember: "OWNER",
         placeHolder: "SATELLITE NAME",
-        displayMember: "OBJECT_NAME",
-        valueMember: "OWNER",
         width: 220,
-        height: 30
+        height: 30,
+        theme: 'shinyblack'
       });
       // trigger the select event.
       $("#jqxWidget").on('select', function (event) {
         if (event.args) {
           var item = event.args.item;
           if (item) {
-            var valueElement = $("<div></div>");
-            valueElement.text("Owner: " + item.value);
+           // var valueElement = $("<div></div>");
+            //valueElement.text("Owner: " + item.value);
             var labelElement = $("<div></div>");
             labelElement.text("Name: " + item.label);
             $("#selectionlog").children().remove();
             //$("#selectionlog").append(labelElement);
             //$("#selectionlog").append(valueElement);
-            console.log(item.label);
-            console.log(satNames[1]);
             endFollow();
             endMesh();
             endOrbit();
             endExtra();
             var searchSat = satNames.indexOf(item.label);
-            console.log(searchSat);
             toCurrentPosition(searchSat);
             meshToCurrentPosition(searchSat);
             createOrbit(searchSat);
@@ -1486,7 +1601,7 @@ function getGroundStations(groundStations) {
         // Move to sat position on click and redefine navigator positioning
       var startFollow;
       var toCurrentPosition = function (index) {
-      //  console.log(index + " from toCurrentPos");
+        //  console.log(index + " from toCurrentPos");
         var toggleButtons = document.getElementById('buttonToggle');
         toggleButtons.style.display = "inline";
         var satPos = everyCurrentPosition[index];
@@ -1672,160 +1787,160 @@ function getGroundStations(groundStations) {
        * Click-handle
        *
        */
-        //Highlighting
-        // Now set up to handle picking.
-    /*  var highlightedItems = [];
+      //Highlighting
+      // Now set up to handle picking.
+      /*  var highlightedItems = [];
 
-      var handleClick = function (recognizer) {
-        // The input argument is either an Event or a TapRecognizer. Both have the same properties for determining
-        // the mouse or tap location.
-        var x = recognizer.clientX,
-          y = recognizer.clientY;
-        console.log(x, y);
+       var handleClick = function (recognizer) {
+       // The input argument is either an Event or a TapRecognizer. Both have the same properties for determining
+       // the mouse or tap location.
+       var x = recognizer.clientX,
+       y = recognizer.clientY;
+       console.log(x, y);
 
-        var redrawRequired = highlightedItems.length > 0;
+       var redrawRequired = highlightedItems.length > 0;
 
-        // De-highlight any highlighted placemarks.
-        for (var h = 0; h < highlightedItems.length; h++) {
-         // var satIndex = null;
-          var toggleButtons = document.getElementById('buttonToggle');
-          toggleButtons.style.display = "none";
+       // De-highlight any highlighted placemarks.
+       for (var h = 0; h < highlightedItems.length; h++) {
+       // var satIndex = null;
+       var toggleButtons = document.getElementById('buttonToggle');
+       toggleButtons.style.display = "none";
 
-          highlightedItems[h].highlighted = false;
-          orbitsHoverLayer.enabled = true;
-          endHoverOrbit();
-          endOrbit();
-          endMesh();
-          endFollow();
-          endExtra();
-          $('#follow').text('FOLLOW OFF');
-          $('#mesh').text('HORIZON OFF');
-          $('#orbit').text('ORBIT OFF');
-          $('#collada').text('3D MODEL OFF');
+       highlightedItems[h].highlighted = false;
+       orbitsHoverLayer.enabled = true;
+       endHoverOrbit();
+       endOrbit();
+       endMesh();
+       endFollow();
+       endExtra();
+       $('#follow').text('FOLLOW OFF');
+       $('#mesh').text('HORIZON OFF');
+       $('#orbit').text('ORBIT OFF');
+       $('#collada').text('3D MODEL OFF');
 
-          //turns off renderables that were turned on by click
-          modelLayer.removeAllRenderables();
-        }
-         highlightedItems = [];
+       //turns off renderables that were turned on by click
+       modelLayer.removeAllRenderables();
+       }
+       highlightedItems = [];
 
-        // Perform the pick. Must first convert from window coordinates to canvas coordinates, which are
-        // relative to the upper left corner of the canvas rather than the upper left corner of the page.
-        var rectRadius = 1,
-          pickPoint = wwd.canvasCoordinates(x, y),
-          pickRectangle = new WorldWind.Rectangle(pickPoint[0] - rectRadius, pickPoint[1] + rectRadius,
-            2 * rectRadius, 2 * rectRadius);
-
-
-        // If only one thing is picked and it is the terrain, tell the world window to go to the picked location.
-        if (pickList.objects.length == 1 && pickList.objects[0].isTerrain) {
-         // satIndex = null;
-          endFollow();
-          endOrbit();
-          endMesh();
-          endHoverOrbit();
-          endExtra();
-          var toggleButtons = document.getElementById('buttonToggle');
-          toggleButtons.style.display = "none";
-         // var groundPosition = pickList.objects[0].position;
-          orbitsHoverLayer.removeAllRenderables();
-          orbitsHoverLayer.enabled = true;
-          $('#follow').text('FOLLOW OFF');
-          $('#mesh').text('HORIZON OFF');
-          $('#orbit').text('ORBIT OFF');
-          $('#collada').text('3D MODEL OFF');
+       // Perform the pick. Must first convert from window coordinates to canvas coordinates, which are
+       // relative to the upper left corner of the canvas rather than the upper left corner of the page.
+       var rectRadius = 1,
+       pickPoint = wwd.canvasCoordinates(x, y),
+       pickRectangle = new WorldWind.Rectangle(pickPoint[0] - rectRadius, pickPoint[1] + rectRadius,
+       2 * rectRadius, 2 * rectRadius);
 
 
-          wwd.goTo(new WorldWind.Location(groundPosition.latitude, groundPosition.longitude));
+       // If only one thing is picked and it is the terrain, tell the world window to go to the picked location.
+       if (pickList.objects.length == 1 && pickList.objects[0].isTerrain) {
+       // satIndex = null;
+       endFollow();
+       endOrbit();
+       endMesh();
+       endHoverOrbit();
+       endExtra();
+       var toggleButtons = document.getElementById('buttonToggle');
+       toggleButtons.style.display = "none";
+       // var groundPosition = pickList.objects[0].position;
+       orbitsHoverLayer.removeAllRenderables();
+       orbitsHoverLayer.enabled = true;
+       $('#follow').text('FOLLOW OFF');
+       $('#mesh').text('HORIZON OFF');
+       $('#orbit').text('ORBIT OFF');
+       $('#collada').text('3D MODEL OFF');
 
-        }
 
-        var pickList = wwd.pickShapesInRegion(pickRectangle);
-        if (pickList.objects.length > 0) {
-          redrawRequired = true;
-        }
+       wwd.goTo(new WorldWind.Location(groundPosition.latitude, groundPosition.longitude));
 
-        // Highlight the items picked.
-        if (pickList.objects.length > 0) {
-          for (var p = 0; p < pickList.objects.length; p++) {
-            if (pickList.objects[p].isOnTop) {
-              pickList.objects[p].userObject.highlighted = true;
-              highlightedItems.push(pickList.objects[p].userObject);
-            }
-          }
-        }
+       }
 
-        if (pickList.objects.length > 0) {
-          console.log(pickList.objects[0].position);
-          var position = pickList.objects[0].position;
-          //console.log(position);
-          var gsIndex = groundStation.indexOf(position);
-             var satIndex = everyCurrentPosition.indexOf(position);
-          endFollow();
-          endMesh();
-          endHoverOrbit();
-          endExtra();
-          endOrbit();
+       var pickList = wwd.pickShapesInRegion(pickRectangle);
+       if (pickList.objects.length > 0) {
+       redrawRequired = true;
+       }
 
-          if (satIndex > -1) {
-            $('#customSat').click(function () {
-              console.log(satIndex);
-              addCustomSat(satIndex);
-            });
-            orbitsHoverLayer.enabled = false;
-            extraData(satIndex);
-            $('#mesh').text("HORIZON ON");
-            meshToCurrentPosition(satIndex);
-            $('#mesh').click(function () {
-              if ($(this).text() == "HORIZON OFF") {
-                $(this).text("HORIZON ON");
-                meshToCurrentPosition(satIndex);
-              }
-              else {
-                $(this).text("HORIZON OFF");
-                endMesh();
-              }
-            });
-            toCurrentPosition(satIndex);
+       // Highlight the items picked.
+       if (pickList.objects.length > 0) {
+       for (var p = 0; p < pickList.objects.length; p++) {
+       if (pickList.objects[p].isOnTop) {
+       pickList.objects[p].userObject.highlighted = true;
+       highlightedItems.push(pickList.objects[p].userObject);
+       }
+       }
+       }
 
-            createOrbit(satIndex);
-            $('#orbit').text('ORBIT ON');
-            $('#orbit').click(function () {
-              if ($(this).text() == "ORBIT OFF") {
-                $(this).text("ORBIT ON");
-                createOrbit(satIndex);
-              }
-              else {
-                $(this).text("ORBIT OFF");
-                endOrbit();
-              }
-            });
+       if (pickList.objects.length > 0) {
+       console.log(pickList.objects[0].position);
+       var position = pickList.objects[0].position;
+       //console.log(position);
+       var gsIndex = groundStation.indexOf(position);
+       var satIndex = everyCurrentPosition.indexOf(position);
+       endFollow();
+       endMesh();
+       endHoverOrbit();
+       endExtra();
+       endOrbit();
 
-            createCollada(satIndex);
-            $('#collada').text('MODEL ON');
-            $('#collada').click(function () {
-              if ($(this).text() == "MODEL OFF") {
-                $(this).text("MODEL ON");
-                createCollada(satIndex);
-              } else {
-                $(this).text("MODEL OFF");
-                modelLayer.removeAllRenderables();
-              }
-            });
-          } else if (gsIndex > -1){
-            toGsStation(gsIndex);
-          }
-        }
-        // Update the window if we changed anything.
-        if (redrawRequired) {
-          wwd.redraw();
-        }
-      };
+       if (satIndex > -1) {
+       $('#customSat').click(function () {
+       console.log(satIndex);
+       addCustomSat(satIndex);
+       });
+       orbitsHoverLayer.enabled = false;
+       extraData(satIndex);
+       $('#mesh').text("HORIZON ON");
+       meshToCurrentPosition(satIndex);
+       $('#mesh').click(function () {
+       if ($(this).text() == "HORIZON OFF") {
+       $(this).text("HORIZON ON");
+       meshToCurrentPosition(satIndex);
+       }
+       else {
+       $(this).text("HORIZON OFF");
+       endMesh();
+       }
+       });
+       toCurrentPosition(satIndex);
 
-      // Listen for mouse clicks.
-      var clickRecognizer = new WorldWind.ClickRecognizer(wwd, handleClick);
+       createOrbit(satIndex);
+       $('#orbit').text('ORBIT ON');
+       $('#orbit').click(function () {
+       if ($(this).text() == "ORBIT OFF") {
+       $(this).text("ORBIT ON");
+       createOrbit(satIndex);
+       }
+       else {
+       $(this).text("ORBIT OFF");
+       endOrbit();
+       }
+       });
 
-      // Listen for taps on mobile devices.
-      var tapRecognizer = new WorldWind.TapRecognizer(wwd, handleClick);*/
+       createCollada(satIndex);
+       $('#collada').text('MODEL ON');
+       $('#collada').click(function () {
+       if ($(this).text() == "MODEL OFF") {
+       $(this).text("MODEL ON");
+       createCollada(satIndex);
+       } else {
+       $(this).text("MODEL OFF");
+       modelLayer.removeAllRenderables();
+       }
+       });
+       } else if (gsIndex > -1){
+       toGsStation(gsIndex);
+       }
+       }
+       // Update the window if we changed anything.
+       if (redrawRequired) {
+       wwd.redraw();
+       }
+       };
+
+       // Listen for mouse clicks.
+       var clickRecognizer = new WorldWind.ClickRecognizer(wwd, handleClick);
+
+       // Listen for taps on mobile devices.
+       var tapRecognizer = new WorldWind.TapRecognizer(wwd, handleClick);*/
 
       var highlightedItems = [];
 
@@ -1876,7 +1991,7 @@ function getGroundStations(groundStations) {
           endExtra();
           var toggleButtons = document.getElementById('buttonToggle');
           toggleButtons.style.display = "none";
-           var groundPosition = pickList.objects[0].position;
+          var groundPosition = pickList.objects[0].position;
           orbitsHoverLayer.removeAllRenderables();
           orbitsHoverLayer.enabled = true;
           $('#follow').text('FOLLOW OFF');
@@ -1946,7 +2061,7 @@ function getGroundStations(groundStations) {
                   }
                 });
               }
-              else if (gsIndex > -1){
+              else if (gsIndex > -1) {
                 toGsStation(gsIndex);
 
               }
@@ -1965,9 +2080,6 @@ function getGroundStations(groundStations) {
       var tapRecognizer = new WorldWind.TapRecognizer(wwd, handleClick);
 
       wwd.redraw();
-
-
-
 
 
       /**
@@ -2075,8 +2187,8 @@ function getGroundStations(groundStations) {
 
               //Populate Info window with proper data
               var position = pickList.objects[p].position,
-                  satIndex = everyCurrentPosition.indexOf(position),
-                  gsIndex = groundStation.indexOf(position);
+                satIndex = everyCurrentPosition.indexOf(position),
+                gsIndex = groundStation.indexOf(position);
               if (satIndex > -1) {
                 populateSatInfo(satData[satIndex]);
                 endExtra();
@@ -2085,7 +2197,7 @@ function getGroundStations(groundStations) {
                 createHoverOrbit(satIndex);
                 updateLLA(everyCurrentPosition[satIndex]);
               }
-              else if (gsIndex > -1){
+              else if (gsIndex > -1) {
                 populateGSInfo(groundStations[gsIndex]);
               }
 
@@ -2107,7 +2219,7 @@ function getGroundStations(groundStations) {
   }
 }
 
-function populateGSInfo(groundStation){
+function populateGSInfo(groundStation) {
   typePlaceholder.textContent = "GROUND STATION";
   namePlaceholder.textContent = groundStation.NAME.toUpperCase();
   ownerPlaceholder.textContent = groundStation.ORGANIZATION.toUpperCase();
@@ -2129,19 +2241,19 @@ function populateGSInfo(groundStation){
   orbitPlaceholder.textContent = "";
 }
 
-function populateSatInfo(satellite){
-    typePlaceholder.textContent = satellite.OBJECT_TYPE;
-    idPlaceholder.textContent = satellite.OBJECT_ID;
-    namePlaceholder.textContent = satellite.OBJECT_NAME;
-    ownerPlaceholder.textContent = satellite.OWNER;
-    launchPlaceholder.textContent = satellite.LAUNCH_SITE;
-    orbitPlaceholder.textContent = satellite.ORBIT_TYPE;
-    inclinationPlaceholder.textContent = roundToTwo(Number(satellite.INCLINATION)) + " °";
-    eccentricityPlaceHolder.textContent = roundToFour(Number(satellite.ECCENTRICITY));
-    apogeeplaceholder.textContent = roundToTwo(Number(satellite.APOGEE)) + " km";
-    perigeeplaceholder.textContent = roundToTwo(Number(satellite.PERIGEE)) + " km";
-    periodPlaceholder.textContent = roundToTwo(Number(satellite.PERIOD)) + " minutes";
-    operationPlaceholder.textContent = satellite.OPERATIONAL_STATUS;
+function populateSatInfo(satellite) {
+  typePlaceholder.textContent = satellite.OBJECT_TYPE;
+  idPlaceholder.textContent = satellite.OBJECT_ID;
+  namePlaceholder.textContent = satellite.OBJECT_NAME;
+  ownerPlaceholder.textContent = satellite.OWNER;
+  launchPlaceholder.textContent = satellite.LAUNCH_SITE;
+  orbitPlaceholder.textContent = satellite.ORBIT_TYPE;
+  inclinationPlaceholder.textContent = roundToTwo(Number(satellite.INCLINATION)) + " °";
+  eccentricityPlaceHolder.textContent = roundToFour(Number(satellite.ECCENTRICITY));
+  apogeeplaceholder.textContent = roundToTwo(Number(satellite.APOGEE)) + " km";
+  perigeeplaceholder.textContent = roundToTwo(Number(satellite.PERIGEE)) + " km";
+  periodPlaceholder.textContent = roundToTwo(Number(satellite.PERIOD)) + " minutes";
+  operationPlaceholder.textContent = satellite.OPERATIONAL_STATUS;
 }
 
 /** projection toggle**/
