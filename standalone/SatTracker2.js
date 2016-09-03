@@ -1047,7 +1047,6 @@ function getGroundStations(groundStations) {
     }
 
     function unclassifiedToggleOff() {
-      // console.log(orbitToggle.unclassifiedP + orbitToggle.unclassifiedR + orbitToggle.unclassifiedD);
       switch (orbitToggle.unclassifiedP + orbitToggle.unclassifiedR + orbitToggle.unclassifiedD) {
         case 0:
           unclassifiedSatLayer.enabled = false;
@@ -1291,12 +1290,9 @@ function getGroundStations(groundStations) {
       var indexCheck = [];
       var indexChecked = null;
       var addCustomSat = function (index) {
-        console.log(index);
         indexChecked = indexCheck.indexOf(index);
-        console.log(indexChecked);
         if (indexChecked === -1) {
           indexCheck.unshift(index);
-          console.log(indexCheck[0]);
 
           var placemarkAttributes = new WorldWind.PlacemarkAttributes(null);
           var highlightPlacemarkAttributes = new WorldWind.PlacemarkAttributes(placemarkAttributes);
@@ -1601,7 +1597,6 @@ function getGroundStations(groundStations) {
         // Move to sat position on click and redefine navigator positioning
       var startFollow;
       var toCurrentPosition = function (index) {
-        //  console.log(index + " from toCurrentPos");
         var toggleButtons = document.getElementById('buttonToggle');
         toggleButtons.style.display = "inline";
         var satPos = everyCurrentPosition[index];
@@ -1782,166 +1777,6 @@ function getGroundStations(groundStations) {
         });
       };
 
-
-      /**
-       * Click-handle
-       *
-       */
-      //Highlighting
-      // Now set up to handle picking.
-      /*  var highlightedItems = [];
-
-       var handleClick = function (recognizer) {
-       // The input argument is either an Event or a TapRecognizer. Both have the same properties for determining
-       // the mouse or tap location.
-       var x = recognizer.clientX,
-       y = recognizer.clientY;
-       console.log(x, y);
-
-       var redrawRequired = highlightedItems.length > 0;
-
-       // De-highlight any highlighted placemarks.
-       for (var h = 0; h < highlightedItems.length; h++) {
-       // var satIndex = null;
-       var toggleButtons = document.getElementById('buttonToggle');
-       toggleButtons.style.display = "none";
-
-       highlightedItems[h].highlighted = false;
-       orbitsHoverLayer.enabled = true;
-       endHoverOrbit();
-       endOrbit();
-       endMesh();
-       endFollow();
-       endExtra();
-       $('#follow').text('FOLLOW OFF');
-       $('#mesh').text('HORIZON OFF');
-       $('#orbit').text('ORBIT OFF');
-       $('#collada').text('3D MODEL OFF');
-
-       //turns off renderables that were turned on by click
-       modelLayer.removeAllRenderables();
-       }
-       highlightedItems = [];
-
-       // Perform the pick. Must first convert from window coordinates to canvas coordinates, which are
-       // relative to the upper left corner of the canvas rather than the upper left corner of the page.
-       var rectRadius = 1,
-       pickPoint = wwd.canvasCoordinates(x, y),
-       pickRectangle = new WorldWind.Rectangle(pickPoint[0] - rectRadius, pickPoint[1] + rectRadius,
-       2 * rectRadius, 2 * rectRadius);
-
-
-       // If only one thing is picked and it is the terrain, tell the world window to go to the picked location.
-       if (pickList.objects.length == 1 && pickList.objects[0].isTerrain) {
-       // satIndex = null;
-       endFollow();
-       endOrbit();
-       endMesh();
-       endHoverOrbit();
-       endExtra();
-       var toggleButtons = document.getElementById('buttonToggle');
-       toggleButtons.style.display = "none";
-       // var groundPosition = pickList.objects[0].position;
-       orbitsHoverLayer.removeAllRenderables();
-       orbitsHoverLayer.enabled = true;
-       $('#follow').text('FOLLOW OFF');
-       $('#mesh').text('HORIZON OFF');
-       $('#orbit').text('ORBIT OFF');
-       $('#collada').text('3D MODEL OFF');
-
-
-       wwd.goTo(new WorldWind.Location(groundPosition.latitude, groundPosition.longitude));
-
-       }
-
-       var pickList = wwd.pickShapesInRegion(pickRectangle);
-       if (pickList.objects.length > 0) {
-       redrawRequired = true;
-       }
-
-       // Highlight the items picked.
-       if (pickList.objects.length > 0) {
-       for (var p = 0; p < pickList.objects.length; p++) {
-       if (pickList.objects[p].isOnTop) {
-       pickList.objects[p].userObject.highlighted = true;
-       highlightedItems.push(pickList.objects[p].userObject);
-       }
-       }
-       }
-
-       if (pickList.objects.length > 0) {
-       console.log(pickList.objects[0].position);
-       var position = pickList.objects[0].position;
-       //console.log(position);
-       var gsIndex = groundStation.indexOf(position);
-       var satIndex = everyCurrentPosition.indexOf(position);
-       endFollow();
-       endMesh();
-       endHoverOrbit();
-       endExtra();
-       endOrbit();
-
-       if (satIndex > -1) {
-       $('#customSat').click(function () {
-       console.log(satIndex);
-       addCustomSat(satIndex);
-       });
-       orbitsHoverLayer.enabled = false;
-       extraData(satIndex);
-       $('#mesh').text("HORIZON ON");
-       meshToCurrentPosition(satIndex);
-       $('#mesh').click(function () {
-       if ($(this).text() == "HORIZON OFF") {
-       $(this).text("HORIZON ON");
-       meshToCurrentPosition(satIndex);
-       }
-       else {
-       $(this).text("HORIZON OFF");
-       endMesh();
-       }
-       });
-       toCurrentPosition(satIndex);
-
-       createOrbit(satIndex);
-       $('#orbit').text('ORBIT ON');
-       $('#orbit').click(function () {
-       if ($(this).text() == "ORBIT OFF") {
-       $(this).text("ORBIT ON");
-       createOrbit(satIndex);
-       }
-       else {
-       $(this).text("ORBIT OFF");
-       endOrbit();
-       }
-       });
-
-       createCollada(satIndex);
-       $('#collada').text('MODEL ON');
-       $('#collada').click(function () {
-       if ($(this).text() == "MODEL OFF") {
-       $(this).text("MODEL ON");
-       createCollada(satIndex);
-       } else {
-       $(this).text("MODEL OFF");
-       modelLayer.removeAllRenderables();
-       }
-       });
-       } else if (gsIndex > -1){
-       toGsStation(gsIndex);
-       }
-       }
-       // Update the window if we changed anything.
-       if (redrawRequired) {
-       wwd.redraw();
-       }
-       };
-
-       // Listen for mouse clicks.
-       var clickRecognizer = new WorldWind.ClickRecognizer(wwd, handleClick);
-
-       // Listen for taps on mobile devices.
-       var tapRecognizer = new WorldWind.TapRecognizer(wwd, handleClick);*/
-
       var highlightedItems = [];
 
       var handleClick = function (recognizer) {
@@ -1983,7 +1818,6 @@ function getGroundStations(groundStations) {
 
         // If only one thing is picked and it is the terrain, tell the world window to go to the picked location.
         if (pickList.objects.length == 1 && pickList.objects[0].isTerrain) {
-          // satIndex = null;
           endFollow();
           endOrbit();
           endMesh();
