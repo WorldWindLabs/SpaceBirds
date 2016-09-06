@@ -439,7 +439,7 @@ function getGroundStations(groundStations) {
       }
     });
 
-    var allLayersOff = function(){
+    var allLayersOff = function () {
       leoSatLayer.enabled = false;
       meoSatLayer.enabled = false;
       heoSatLayer.enabled = false;
@@ -1192,7 +1192,6 @@ function getGroundStations(groundStations) {
       var satNames = [];
       var satOwner = [];
       var satDate = [];
-      //var satYear = [];
       var satSite = [];
       var now = new Date();
       var everyCurrentPosition = [];
@@ -1214,6 +1213,7 @@ function getGroundStations(groundStations) {
           position.longitude,
           position.altitude);
         everyCurrentPosition.push(currentPosition);
+        satSite.push(satData[j].LAUNCH_SITE);
         satNames.push(satData[j].OBJECT_NAME);
         satOwner.push(satData[j].OWNER);
         try {
@@ -1406,6 +1406,11 @@ function getGroundStations(groundStations) {
       }, updateTime * 1.5);
 
 
+
+
+
+
+
       /***
        * HTML interface Controls *
        * ***/
@@ -1415,7 +1420,7 @@ function getGroundStations(groundStations) {
       }
 
       // Create search box for GS's
-      $("#jqxWidget2").jqxComboBox({
+      $("#gsNameSearch").jqxComboBox({
         source: groundStations,
         displayMember: "NAME",
         placeHolder: "GS NAME",
@@ -1424,13 +1429,13 @@ function getGroundStations(groundStations) {
         theme: 'shinyblack'
       });
       // trigger the select event.
-      $("#jqxWidget2").on('select', function (event) {
+      $("#gsNameSearch").on('select', function (event) {
         if (event.args) {
           var item = event.args.item;
           if (item) {
             var labelElement = $("<div></div>");
             labelElement.text("Name: " + item.label);
-            $("#selectionlog2").children().remove();
+            $("#gsNameLog").children().remove();
             var searchGSat = gsNames.indexOf(item.label);
             endFollow();
             toGsStation(searchGSat);
@@ -1441,7 +1446,7 @@ function getGroundStations(groundStations) {
 
       //create satellite site search
       var org = gsOrg.filter(onlyUnique);
-      $("#jqxWidget6").jqxComboBox({
+      $("#gsOrgSearch").jqxComboBox({
         source: org,
         displayMember: "ORGANIZATION",
         placeHolder: "ORGANIZATION",
@@ -1450,13 +1455,13 @@ function getGroundStations(groundStations) {
         theme: 'shinyblack'
       });
       // trigger the select event.
-      $("#jqxWidget6").on('select', function (event) {
+      $("#gsOrgSearch").on('select', function (event) {
         if (event.args) {
           var item = event.args.item;
           if (item) {
             var labelElement = $("<div></div>");
             labelElement.text("Name: " + item.label);
-            $("#selectionlog5").children().remove();
+            $("#gsOrgLog").children().remove();
             for (var i = 0; i < satNum; i += 1) {
               if (gsOrg[i] === item.label) {
                 addCustomGS(i);
@@ -1474,7 +1479,7 @@ function getGroundStations(groundStations) {
 
       //create satellite owner search
       var owner = satOwner.filter(onlyUnique); // returns ['a', 1, 2, '1'];
-      $("#jqxWidget3").jqxComboBox({
+      $("#ownerSearch").jqxComboBox({
         source: owner,
         placeHolder: "OWNER",
         width: 220,
@@ -1483,13 +1488,13 @@ function getGroundStations(groundStations) {
 
       });
       // trigger the select event.
-      $("#jqxWidget3").on('select', function (event) {
+      $("#ownerSearch").on('select', function (event) {
         if (event.args) {
           var item = event.args.item;
           if (item) {
             var labelElement = $("<div></div>");
             labelElement.text("Name: " + item.label);
-            $("#selectionlog3").children().remove();
+            $("#ownerLog").children().remove();
 
             for (var i = 0; i < satNum; i += 1) {
               if (satData[i].OWNER === item.label) {
@@ -1509,23 +1514,23 @@ function getGroundStations(groundStations) {
 
       //create satellite owner search
       var year = satDate.filter(onlyUnique); // returns ['a', 1, 2, '1'];
-      $("#jqxWidget4").jqxComboBox({
+      $("#yearSearch").jqxComboBox({
         //selectedIndex: 0,
         source: year,
-        // displayMember: "LAUNCH YEAR",
+        displayMember: "LAUNCH YEAR",
         placeHolder: "LAUNCH YEAR",
         width: 220,
         height: 30,
         theme: 'shinyblack'
       });
       // trigger the select event.
-      $("#jqxWidget4").on('select', function (event) {
+      $("#yearSearch").on('select', function (event) {
         if (event.args) {
           var item = event.args.item;
           if (item) {
             var labelElement = $("<div></div>");
             labelElement.text("Name: " + item.label);
-            $("#selectionlog4").children().remove();
+            $("#yearLog").children().remove();
 
             for (var i = 0; i < (satNum - 1); i += 1) {
               if (satDate[i] === item.label) {
@@ -1545,7 +1550,7 @@ function getGroundStations(groundStations) {
 
       //create satellite site search
       var site = satSite.filter(onlyUnique);
-      $("#jqxWidget5").jqxComboBox({
+      $("#siteSearch").jqxComboBox({
         //selectedIndex: 0,
         source: site,
         displayMember: "LAUNCH SITE",
@@ -1555,13 +1560,13 @@ function getGroundStations(groundStations) {
         theme: 'shinyblack'
       });
       // trigger the select event.
-      $("#jqxWidget5").on('select', function (event) {
+      $("#siteSearch").on('select', function (event) {
         if (event.args) {
           var item = event.args.item;
           if (item) {
             var labelElement = $("<div></div>");
             labelElement.text("Name: " + item.label);
-            $("#selectionlog5").children().remove();
+            $("#siteLog").children().remove();
             for (var i = 0; i < satNum; i += 1) {
               if (satData[i].LAUNCH_SITE === item.label) {
                 addCustomSat(i);
@@ -1580,7 +1585,7 @@ function getGroundStations(groundStations) {
       });
 
       // Create search box for Satellites
-      $("#jqxWidget").jqxComboBox({
+      $("#nameSearch").jqxComboBox({
         // selectedIndex: 0,
         source: satNames,
         // displayMember: "OBJECT_NAME",
@@ -1591,7 +1596,7 @@ function getGroundStations(groundStations) {
         theme: 'shinyblack'
       });
       // trigger the select event.
-      $("#jqxWidget").on('select', function (event) {
+      $("#nameSearch").on('select', function (event) {
         if (event.args) {
           var item = event.args.item;
           if (item) {
@@ -1599,7 +1604,7 @@ function getGroundStations(groundStations) {
             //valueElement.text("Owner: " + item.value);
             var labelElement = $("<div></div>");
             labelElement.text("Name: " + item.label);
-            $("#selectionlog").children().remove();
+            $("#nameLog").children().remove();
             //$("#selectionlog").append(labelElement);
             //$("#selectionlog").append(valueElement);
             endFollow();
@@ -1656,6 +1661,11 @@ function getGroundStations(groundStations) {
         $('#sliderValueMin').html('Mins: ' + event.args.value);
 
       });
+
+
+
+
+
 
       /****
        * Click-handle functions
