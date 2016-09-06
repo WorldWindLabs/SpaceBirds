@@ -439,6 +439,34 @@ function getGroundStations(groundStations) {
       }
     });
 
+    var allLayersOff = function(){
+      leoSatLayer.enabled = false;
+      meoSatLayer.enabled = false;
+      heoSatLayer.enabled = false;
+      geoSatLayer.enabled = false;
+      unclassifiedSatLayer.enabled = false;
+      leoRocketLayer.enabled = false;
+      meoRocketLayer.enabled = false;
+      heoRocketLayer.enabled = false;
+      geoRocketLayer.enabled = false;
+      unclassifiedRocketLayer.enabled = false;
+      leoDebrisLayer.enabled = false;
+      meoDebrisLayer.enabled = false;
+      heoDebrisLayer.enabled = false;
+      geoDebrisLayer.enabled = false;
+      unclassifiedDebrisLayer.enabled = false;
+
+      $("#payloads").text("PAYLOADS OFF");
+      $("#rockets").text("ROCKETS OFF");
+      $("#debis").text("PAYLOADS OFF");
+      $("#allSats").text("ALL OFF");
+      $("#leo").text("LEO OFF");
+      $("#meo").text("MEO OFF");
+      $("#geo").text("GEO OFF");
+      $("#heo").text("HEO OFF");
+      $("#unclassified").text("UNCLASSIFIED OFF");
+    };
+
     /***
      * Satellites
      */
@@ -1406,6 +1434,7 @@ function getGroundStations(groundStations) {
             var searchGSat = gsNames.indexOf(item.label);
             endFollow();
             toGsStation(searchGSat);
+            allLayersOff();
           }
         }
       });
@@ -1437,6 +1466,8 @@ function getGroundStations(groundStations) {
             window.setTimeout(function () {
               $('#customStatus').text("");
             }, 3000);
+            customGSLayer.enabled = true;
+            $("#customGS").text("CUSTOM GS ON");
           }
         }
       });
@@ -1469,6 +1500,9 @@ function getGroundStations(groundStations) {
             window.setTimeout(function () {
               $('#customStatus').text("");
             }, 3000);
+            allLayersOff();
+            customSatLayer.enabled = true;
+            $("#custom").text("CUSTOM ON");
           }
         }
       });
@@ -1502,6 +1536,9 @@ function getGroundStations(groundStations) {
             window.setTimeout(function () {
               $('#customStatus').text("");
             }, 3000);
+            allLayersOff();
+            customSatLayer.enabled = true;
+            $("#custom").text("CUSTOM ON");
           }
         }
       });
@@ -1511,8 +1548,8 @@ function getGroundStations(groundStations) {
       $("#jqxWidget5").jqxComboBox({
         //selectedIndex: 0,
         source: site,
-        // displayMember: "LAUNCH SITE",
-        placeHolder: "LAUNCH SIGHT",
+        displayMember: "LAUNCH SITE",
+        placeHolder: "LAUNCH SITE",
         width: 220,
         height: 30,
         theme: 'shinyblack'
@@ -1528,12 +1565,16 @@ function getGroundStations(groundStations) {
             for (var i = 0; i < satNum; i += 1) {
               if (satData[i].LAUNCH_SITE === item.label) {
                 addCustomSat(i);
+
               }
             }
             $('#customStatus').text("ADDED " + item.label + " TO CUSTOM LAYER");
             window.setTimeout(function () {
               $('#customStatus').text("");
             }, 3000);
+            allLayersOff();
+            customSatLayer.enabled = true;
+            $("#custom").text("CUSTOM ON");
           }
         }
       });
