@@ -1689,7 +1689,7 @@ function getGroundStations(groundStations) {
       });
       $('#orbitEvent').bind('change', function (event) {
         $('#orbitValue').html(new Date(now.getTime() + event.args.value * 60000));
-        $('#orbitValueMin').html((parseInt(event.args.value/60) % 24) + "h " + (parseInt( event.args.value ) % 60) + "m " + ((event.args.value * 60) % 60) + "s");
+        $('#orbitValueMin').html(event.args.value + "mins");
       });
 
 
@@ -1804,7 +1804,7 @@ function getGroundStations(groundStations) {
       var startOrbit;
       var createOrbit = function (index) {
         startOrbit = window.setInterval(function () {
-          var orbitRange = $('#timeEvent').jqxSlider('value');
+          var orbitRange = $('#orbitEvent').jqxSlider('value');
           var timeSlide = $('#timeEvent').jqxSlider('value');
 
           orbitsLayer.removeAllRenderables();
@@ -1914,6 +1914,7 @@ function getGroundStations(groundStations) {
         // De-highlight any highlighted placemarks.
         for (var h = 0; h < highlightedItems.length; h++) {
           highlightedItems[h].highlighted = false;
+          orbitsLayer.enabled = false;
           endExtra();
           endFollow();
           endOrbit();
@@ -1956,6 +1957,7 @@ function getGroundStations(groundStations) {
           $('#mesh').text('HORIZON OFF');
           $('#orbit').text('ORBIT OFF');
           $('#collada').text('3D MODEL OFF');
+          orbitsLayer.enabled = false;
 
 
           wwd.goTo(new WorldWind.Location(groundPosition.latitude, groundPosition.longitude));
@@ -1973,6 +1975,7 @@ function getGroundStations(groundStations) {
               var position = pickList.objects[p].position,
                 satIndex = everyCurrentPosition.indexOf(position),
                 gsIndex = groundStation.indexOf(position);
+              orbitsLayer.enabled = true;
               if (satIndex > -1) {
                 endHoverOrbit();
                 $('#customSat').click(function () {
