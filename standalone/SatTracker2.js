@@ -1193,31 +1193,32 @@ function getGroundStations(groundStations) {
       var satOwner = [];
       var satDate = [];
       var satSite = [];
+      var satStatus = [];
       var now = new Date();
       var everyCurrentPosition = [];
       for (var j = 0; j < satNum; j++) {
         var currentPosition = null;
         var time = new Date(now.getTime() + i * 60000);
 
-        //var position = getPosition(satellite.twoline2satrec(satData[j].TLE_LINE1, satData[j].TLE_LINE2), time);
         try {
           getVelocity(satellite.twoline2satrec(satData[j].TLE_LINE1, satData[j].TLE_LINE2), time);
           satVelocity[j] = satVelocity;
           var position = getPosition(satellite.twoline2satrec(satData[j].TLE_LINE1, satData[j].TLE_LINE2), time);
         } catch (err) {
-          console.log(err + ' in renderSats, sat ' + j);
+          console.log(err + ' in renderSats, sat ' + j + satPac[j].OBJECT_NAME);
           continue;
         }
 
         currentPosition = new WorldWind.Position(position.latitude,
           position.longitude,
           position.altitude);
+        try {
         everyCurrentPosition.push(currentPosition);
         satSite.push(satData[j].LAUNCH_SITE);
         satNames.push(satData[j].OBJECT_NAME);
         satOwner.push(satData[j].OWNER);
-        try {
-          satDate[j] = satData[j].LAUNCH_DATE.substring(0, 4);
+        satStatus.push(satData[j].OPERATIONAL_STATUS);
+        satDate[j] = satData[j].LAUNCH_DATE.substring(0, 4);
         } catch (err) {
           console.log(err + ' in renderSats, sat ' + j);
           continue;
@@ -1382,16 +1383,16 @@ function getGroundStations(groundStations) {
           return;
 
         for (var indx = 0; indx < satNum; indx += 1) {
-          var timeSlide = $('#jqxsliderEvent2').jqxSlider('value');
+          var timeSlide = $('#timeEvent').jqxSlider('value');
           var now = new Date();
           var time = new Date(now.getTime() + timeSlide * 60000);
-          $('#sliderValue2').html(new Date(now.getTime() + timeSlide * 60000));
+          $('#timeValue').html(new Date(now.getTime() + timeSlide * 60000));
           try {
             var position = getPosition(satellite.twoline2satrec(satData[indx].TLE_LINE1, satData[indx].TLE_LINE2), time);
             satVelocity[indx] = getVelocity(satellite.twoline2satrec(satData[indx].TLE_LINE1, satData[indx].TLE_LINE2), time);
 
           } catch (err) {
-            console.log(err + ' in updatePositions interval, sat ' + indx);
+            console.log(err + ' in updatePositions interval, sat ' + indx + satPac[indx].OBJECT_NAME);
             continue;
           }
           try {
@@ -1404,11 +1405,6 @@ function getGroundStations(groundStations) {
         }
         wwd.redraw();
       }, updateTime * 1.5);
-
-
-
-
-
 
 
       /***
@@ -1584,11 +1580,47 @@ function getGroundStations(groundStations) {
         }
       });
 
+      //create satellite site search
+      var status = satStatus.filter(onlyUnique);
+      console.log(status[0]);
+      $("#statusSearch").jqxComboBox({
+        //selectedIndex: 0,
+        source: status,
+        displayMember: "OPERATIONAL STATUS",
+        placeHolder: "OPERATIONAL STATUS",
+        width: 220,
+        height: 30,
+        theme: 'shinyblack'
+      });
+      // trigger the select event.
+      $("#statusSearch").on('select', function (event) {
+        if (event.args) {
+          var item = event.args.item;
+          if (item) {
+            var labelElement = $("<div></div>");
+            labelElement.text("Name: " + item.label);
+            $("#statusLog").children().remove();
+            for (var i = 0; i < satNum; i += 1) {
+              if (status[i] === item.label) {
+                addCustomSat(i);
+              }
+            }
+            $('#customStatus').text("ADDED " + item.label + " TO CUSTOM LAYER");
+            window.setTimeout(function () {
+              $('#customStatus').text("");
+            }, 3000);
+            allLayersOff();
+            customSatLayer.enabled = true;
+            $("#custom").text("CUSTOM ON");
+          }
+        }
+      });
+
       // Create search box for Satellites
       $("#nameSearch").jqxComboBox({
         // selectedIndex: 0,
         source: satNames,
-        // displayMember: "OBJECT_NAME",
+        displayMember: "OBJECT_NAME",
         //valueMember: "OWNER",
         placeHolder: "SATELLITE NAME",
         width: 220,
@@ -1625,10 +1657,9 @@ function getGroundStations(groundStations) {
         }
       });
 
-
       //Time Control slider
-      $("#jqxsliderEvent2").jqxSlider({
-        theme: 'summer',
+      $("#timeEvent").jqxSlider({
+        theme: 'shinyblack',
         value: 0,
         max: 10080,
         min: -10080,
@@ -1639,31 +1670,61 @@ function getGroundStations(groundStations) {
         minorTicksFrequency: 240,
         showTickLabels: true
       });
-      $('#jqxsliderEvent2').bind('change', function (event) {
-        $('#sliderValue2').html(new Date(now.getTime() + event.args.value * 60000));
+      $('#timeEvent').bind('change', function (event) {
+        $('#timeValue').html(new Date(now.getTime() + event.args.value * 60000));
       });
-      $('#jqxButton').on('click', function () {
-        $('#jqxsliderEvent2').jqxSlider('setValue', 0);
+      $('#timeReset').on('click', function () {
+        $('#timeEvent').jqxSlider('setValue', 0);
       });
 
       //Orbit length/time slider
-      $("#jqxsliderEvent").jqxSlider({
-        theme: 'summer',
+      $("#orbitEvent").jqxSlider({
+        theme: 'shinyblack',
         value: 98,
         max: 10080,
         min: 0,
-        mode: 'fixed',
         ticksFrequency: 1440,
+        width: "viewport",
+        showButtons: false
+      });
+      $('#orbitEvent').bind('change', function (event) {
+        $('#orbitValue').html(new Date(now.getTime() + event.args.value * 60000));
+        $('#orbitValueMin').html((parseInt(event.args.value/60) % 24) + "h " + (parseInt( event.args.value ) % 60) + "m " + ((event.args.value * 60) % 60) + "s");
+      });
+
+
+      $("#yearRangeSlider").jqxSlider({
+        theme: 'shinyblack',
+        mode: "fixed",
+        values: [1958, 2016],
+        min: 1958,
+        max: 2016,
+        step: 1,
+        tooltip: true,
+        ticksFrequency: 5,
+        rangeSlider: true,
         width: "viewport"
       });
-      $('#jqxsliderEvent').bind('change', function (event) {
-        $('#sliderValue').html(new Date(now.getTime() + event.args.value * 60000));
-        $('#sliderValueMin').html('Mins: ' + event.args.value);
-
+      var values = $('#yearRangeSlider').jqxSlider('values');
+      console.log(values);
+      $("#yearRangeSlider").bind('change', function () {
+        allLayersOff();
+        customSatLayer.enabled = true;
+        while (indexCheck.length > 0) {
+          indexCheck.pop();
+        }
+        customSatLayer.removeAllRenderables();
+        $('#customStatus').text("CLEARED CUSTOM LAYER");
+        window.setTimeout(function () {
+          $('#customStatus').text("");
+        }, 2000);
+        $("#custom").text("CUSTOM ON");
+        for (var i = 0; i < satNum; i += 1) {
+          if (satDate[i] >= values[0] && satDate[i] <= values[1]) {
+            addCustomSat(i);
+          }
+        }
       });
-
-
-
 
 
 
@@ -1743,8 +1804,8 @@ function getGroundStations(groundStations) {
       var startOrbit;
       var createOrbit = function (index) {
         startOrbit = window.setInterval(function () {
-          var orbitRange = $('#jqxsliderEvent').jqxSlider('value');
-          var timeSlide = $('#jqxsliderEvent2').jqxSlider('value');
+          var orbitRange = $('#timeEvent').jqxSlider('value');
+          var timeSlide = $('#timeEvent').jqxSlider('value');
 
           orbitsLayer.removeAllRenderables();
           var now = new Date();
@@ -1988,7 +2049,7 @@ function getGroundStations(groundStations) {
       var createHoverOrbit = function (index) {
         startHoverOrbit = window.setInterval(function () {
           orbitsHoverLayer.removeAllRenderables();
-          var timeSlide = $('#jqxsliderEvent2').jqxSlider('value');
+          var timeSlide = $('#timeEvent').jqxSlider('value');
           var now = new Date();
           var pastOrbit = [];
           var futureOrbit = [];

@@ -47,10 +47,10 @@
 
 <!--time bar-->
 <div id="timeBar">
-    <div style="color: white; font-size:20px; text-align: left; right: 650px" id="sliderValue2"></div>
+    <div style="color: white; font-size:20px; text-align: left; right: 650px" id="timeValue"></div>
     <div class="coolLogo" style="color: white; text-align: left">TIME CONTROL
         <button style="font-size:65%; width: 65px; height: 25px; max-height:25px; background-color: #d1d1d1; color: black; padding: 0.1em 0.1em 0.1em 0.1em"
-                id="jqxButton">Current date
+                id="timeReset">Current date
         </button>
         <button style="font-size:55%; width: 65px; height: 25px; max-height:25px; background-color: #d1d1d1; color: black; padding: 0.1em 0.1em 0.1em 0.1em">
         <a href="javascript:toggleRepresentation();" id="representation" style="color: black">3D</a>
@@ -75,7 +75,7 @@
         </span>
         </a>
     </div>
-    <div style="color: white;" id='jqxsliderEvent2'></div>
+    <div style="color: white;" id='timeEvent'></div>
 </div>
 
 
@@ -109,16 +109,20 @@
                     <nav class="panel" style="left: 10px;right: 10px; position: relative; width: 230px">
                         <p class="panel-heading coolLogo" style="color: #d9d9d9">
                             SEARCH
-
                         <div style="width: 100%" id='nameSearch'></div>
                         <div style="width: 100%;font-size: 12px; font-family: Verdana;" id="nameLog"></div>
                         <div style="width: 100%" id='ownerSearch'></div>
                         <div style="width: 100%;font-size: 12px; font-family: Verdana;" id="ownerLog"></div>
-                        <div style="width: 100%" id='yearSearch'></div>
-                        <div style="width: 100%;font-size: 12px; font-family: Verdana;" id="yearLog"></div>
                         <div style="width: 100%" id='siteSearch'></div>
                         <div style="width: 100%;font-size: 12px; font-family: Verdana;" id="siteLog"></div>
-
+                        <div style="width: 100%" id='statusSearch'></div>
+                        <div style="width: 100%;font-size: 12px; font-family: Verdana;" id="statusLog"></div>
+                        <div style="width: 100%" id='yearSearch'></div>
+                        <div style="width: 100%;font-size: 12px; font-family: Verdana;" id="yearLog"></div>
+                        <div style="width: 100%" class="panel-block is-active;" id='yearRangeSlider'></div>
+                        <a id="clearCustom" class="panel-block" style="color: #d9d9d9">
+                            CLEAR CUSTOM
+                        </a>
                     </nav>
                  
                     <nav class="panel" style="left: 10px;right: 10px; position: relative; width: 230px;color: #d9d9d9">
@@ -136,19 +140,16 @@
                         <a id="custom" class="panel-block" style="color: #d9d9d9">
                             CUSTOM OFF
                         </a>
-                        <a id="clearCustom" class="panel-block" style="color: #d9d9d9">
-                            CLEAR CUSTOM
-                        </a>
                     </nav>
 
                     <nav class="panel" style="left: 10px;right: 10px; position: relative; width: 230px">
                         <p class="panel-heading coolLogo" style="color: #d9d9d9">
                           ORBIT RANGE
                         </p>
-                        <a id='jqxsliderEvent' class="panel-block is-active">
+                        <a style="width: 100%;" id='orbitEvent' class="panel-block is-active">
                         </a>
-                        <p style="color: #d9d9d9; font-size:12px" id="sliderValue"></p>
-                        <p style="color: #d9d9d9; font-size:12px" id="sliderValueMin"></p>
+                        <p style="color: #d9d9d9; font-size:10px; width: 100%;" id="orbitValue"></p>
+                        <p style="color: #d9d9d9; font-size:10px; width: 100%;" id="orbitValueMin"></p>
                         <a id="leo" class="panel-block is-active" style="color: #d9d9d9">
                             LEO ON
                         </a>
@@ -184,31 +185,6 @@
                             CLEAR CUSTOM GS
                         </a>
                     </nav>
-
-                <!-- -->
-                <!--<nav class="panel" style="left: 10px;right: 10px; position: relative; width: 230px">-->
-                <!--<p class="panel-heading coolLogo">-->
-                <!--Satellite Controls-->
-                <!--</p>-->
-                <!--<a href="javascript:toggleRepresentation();" id="representation" class="panel-block is-active">-->
-                <!--3D-->
-                <!--</a>-->
-                <!--<a id="follow" class="panel-block">-->
-                <!--FOLLOW OFF-->
-                <!--</a>-->
-                <!--<a id="orbit" class="panel-block">-->
-                <!--ORBIT OFF-->
-                <!--</a>-->
-                <!--<a id="collada" class="panel-block">-->
-                <!--MODEL OFF-->
-                <!--</a>-->
-                <!--<a id="customSat" class="panel-block">-->
-                <!--ADD TO CUSTOM-->
-                <!--</a>-->
-                <!--</nav>-->
-
-                <!--  -->
-                <!--<br/>-->
                  
                     <nav class="panel" style="left: 10px;right: 10px; position: relative; width: 230px">
                         <p class="panel-heading coolLogo" style="color: #d9d9d9">
