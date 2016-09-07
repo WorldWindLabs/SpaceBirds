@@ -45,6 +45,7 @@ layers[2].layer.minActiveAltitude = 5e6;
 
 //custom layers
 var groundStationsLayer = new WorldWind.RenderableLayer();
+var customGSLayer = new WorldWind.RenderableLayer("customGS");
 var shapeLayer = new WorldWind.RenderableLayer();
 var orbitsHoverLayer = new WorldWind.RenderableLayer();
 var modelLayer = new WorldWind.RenderableLayer("Model");
@@ -65,8 +66,24 @@ var meoDebrisLayer = new WorldWind.RenderableLayer("MEO Debris");
 var heoDebrisLayer = new WorldWind.RenderableLayer("HEO Debris");
 var geoDebrisLayer = new WorldWind.RenderableLayer("GEO Debris");
 var unclassifiedDebrisLayer = new WorldWind.RenderableLayer("UnclassifiedDebris");
-var customSatLayer = new WorldWind.RenderableLayer("custom");
-var customGSLayer = new WorldWind.RenderableLayer("customGS");
+
+var leoSatCustom = new WorldWind.RenderableLayer("LEO Payloads");
+var meoSatCustom = new WorldWind.RenderableLayer("MEO Payloads");
+var heoSatCustom = new WorldWind.RenderableLayer("HEO Payloads");
+var geoSatCustom = new WorldWind.RenderableLayer("GEO Payloads");
+var unclassifiedSatCustom = new WorldWind.RenderableLayer("Unclassified Payloads");
+var leoRocketCustom = new WorldWind.RenderableLayer("LEO Rocket Bodies");
+var meoRocketCustom = new WorldWind.RenderableLayer("MEO Rocket Bodies");
+var heoRocketCustom = new WorldWind.RenderableLayer("HEO Rocket Bodies");
+var geoRocketCustom = new WorldWind.RenderableLayer("GEO Rocket Bodies");
+var unclassifiedRocketCustom = new WorldWind.RenderableLayer("Unclassified Rocket Bodies");
+var leoDebrisCustom = new WorldWind.RenderableLayer("LEO Debris");
+var meoDebrisCustom = new WorldWind.RenderableLayer("MEO Debris");
+var heoDebrisCustom = new WorldWind.RenderableLayer("HEO Debris");
+var geoDebrisCustom = new WorldWind.RenderableLayer("GEO Debris");
+var unclassifiedDebrisCustom = new WorldWind.RenderableLayer("UnclassifiedDebris");
+
+
 
 //add custom layers
 wwd.addLayer(customGSLayer);
@@ -91,7 +108,24 @@ wwd.addLayer(unclassifiedDebrisLayer);
 wwd.addLayer(geoRocketLayer);
 wwd.addLayer(geoDebrisLayer);
 wwd.addLayer(geoSatLayer);
-wwd.addLayer(customSatLayer);
+//Custom Layers
+wwd.addLayer(leoSatCustom);
+wwd.addLayer(meoSatCustom);
+wwd.addLayer(heoSatCustom);
+wwd.addLayer(geoSatCustom);
+wwd.addLayer(unclassifiedSatCustom);
+wwd.addLayer(leoRocketCustom);
+wwd.addLayer(meoRocketCustom);
+wwd.addLayer(heoRocketCustom);
+wwd.addLayer(geoRocketCustom);
+wwd.addLayer(unclassifiedRocketCustom);
+wwd.addLayer(leoDebrisCustom);
+wwd.addLayer(meoDebrisCustom);
+wwd.addLayer(heoDebrisCustom);
+wwd.addLayer(geoDebrisCustom);
+wwd.addLayer(unclassifiedDebrisCustom);
+
+
 
 //Latitude, Longitude, and Altitude
 var latitudePlaceholder = document.getElementById('latitude');
@@ -456,16 +490,58 @@ function getGroundStations(groundStations) {
       geoDebrisLayer.enabled = false;
       unclassifiedDebrisLayer.enabled = false;
 
-      $("#payloads").text("PAYLOADS OFF");
-      $("#rockets").text("ROCKETS OFF");
-      $("#debis").text("PAYLOADS OFF");
-      $("#allSats").text("ALL OFF");
-      $("#leo").text("LEO OFF");
-      $("#meo").text("MEO OFF");
-      $("#geo").text("GEO OFF");
-      $("#heo").text("HEO OFF");
-      $("#unclassified").text("UNCLASSIFIED OFF");
+      leoSatCustom.enabled = true;
+      meoSatCustom.enabled = true;
+      heoSatCustom.enabled = true;
+      geoSatCustom.enabled = true;
+      unclassifiedSatCustom.enabled = true;
+      leoRocketCustom.enabled = true;
+      meoRocketCustom.enabled = true;
+      heoRocketCustom.enabled = true;
+      geoRocketCustom.enabled = true;
+      unclassifiedRocketCustom.enabled = true;
+      leoDebrisCustom.enabled = true;
+      meoDebrisCustom.enabled = true;
+      heoDebrisCustom.enabled = true;
+      geoDebrisCustom.enabled = true;
+      unclassifiedDebrisCustom.enabled = true;
     };
+
+    var allCustomOff = function () {
+      leoSatCustom.enabled = false;
+      meoSatCustom.enabled = false;
+      heoSatCustom.enabled = false;
+      geoSatCustom.enabled = false;
+      unclassifiedSatCustom.enabled = false;
+      leoRocketCustom.enabled = false;
+      meoRocketCustom.enabled = false;
+      heoRocketCustom.enabled = false;
+      geoRocketCustom.enabled = false;
+      unclassifiedRocketCustom.enabled = false;
+      leoDebrisCustom.enabled = false;
+      meoDebrisCustom.enabled = false;
+      heoDebrisCustom.enabled = false;
+      geoDebrisCustom.enabled = false;
+      unclassifiedDebrisCustom.enabled = false;
+
+      leoSatLayer.enabled = true;
+      meoSatLayer.enabled = true;
+      heoSatLayer.enabled = true;
+      geoSatLayer.enabled = true;
+      unclassifiedSatLayer.enabled = true;
+      leoRocketLayer.enabled = true;
+      meoRocketLayer.enabled = true;
+      heoRocketLayer.enabled = true;
+      geoRocketLayer.enabled = true;
+      unclassifiedRocketLayer.enabled = true;
+      leoDebrisLayer.enabled = true;
+      meoDebrisLayer.enabled = true;
+      heoDebrisLayer.enabled = true;
+      geoDebrisLayer.enabled = true;
+      unclassifiedDebrisLayer.enabled = true;
+    };
+
+
 
     /***
      * Satellites
@@ -494,8 +570,23 @@ function getGroundStations(groundStations) {
     heoDebrisLayer.enabled = false;
     geoDebrisLayer.enabled = false;
     unclassifiedDebrisLayer.enabled = false;
-    customSatLayer.enabled = false;
     customGSLayer.enabled = false;
+
+    leoSatCustom.enabled = false;
+    leoRocketCustom.enabled = false;
+    leoDebrisCustom.enabled = false;
+    meoSatCustom.enabled = false;
+    meoRocketCustom.enabled = false;
+    meoDebrisCustom.enabled = false;
+    heoSatCustom.enabled = false;
+    heoRocketCustom.enabled = false;
+    heoDebrisCustom.enabled = false;
+    geoSatCustom.enabled = false;
+    geoRocketCustom.enabled = false;
+    geoDebrisCustom.enabled = false;
+    unclassifiedSatCustom.enabled = false;
+    unclassifiedRocketCustom.enabled = false;
+    unclassifiedDebrisCustom.enabled = false;
 
     var satNum = satPac.length;
     //Sat Type toggles
@@ -511,36 +602,54 @@ function getGroundStations(groundStations) {
         $('#heo').text("HEO ON");
         $('#geo').text("GEO ON");
         $('#unclassified').text("UNCLASSIFIED ON");
-        leoSatLayer.enabled = true;
-        leoRocketLayer.enabled = true;
-        leoDebrisLayer.enabled = true;
-        meoSatLayer.enabled = true;
-        meoRocketLayer.enabled = true;
-        meoDebrisLayer.enabled = true;
-        heoSatLayer.enabled = true;
-        heoRocketLayer.enabled = true;
-        heoDebrisLayer.enabled = true;
-        geoSatLayer.enabled = true;
-        geoRocketLayer.enabled = true;
-        geoDebrisLayer.enabled = true;
-        unclassifiedSatLayer.enabled = true;
-        unclassifiedRocketLayer.enabled = true;
-        unclassifiedDebrisLayer.enabled = true;
-        orbitToggle.leoP = 1;
-        orbitToggle.leoR = 3;
-        orbitToggle.leoD = 5;
-        orbitToggle.meoP = 1;
-        orbitToggle.meoR = 3;
-        orbitToggle.meoD = 5;
-        orbitToggle.heoP = 1;
-        orbitToggle.heoR = 3;
-        orbitToggle.heoD = 5;
-        orbitToggle.geoP = 1;
-        orbitToggle.geoR = 3;
-        orbitToggle.geoD = 5;
-        orbitToggle.unclassifiedP = 1;
-        orbitToggle.unclassifiedR = 3;
-        orbitToggle.unclassifiedD = 5;
+        if ($("#custom").text() === "CUSTOM ON"){
+          leoSatCustom.enabled = true;
+          leoRocketCustom.enabled = true;
+          leoDebrisCustom.enabled = true;
+          meoSatCustom.enabled = true;
+          meoRocketCustom.enabled = true;
+          meoDebrisCustom.enabled = true;
+          heoSatCustom.enabled = true;
+          heoRocketCustom.enabled = true;
+          heoDebrisCustom.enabled = true;
+          geoSatCustom.enabled = true;
+          geoRocketCustom.enabled = true;
+          geoDebrisCustom.enabled = true;
+          unclassifiedSatCustom.enabled = true;
+          unclassifiedRocketCustom.enabled = true;
+          unclassifiedDebrisCustom.enabled = true;
+        } else {
+          leoSatLayer.enabled = true;
+          leoRocketLayer.enabled = true;
+          leoDebrisLayer.enabled = true;
+          meoSatLayer.enabled = true;
+          meoRocketLayer.enabled = true;
+          meoDebrisLayer.enabled = true;
+          heoSatLayer.enabled = true;
+          heoRocketLayer.enabled = true;
+          heoDebrisLayer.enabled = true;
+          geoSatLayer.enabled = true;
+          geoRocketLayer.enabled = true;
+          geoDebrisLayer.enabled = true;
+          unclassifiedSatLayer.enabled = true;
+          unclassifiedRocketLayer.enabled = true;
+          unclassifiedDebrisLayer.enabled = true;
+        }
+          orbitToggle.leoP = 1;
+          orbitToggle.leoR = 3;
+          orbitToggle.leoD = 5;
+          orbitToggle.meoP = 1;
+          orbitToggle.meoR = 3;
+          orbitToggle.meoD = 5;
+          orbitToggle.heoP = 1;
+          orbitToggle.heoR = 3;
+          orbitToggle.heoD = 5;
+          orbitToggle.geoP = 1;
+          orbitToggle.geoR = 3;
+          orbitToggle.geoD = 5;
+          orbitToggle.unclassifiedP = 1;
+          orbitToggle.unclassifiedR = 3;
+          orbitToggle.unclassifiedD = 5;
         return orbitToggle;
       } else {
         $(this).text("ALL OFF");
@@ -564,6 +673,23 @@ function getGroundStations(groundStations) {
         unclassifiedSatLayer.enabled = false;
         unclassifiedRocketLayer.enabled = false;
         unclassifiedDebrisLayer.enabled = false;
+
+        leoSatCustom.enabled = false;
+        leoRocketCustom.enabled = false;
+        leoDebrisCustom.enabled = false;
+        meoSatCustom.enabled = false;
+        meoRocketCustom.enabled = false;
+        meoDebrisCustom.enabled = false;
+        heoSatCustom.enabled = false;
+        heoRocketCustom.enabled = false;
+        heoDebrisCustom.enabled = false;
+        geoSatCustom.enabled = false;
+        geoRocketCustom.enabled = false;
+        geoDebrisCustom.enabled = false;
+        unclassifiedSatCustom.enabled = false;
+        unclassifiedRocketCustom.enabled = false;
+        unclassifiedDebrisCustom.enabled = false;
+
         orbitToggle.leoP = 0;
         orbitToggle.leoR = 0;
         orbitToggle.leoD = 0;
@@ -613,6 +739,22 @@ function getGroundStations(groundStations) {
           geoDebrisLayer.enabled = false;
           unclassifiedRocketLayer.enabled = false;
           unclassifiedDebrisLayer.enabled = false;
+
+          leoSatCustom.enabled = false;
+          leoRocketCustom.enabled = false;
+          leoDebrisCustom.enabled = false;
+          meoSatCustom.enabled = false;
+          meoRocketCustom.enabled = false;
+          meoDebrisCustom.enabled = false;
+          heoSatCustom.enabled = false;
+          heoRocketCustom.enabled = false;
+          heoDebrisCustom.enabled = false;
+          geoSatCustom.enabled = false;
+          geoRocketCustom.enabled = false;
+          geoDebrisCustom.enabled = false;
+          unclassifiedSatCustom.enabled = false;
+          unclassifiedRocketCustom.enabled = false;
+          unclassifiedDebrisCustom.enabled = false;
         }
         $('#allSats').text("ALL OFF");
         $('#leo').text("LEO ON");
@@ -620,11 +762,19 @@ function getGroundStations(groundStations) {
         $('#heo').text("HEO ON");
         $('#geo').text("GEO ON");
         $('#unclassified').text("UNCLASSIFIED ON");
-        leoSatLayer.enabled = true;
-        meoSatLayer.enabled = true;
-        heoSatLayer.enabled = true;
-        geoSatLayer.enabled = true;
-        unclassifiedSatLayer.enabled = true;
+        if ($("#custom").text() === "CUSTOM ON"){
+          leoSatCustom.enabled = true;
+          meoSatCustom.enabled = true;
+          heoSatCustom.enabled = true;
+          geoSatCustom.enabled = true;
+          unclassifiedSatCustom.enabled = true;
+        } else {
+          leoSatLayer.enabled = true;
+          meoSatLayer.enabled = true;
+          heoSatLayer.enabled = true;
+          geoSatLayer.enabled = true;
+          unclassifiedSatLayer.enabled = true;
+        }
         orbitToggle.leoP = 1;
         orbitToggle.meoP = 1;
         orbitToggle.heoP = 1;
@@ -643,6 +793,12 @@ function getGroundStations(groundStations) {
         heoSatLayer.enabled = false;
         geoSatLayer.enabled = false;
         unclassifiedSatLayer.enabled = false;
+
+        leoSatCustom.enabled = false;
+        meoSatCustom.enabled = false;
+        heoSatCustom.enabled = false;
+        geoSatCustom.enabled = false;
+        unclassifiedSatCustom.enabled = false;
 
         return orbitToggle;
       }
@@ -676,6 +832,21 @@ function getGroundStations(groundStations) {
           geoDebrisLayer.enabled = false;
           unclassifiedSatLayer.enabled = false;
           unclassifiedDebrisLayer.enabled = false;
+          leoSatCustom.enabled = false;
+          leoRocketCustom.enabled = false;
+          leoDebrisCustom.enabled = false;
+          meoSatCustom.enabled = false;
+          meoRocketCustom.enabled = false;
+          meoDebrisCustom.enabled = false;
+          heoSatCustom.enabled = false;
+          heoRocketCustom.enabled = false;
+          heoDebrisCustom.enabled = false;
+          geoSatCustom.enabled = false;
+          geoRocketCustom.enabled = false;
+          geoDebrisCustom.enabled = false;
+          unclassifiedSatCustom.enabled = false;
+          unclassifiedRocketCustom.enabled = false;
+          unclassifiedDebrisCustom.enabled = false;
         }
         $('#allSats').text("ALL OFF");
         $('#leo').text("LEO ON");
@@ -683,11 +854,19 @@ function getGroundStations(groundStations) {
         $('#heo').text("HEO ON");
         $('#geo').text("GEO ON");
         $('#unclassified').text("UNCLASSIFIED ON");
-        leoRocketLayer.enabled = true;
-        meoRocketLayer.enabled = true;
-        heoRocketLayer.enabled = true;
-        geoRocketLayer.enabled = true;
-        unclassifiedRocketLayer.enabled = true;
+        if ($("#custom").text() === "CUSTOM ON"){
+          leoRocketCustom.enabled = true;
+          meoRocketCustom.enabled = true;
+          heoRocketCustom.enabled = true;
+          geoRocketCustom.enabled = true;
+          unclassifiedRocketCustom.enabled = true;
+        } else {
+          leoRocketLayer.enabled = true;
+          meoRocketLayer.enabled = true;
+          heoRocketLayer.enabled = true;
+          geoRocketLayer.enabled = true;
+          unclassifiedRocketLayer.enabled = true;
+        }
         orbitToggle.leoR = 3;
         orbitToggle.meoR = 3;
         orbitToggle.heoR = 3;
@@ -706,6 +885,11 @@ function getGroundStations(groundStations) {
         heoRocketLayer.enabled = false;
         geoRocketLayer.enabled = false;
         unclassifiedRocketLayer.enabled = false;
+        leoRocketCustom.enabled = false;
+        meoRocketCustom.enabled = false;
+        heoRocketCustom.enabled = false;
+        geoRocketCustom.enabled = false;
+        unclassifiedRocketCustom.enabled = false;
         return orbitToggle;
       }
     });
@@ -745,11 +929,19 @@ function getGroundStations(groundStations) {
         $('#heo').text("HEO ON");
         $('#geo').text("GEO ON");
         $('#unclassified').text("UNCLASSIFIED ON");
-        leoDebrisLayer.enabled = true;
-        meoDebrisLayer.enabled = true;
-        heoDebrisLayer.enabled = true;
-        geoDebrisLayer.enabled = true;
-        unclassifiedDebrisLayer.enabled = true;
+        if ($("#custom").text() === "CUSTOM ON"){
+          leoDebrisCustom.enabled = true;
+          meoDebrisCustom.enabled = true;
+          heoDebrisCustom.enabled = true;
+          geoDebrisCustom.enabled = true;
+          unclassifiedDebrisCustom.enabled = true;
+        } else {
+          leoDebrisLayer.enabled = true;
+          meoDebrisLayer.enabled = true;
+          heoDebrisLayer.enabled = true;
+          geoDebrisLayer.enabled = true;
+          unclassifiedDebrisLayer.enabled = true;
+        }
         orbitToggle.leoD = 5;
         orbitToggle.meoD = 5;
         orbitToggle.heoD = 5;
@@ -768,74 +960,173 @@ function getGroundStations(groundStations) {
         heoDebrisLayer.enabled = false;
         geoDebrisLayer.enabled = false;
         unclassifiedDebrisLayer.enabled = false;
+        leoDebrisCustom.enabled = false;
+        meoDebrisCustom.enabled = false;
+        heoDebrisCustom.enabled = false;
+        geoDebrisCustom.enabled = false;
+        unclassifiedDebrisCustom.enabled = false;
         return orbitToggle;
       }
     });
 
+
     //Switch Board for Orbit Types
     function leoToggleOn() {
-      switch (orbitToggle.leoP + orbitToggle.leoR + orbitToggle.leoD) {
-        case 1:
-          leoSatLayer.enabled = true;
-          break;
-        case 3:
-          leoRocketLayer.enabled = true;
-          break;
-        case 5:
-          leoDebrisLayer.enabled = true;
-          break;
-        case 4:
-          leoSatLayer.enabled = true;
-          leoRocketLayer.enabled = true;
-          break;
-        case 6:
-          leoSatLayer.enabled = true;
-          leoDebrisLayer.enabled = true;
-          break;
-        case 8:
-          leoRocketLayer.enabled = true;
-          leoDebrisLayer.enabled = true;
-          break;
-        case 9:
-          leoSatLayer.enabled = true;
-          leoRocketLayer.enabled = true;
-          leoDebrisLayer.enabled = true;
-          break;
+      if ($("#custom").text() === "CUSTOM ON"){
+        switch (orbitToggle.leoP + orbitToggle.leoR + orbitToggle.leoD) {
+          case 1:
+            leoSatCustom.enabled = true;
+            break;
+          case 3:
+            leoRocketCustom.enabled = true;
+            break;
+          case 5:
+            leoDebrisCustom.enabled = true;
+            break;
+          case 4:
+            leoSatCustom.enabled = true;
+            leoRocketCustom.enabled = true;
+            break;
+          case 6:
+            leoSatCustom.enabled = true;
+            leoDebrisCustom.enabled = true;
+            break;
+          case 8:
+            leoRocketCustom.enabled = true;
+            leoDebrisCustom.enabled = true;
+            break;
+          case 9:
+            leoSatCustom.enabled = true;
+            leoRocketCustom.enabled = true;
+            leoDebrisCustom.enabled = true;
+            break;
+        }
+      } else {
+        switch (orbitToggle.leoP + orbitToggle.leoR + orbitToggle.leoD) {
+          case 1:
+            leoSatLayer.enabled = true;
+            break;
+          case 3:
+            leoRocketLayer.enabled = true;
+            break;
+          case 5:
+            leoDebrisLayer.enabled = true;
+            break;
+          case 4:
+            leoSatLayer.enabled = true;
+            leoRocketLayer.enabled = true;
+            break;
+          case 6:
+            leoSatLayer.enabled = true;
+            leoDebrisLayer.enabled = true;
+            break;
+          case 8:
+            leoRocketLayer.enabled = true;
+            leoDebrisLayer.enabled = true;
+            break;
+          case 9:
+            leoSatLayer.enabled = true;
+            leoRocketLayer.enabled = true;
+            leoDebrisLayer.enabled = true;
+            break;
+        }
       }
     }
 
     function meoToggleOn() {
-      switch (orbitToggle.meoP + orbitToggle.meoR + orbitToggle.meoD) {
-        case 1:
-          meoSatLayer.enabled = true;
-          break;
-        case 3:
-          meoRocketLayer.enabled = true;
-          break;
-        case 5:
-          meoDebrisLayer.enabled = true;
-          break;
-        case 4:
-          meoSatLayer.enabled = true;
-          meoRocketLayer.enabled = true;
-          break;
-        case 6:
-          meoSatLayer.enabled = true;
-          meoDebrisLayer.enabled = true;
-          break;
-        case 8:
-          meoRocketLayer.enabled = true;
-          meoDebrisLayer.enabled = true;
-          break;
-        case 9:
-          meoSatLayer.enabled = true;
-          meoRocketLayer.enabled = true;
-          meoDebrisLayer.enabled = true;
-          break;
+      if ($("#custom").text() === "CUSTOM ON") {
+        switch (orbitToggle.meoP + orbitToggle.meoR + orbitToggle.meoD) {
+          case 1:
+            meoSatCustom.enabled = true;
+            break;
+          case 3:
+            meoRocketCustom.enabled = true;
+            break;
+          case 5:
+            meoDebrisCustom.enabled = true;
+            break;
+          case 4:
+            meoSatCustom.enabled = true;
+            meoRocketCustom.enabled = true;
+            break;
+          case 6:
+            meoSatCustom.enabled = true;
+            meoDebrisCustom.enabled = true;
+            break;
+          case 8:
+            meoRocketCustom.enabled = true;
+            meoDebrisCustom.enabled = true;
+            break;
+          case 9:
+            meoSatCustom.enabled = true;
+            meoRocketCustom.enabled = true;
+            meoDebrisCustom.enabled = true;
+            break;
+        }
+      } else {
+        switch (orbitToggle.meoP + orbitToggle.meoR + orbitToggle.meoD) {
+          case 1:
+            meoSatLayer.enabled = true;
+            break;
+          case 3:
+            meoRocketLayer.enabled = true;
+            break;
+          case 5:
+            meoDebrisLayer.enabled = true;
+            break;
+          case 4:
+            meoSatLayer.enabled = true;
+            meoRocketLayer.enabled = true;
+            break;
+          case 6:
+            meoSatLayer.enabled = true;
+            meoDebrisLayer.enabled = true;
+            break;
+          case 8:
+            meoRocketLayer.enabled = true;
+            meoDebrisLayer.enabled = true;
+            break;
+          case 9:
+            meoSatLayer.enabled = true;
+            meoRocketLayer.enabled = true;
+            meoDebrisLayer.enabled = true;
+            break;
+        }
+
       }
     }
 
     function heoToggleOn() {
+      if ($("#custom").text() === "CUSTOM ON") {
+        switch (orbitToggle.heoP + orbitToggle.heoR + orbitToggle.heoD) {
+          case 1:
+            heoSatCustom.enabled = true;
+            break;
+          case 3:
+            heoRocketCustom.enabled = true;
+            break;
+          case 5:
+            heoDebrisCustom.enabled = true;
+            break;
+          case 4:
+            heoSatCustom.enabled = true;
+            heoRocketCustom.enabled = true;
+            break;
+          case 6:
+            heoSatCustom.enabled = true;
+            heoDebrisCustom.enabled = true;
+            break;
+          case 8:
+            heoRocketCustom.enabled = true;
+            heoDebrisCustom.enabled = true;
+            break;
+          case 9:
+            heoSatCustom.enabled = true;
+            heoRocketCustom.enabled = true;
+            heoDebrisCustom.enabled = true;
+            break;
+        }
+      } else {
       switch (orbitToggle.heoP + orbitToggle.heoR + orbitToggle.heoD) {
         case 1:
           heoSatLayer.enabled = true;
@@ -865,253 +1156,503 @@ function getGroundStations(groundStations) {
           break;
       }
     }
+    }
 
     function geoToggleOn() {
-      switch (orbitToggle.geoP + orbitToggle.geoR + orbitToggle.geoD) {
-        case 1:
-          geoSatLayer.enabled = true;
-          break;
-        case 3:
-          geoRocketLayer.enabled = true;
-          break;
-        case 5:
-          geoDebrisLayer.enabled = true;
-          break;
-        case 4:
-          geoSatLayer.enabled = true;
-          geoRocketLayer.enabled = true;
-          break;
-        case 6:
-          geoSatLayer.enabled = true;
-          geoDebrisLayer.enabled = true;
-          break;
-        case 8:
-          geoRocketLayer.enabled = true;
-          geoDebrisLayer.enabled = true;
-          break;
-        case 9:
-          geoSatLayer.enabled = true;
-          geoRocketLayer.enabled = true;
-          geoDebrisLayer.enabled = true;
-          break;
+      if ($("#custom").text() === "CUSTOM ON") {
+        switch (orbitToggle.geoP + orbitToggle.geoR + orbitToggle.geoD) {
+          case 1:
+            geoSatCustom.enabled = true;
+            break;
+          case 3:
+            geoRocketCustom.enabled = true;
+            break;
+          case 5:
+            geoDebrisCustom.enabled = true;
+            break;
+          case 4:
+            geoSatCustom.enabled = true;
+            geoRocketCustom.enabled = true;
+            break;
+          case 6:
+            geoSatCustom.enabled = true;
+            geoDebrisCustom.enabled = true;
+            break;
+          case 8:
+            geoRocketCustom.enabled = true;
+            geoDebrisCustom.enabled = true;
+            break;
+          case 9:
+            geoSatCustom.enabled = true;
+            geoRocketCustom.enabled = true;
+            geoDebrisCustom.enabled = true;
+            break;
+        }
+      } else {
+        switch (orbitToggle.geoP + orbitToggle.geoR + orbitToggle.geoD) {
+          case 1:
+            geoSatLayer.enabled = true;
+            break;
+          case 3:
+            geoRocketLayer.enabled = true;
+            break;
+          case 5:
+            geoDebrisLayer.enabled = true;
+            break;
+          case 4:
+            geoSatLayer.enabled = true;
+            geoRocketLayer.enabled = true;
+            break;
+          case 6:
+            geoSatLayer.enabled = true;
+            geoDebrisLayer.enabled = true;
+            break;
+          case 8:
+            geoRocketLayer.enabled = true;
+            geoDebrisLayer.enabled = true;
+            break;
+          case 9:
+            geoSatLayer.enabled = true;
+            geoRocketLayer.enabled = true;
+            geoDebrisLayer.enabled = true;
+            break;
+        }
       }
     }
 
     function unclassifiedToggleOn() {
-      switch (orbitToggle.unclassifiedP + orbitToggle.unclassifiedR + orbitToggle.unclassifiedD) {
-        case 1:
-          unclassifiedSatLayer.enabled = true;
-          break;
-        case 3:
-          unclassifiedRocketLayer.enabled = true;
-          break;
-        case 5:
-          unclassifiedDebrisLayer.enabled = true;
-          break;
-        case 4:
-          unclassifiedSatLayer.enabled = true;
-          unclassifiedRocketLayer.enabled = true;
-          break;
-        case 6:
-          unclassifiedSatLayer.enabled = true;
-          unclassifiedDebrisLayer.enabled = true;
-          break;
-        case 8:
-          unclassifiedRocketLayer.enabled = true;
-          unclassifiedDebrisLayer.enabled = true;
-          break;
-        case 9:
-          unclassifiedSatLayer.enabled = true;
-          unclassifiedRocketLayer.enabled = true;
-          unclassifiedDebrisLayer.enabled = true;
-          break;
+      if ($("#custom").text() === "CUSTOM ON") {
+        switch (orbitToggle.unclassifiedP + orbitToggle.unclassifiedR + orbitToggle.unclassifiedD) {
+          case 1:
+            unclassifiedSatCustom.enabled = true;
+            break;
+          case 3:
+            unclassifiedRocketCustom.enabled = true;
+            break;
+          case 5:
+            unclassifiedDebrisCustom.enabled = true;
+            break;
+          case 4:
+            unclassifiedSatCustom.enabled = true;
+            unclassifiedRocketCustom.enabled = true;
+            break;
+          case 6:
+            unclassifiedSatCustom.enabled = true;
+            unclassifiedDebrisCustom.enabled = true;
+            break;
+          case 8:
+            unclassifiedRocketCustom.enabled = true;
+            unclassifiedDebrisCustom.enabled = true;
+            break;
+          case 9:
+            unclassifiedSatCustom.enabled = true;
+            unclassifiedRocketCustom.enabled = true;
+            unclassifiedDebrisCustom.enabled = true;
+            break;
+        }
+      } else {
+        switch (orbitToggle.unclassifiedP + orbitToggle.unclassifiedR + orbitToggle.unclassifiedD) {
+          case 1:
+            unclassifiedSatLayer.enabled = true;
+            break;
+          case 3:
+            unclassifiedRocketLayer.enabled = true;
+            break;
+          case 5:
+            unclassifiedDebrisLayer.enabled = true;
+            break;
+          case 4:
+            unclassifiedSatLayer.enabled = true;
+            unclassifiedRocketLayer.enabled = true;
+            break;
+          case 6:
+            unclassifiedSatLayer.enabled = true;
+            unclassifiedDebrisLayer.enabled = true;
+            break;
+          case 8:
+            unclassifiedRocketLayer.enabled = true;
+            unclassifiedDebrisLayer.enabled = true;
+            break;
+          case 9:
+            unclassifiedSatLayer.enabled = true;
+            unclassifiedRocketLayer.enabled = true;
+            unclassifiedDebrisLayer.enabled = true;
+            break;
+        }
       }
     }
 
     function leoToggleOff() {
-      switch (orbitToggle.leoP + orbitToggle.leoR + orbitToggle.leoD) {
-        case 0:
-          leoSatLayer.enabled = false;
-          leoRocketLayer.enabled = false;
-          leoDebrisLayer.enabled = false;
-          break;
-        case 1:
-          leoSatLayer.enabled = false;
-          break;
-        case 3:
-          leoRocketLayer.enabled = false;
-          break;
-        case 5:
-          leoDebrisLayer.enabled = false;
+      if ($("#custom").text() === "CUSTOM ON") {
+        switch (orbitToggle.leoP + orbitToggle.leoR + orbitToggle.leoD) {
+          case 0:
+            leoSatCustom.enabled = false;
+            leoRocketCustom.enabled = false;
+            leoDebrisCustom.enabled = false;
+            break;
+          case 1:
+            leoSatCustom.enabled = false;
+            break;
+          case 3:
+            leoRocketCustom.enabled = false;
+            break;
+          case 5:
+            leoDebrisCustom.enabled = false;
 
-          break;
-        case 4:
-          leoSatLayer.enabled = false;
-          leoRocketLayer.enabled = false;
+            break;
+          case 4:
+            leoSatCustom.enabled = false;
+            leoRocketCustom.enabled = false;
 
-          break;
-        case 6:
-          leoSatLayer.enabled = false;
-          leoDebrisLayer.enabled = false;
-          break;
-        case 8:
-          leoRocketLayer.enabled = false;
-          leoDebrisLayer.enabled = false;
-          break;
-        case 9:
-          leoSatLayer.enabled = false;
-          leoRocketLayer.enabled = false;
-          leoDebrisLayer.enabled = false;
-          break;
+            break;
+          case 6:
+            leoSatCustom.enabled = false;
+            leoDebrisCustom.enabled = false;
+            break;
+          case 8:
+            leoRocketCustom.enabled = false;
+            leoDebrisCustom.enabled = false;
+            break;
+          case 9:
+            leoSatCustom.enabled = false;
+            leoRocketCustom.enabled = false;
+            leoDebrisCustom.enabled = false;
+            break;
+        }
+      } else {
+        switch (orbitToggle.leoP + orbitToggle.leoR + orbitToggle.leoD) {
+          case 0:
+            leoSatLayer.enabled = false;
+            leoRocketLayer.enabled = false;
+            leoDebrisLayer.enabled = false;
+            break;
+          case 1:
+            leoSatLayer.enabled = false;
+            break;
+          case 3:
+            leoRocketLayer.enabled = false;
+            break;
+          case 5:
+            leoDebrisLayer.enabled = false;
+
+            break;
+          case 4:
+            leoSatLayer.enabled = false;
+            leoRocketLayer.enabled = false;
+
+            break;
+          case 6:
+            leoSatLayer.enabled = false;
+            leoDebrisLayer.enabled = false;
+            break;
+          case 8:
+            leoRocketLayer.enabled = false;
+            leoDebrisLayer.enabled = false;
+            break;
+          case 9:
+            leoSatLayer.enabled = false;
+            leoRocketLayer.enabled = false;
+            leoDebrisLayer.enabled = false;
+            break;
+        }
       }
     }
 
     function meoToggleOff() {
-      switch (orbitToggle.meoP + orbitToggle.meoR + orbitToggle.meoD) {
-        case 0:
-          meoSatLayer.enabled = false;
-          meoRocketLayer.enabled = false;
-          meoDebrisLayer.enabled = false;
-          break;
-        case 1:
-          meoSatLayer.enabled = false;
-          break;
-        case 3:
-          meoRocketLayer.enabled = false;
-          break;
-        case 5:
-          meoDebrisLayer.enabled = false;
+      if ($("#custom").text() === "CUSTOM ON") {
+        switch (orbitToggle.meoP + orbitToggle.meoR + orbitToggle.meoD) {
+          case 0:
+            meoSatCustom.enabled = false;
+            meoRocketCustom.enabled = false;
+            meoDebrisCustom.enabled = false;
+            break;
+          case 1:
+            meoSatCustom.enabled = false;
+            break;
+          case 3:
+            meoRocketCustom.enabled = false;
+            break;
+          case 5:
+            meoDebrisCustom.enabled = false;
 
-          break;
-        case 4:
-          meoSatLayer.enabled = false;
-          meoRocketLayer.enabled = false;
+            break;
+          case 4:
+            meoSatCustom.enabled = false;
+            meoRocketCustom.enabled = false;
 
-          break;
-        case 6:
-          meoSatLayer.enabled = false;
-          meoDebrisLayer.enabled = false;
-          break;
-        case 8:
-          meoRocketLayer.enabled = false;
-          meoDebrisLayer.enabled = false;
-          break;
-        case 9:
-          meoSatLayer.enabled = false;
-          meoRocketLayer.enabled = false;
-          meoDebrisLayer.enabled = false;
-          break;
+            break;
+          case 6:
+            meoSatCustom.enabled = false;
+            meoDebrisCustom.enabled = false;
+            break;
+          case 8:
+            meoRocketCustom.enabled = false;
+            meoDebrisCustom.enabled = false;
+            break;
+          case 9:
+            meoSatCustom.enabled = false;
+            meoRocketCustom.enabled = false;
+            meoDebrisCustom.enabled = false;
+            break;
+        }
+      } else {
+        switch (orbitToggle.meoP + orbitToggle.meoR + orbitToggle.meoD) {
+          case 0:
+            meoSatLayer.enabled = false;
+            meoRocketLayer.enabled = false;
+            meoDebrisLayer.enabled = false;
+            break;
+          case 1:
+            meoSatLayer.enabled = false;
+            break;
+          case 3:
+            meoRocketLayer.enabled = false;
+            break;
+          case 5:
+            meoDebrisLayer.enabled = false;
+
+            break;
+          case 4:
+            meoSatLayer.enabled = false;
+            meoRocketLayer.enabled = false;
+
+            break;
+          case 6:
+            meoSatLayer.enabled = false;
+            meoDebrisLayer.enabled = false;
+            break;
+          case 8:
+            meoRocketLayer.enabled = false;
+            meoDebrisLayer.enabled = false;
+            break;
+          case 9:
+            meoSatLayer.enabled = false;
+            meoRocketLayer.enabled = false;
+            meoDebrisLayer.enabled = false;
+            break;
+        }
       }
     }
 
     function heoToggleOff() {
-      switch (orbitToggle.heoP + orbitToggle.heoR + orbitToggle.heoD) {
-        case 0:
-          heoSatLayer.enabled = false;
-          heoRocketLayer.enabled = false;
-          heoDebrisLayer.enabled = false;
-          break;
-        case 1:
-          heoSatLayer.enabled = false;
-          break;
-        case 3:
-          heoRocketLayer.enabled = false;
-          break;
-        case 5:
-          heoDebrisLayer.enabled = false;
+      if ($("#custom").text() === "CUSTOM ON") {
+        switch (orbitToggle.heoP + orbitToggle.heoR + orbitToggle.heoD) {
+          case 0:
+            heoSatCustom.enabled = false;
+            heoRocketCustom.enabled = false;
+            heoDebrisCustom.enabled = false;
+            break;
+          case 1:
+            heoSatCustom.enabled = false;
+            break;
+          case 3:
+            heoRocketCustom.enabled = false;
+            break;
+          case 5:
+            heoDebrisCustom.enabled = false;
 
-          break;
-        case 4:
-          heoSatLayer.enabled = false;
-          heoRocketLayer.enabled = false;
-          break;
-        case 6:
-          heoSatLayer.enabled = false;
-          heoDebrisLayer.enabled = false;
-          break;
-        case 8:
-          heoRocketLayer.enabled = false;
-          heoDebrisLayer.enabled = false;
-          break;
-        case 9:
-          heoSatLayer.enabled = false;
-          heoRocketLayer.enabled = false;
-          heoDebrisLayer.enabled = false;
-          break;
+            break;
+          case 4:
+            heoSatCustom.enabled = false;
+            heoRocketCustom.enabled = false;
+            break;
+          case 6:
+            heoSatCustom.enabled = false;
+            heoDebrisCustom.enabled = false;
+            break;
+          case 8:
+            heoRocketCustom.enabled = false;
+            heoDebrisCustom.enabled = false;
+            break;
+          case 9:
+            heoSatCustom.enabled = false;
+            heoRocketCustom.enabled = false;
+            heoDebrisCustom.enabled = false;
+            break;
+        }
+      } else {
+        switch (orbitToggle.heoP + orbitToggle.heoR + orbitToggle.heoD) {
+          case 0:
+            heoSatLayer.enabled = false;
+            heoRocketLayer.enabled = false;
+            heoDebrisLayer.enabled = false;
+            break;
+          case 1:
+            heoSatLayer.enabled = false;
+            break;
+          case 3:
+            heoRocketLayer.enabled = false;
+            break;
+          case 5:
+            heoDebrisLayer.enabled = false;
+
+            break;
+          case 4:
+            heoSatLayer.enabled = false;
+            heoRocketLayer.enabled = false;
+            break;
+          case 6:
+            heoSatLayer.enabled = false;
+            heoDebrisLayer.enabled = false;
+            break;
+          case 8:
+            heoRocketLayer.enabled = false;
+            heoDebrisLayer.enabled = false;
+            break;
+          case 9:
+            heoSatLayer.enabled = false;
+            heoRocketLayer.enabled = false;
+            heoDebrisLayer.enabled = false;
+            break;
+        }
       }
     }
 
     function geoToggleOff() {
-      switch (orbitToggle.unclassifiedP + orbitToggle.unclassifiedR + orbitToggle.unclassifiedD) {
-        case 0:
-          geoSatLayer.enabled = false;
-          geoRocketLayer.enabled = false;
-          geoDebrisLayer.enabled = false;
-          break;
-        case 1:
-          geoSatLayer.enabled = false;
-          break;
-        case 3:
-          geoRocketLayer.enabled = false;
-          break;
-        case 5:
-          geoDebrisLayer.enabled = false;
+      if ($("#custom").text() === "CUSTOM ON") {
+        switch (orbitToggle.unclassifiedP + orbitToggle.unclassifiedR + orbitToggle.unclassifiedD) {
+          case 0:
+            geoSatCustom.enabled = false;
+            geoRocketCustom.enabled = false;
+            geoDebrisCustom.enabled = false;
+            break;
+          case 1:
+            geoSatCustom.enabled = false;
+            break;
+          case 3:
+            geoRocketCustom.enabled = false;
+            break;
+          case 5:
+            geoDebrisCustom.enabled = false;
 
-          break;
-        case 4:
-          geoSatLayer.enabled = false;
-          geoRocketLayer.enabled = false;
-          break;
-        case 6:
-          geoSatLayer.enabled = false;
-          geoDebrisLayer.enabled = false;
-          break;
-        case 8:
-          geoRocketLayer.enabled = false;
-          geoDebrisLayer.enabled = false;
-          break;
-        case 9:
-          geoSatLayer.enabled = false;
-          geoRocketLayer.enabled = false;
-          geoDebrisLayer.enabled = false;
-          break;
+            break;
+          case 4:
+            geoSatCustom.enabled = false;
+            geoRocketCustom.enabled = false;
+            break;
+          case 6:
+            geoSatCustom.enabled = false;
+            geoDebrisCustom.enabled = false;
+            break;
+          case 8:
+            geoRocketCustom.enabled = false;
+            geoDebrisCustom.enabled = false;
+            break;
+          case 9:
+            geoSatCustom.enabled = false;
+            geoRocketCustom.enabled = false;
+            geoDebrisCustom.enabled = false;
+            break;
+        }
+      } else {
+        switch (orbitToggle.unclassifiedP + orbitToggle.unclassifiedR + orbitToggle.unclassifiedD) {
+          case 0:
+            geoSatLayer.enabled = false;
+            geoRocketLayer.enabled = false;
+            geoDebrisLayer.enabled = false;
+            break;
+          case 1:
+            geoSatLayer.enabled = false;
+            break;
+          case 3:
+            geoRocketLayer.enabled = false;
+            break;
+          case 5:
+            geoDebrisLayer.enabled = false;
+
+            break;
+          case 4:
+            geoSatLayer.enabled = false;
+            geoRocketLayer.enabled = false;
+            break;
+          case 6:
+            geoSatLayer.enabled = false;
+            geoDebrisLayer.enabled = false;
+            break;
+          case 8:
+            geoRocketLayer.enabled = false;
+            geoDebrisLayer.enabled = false;
+            break;
+          case 9:
+            geoSatLayer.enabled = false;
+            geoRocketLayer.enabled = false;
+            geoDebrisLayer.enabled = false;
+            break;
+        }
       }
     }
 
     function unclassifiedToggleOff() {
-      switch (orbitToggle.unclassifiedP + orbitToggle.unclassifiedR + orbitToggle.unclassifiedD) {
-        case 0:
-          unclassifiedSatLayer.enabled = false;
-          unclassifiedRocketLayer.enabled = false;
-          unclassifiedDebrisLayer.enabled = false;
-          break;
-        case 1:
-          unclassifiedSatLayer.enabled = false;
-          break;
-        case 3:
-          unclassifiedRocketLayer.enabled = false;
-          break;
-        case 5:
-          unclassifiedDebrisLayer.enabled = false;
+      if ($("#custom").text() === "CUSTOM ON") {
+        switch (orbitToggle.unclassifiedP + orbitToggle.unclassifiedR + orbitToggle.unclassifiedD) {
+          case 0:
+            unclassifiedSatCustom.enabled = false;
+            unclassifiedRocketCustom.enabled = false;
+            unclassifiedDebrisCustom.enabled = false;
+            break;
+          case 1:
+            unclassifiedSatCustom.enabled = false;
+            break;
+          case 3:
+            unclassifiedRocketCustom.enabled = false;
+            break;
+          case 5:
+            unclassifiedDebrisCustom.enabled = false;
 
-          break;
-        case 4:
-          unclassifiedSatLayer.enabled = false;
-          unclassifiedRocketLayer.enabled = false;
-          break;
-        case 6:
-          unclassifiedSatLayer.enabled = false;
-          unclassifiedDebrisLayer.enabled = false;
-          break;
-        case 8:
-          unclassifiedRocketLayer.enabled = false;
-          unclassifiedDebrisLayer.enabled = false;
-          break;
-        case 9:
-          unclassifiedSatLayer.enabled = false;
-          unclassifiedRocketLayer.enabled = false;
-          unclassifiedDebrisLayer.enabled = false;
-          break;
+            break;
+          case 4:
+            unclassifiedSatCustom.enabled = false;
+            unclassifiedRocketCustom.enabled = false;
+            break;
+          case 6:
+            unclassifiedSatCustom.enabled = false;
+            unclassifiedDebrisCustom.enabled = false;
+            break;
+          case 8:
+            unclassifiedRocketCustom.enabled = false;
+            unclassifiedDebrisCustom.enabled = false;
+            break;
+          case 9:
+            unclassifiedSatCustom.enabled = false;
+            unclassifiedRocketCustom.enabled = false;
+            unclassifiedDebrisCustom.enabled = false;
+            break;
+        }
+      } else {
+        switch (orbitToggle.unclassifiedP + orbitToggle.unclassifiedR + orbitToggle.unclassifiedD) {
+          case 0:
+            unclassifiedSatLayer.enabled = false;
+            unclassifiedRocketLayer.enabled = false;
+            unclassifiedDebrisLayer.enabled = false;
+            break;
+          case 1:
+            unclassifiedSatLayer.enabled = false;
+            break;
+          case 3:
+            unclassifiedRocketLayer.enabled = false;
+            break;
+          case 5:
+            unclassifiedDebrisLayer.enabled = false;
+
+            break;
+          case 4:
+            unclassifiedSatLayer.enabled = false;
+            unclassifiedRocketLayer.enabled = false;
+            break;
+          case 6:
+            unclassifiedSatLayer.enabled = false;
+            unclassifiedDebrisLayer.enabled = false;
+            break;
+          case 8:
+            unclassifiedRocketLayer.enabled = false;
+            unclassifiedDebrisLayer.enabled = false;
+            break;
+          case 9:
+            unclassifiedSatLayer.enabled = false;
+            unclassifiedRocketLayer.enabled = false;
+            unclassifiedDebrisLayer.enabled = false;
+            break;
+        }
       }
     }
 
@@ -1164,10 +1705,26 @@ function getGroundStations(groundStations) {
     $('#custom').click(function () {
       if ($(this).text() == "CUSTOM ON") {
         $(this).text("CUSTOM OFF");
-        customSatLayer.enabled = false;
+        allCustomOff();
+        $('#leo').text("LEO ON");
+        $('#meo').text("MEO ON");
+        $('#heo').text("HEO ON");
+        $('#geo').text("GEO ON");
+        $('#unclassified').text("UNCLASSIFIED ON");
+        $('#payloads').text("PAYLOADS ON");
+        $('#rockets').text("ROCKETS ON");
+        $('#debris').text("DEBRIS ON");
       } else {
         $(this).text("CUSTOM ON");
-        customSatLayer.enabled = true;
+        allLayersOff();
+        $('#leo').text("LEO ON");
+        $('#meo').text("MEO ON");
+        $('#heo').text("HEO ON");
+        $('#geo').text("GEO ON");
+        $('#unclassified').text("UNCLASSIFIED ON");
+        $('#payloads').text("PAYLOADS ON");
+        $('#rockets').text("ROCKETS ON");
+        $('#debris').text("DEBRIS ON");
       }
     });
 
@@ -1312,7 +1869,21 @@ function getGroundStations(groundStations) {
         while (indexCheck.length > 0) {
           indexCheck.pop();
         }
-        customSatLayer.removeAllRenderables();
+        leoSatCustom.removeAllRenderables();
+        leoRocketCustom.removeAllRenderables();
+        leoDebrisCustom.removeAllRenderables();
+        meoSatCustom.removeAllRenderables();
+        meoRocketCustom.removeAllRenderables();
+        meoDebrisCustom.removeAllRenderables();
+        heoSatCustom.removeAllRenderables();
+        heoRocketCustom.removeAllRenderables();
+        heoDebrisCustom.removeAllRenderables();
+        geoSatCustom.removeAllRenderables();
+        geoRocketCustom.removeAllRenderables();
+        geoDebrisCustom.removeAllRenderables();
+        unclassifiedSatCustom.removeAllRenderables();
+        unclassifiedRocketCustom.removeAllRenderables();
+        unclassifiedDebrisCustom.removeAllRenderables();
         $('#customStatus').text("CLEARED CUSTOM LAYER");
         window.setTimeout(function () {
           $('#customStatus').text("");
@@ -1361,7 +1932,50 @@ function getGroundStations(groundStations) {
           placemark.attributes = placemarkAttributes;
           placemark.highlightAttributes = highlightPlacemarkAttributes;
 
-          customSatLayer.addRenderable(placemark);
+          //Defines orbit ranges
+          if (satData[indexCheck[0]].OBJECT_TYPE === "PAYLOAD") {
+            if (satData[indexCheck[0]].ORBIT_TYPE === "Low Earth Orbit") {
+              leoSatCustom.addRenderable(placemark);
+            } else if (satData[indexCheck[0]].ORBIT_TYPE === "Middle Earth Orbit") {
+              meoSatCustom.addRenderable(placemark);
+            } else if (satData[indexCheck[0]].ORBIT_TYPE === "Geosynchronous") {
+              geoSatCustom.addRenderable(placemark);
+            } else if (satData[indexCheck[0]].ORBIT_TYPE === "Highly Elliptical Orbit") {
+              heoSatCustom.addRenderable(placemark);
+            } else if (satData[indexCheck[0]].ORBIT_TYPE === "Unclassified") {
+              unclassifiedSatCustom.addRenderable(placemark);
+            } else {
+              console.log(satData[indexCheck[0]].ORBIT_TYPE);
+            }
+          } else if (satData[indexCheck[0]].OBJECT_TYPE === "ROCKET BODY") {
+            if (satData[indexCheck[0]].ORBIT_TYPE === "Low Earth Orbit") {
+              leoRocketCustom.addRenderable(placemark);
+            } else if (satData[indexCheck[0]].ORBIT_TYPE === "Middle Earth Orbit") {
+              meoRocketCustom.addRenderable(placemark);
+            } else if (satData[indexCheck[0]].ORBIT_TYPE === "Geosynchronous") {
+              geoRocketCustom.addRenderable(placemark);
+            } else if (satData[indexCheck[0]].ORBIT_TYPE === "Highly Elliptical Orbit") {
+              heoRocketCustom.addRenderable(placemark);
+            } else if (satData[indexCheck[0]].ORBIT_TYPE === "Unclassified") {
+              unclassifiedRocketCustom.addRenderable(placemark);
+            } else {
+              console.log(satData[indexCheck[0]].ORBIT_TYPE);
+            }
+          } else if (satData[indexCheck[0]].OBJECT_TYPE === "DEBRIS") {
+            if (satData[indexCheck[0]].ORBIT_TYPE === "Low Earth Orbit") {
+              leoDebrisCustom.addRenderable(placemark);
+            } else if (satData[indexCheck[0]].ORBIT_TYPE === "Middle Earth Orbit") {
+              meoDebrisCustom.addRenderable(placemark);
+            } else if (satData[indexCheck[0]].ORBIT_TYPE === "Geosynchronous") {
+              geoDebrisCustom.addRenderable(placemark);
+            } else if (satData[indexCheck[0]].ORBIT_TYPE === "Highly Elliptical Orbit") {
+              heoDebrisCustom.addRenderable(placemark);
+            } else if (satData[indexCheck[0]].ORBIT_TYPE === "Unclassified") {
+              unclassifiedDebrisCustom.addRenderable(placemark);
+            } else {
+              console.log(satData[indexCheck[0]].ORBIT_TYPE);
+            }
+          }
 
 
           $('#customStatus').text("ADDED " + satData[indexCheck[0]].OBJECT_NAME + " TO CUSTOM LAYER");
@@ -1502,7 +2116,6 @@ function getGroundStations(groundStations) {
               $('#customStatus').text("");
             }, 3000);
             allLayersOff();
-            customSatLayer.enabled = true;
             $("#custom").text("CUSTOM ON");
           }
         }
@@ -1538,7 +2151,6 @@ function getGroundStations(groundStations) {
               $('#customStatus').text("");
             }, 3000);
             allLayersOff();
-            customSatLayer.enabled = true;
             $("#custom").text("CUSTOM ON");
           }
         }
@@ -1574,7 +2186,6 @@ function getGroundStations(groundStations) {
               $('#customStatus').text("");
             }, 3000);
             allLayersOff();
-            customSatLayer.enabled = true;
             $("#custom").text("CUSTOM ON");
           }
         }
@@ -1610,7 +2221,6 @@ function getGroundStations(groundStations) {
               $('#customStatus').text("");
             }, 3000);
             allLayersOff();
-            customSatLayer.enabled = true;
             $("#custom").text("CUSTOM ON");
           }
         }
@@ -1709,11 +2319,24 @@ function getGroundStations(groundStations) {
       console.log(values);
       $("#yearRangeSlider").bind('change', function () {
         allLayersOff();
-        customSatLayer.enabled = true;
         while (indexCheck.length > 0) {
           indexCheck.pop();
         }
-        customSatLayer.removeAllRenderables();
+        leoSatCustom.removeAllRenderables();
+        leoRocketCustom.removeAllRenderables();
+        leoDebrisCustom.removeAllRenderables();
+        meoSatCustom.removeAllRenderables();
+        meoRocketCustom.removeAllRenderables();
+        meoDebrisCustom.removeAllRenderables();
+        heoSatCustom.removeAllRenderables();
+        heoRocketCustom.removeAllRenderables();
+        heoDebrisCustom.removeAllRenderables();
+        geoSatCustom.removeAllRenderables();
+        geoRocketCustom.removeAllRenderables();
+        geoDebrisCustom.removeAllRenderables();
+        unclassifiedSatCustom.removeAllRenderables();
+        unclassifiedRocketCustom.removeAllRenderables();
+        unclassifiedDebrisCustom.removeAllRenderables();
         $('#customStatus').text("CLEARED CUSTOM LAYER");
         window.setTimeout(function () {
           $('#customStatus').text("");
