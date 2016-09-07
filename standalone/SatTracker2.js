@@ -1473,8 +1473,9 @@ function getGroundStations(groundStations) {
         }
       });
 
-      //create satellite owner search
+//create satellite owner search
       var owner = satOwner.filter(onlyUnique); // returns ['a', 1, 2, '1'];
+      owner.sort();
       $("#ownerSearch").jqxComboBox({
         source: owner,
         placeHolder: "OWNER",
@@ -1511,7 +1512,6 @@ function getGroundStations(groundStations) {
       //create satellite owner search
       var year = satDate.filter(onlyUnique); // returns ['a', 1, 2, '1'];
       $("#yearSearch").jqxComboBox({
-        //selectedIndex: 0,
         source: year,
         displayMember: "LAUNCH YEAR",
         placeHolder: "LAUNCH YEAR",
@@ -1546,8 +1546,8 @@ function getGroundStations(groundStations) {
 
       //create satellite site search
       var site = satSite.filter(onlyUnique);
+      site.sort();
       $("#siteSearch").jqxComboBox({
-        //selectedIndex: 0,
         source: site,
         displayMember: "LAUNCH SITE",
         placeHolder: "LAUNCH SITE",
@@ -1566,7 +1566,6 @@ function getGroundStations(groundStations) {
             for (var i = 0; i < satNum; i += 1) {
               if (satData[i].LAUNCH_SITE === item.label) {
                 addCustomSat(i);
-
               }
             }
             $('#customStatus').text("ADDED " + item.label + " TO CUSTOM LAYER");
@@ -1582,6 +1581,7 @@ function getGroundStations(groundStations) {
 
       //create satellite site search
       var status = satStatus.filter(onlyUnique);
+      status.sort();
       console.log(status[0]);
       $("#statusSearch").jqxComboBox({
         //selectedIndex: 0,
@@ -1600,8 +1600,9 @@ function getGroundStations(groundStations) {
             var labelElement = $("<div></div>");
             labelElement.text("Name: " + item.label);
             $("#statusLog").children().remove();
+
             for (var i = 0; i < satNum; i += 1) {
-              if (status[i] === item.label) {
+              if (satData[i].OPERATIONAL_STATUS === item.label) {
                 addCustomSat(i);
               }
             }
@@ -1617,11 +1618,10 @@ function getGroundStations(groundStations) {
       });
 
       // Create search box for Satellites
+      satNames.sort();
       $("#nameSearch").jqxComboBox({
-        // selectedIndex: 0,
         source: satNames,
         displayMember: "OBJECT_NAME",
-        //valueMember: "OWNER",
         placeHolder: "SATELLITE NAME",
         width: 220,
         height: 30,
@@ -1643,7 +1643,13 @@ function getGroundStations(groundStations) {
             endMesh();
             endOrbit();
             endExtra();
-            var searchSat = satNames.indexOf(item.label);
+            var searchSat = -1;
+            for (var i = 0; i < satNum; i += 1){
+              if (satData[i].OBJECT_NAME === item.label){
+                searchSat = i;
+                break;
+              }
+            }
             toCurrentPosition(searchSat);
             meshToCurrentPosition(searchSat);
             createOrbit(searchSat);
@@ -1652,7 +1658,6 @@ function getGroundStations(groundStations) {
             typePlaceholder.textContent = satData[searchSat].OBJECT_TYPE;
             idPlaceholder.textContent = satData[searchSat].OBJECT_ID;
             namePlaceholder.textContent = satData[searchSat].OBJECT_NAME;
-
           }
         }
       });
