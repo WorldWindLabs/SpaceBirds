@@ -290,6 +290,9 @@ function sanitizeSatellites(objectArray) {
       // i--;
       continue;
     }
+
+    if(typeof objectArray[i].LAUNCH_DATE === "undefined") continue;
+    
     resultArray.push(objectArray[i]);
   }
   updateTime = performance.now() - updateTime;
