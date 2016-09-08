@@ -281,10 +281,15 @@ function sanitizeSatellites(objectArray) {
   var resultArray = [];
   var maxSats = objectArray.length;
   updateTime = performance.now();
+  var now = new Date();
+  var time = new Date(now.getTime());
   for (var i = 0; i < maxSats; i += 1) {
     try {
-      var position = getPosition(satellite.twoline2satrec(objectArray[i].TLE_LINE1, objectArray[i].TLE_LINE2), new Date());
+      var position = getPosition(satellite.twoline2satrec(objectArray[i].TLE_LINE1, objectArray[i].TLE_LINE2), time);
+      var velocity = getVelocity(satellite.twoline2satrec(objectArray[i].TLE_LINE1, objectArray[i].TLE_LINE2), time);
+
     } catch (err) {
+      console.log(objectArray[i].OBJECT_NAME +" is a faulty sat it is " + i);
       faultySatellites += 1;
       // objectArray.splice(i,1);
       // i--;
@@ -293,6 +298,9 @@ function sanitizeSatellites(objectArray) {
     resultArray.push(objectArray[i]);
   }
   updateTime = performance.now() - updateTime;
+  console.log(faultySatellites);
+  console.log(objectArray.length + " from uncleansed");
+  console.log(resultArray.length + " from cleansed");
   return resultArray;
 }
 
@@ -1755,21 +1763,20 @@ function getGroundStations(groundStations) {
       var everyCurrentPosition = [];
       for (var j = 0; j < satNum; j++) {
         var currentPosition = null;
-        var time = new Date(now.getTime() + i * 60000);
+        var time = new Date(now.getTime());
 
         try {
-          getVelocity(satellite.twoline2satrec(satData[j].TLE_LINE1, satData[j].TLE_LINE2), time);
-          satVelocity[j] = satVelocity;
+          var velocity = getVelocity(satellite.twoline2satrec(satData[j].TLE_LINE1, satData[j].TLE_LINE2), time);
           var position = getPosition(satellite.twoline2satrec(satData[j].TLE_LINE1, satData[j].TLE_LINE2), time);
         } catch (err) {
-          console.log(err + ' in renderSats, sat ' + j + satPac[j].OBJECT_NAME);
+          console.log(err + ' in renderSats, sat ' + j +  " " + satPac[j].OBJECT_NAME);
           continue;
         }
-
-        currentPosition = new WorldWind.Position(position.latitude,
-          position.longitude,
-          position.altitude);
         try {
+          satVelocity.push(velocity);
+          currentPosition = new WorldWind.Position(position.latitude,
+            position.longitude,
+            position.altitude);
         everyCurrentPosition.push(currentPosition);
         satSite.push(satData[j].LAUNCH_SITE);
         satNames.push(satData[j].OBJECT_NAME);
@@ -1780,7 +1787,6 @@ function getGroundStations(groundStations) {
           console.log(err + ' in renderSats, sat ' + j);
           continue;
         }
-
 
         var placemarkAttributes = new WorldWind.PlacemarkAttributes(null);
         var highlightPlacemarkAttributes = new WorldWind.PlacemarkAttributes(placemarkAttributes);
