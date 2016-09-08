@@ -289,7 +289,7 @@ function sanitizeSatellites(objectArray) {
       var velocity = getVelocity(satellite.twoline2satrec(objectArray[i].TLE_LINE1, objectArray[i].TLE_LINE2), time);
 
     } catch (err) {
-      console.log(objectArray[i].OBJECT_NAME +" is a faulty sat it is " + i);
+     // console.log(objectArray[i].OBJECT_NAME +" is a faulty sat it is " + i);
       faultySatellites += 1;
       // objectArray.splice(i,1);
       // i--;
@@ -381,13 +381,13 @@ function getGroundStations(groundStations) {
     var gsNames = [];
     var gsOrg = [];
     var groundStation = [];
-    for (var i = 0, len = groundStations.length; i < len; i++) {
-      gsNames.push(groundStations[i].NAME);
-      gsOrg.push(groundStations[i].ORGANIZATION)
-      groundStation[i] = new WorldWind.Position(groundStations[i].LATITUDE,
-        groundStations[i].LONGITUDE,
-        groundStations[i].ALTITUDE);
-      var gsPlacemark = new WorldWind.Placemark(groundStation[i]);
+    for (var g = 0, len = groundStations.length; g < len; g++) {
+      gsNames.push(groundStations[g].NAME);
+      gsOrg.push(groundStations[g].ORGANIZATION);
+      groundStation[g] = new WorldWind.Position(groundStations[g].LATITUDE,
+        groundStations[g].LONGITUDE,
+        groundStations[g].ALTITUDE);
+      var gsPlacemark = new WorldWind.Placemark(groundStation[g]);
 
       gsPlacemark.altitudeMode = WorldWind.RELATIVE_TO_GROUND;
       gsPlacemark.label = groundStation.NAME;
@@ -513,6 +513,16 @@ function getGroundStations(groundStations) {
       heoDebrisCustom.enabled = true;
       geoDebrisCustom.enabled = true;
       unclassifiedDebrisCustom.enabled = true;
+
+      $('#payloads').text("PAYLOADS OFF");
+      $('#rockets').text("ROCKETS OFF");
+      $('#debris').text("DEBRIS OFF");
+      $('#leo').text("LEO ON");
+      $('#meo').text("MEO ON");
+      $('#heo').text("HEO ON");
+      $('#geo').text("GEO ON");
+      $('#unclassified').text("UNCLASSIFIED ON");
+      $('#allSats').text("ALL ON");
     };
 
     var allCustomOff = function () {
@@ -547,6 +557,16 @@ function getGroundStations(groundStations) {
       heoDebrisLayer.enabled = true;
       geoDebrisLayer.enabled = true;
       unclassifiedDebrisLayer.enabled = true;
+
+      $('#payloads').text("PAYLOADS OFF");
+      $('#rockets').text("ROCKETS OFF");
+      $('#debris').text("DEBRIS OFF");
+      $('#leo').text("LEO ON");
+      $('#meo').text("MEO ON");
+      $('#heo').text("HEO ON");
+      $('#geo').text("GEO ON");
+      $('#unclassified').text("UNCLASSIFIED ON");
+      $('#allSats').text("ALL ON");
     };
 
 
@@ -1711,28 +1731,12 @@ function getGroundStations(groundStations) {
       }
     });
     $('#custom').click(function () {
-      if ($(this).text() == "CUSTOM ON") {
-        $(this).text("CUSTOM OFF");
-        allCustomOff();
-        $('#leo').text("LEO ON");
-        $('#meo').text("MEO ON");
-        $('#heo').text("HEO ON");
-        $('#geo').text("GEO ON");
-        $('#unclassified').text("UNCLASSIFIED ON");
-        $('#payloads').text("PAYLOADS ON");
-        $('#rockets').text("ROCKETS ON");
-        $('#debris').text("DEBRIS ON");
-      } else {
+      if ($(this).text() == "CUSTOM OFF") {
         $(this).text("CUSTOM ON");
         allLayersOff();
-        $('#leo').text("LEO ON");
-        $('#meo').text("MEO ON");
-        $('#heo').text("HEO ON");
-        $('#geo').text("GEO ON");
-        $('#unclassified').text("UNCLASSIFIED ON");
-        $('#payloads').text("PAYLOADS ON");
-        $('#rockets').text("ROCKETS ON");
-        $('#debris').text("DEBRIS ON");
+      } else {
+        $(this).text("CUSTOM OFF");
+        allCustomOff();
       }
     });
 
@@ -1785,9 +1789,9 @@ function getGroundStations(groundStations) {
         satDate[j] = satData[j].LAUNCH_DATE.substring(0, 4);
         } catch (err) {
           console.log(err + ' in renderSats, sat ' + j);
+          console.log(satData[j].OBJECT_NAME);
           continue;
         }
-
         var placemarkAttributes = new WorldWind.PlacemarkAttributes(null);
         var highlightPlacemarkAttributes = new WorldWind.PlacemarkAttributes(placemarkAttributes);
         highlightPlacemarkAttributes.imageScale = 0.4;
