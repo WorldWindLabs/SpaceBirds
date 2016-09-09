@@ -5,7 +5,7 @@
 "use strict";
 
 // Tell World Wind to log only warnings and errors.
-WorldWind.Logger.setLoggingLevel(WorldWind.Logger.LEVEL_WARNING);
+//WorldWind.Logger.setLoggingLevel(WorldWind.Logger.LEVEL_WARNING);
 
 // Create the World Window.
 var wwd = new WorldWind.ObjectWindow("canvasOne");
@@ -2042,9 +2042,10 @@ function getGroundStations(groundStations) {
         return self.indexOf(value) === index;
       }
 
+      gsNames.sort();
       // Create search box for GS's
       $("#gsNameSearch").jqxComboBox({
-        source: groundStations,
+        source: gsNames,
         displayMember: "NAME",
         placeHolder: "GS NAME",
         width: 220,
@@ -2059,7 +2060,13 @@ function getGroundStations(groundStations) {
             var labelElement = $("<div></div>");
             labelElement.text("Name: " + item.label);
             $("#gsNameLog").children().remove();
-            var searchGSat = gsNames.indexOf(item.label);
+            var searchGSat = -1;
+            for (var i = 0; i < gsNames.length; i += 1){
+              if (groundStations[i].NAME === item.label){
+                searchGSat = i;
+                break;
+              }
+            }
             endFollow();
             toGsStation(searchGSat);
             allLayersOff();
@@ -2255,13 +2262,9 @@ function getGroundStations(groundStations) {
         if (event.args) {
           var item = event.args.item;
           if (item) {
-            // var valueElement = $("<div></div>");
-            //valueElement.text("Owner: " + item.value);
             var labelElement = $("<div></div>");
             labelElement.text("Name: " + item.label);
             $("#nameLog").children().remove();
-            //$("#selectionlog").append(labelElement);
-            //$("#selectionlog").append(valueElement);
             endFollow();
             endMesh();
             endOrbit();
@@ -2600,9 +2603,7 @@ function getGroundStations(groundStations) {
           $('#collada').text('3D MODEL OFF');
           orbitsLayer.enabled = false;
 
-
           wwd.goTo(new WorldWind.Location(groundPosition.latitude, groundPosition.longitude));
-
         }
 
         if (pickList.objects.length > 0) {
