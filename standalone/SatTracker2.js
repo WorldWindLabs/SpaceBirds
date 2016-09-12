@@ -1879,24 +1879,12 @@ function getGroundStations(groundStations) {
       }
 
       $('#clearCustom').click(function () {
-        while (indexCheck.length > 0) {
-          indexCheck.pop();
-        }
-        leoSatCustom.removeAllRenderables();
-        leoRocketCustom.removeAllRenderables();
-        leoDebrisCustom.removeAllRenderables();
-        meoSatCustom.removeAllRenderables();
-        meoRocketCustom.removeAllRenderables();
-        meoDebrisCustom.removeAllRenderables();
-        heoSatCustom.removeAllRenderables();
-        heoRocketCustom.removeAllRenderables();
-        heoDebrisCustom.removeAllRenderables();
-        geoSatCustom.removeAllRenderables();
-        geoRocketCustom.removeAllRenderables();
-        geoDebrisCustom.removeAllRenderables();
-        unclassifiedSatCustom.removeAllRenderables();
-        unclassifiedRocketCustom.removeAllRenderables();
-        unclassifiedDebrisCustom.removeAllRenderables();
+        indexCheck = [];
+        isOwner = false;
+        isOperationalStatus = false;
+        isLaunchYear = false;
+        isLaunchSite = false;
+        clearAllCustomLayers();
         $('#customStatus').text("CLEARED CUSTOM LAYER");
         window.setTimeout(function () {
           $('#customStatus').text("");
@@ -2107,7 +2095,10 @@ function getGroundStations(groundStations) {
         }
       });
 
-//create satellite owner search
+      var isOwner = false, isOperationalStatus = false,
+          isLaunchSite = false, isLaunchYear = false;
+
+      //create satellite owner search
       var owner = satOwner.filter(onlyUnique); // returns ['a', 1, 2, '1'];
       owner.sort();
       $("#ownerSearch").jqxComboBox({
@@ -2127,11 +2118,10 @@ function getGroundStations(groundStations) {
             labelElement.text("Name: " + item.label);
             $("#ownerLog").children().remove();
 
-            for (var i = 0; i < satNum; i += 1) {
-              if (satData[i].OWNER === item.label) {
-                addCustomSat(i);
-              }
-            }
+            isOwner = item.label;
+            indexCheck = [];
+            populateCustomSatLayer(satData, isOwner, isLaunchYear,
+                isLaunchSite, isOperationalStatus, addCustomSat);
             $('#customStatus').text("ADDED " + item.label + " TO CUSTOM LAYER");
             window.setTimeout(function () {
               $('#customStatus').text("");
@@ -2161,11 +2151,10 @@ function getGroundStations(groundStations) {
             labelElement.text("Name: " + item.label);
             $("#yearLog").children().remove();
 
-            for (var i = 0; i < (satNum - 1); i += 1) {
-              if (satDate[i] === item.label) {
-                addCustomSat(i);
-              }
-            }
+            isLaunchYear = item.label;
+            indexCheck = [];
+            populateCustomSatLayer(satData, isOwner, isLaunchYear,
+                isLaunchSite, isOperationalStatus, addCustomSat);
             $('#customStatus').text("ADDED " + item.label + " TO CUSTOM LAYER");
             window.setTimeout(function () {
               $('#customStatus').text("");
@@ -2195,11 +2184,11 @@ function getGroundStations(groundStations) {
             var labelElement = $("<div></div>");
             labelElement.text("Name: " + item.label);
             $("#siteLog").children().remove();
-            for (var i = 0; i < satNum; i += 1) {
-              if (satData[i].LAUNCH_SITE === item.label) {
-                addCustomSat(i);
-              }
-            }
+
+            isLaunchSite = item.label;
+            indexCheck = [];
+            populateCustomSatLayer(satData, isOwner, isLaunchYear,
+                isLaunchSite, isOperationalStatus, addCustomSat);
             $('#customStatus').text("ADDED " + item.label + " TO CUSTOM LAYER");
             window.setTimeout(function () {
               $('#customStatus').text("");
@@ -2215,7 +2204,6 @@ function getGroundStations(groundStations) {
       status.sort();
       console.log(status[0]);
       $("#statusSearch").jqxComboBox({
-        //selectedIndex: 0,
         source: status,
         displayMember: "OPERATIONAL STATUS",
         placeHolder: "OPERATIONAL STATUS",
@@ -2232,11 +2220,10 @@ function getGroundStations(groundStations) {
             labelElement.text("Name: " + item.label);
             $("#statusLog").children().remove();
 
-            for (var i = 0; i < satNum; i += 1) {
-              if (satData[i].OPERATIONAL_STATUS === item.label) {
-                addCustomSat(i);
-              }
-            }
+            isOperationalStatus = item.label;
+            indexCheck = [];
+            populateCustomSatLayer(satData, isOwner, isLaunchYear,
+                isLaunchSite, isOperationalStatus, addCustomSat);
             $('#customStatus').text("ADDED " + item.label + " TO CUSTOM LAYER");
             window.setTimeout(function () {
               $('#customStatus').text("");
@@ -2340,24 +2327,8 @@ function getGroundStations(groundStations) {
       console.log(values);
       $("#yearRangeSlider").bind('change', function () {
         allLayersOff();
-        while (indexCheck.length > 0) {
-          indexCheck.pop();
-        }
-        leoSatCustom.removeAllRenderables();
-        leoRocketCustom.removeAllRenderables();
-        leoDebrisCustom.removeAllRenderables();
-        meoSatCustom.removeAllRenderables();
-        meoRocketCustom.removeAllRenderables();
-        meoDebrisCustom.removeAllRenderables();
-        heoSatCustom.removeAllRenderables();
-        heoRocketCustom.removeAllRenderables();
-        heoDebrisCustom.removeAllRenderables();
-        geoSatCustom.removeAllRenderables();
-        geoRocketCustom.removeAllRenderables();
-        geoDebrisCustom.removeAllRenderables();
-        unclassifiedSatCustom.removeAllRenderables();
-        unclassifiedRocketCustom.removeAllRenderables();
-        unclassifiedDebrisCustom.removeAllRenderables();
+        indexCheck = [];
+        clearAllCustomLayers();
         $('#customStatus').text("CLEARED CUSTOM LAYER");
         window.setTimeout(function () {
           $('#customStatus').text("");
@@ -2857,6 +2828,37 @@ function populateSatInfo(satellite) {
   perigeeplaceholder.textContent = roundToTwo(Number(satellite.PERIGEE)) + " km";
   periodPlaceholder.textContent = roundToTwo(Number(satellite.PERIOD)) + " minutes";
   operationPlaceholder.textContent = satellite.OPERATIONAL_STATUS;
+}
+
+function populateCustomSatLayer(satData, owner, launchYear, launchSite, operationalStatus, addCustomSatCallback){
+  clearAllCustomLayers();
+  for (var i = 0; i < satData.length; i++){
+    if ((!owner || owner === satData[i].OWNER) &&
+        (!launchYear || launchYear === satData[i].LAUNCH_DATE.substring(0, 4)) &&
+        (!launchSite || launchSite === satData[i].LAUNCH_SITE) &&
+        (!operationalStatus || operationalStatus === satData[i].OPERATIONAL_STATUS))
+    {
+      addCustomSatCallback(i);
+    }
+  }
+}
+
+function clearAllCustomLayers(){
+  leoSatCustom.removeAllRenderables();
+  leoRocketCustom.removeAllRenderables();
+  leoDebrisCustom.removeAllRenderables();
+  meoSatCustom.removeAllRenderables();
+  meoRocketCustom.removeAllRenderables();
+  meoDebrisCustom.removeAllRenderables();
+  heoSatCustom.removeAllRenderables();
+  heoRocketCustom.removeAllRenderables();
+  heoDebrisCustom.removeAllRenderables();
+  geoSatCustom.removeAllRenderables();
+  geoRocketCustom.removeAllRenderables();
+  geoDebrisCustom.removeAllRenderables();
+  unclassifiedSatCustom.removeAllRenderables();
+  unclassifiedRocketCustom.removeAllRenderables();
+  unclassifiedDebrisCustom.removeAllRenderables();
 }
 
 /** projection toggle**/
