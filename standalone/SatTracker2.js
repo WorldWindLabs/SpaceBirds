@@ -467,13 +467,8 @@ function getGroundStations(groundStations) {
 
       //moves to GS location
       wwd.goTo(new WorldWind.Location(groundStations[gsind].LATITUDE, groundStations[gsind].LONGITUDE));
-
-
-      //turn on shape for current GS
-      $('#addStation').click(function () {
-        addCustomGS(gsind);
-      });
     };
+
     $('#customGS').click(function () {
       if ($(this).text() == "CUSTOM GS ON") {
         $(this).text("CUSTOM GS OFF");
@@ -2530,6 +2525,8 @@ function getGroundStations(groundStations) {
       };
 
       var highlightedItems = [];
+      var satIndex;
+      var gsIndex;
       var myFuncCalls = 0;
 
       var handleClick = function (recognizer) {
@@ -2601,17 +2598,13 @@ function getGroundStations(groundStations) {
               //Populate Info window with proper data
               myFuncCalls++;
               console.log(myFuncCalls);
-              var position = pickList.objects[p].position,
-                satIndex = everyCurrentPosition.indexOf(position),
+              var position = pickList.objects[p].position;
+                satIndex = everyCurrentPosition.indexOf(position);
                 gsIndex = groundStation.indexOf(position);
               console.log(position);
               orbitsLayer.enabled = true;
               if (satIndex > -1) {
                 endHoverOrbit();
-                $('#customSat').click(function () {
-                  console.log(satIndex);
-                  addCustomSat(satIndex);
-                });
                 orbitsHoverLayer.enabled = false;
                 extraData(satIndex);
                 $('#mesh').text("HORIZON ON");
@@ -2673,6 +2666,15 @@ function getGroundStations(groundStations) {
 
       wwd.redraw();
 
+        $('#customSat').click(function () {
+          console.log(satIndex);
+          addCustomSat(satIndex);
+        });
+        $('#addStation').click(function () {
+          $("#customGS").text('CUSTOM GS ON');
+          customGSLayer.enabled = true;
+          addCustomGS(gsIndex);
+        });
 
       /**
        * Pick-Handle Functions
