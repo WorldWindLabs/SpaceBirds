@@ -2530,6 +2530,7 @@ function getGroundStations(groundStations) {
       };
 
       var highlightedItems = [];
+      var myFuncCalls = 0;
 
       var handleClick = function (recognizer) {
         // The input argument is either an Event or a TapRecognizer. Both have the same properties for determining
@@ -2598,13 +2599,17 @@ function getGroundStations(groundStations) {
               highlightedItems.push(pickList.objects[p].userObject);
 
               //Populate Info window with proper data
+              myFuncCalls++;
+              console.log(myFuncCalls);
               var position = pickList.objects[p].position,
                 satIndex = everyCurrentPosition.indexOf(position),
                 gsIndex = groundStation.indexOf(position);
+              console.log(position);
               orbitsLayer.enabled = true;
               if (satIndex > -1) {
                 endHoverOrbit();
                 $('#customSat').click(function () {
+                  console.log(satIndex);
                   addCustomSat(satIndex);
                 });
                 orbitsHoverLayer.enabled = false;
