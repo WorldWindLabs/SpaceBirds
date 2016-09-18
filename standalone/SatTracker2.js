@@ -26,7 +26,7 @@ coordinates.eyeText.attributes.color = WorldWind.Color.WHITE;
 //Add imagery layers.
 var layers = [
   {layer: new WorldWind.BMNGOneImageLayer(), enabled: true},
-  //{layer: new WorldWind.BMNGLayer(), enabled: true},
+ // {layer: new WorldWind.BMNGLayer(), enabled: true},
   {layer: new WorldWind.BingAerialLayer(null), enabled: true},
   {layer: coordinates, enabled: true},
   {layer: viewControlsLayer, enabled: true}
@@ -38,9 +38,10 @@ for (var l = 0; l < layers.length; l++) {
 }
 
 //Activate BMNGLayer in low altitudes
-layers[1].layer.maxActiveAltitude = 5e6;
-//layers[2].layer.maxActiveAltitude = 15e7;
-layers[2].layer.minActiveAltitude = 5e6;
+layers[1].layer.maxActiveAltitude = 3e6;
+layers[2].layer.minActiveAltitude = 3e6;
+//layers[2].layer.maxActiveAltitude = 2e5;
+//layers[3].layer.minActiveAltitude = 2e5;
 
 
 //custom layers
@@ -50,6 +51,7 @@ var shapeLayer = new WorldWind.RenderableLayer();
 var orbitsHoverLayer = new WorldWind.RenderableLayer();
 var modelLayer = new WorldWind.RenderableLayer("Model");
 var meshLayer = new WorldWind.RenderableLayer();
+
 var orbitsLayer = new WorldWind.RenderableLayer("Orbit");
 var leoSatLayer = new WorldWind.RenderableLayer("LEO Payloads");
 var meoSatLayer = new WorldWind.RenderableLayer("MEO Payloads");
@@ -82,8 +84,6 @@ var meoDebrisCustom = new WorldWind.RenderableLayer("MEO Debris");
 var heoDebrisCustom = new WorldWind.RenderableLayer("HEO Debris");
 var geoDebrisCustom = new WorldWind.RenderableLayer("GEO Debris");
 var unclassifiedDebrisCustom = new WorldWind.RenderableLayer("UnclassifiedDebris");
-
-
 
 //add custom layers
 wwd.addLayer(customGSLayer);
@@ -124,8 +124,6 @@ wwd.addLayer(meoDebrisCustom);
 wwd.addLayer(heoDebrisCustom);
 wwd.addLayer(geoDebrisCustom);
 wwd.addLayer(unclassifiedDebrisCustom);
-
-
 
 //Latitude, Longitude, and Altitude
 var latitudePlaceholder = document.getElementById('latitude');
@@ -364,121 +362,14 @@ function getGroundStations(groundStations) {
       altitudePlaceholder.textContent = (Math.round(position.altitude / 10) / 100) + "km";
     }
 
+
+
+
     /***
-     Ground Stations Layer
-     ***/
-    var gsPlacemarkAttributes = new WorldWind.PlacemarkAttributes(null);
-    var gsHighlightPlacemarkAttributes = new WorldWind.PlacemarkAttributes(gsPlacemarkAttributes);
+     * UI and Switchboard
+     */
 
-    gsPlacemarkAttributes.imageSource = "assets/icons/ground-station.png";
-    gsPlacemarkAttributes.imageScale = 0.25;
-    gsPlacemarkAttributes.imageOffset = new WorldWind.Offset(
-      WorldWind.OFFSET_FRACTION, 0.3,
-      WorldWind.OFFSET_FRACTION, 0.0);
-    gsPlacemarkAttributes.imageColor = WorldWind.Color.WHITE;
-    gsPlacemarkAttributes.labelAttributes.offset = new WorldWind.Offset(
-      WorldWind.OFFSET_FRACTION, 0.5,
-      WorldWind.OFFSET_FRACTION, 1.0);
-    gsPlacemarkAttributes.labelAttributes.color = WorldWind.Color.WHITE;
-
-    var gsNames = [];
-    var gsOrg = [];
-    var groundStation = [];
-    for (var g = 0, len = groundStations.length; g < len; g++) {
-      gsNames.push(groundStations[g].NAME);
-      gsOrg.push(groundStations[g].ORGANIZATION);
-      groundStation[g] = new WorldWind.Position(groundStations[g].LATITUDE,
-        groundStations[g].LONGITUDE,
-        groundStations[g].ALTITUDE);
-      var gsPlacemark = new WorldWind.Placemark(groundStation[g]);
-
-      gsPlacemark.altitudeMode = WorldWind.RELATIVE_TO_GROUND;
-      gsPlacemark.label = groundStation.NAME;
-      gsPlacemark.attributes = gsPlacemarkAttributes;
-      gsPlacemark.highlightAttributes = gsHighlightPlacemarkAttributes;
-      groundStationsLayer.addRenderable(gsPlacemark);
-    }
-
-
-    // Add the path to a layer and the layer to the World Window's layer list.
-    groundStationsLayer.enabled = false;
-    $('#clearStations').click(function () {
-      customGSLayer.removeAllRenderables();
-      while (groundsIndex.length > 0) {
-        groundsIndex.pop();
-      }
-      $('#customStatus').text("CLEARED GS LAYER");
-      window.setTimeout(function () {
-        $('#customStatus').text("");
-      }, 2000)
-    });
-
-    var addCustomGS = function (gsind) {
-      var indexCheck = groundsIndex.indexOf(gsind);
-      if (indexCheck === -1) {
-        groundsIndex.unshift(gsind);
-        var gsAttributes = new WorldWind.ShapeAttributes(null);
-        gsAttributes.outlineColor = new WorldWind.Color(0, 255, 255, 1);
-        gsAttributes.interiorColor = new WorldWind.Color(0, 255, 255, 0.2);
-
-        var shape = new WorldWind.SurfaceCircle(new WorldWind.Location(groundStations[groundsIndex[0]].LATITUDE,
-          groundStations[groundsIndex[0]].LONGITUDE), 150e4, gsAttributes);
-
-        var gsPlacemarkAttributes = new WorldWind.PlacemarkAttributes(null);
-        var gsHighlightPlacemarkAttributes = new WorldWind.PlacemarkAttributes(gsPlacemarkAttributes);
-
-        gsPlacemarkAttributes.imageSource = "assets/icons/ground-station.png";
-        gsPlacemarkAttributes.imageScale = 0.25;
-        gsPlacemarkAttributes.imageOffset = new WorldWind.Offset(
-          WorldWind.OFFSET_FRACTION, 0.3,
-          WorldWind.OFFSET_FRACTION, 0.0);
-        gsPlacemarkAttributes.imageColor = WorldWind.Color.WHITE;
-        gsPlacemarkAttributes.labelAttributes.offset = new WorldWind.Offset(
-          WorldWind.OFFSET_FRACTION, 0.5,
-          WorldWind.OFFSET_FRACTION, 1.0);
-        gsPlacemarkAttributes.labelAttributes.color = WorldWind.Color.WHITE;
-
-        var gsPlacemark = new WorldWind.Placemark(new WorldWind.Position(groundStations[groundsIndex[0]].LATITUDE,
-          groundStations[groundsIndex[0]].LONGITUDE, groundStations[groundsIndex[0]].ALTITUDE));
-
-        gsPlacemark.altitudeMode = WorldWind.RELATIVE_TO_GROUND;
-        gsPlacemark.label = groundStation.NAME;
-        gsPlacemark.attributes = gsPlacemarkAttributes;
-        gsPlacemark.highlightAttributes = gsHighlightPlacemarkAttributes;
-
-        customGSLayer.addRenderable(gsPlacemark);
-        customGSLayer.addRenderable(shape);
-
-        $('#customStatus').text("ADDED " + groundStations[groundsIndex[0]].NAME.toUpperCase() + " TO CUSTOM GS LAYER");
-        window.setTimeout(function () {
-          $('#customStatus').text("");
-        }, 2000)
-      } else {
-        $('#customStatus').text("ALREADY ON CUSTOM LAYER");
-        window.setTimeout(function () {
-          $('#customStatus').text("");
-        }, 2000)
-      }
-    };
-    var groundsIndex = [];
-    var toGsStation = function (gsind) {
-      //GS information display
-      populateGSInfo(groundStations[gsind]);
-
-      //moves to GS location
-      wwd.goTo(new WorldWind.Location(groundStations[gsind].LATITUDE, groundStations[gsind].LONGITUDE));
-    };
-
-    $('#customGS').click(function () {
-      if ($(this).text() == "CUSTOM GS ON") {
-        $(this).text("CUSTOM GS OFF");
-        customGSLayer.enabled = false;
-      } else {
-        $(this).text("CUSTOM GS ON");
-        customGSLayer.enabled = true;
-      }
-    });
-
+      //Switch between Main Layers: regular and custom
     var allLayersOff = function () {
       if (leoSatLayer.enabled === true) {
         leoSatCustom.enabled = true;
@@ -542,6 +433,7 @@ function getGroundStations(groundStations) {
       geoDebrisLayer.enabled = false;
       unclassifiedDebrisLayer.enabled = false;
 
+      $('#custom').text("CUSTOM ON");
     };
 
     var allCustomOff = function () {
@@ -577,14 +469,10 @@ function getGroundStations(groundStations) {
       geoDebrisCustom.enabled = false;
       unclassifiedDebrisCustom.enabled = false;
 
+      $('#custom').text("CUSTOM OFF");
     };
 
-
-
-    /***
-     * Satellites
-     */
-      //Swtich Board for Sat Types
+    ////Switchboard for Sat Types
     var orbitToggle = {
         leoP: 9,
         leoR: 0,
@@ -1740,16 +1628,21 @@ function getGroundStations(groundStations) {
         unclassifiedToggleOff();
       }
     });
+    //custom toggle
+    var customYearCon = false;
     $('#custom').click(function () {
       if ($(this).text() == "CUSTOM OFF") {
         $(this).text("CUSTOM ON");
+        $('#yearRangeSlider').jqxSlider({ values: [1958, 2016] });
         allLayersOff();
       } else {
         $(this).text("CUSTOM OFF");
+        customYearCon = false;
+        $('#yearRangeSlider').jqxSlider({ values: [1958, 2016] });
         allCustomOff();
       }
     });
-
+    //gs toggle
     $('#gStations').click(function () {
       if ($(this).text() == "GS ON") {
         $(this).text("GS OFF");
@@ -1763,9 +1656,129 @@ function getGroundStations(groundStations) {
         gsToggleButtons.style.display = "inline";
       }
     });
-    renderSats(satPac);
+    //turn of custom gs layer
+    $('#customGS').click(function () {
+      if ($(this).text() == "CUSTOM GS ON") {
+        $(this).text("CUSTOM GS OFF");
+        customGSLayer.enabled = false;
+      } else {
+        $(this).text("CUSTOM GS ON");
+        customGSLayer.enabled = true;
+      }
+    });
+    // Add the station and its horizon to the custom layer
+    $('#clearStations').click(function () {
+      customGSLayer.removeAllRenderables();
+      while (groundsIndex.length > 0) {
+        groundsIndex.pop();
+      }
+      $('#customStatus').text("CLEARED GS LAYER");
+      window.setTimeout(function () {
+        $('#customStatus').text("");
+      }, 2000)
+    });
 
+
+
+
+    /***
+     Ground Stations Layer
+     ***/
+    groundStationsLayer.enabled = false;
+    var gsPlacemarkAttributes = new WorldWind.PlacemarkAttributes(null);
+    var gsHighlightPlacemarkAttributes = new WorldWind.PlacemarkAttributes(gsPlacemarkAttributes);
+
+    gsPlacemarkAttributes.imageSource = "assets/icons/ground-station.png";
+    gsPlacemarkAttributes.imageScale = 0.25;
+    gsPlacemarkAttributes.imageOffset = new WorldWind.Offset(
+      WorldWind.OFFSET_FRACTION, 0.3,
+      WorldWind.OFFSET_FRACTION, 0.0);
+    gsPlacemarkAttributes.imageColor = WorldWind.Color.WHITE;
+    gsPlacemarkAttributes.labelAttributes.offset = new WorldWind.Offset(
+      WorldWind.OFFSET_FRACTION, 0.5,
+      WorldWind.OFFSET_FRACTION, 1.0);
+    gsPlacemarkAttributes.labelAttributes.color = WorldWind.Color.WHITE;
+
+    var gsNames = [];
+    var gsOrg = [];
+    var groundStation = [];
+    for (var g = 0, len = groundStations.length; g < len; g++) {
+      gsNames.push(groundStations[g].NAME);
+      gsOrg.push(groundStations[g].ORGANIZATION);
+      groundStation[g] = new WorldWind.Position(groundStations[g].LATITUDE,
+        groundStations[g].LONGITUDE,
+        groundStations[g].ALTITUDE);
+      var gsPlacemark = new WorldWind.Placemark(groundStation[g]);
+
+      gsPlacemark.altitudeMode = WorldWind.RELATIVE_TO_GROUND;
+      gsPlacemark.label = groundStation.NAME;
+      gsPlacemark.attributes = gsPlacemarkAttributes;
+      gsPlacemark.highlightAttributes = gsHighlightPlacemarkAttributes;
+      groundStationsLayer.addRenderable(gsPlacemark);
+    }
+
+    var addCustomGS = function (gsind) {
+      var indexCheck = groundsIndex.indexOf(gsind);
+      if (indexCheck === -1) {
+        groundsIndex.unshift(gsind);
+        var gsAttributes = new WorldWind.ShapeAttributes(null);
+        gsAttributes.outlineColor = new WorldWind.Color(0, 255, 255, 1);
+        gsAttributes.interiorColor = new WorldWind.Color(0, 255, 255, 0.2);
+
+        var shape = new WorldWind.SurfaceCircle(new WorldWind.Location(groundStations[groundsIndex[0]].LATITUDE,
+          groundStations[groundsIndex[0]].LONGITUDE), 150e4, gsAttributes);
+
+        var gsPlacemarkAttributes = new WorldWind.PlacemarkAttributes(null);
+        var gsHighlightPlacemarkAttributes = new WorldWind.PlacemarkAttributes(gsPlacemarkAttributes);
+
+        gsPlacemarkAttributes.imageSource = "assets/icons/ground-station.png";
+        gsPlacemarkAttributes.imageScale = 0.25;
+        gsPlacemarkAttributes.imageOffset = new WorldWind.Offset(
+          WorldWind.OFFSET_FRACTION, 0.3,
+          WorldWind.OFFSET_FRACTION, 0.0);
+        gsPlacemarkAttributes.imageColor = WorldWind.Color.WHITE;
+        gsPlacemarkAttributes.labelAttributes.offset = new WorldWind.Offset(
+          WorldWind.OFFSET_FRACTION, 0.5,
+          WorldWind.OFFSET_FRACTION, 1.0);
+        gsPlacemarkAttributes.labelAttributes.color = WorldWind.Color.WHITE;
+
+        var gsPlacemark = new WorldWind.Placemark(new WorldWind.Position(groundStations[groundsIndex[0]].LATITUDE,
+          groundStations[groundsIndex[0]].LONGITUDE, groundStations[groundsIndex[0]].ALTITUDE));
+
+        gsPlacemark.altitudeMode = WorldWind.RELATIVE_TO_GROUND;
+        gsPlacemark.label = groundStation.NAME;
+        gsPlacemark.attributes = gsPlacemarkAttributes;
+        gsPlacemark.highlightAttributes = gsHighlightPlacemarkAttributes;
+
+        customGSLayer.addRenderable(gsPlacemark);
+        customGSLayer.addRenderable(shape);
+
+        $('#customStatus').text("ADDED " + groundStations[groundsIndex[0]].NAME.toUpperCase() + " TO CUSTOM GS LAYER");
+        window.setTimeout(function () {
+          $('#customStatus').text("");
+        }, 2000)
+      } else {
+        $('#customStatus').text("ALREADY ON CUSTOM LAYER");
+        window.setTimeout(function () {
+          $('#customStatus').text("");
+        }, 2000)
+      }
+    };
+    var groundsIndex = [];
+    var toGsStation = function (gsind) {
+      //GS information display
+      populateGSInfo(groundStations[gsind]);
+
+      //moves to GS location
+      wwd.goTo(new WorldWind.Location(groundStations[gsind].LATITUDE, groundStations[gsind].LONGITUDE));
+    };
+
+
+
+
+    /***Satellite Propagation***/
     //plots all sats
+    renderSats(satPac);
     function renderSats(satData) {
       trackedPlaceholder.textContent = satData.length;
       var satNames = [];
@@ -1885,6 +1898,7 @@ function getGroundStations(groundStations) {
         wwd.redraw();
       }
 
+      //UI button to clear custom sat layer
       $('#clearCustom').click(function () {
         indexCheck = [];
         isOwner = false;
@@ -1892,6 +1906,12 @@ function getGroundStations(groundStations) {
         isLaunchYear = false;
         isLaunchSite = false;
         $('#yearRangeSlider').jqxSlider({ values: [1958, 2016] });
+        $("#nameSearch").jqxComboBox('clearSelection');
+        $("#yearSearch").jqxComboBox('clearSelection');
+        $("#siteSearch").jqxComboBox('clearSelection');
+        $("#ownerSearch").jqxComboBox('clearSelection');
+        $("#statusSearch").jqxComboBox('clearSelection');
+        $('#yearRangeSlider').jqxSlider('setValue', 1958, 2016);
         clearAllCustomLayers();
         $('#customStatus').text("CLEARED CUSTOM LAYER");
         window.setTimeout(function () {
@@ -1899,30 +1919,34 @@ function getGroundStations(groundStations) {
         }, 2000)
       });
 
+      //Add individual sats to custom layer
       var indexCheck = [];
+      var customLayerSats = [];
       var indexChecked = null;
       var addCustomSat = function (index) {
         indexChecked = indexCheck.indexOf(index);
         if (indexChecked === -1) {
+          customLayerSats.push(index);
           indexCheck.unshift(index);
+
 
           var placemarkAttributes = new WorldWind.PlacemarkAttributes(null);
           var highlightPlacemarkAttributes = new WorldWind.PlacemarkAttributes(placemarkAttributes);
-          highlightPlacemarkAttributes.imageScale = 0.5;
+          highlightPlacemarkAttributes.imageScale = 0.4;
 
           //add colored image depending on sat type
           switch (satData[indexCheck[0]].OBJECT_TYPE) {
             case "PAYLOAD":
               placemarkAttributes.imageSource = "assets/icons/blue_dot.png";
-              placemarkAttributes.imageScale = 0.4;
+              placemarkAttributes.imageScale = 0.3;
               break;
             case "ROCKET BODY":
               placemarkAttributes.imageSource = "assets/icons/yellow_dot.png";
-              placemarkAttributes.imageScale = 0.4;
+              placemarkAttributes.imageScale = 0.3;
               break;
             default:
               placemarkAttributes.imageSource = "assets/icons/red_dot.png";
-              placemarkAttributes.imageScale = 0.35;
+              placemarkAttributes.imageScale = 0.2;
               highlightPlacemarkAttributes.imageScale = 0.3;
           }
 
@@ -1986,7 +2010,6 @@ function getGroundStations(groundStations) {
             }
           }
 
-
           $('#customStatus').text("ADDED " + satData[indexCheck[0]].OBJECT_NAME + " TO CUSTOM LAYER");
           window.setTimeout(function () {
             $('#customStatus').text("");
@@ -2000,7 +2023,7 @@ function getGroundStations(groundStations) {
       };
 
 
-      // Update all Satellite Positions
+      // Interval to Update all Satellite Positions
       var updatePositions = setInterval(function () {
         if (!updatePermission)
           return;
@@ -2031,7 +2054,7 @@ function getGroundStations(groundStations) {
 
 
       /***
-       * HTML interface Controls *
+       * Search bars and sliders *
        * ***/
 
       function onlyUnique(value, index, self) {
@@ -2063,9 +2086,9 @@ function getGroundStations(groundStations) {
                 break;
               }
             }
+            customYearCon = true;
             endFollow();
             toGsStation(searchGSat);
-            allLayersOff();
           }
         }
       });
@@ -2088,6 +2111,7 @@ function getGroundStations(groundStations) {
             var labelElement = $("<div></div>");
             labelElement.text("Name: " + item.label);
             $("#gsOrgLog").children().remove();
+            customYearCon = true;
             for (var i = 0; i < satNum; i += 1) {
               if (gsOrg[i] === item.label) {
                 addCustomGS(i);
@@ -2125,9 +2149,11 @@ function getGroundStations(groundStations) {
             var labelElement = $("<div></div>");
             labelElement.text("Name: " + item.label);
             $("#ownerLog").children().remove();
-
+            $('#yearRangeSlider').jqxSlider('setValue', 1958, 2016);
             isOwner = item.label;
             indexCheck = [];
+            customYearCon = true;
+            customLayerSats = [];
             populateCustomSatLayer(satData, isOwner, isLaunchYear,
                 isLaunchSite, isOperationalStatus, addCustomSat);
             $('#customStatus').text("ADDED " + item.label + " TO CUSTOM LAYER");
@@ -2135,7 +2161,6 @@ function getGroundStations(groundStations) {
               $('#customStatus').text("");
             }, 3000);
             allLayersOff();
-            $("#custom").text("CUSTOM ON");
           }
         }
       });
@@ -2158,9 +2183,11 @@ function getGroundStations(groundStations) {
             var labelElement = $("<div></div>");
             labelElement.text("Name: " + item.label);
             $("#yearLog").children().remove();
-
             isLaunchYear = item.label;
             indexCheck = [];
+            customYearCon = true;
+            customLayerSats = [];
+            $('#yearRangeSlider').jqxSlider('setValue', 1958, 2016);
             populateCustomSatLayer(satData, isOwner, isLaunchYear,
                 isLaunchSite, isOperationalStatus, addCustomSat);
             $('#customStatus').text("ADDED " + item.label + " TO CUSTOM LAYER");
@@ -2168,7 +2195,6 @@ function getGroundStations(groundStations) {
               $('#customStatus').text("");
             }, 3000);
             allLayersOff();
-            $("#custom").text("CUSTOM ON");
           }
         }
       });
@@ -2192,9 +2218,11 @@ function getGroundStations(groundStations) {
             var labelElement = $("<div></div>");
             labelElement.text("Name: " + item.label);
             $("#siteLog").children().remove();
-
+            customYearCon = true;
             isLaunchSite = item.label;
             indexCheck = [];
+            customLayerSats = [];
+            $('#yearRangeSlider').jqxSlider('setValue', 1958, 2016);
             populateCustomSatLayer(satData, isOwner, isLaunchYear,
                 isLaunchSite, isOperationalStatus, addCustomSat);
             $('#customStatus').text("ADDED " + item.label + " TO CUSTOM LAYER");
@@ -2202,7 +2230,6 @@ function getGroundStations(groundStations) {
               $('#customStatus').text("");
             }, 3000);
             allLayersOff();
-            $("#custom").text("CUSTOM ON");
           }
         }
       });
@@ -2227,9 +2254,11 @@ function getGroundStations(groundStations) {
             var labelElement = $("<div></div>");
             labelElement.text("Name: " + item.label);
             $("#statusLog").children().remove();
-
             isOperationalStatus = item.label;
             indexCheck = [];
+            customYearCon = true;
+            customLayerSats = [];
+            $('#yearRangeSlider').jqxSlider('setValue', 1958, 2016);
             populateCustomSatLayer(satData, isOwner, isLaunchYear,
                 isLaunchSite, isOperationalStatus, addCustomSat);
             $('#customStatus').text("ADDED " + item.label + " TO CUSTOM LAYER");
@@ -2237,7 +2266,6 @@ function getGroundStations(groundStations) {
               $('#customStatus').text("");
             }, 3000);
             allLayersOff();
-            $("#custom").text("CUSTOM ON");
           }
         }
       });
@@ -2318,7 +2346,6 @@ function getGroundStations(groundStations) {
         $('#orbitValueMin').html(event.args.value + "mins");
       });
 
-
       $("#yearRangeSlider").jqxSlider({
         theme: 'shinyblack',
         mode: "fixed",
@@ -2336,15 +2363,21 @@ function getGroundStations(groundStations) {
       $("#yearRangeSlider").bind('change', function () {
         indexCheck = [];
         clearAllCustomLayers();
-        $('#customStatus').text("CLEARED CUSTOM LAYER");
-        window.setTimeout(function () {
-          $('#customStatus').text("");
-        }, 2000);
-        allLayersOff();
-        $("#custom").text("CUSTOM ON");
-        for (var i = 0; i < satNum; i += 1) {
-          if (satDate[i] >= values[0] && satDate[i] <= values[1]) {
-            addCustomSat(i);
+
+        if (customYearCon === true) {
+          allLayersOff();
+          for (var i = 0; i < customLayerSats.length; i += 1) {
+            if (satDate[customLayerSats[i]] >= values[0] && satDate[customLayerSats[i]] <= values[1]) {
+              addCustomSat(customLayerSats[i]);
+            }
+          }
+        } else {
+          allLayersOff();
+          customLayerSats = [];
+          for (var i = 0; i < satNum; i += 1) {
+            if (satDate[i] >= values[0] && satDate[i] <= values[1]) {
+              addCustomSat(i);
+            }
           }
         }
       });
@@ -2850,7 +2883,7 @@ function populateSatInfo(satellite) {
   operationPlaceholder.textContent = satellite.OPERATIONAL_STATUS;
 }
 
-function populateCustomSatLayer(satData, owner, launchYear, launchSite, operationalStatus, addCustomSatCallback){
+function populateCustomSatLayer(satData, owner, launchYear, launchSite, operationalStatus, addCustomSatCallback, customYearCon){
   clearAllCustomLayers();
   for (var i = 0; i < satData.length; i++){
     if ((!owner || owner === satData[i].OWNER) &&
