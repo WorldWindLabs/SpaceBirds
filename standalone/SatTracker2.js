@@ -179,25 +179,121 @@ $('#sidebar-wrapper-right').perfectScrollbar();
 //toggle minimization of left nav bar
 $("#min_button").click(function () {
   console.log("in");
-  if ($(this).html() == "-") {
+  if ($(this).html() == "+") {
     console.log("inner");
-    $(this).html("+");
+    $(this).html("-");
   }
   else {
-    $(this).html("-");
+    $(this).html("+");
   }
   $("#box").slideToggle();
 });
 
 //toggle minimization of right nav bar
 $("#min_button_right").click(function () {
-  if ($(this).html() == "-") {
-    $(this).html("+");
-  }
-  else {
+  if ($(this).html() == "+") {
     $(this).html("-");
   }
+  else {
+    $(this).html("+");
+  }
   $("#box_right").slideToggle();
+});
+
+$('#min_button2').click(function () {
+  if ($(this).html() == "-") {
+    $(this).html("+");
+    var searchStack = document.getElementById('searchStack');
+    searchStack.style.display = "none";
+  } else {
+    $(this).html("-");
+    var searchStack = document.getElementById('searchStack');
+    searchStack.style.display = "block";
+  }
+});
+
+$('#min_button3').click(function () {
+  if ($(this).html() == "-") {
+    $(this).html("+");
+    var typeStack = document.getElementById('typeStack');
+    typeStack.style.display = "none";
+  } else {
+    $(this).html("-");
+    var typeStack = document.getElementById('typeStack');
+    typeStack.style.display = "block";
+  }
+});
+
+$('#min_button4').click(function () {
+  if ($(this).html() == "-") {
+    $(this).html("+");
+    var orbitStack = document.getElementById('orbitStack');
+    orbitStack.style.display = "none";
+  } else {
+    $(this).html("-");
+    var orbitStack = document.getElementById('orbitStack');
+    orbitStack.style.display = "block";
+  }
+});
+
+$('#min_button5').click(function () {
+  if ($(this).html() == "-") {
+    $(this).html("+");
+    var gsStack = document.getElementById('gsStack');
+    gsStack.style.display = "none";
+  } else {
+    $(this).html("-");
+    var gsStack = document.getElementById('gsStack');
+    gsStack.style.display = "block";
+  }
+});
+
+$('#min_button6').click(function () {
+  if ($(this).html() == "-") {
+    $(this).html("+");
+    var generalStack = document.getElementById('generalStack');
+    generalStack.style.display = "none";
+  } else {
+    $(this).html("-");
+    var generalStack = document.getElementById('generalStack');
+    generalStack.style.display = "block";
+  }
+});
+
+$('#min_button7').click(function () {
+  if ($(this).html() == "-") {
+    $(this).html("+");
+    var infoStack = document.getElementById('infoStack');
+    infoStack.style.display = "none";
+  } else {
+    $(this).html("-");
+    var infoStack = document.getElementById('infoStack');
+    infoStack.style.display = "block";
+  }
+});
+
+$('#min_button8').click(function () {
+  if ($(this).html() == "-") {
+    $(this).html("+");
+    var positionStack = document.getElementById('positionStack');
+    positionStack.style.display = "none";
+  } else {
+    $(this).html("-");
+    var positionStack = document.getElementById('positionStack');
+    positionStack.style.display = "block";
+  }
+});
+
+$('#min_button9').click(function () {
+  if ($(this).html() == "-") {
+    $(this).html("+");
+    var extraStack = document.getElementById('extraStack');
+    extraStack.style.display = "none";
+  } else {
+    $(this).html("-");
+    var extraStack = document.getElementById('extraStack');
+    extraStack.style.display = "block";
+  }
 });
 
 //gets position of every satellite
