@@ -172,130 +172,6 @@ function mouseUp() {
   updatePermission = true;
 }
 
-// Implementing the perfect scrollbar
-$('#sidebar-wrapper').perfectScrollbar();
-$('#sidebar-wrapper-right').perfectScrollbar();
-
-//toggle minimization of left nav bar
-$("#min_button").click(function () {
-  console.log("in");
-  if ($(this).html() == "+") {
-    console.log("inner");
-    $(this).html("-");
-  }
-  else {
-    $(this).html("+");
-  }
-  $("#box").slideToggle();
-});
-
-//toggle minimization of right nav bar
-$("#min_button_right").click(function () {
-  if ($(this).html() == "+") {
-    $(this).html("-");
-  }
-  else {
-    $(this).html("+");
-  }
-  $("#box_right").slideToggle();
-});
-
-$('#min_button2').click(function () {
-  if ($(this).html() == "-") {
-    $(this).html("+");
-    var searchStack = document.getElementById('searchStack');
-    searchStack.style.display = "none";
-  } else {
-    $(this).html("-");
-    var searchStack = document.getElementById('searchStack');
-    searchStack.style.display = "block";
-  }
-});
-
-$('#min_button3').click(function () {
-  if ($(this).html() == "-") {
-    $(this).html("+");
-    var typeStack = document.getElementById('typeStack');
-    typeStack.style.display = "none";
-  } else {
-    $(this).html("-");
-    var typeStack = document.getElementById('typeStack');
-    typeStack.style.display = "block";
-  }
-});
-
-$('#min_button4').click(function () {
-  if ($(this).html() == "-") {
-    $(this).html("+");
-    var orbitStack = document.getElementById('orbitStack');
-    orbitStack.style.display = "none";
-  } else {
-    $(this).html("-");
-    var orbitStack = document.getElementById('orbitStack');
-    orbitStack.style.display = "block";
-  }
-});
-
-$('#min_button5').click(function () {
-  if ($(this).html() == "-") {
-    $(this).html("+");
-    var gsStack = document.getElementById('gsStack');
-    gsStack.style.display = "none";
-  } else {
-    $(this).html("-");
-    var gsStack = document.getElementById('gsStack');
-    gsStack.style.display = "block";
-  }
-});
-
-$('#min_button6').click(function () {
-  if ($(this).html() == "-") {
-    $(this).html("+");
-    var generalStack = document.getElementById('generalStack');
-    generalStack.style.display = "none";
-  } else {
-    $(this).html("-");
-    var generalStack = document.getElementById('generalStack');
-    generalStack.style.display = "block";
-  }
-});
-
-$('#min_button7').click(function () {
-  if ($(this).html() == "-") {
-    $(this).html("+");
-    var infoStack = document.getElementById('infoStack');
-    infoStack.style.display = "none";
-  } else {
-    $(this).html("-");
-    var infoStack = document.getElementById('infoStack');
-    infoStack.style.display = "block";
-  }
-});
-
-$('#min_button8').click(function () {
-  if ($(this).html() == "-") {
-    $(this).html("+");
-    var positionStack = document.getElementById('positionStack');
-    positionStack.style.display = "none";
-  } else {
-    $(this).html("-");
-    var positionStack = document.getElementById('positionStack');
-    positionStack.style.display = "block";
-  }
-});
-
-$('#min_button9').click(function () {
-  if ($(this).html() == "-") {
-    $(this).html("+");
-    var extraStack = document.getElementById('extraStack');
-    extraStack.style.display = "none";
-  } else {
-    $(this).html("-");
-    var extraStack = document.getElementById('extraStack');
-    extraStack.style.display = "block";
-  }
-});
-
 //gets position of every satellite
 function getPosition(satrec, time) {
   var position_and_velocity = satellite.propagate(satrec,
@@ -570,20 +446,20 @@ function getGroundStations(groundStations) {
 
     ////Switchboard for Sat Types
     var orbitToggle = {
-        leoP: 9,
-        leoR: 0,
+        leoP: 1,
+        leoR: 3,
         leoD: 0,
-        meoP: 9,
-        meoR: 0,
+        meoP: 1,
+        meoR: 3,
         meoD: 0,
-        heoP: 9,
-        heoR: 0,
+        heoP: 1,
+        heoR: 3,
         heoD: 0,
-        geoP: 9,
-        geoR: 0,
+        geoP: 1,
+        geoR: 3,
         geoD: 0,
-        unclassifiedP: 0,
-        unclassifiedR: 0,
+        unclassifiedP: 1,
+        unclassifiedR: 3,
         unclassifiedD: 0
       };
 
@@ -1493,6 +1369,7 @@ function getGroundStations(groundStations) {
             break;
         }
       } else {
+        console.log(orbitToggle.heoP + orbitToggle.heoR + orbitToggle.heoD);
         switch (orbitToggle.heoP + orbitToggle.heoR + orbitToggle.heoD) {
           case 0:
             heoSatLayer.enabled = false;
@@ -1729,12 +1606,13 @@ function getGroundStations(groundStations) {
     $('#custom').click(function () {
       if ($(this).text() == "CUSTOM OFF") {
         $(this).text("CUSTOM ON");
-        $('#yearRangeSlider').jqxSlider({ values: [1958, 2016] });
+       // $('#yearRangeSlider').jqxSlider({ values: [1958, 2016] });
         allLayersOff();
       } else {
         $(this).text("CUSTOM OFF");
         customYearCon = false;
-        $('#yearRangeSlider').jqxSlider({ values: [1958, 2016] });
+        //clearAllCustomLayers();
+       // $('#yearRangeSlider').jqxSlider({ values: [1958, 2016] });
         allCustomOff();
       }
     });
@@ -1752,6 +1630,7 @@ function getGroundStations(groundStations) {
         gsToggleButtons.style.display = "inline";
       }
     });
+
     //turn of custom gs layer
     $('#customGS').click(function () {
       if ($(this).text() == "CUSTOM GS ON") {
@@ -1774,7 +1653,129 @@ function getGroundStations(groundStations) {
       }, 2000)
     });
 
+// Implementing the perfect scrollbar
+    $('#sidebar-wrapper').perfectScrollbar();
+    $('#sidebar-wrapper-right').perfectScrollbar();
 
+//toggle minimization of left nav bar
+    $("#min_button").click(function () {
+      console.log("in");
+      if ($(this).html() == "+") {
+        console.log("inner");
+        $(this).html("-");
+      }
+      else {
+        $(this).html("+");
+      }
+      $("#box").slideToggle();
+    });
+
+//toggle minimization of right nav bar
+    $("#min_button_right").click(function () {
+      if ($(this).html() == "+") {
+        $(this).html("-");
+      }
+      else {
+        $(this).html("+");
+      }
+      $("#box_right").slideToggle();
+    });
+
+    $('#min_button2').click(function () {
+      if ($(this).html() == "-") {
+        $(this).html("+");
+        var searchStack = document.getElementById('searchStack');
+        searchStack.style.display = "none";
+      } else {
+        $(this).html("-");
+        var searchStack = document.getElementById('searchStack');
+        searchStack.style.display = "block";
+      }
+    });
+
+    $('#min_button3').click(function () {
+      if ($(this).html() == "-") {
+        $(this).html("+");
+        var typeStack = document.getElementById('typeStack');
+        typeStack.style.display = "none";
+      } else {
+        $(this).html("-");
+        var typeStack = document.getElementById('typeStack');
+        typeStack.style.display = "block";
+      }
+    });
+
+    $('#min_button4').click(function () {
+      if ($(this).html() == "-") {
+        $(this).html("+");
+        var orbitStack = document.getElementById('orbitStack');
+        orbitStack.style.display = "none";
+      } else {
+        $(this).html("-");
+        var orbitStack = document.getElementById('orbitStack');
+        orbitStack.style.display = "block";
+      }
+    });
+
+    $('#min_button5').click(function () {
+      if ($(this).html() == "-") {
+        $(this).html("+");
+        var gsStack = document.getElementById('gsStack');
+        gsStack.style.display = "none";
+      } else {
+        $(this).html("-");
+        var gsStack = document.getElementById('gsStack');
+        gsStack.style.display = "block";
+      }
+    });
+
+    $('#min_button6').click(function () {
+      if ($(this).html() == "-") {
+        $(this).html("+");
+        var generalStack = document.getElementById('generalStack');
+        generalStack.style.display = "none";
+      } else {
+        $(this).html("-");
+        var generalStack = document.getElementById('generalStack');
+        generalStack.style.display = "block";
+      }
+    });
+
+    $('#min_button7').click(function () {
+      if ($(this).html() == "-") {
+        $(this).html("+");
+        var infoStack = document.getElementById('infoStack');
+        infoStack.style.display = "none";
+      } else {
+        $(this).html("-");
+        var infoStack = document.getElementById('infoStack');
+        infoStack.style.display = "block";
+      }
+    });
+
+    $('#min_button8').click(function () {
+      if ($(this).html() == "-") {
+        $(this).html("+");
+        var positionStack = document.getElementById('positionStack');
+        positionStack.style.display = "none";
+      } else {
+        $(this).html("-");
+        var positionStack = document.getElementById('positionStack');
+        positionStack.style.display = "block";
+      }
+    });
+
+    $('#min_button9').click(function () {
+      if ($(this).html() == "-") {
+        $(this).html("+");
+        var extraStack = document.getElementById('extraStack');
+        extraStack.style.display = "none";
+      } else {
+        $(this).html("-");
+        var extraStack = document.getElementById('extraStack');
+        extraStack.style.display = "block";
+      }
+    });
 
 
     /***
@@ -1996,12 +1997,16 @@ function getGroundStations(groundStations) {
 
       //UI button to clear custom sat layer
       $('#clearCustom').click(function () {
-        indexCheck = [];
         isOwner = false;
         isOperationalStatus = false;
         isLaunchYear = false;
         isLaunchSite = false;
-        $('#yearRangeSlider').jqxSlider({ values: [1958, 2016] });
+        while (customLayerSats.length > 0) {
+          customLayerSats.pop();
+        }
+        while (indexCheck.length > 0) {
+          indexCheck.pop();
+        }
         $("#nameSearch").jqxComboBox('clearSelection');
         $("#yearSearch").jqxComboBox('clearSelection');
         $("#siteSearch").jqxComboBox('clearSelection');
@@ -2017,8 +2022,8 @@ function getGroundStations(groundStations) {
 
       //Add individual sats to custom layer
       var indexCheck = [];
-      var customLayerSats = [];
       var indexChecked = null;
+      var customLayerSats = [];
       var addCustomSat = function (index) {
         indexChecked = indexCheck.indexOf(index);
         if (indexChecked === -1) {
@@ -2455,24 +2460,32 @@ function getGroundStations(groundStations) {
         width: "viewport"
       });
       var values = $('#yearRangeSlider').jqxSlider('values');
-      console.log(values);
       $("#yearRangeSlider").bind('change', function () {
-        indexCheck = [];
+        while (indexCheck.length > 0){
+          indexCheck.pop();
+        }
+        console.log(indexCheck.length);
         clearAllCustomLayers();
-
+        allLayersOff();
         if (customYearCon === true) {
-          allLayersOff();
+          console.log("in custom");
+          console.log(customYearCon);
           for (var i = 0; i < customLayerSats.length; i += 1) {
             if (satDate[customLayerSats[i]] >= values[0] && satDate[customLayerSats[i]] <= values[1]) {
               addCustomSat(customLayerSats[i]);
             }
           }
         } else {
+          while (customLayerSats.length > 0){
+            customLayerSats.pop();
+          }
+          console.log("in regular");
+          console.log(customYearCon);
+          clearAllCustomLayers();
           allLayersOff();
-          customLayerSats = [];
-          for (var i = 0; i < satNum; i += 1) {
-            if (satDate[i] >= values[0] && satDate[i] <= values[1]) {
-              addCustomSat(i);
+          for (var ind = 0; ind < satNum; ind += 1) {
+            if (satDate[ind] >= values[0] && satDate[ind] <= values[1]) {
+              addCustomSat(ind);
             }
           }
         }
@@ -2486,17 +2499,20 @@ function getGroundStations(groundStations) {
         //follow satellite on click
         // Move to sat position on click and redefine navigator positioning
       var startFollow;
-      var toCurrentPosition = function (index) {
+      var followIndex = 0;
+      var toCurrentPosition = function (ind) {
+        endFollow();
+        console.log(ind);
         var toggleButtons = document.getElementById('buttonToggle');
         toggleButtons.style.display = "inline";
-        var satPos = everyCurrentPosition[index];
+        var satPos = everyCurrentPosition[ind];
         //Changes center point of view.
         wwd.navigator.lookAtLocation.altitude = satPos.altitude;
         startFollow = window.setInterval(function () {
           try {
-            var position = getPosition(satellite.twoline2satrec(satData[index].TLE_LINE1, satData[index].TLE_LINE2), new Date());
+            var position = getPosition(satellite.twoline2satrec(satData[ind].TLE_LINE1, satData[ind].TLE_LINE2), new Date());
           } catch (err) {
-            console.log(err + ' in toCurrentPosition, sat ' + indx);
+            console.log(err + ' in toCurrentPosition, sat ' + ind);
             //continue;
           }
           //change view position
@@ -2504,25 +2520,28 @@ function getGroundStations(groundStations) {
           wwd.navigator.lookAtLocation.longitude = satPos.longitude;
           updateLLA(position);
         });
-        $('#follow').text('FOLLOW ON');
-        $('#follow').click(function () {
-          if ($(this).text() == "FOLLOW OFF") {
-            $(this).text("FOLLOW ON");
-            toCurrentPosition(index);
-          }
-          else {
-            $(this).text("FOLLOW OFF");
-            endFollow();
-          }
-        });
+        followIndex = ind;
       };
       var endFollow = function () {     //ends startFollow window.setInterval
         clearInterval(startFollow);
       };
 
+      $('#follow').click(function () {
+        if ($(this).text() == "FOLLOW OFF") {
+          $(this).text("FOLLOW ON");
+          console.log(followIndex);
+          toCurrentPosition(followIndex);
+        }
+        else {
+          $(this).text("FOLLOW OFF");
+          endFollow();
+        }
+      });
+
       //Mesh-cone to follow sat position
       var startMesh;                                    //allows to end window interval
       var meshToCurrentPosition = function (index) {
+        endMesh();
         startMesh = window.setInterval(function () {
           meshLayer.removeAllRenderables();
           var attributes = new WorldWind.ShapeAttributes(null);
@@ -2555,6 +2574,7 @@ function getGroundStations(groundStations) {
       //create past and future orbit on click
       var startOrbit;
       var createOrbit = function (index) {
+        endOrbit();
         startOrbit = window.setInterval(function () {
           var orbitRange = $('#orbitEvent').jqxSlider('value');
           var timeSlide = $('#timeEvent').jqxSlider('value');
@@ -2614,6 +2634,7 @@ function getGroundStations(groundStations) {
       //Get additional info of satellite on click and hover handles
       var startExtra;
       var extraData = function (index) {
+        endExtra();
         startExtra = window.setInterval(function () {
           try {
             var satStuff = satellite.twoline2satrec( //perform and store sat init calcs
@@ -2670,14 +2691,11 @@ function getGroundStations(groundStations) {
         for (var h = 0; h < highlightedItems.length; h++) {
           highlightedItems[h].highlighted = false;
           orbitsLayer.enabled = false;
-          endExtra();
-          endFollow();
-          endOrbit();
-          endMesh();
 
           var toggleButtons = document.getElementById('buttonToggle');
           toggleButtons.style.display = "none";
           orbitsHoverLayer.removeAllRenderables();
+          modelLayer.removeAllRenderables();
           orbitsHoverLayer.enabled = true;
           $('#follow').text('FOLLOW OFF');
           $('#mesh').text('HORIZON OFF');
@@ -2703,11 +2721,14 @@ function getGroundStations(groundStations) {
           endMesh();
           endHoverOrbit();
           endExtra();
+          satIndex = null;
+          gsIndex = null;
           var toggleButtons = document.getElementById('buttonToggle');
           toggleButtons.style.display = "none";
           var groundPosition = pickList.objects[0].position;
           orbitsHoverLayer.removeAllRenderables();
           orbitsHoverLayer.enabled = true;
+          modelLayer.removeAllRenderables();
           $('#follow').text('FOLLOW OFF');
           $('#mesh').text('HORIZON OFF');
           $('#orbit').text('ORBIT OFF');
@@ -2732,6 +2753,7 @@ function getGroundStations(groundStations) {
                 gsIndex = groundStation.indexOf(position);
               console.log(position);
               orbitsLayer.enabled = true;
+
               if (satIndex > -1) {
                 endHoverOrbit();
                 orbitsHoverLayer.enabled = false;
@@ -2748,6 +2770,9 @@ function getGroundStations(groundStations) {
                     endMesh();
                   }
                 });
+
+                $('#follow').text('FOLLOW ON');
+
                 toCurrentPosition(satIndex);
 
                 createOrbit(satIndex);
