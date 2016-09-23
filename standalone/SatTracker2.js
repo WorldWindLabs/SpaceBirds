@@ -1369,7 +1369,6 @@ function getGroundStations(groundStations) {
             break;
         }
       } else {
-        console.log(orbitToggle.heoP + orbitToggle.heoR + orbitToggle.heoD);
         switch (orbitToggle.heoP + orbitToggle.heoR + orbitToggle.heoD) {
           case 0:
             heoSatLayer.enabled = false;
@@ -1659,9 +1658,7 @@ function getGroundStations(groundStations) {
 
 //toggle minimization of left nav bar
     $("#min_button").click(function () {
-      console.log("in");
       if ($(this).html() == "+") {
-        console.log("inner");
         $(this).html("-");
       }
       else {
@@ -2338,7 +2335,6 @@ function getGroundStations(groundStations) {
       //create satellite site search
       var status = satStatus.filter(onlyUnique);
       status.sort();
-      console.log(status[0]);
       $("#statusSearch").jqxComboBox({
         source: status,
         displayMember: "OPERATIONAL STATUS",
@@ -2464,12 +2460,9 @@ function getGroundStations(groundStations) {
         while (indexCheck.length > 0){
           indexCheck.pop();
         }
-        console.log(indexCheck.length);
         clearAllCustomLayers();
         allLayersOff();
         if (customYearCon === true) {
-          console.log("in custom");
-          console.log(customYearCon);
           for (var i = 0; i < customLayerSats.length; i += 1) {
             if (satDate[customLayerSats[i]] >= values[0] && satDate[customLayerSats[i]] <= values[1]) {
               addCustomSat(customLayerSats[i]);
@@ -2479,8 +2472,6 @@ function getGroundStations(groundStations) {
           while (customLayerSats.length > 0){
             customLayerSats.pop();
           }
-          console.log("in regular");
-          console.log(customYearCon);
           clearAllCustomLayers();
           allLayersOff();
           for (var ind = 0; ind < satNum; ind += 1) {
@@ -2502,7 +2493,6 @@ function getGroundStations(groundStations) {
       var followIndex = 0;
       var toCurrentPosition = function (ind) {
         endFollow();
-        console.log(ind);
         var toggleButtons = document.getElementById('buttonToggle');
         toggleButtons.style.display = "inline";
         var satPos = everyCurrentPosition[ind];
@@ -2529,7 +2519,6 @@ function getGroundStations(groundStations) {
       $('#follow').click(function () {
         if ($(this).text() == "FOLLOW OFF") {
           $(this).text("FOLLOW ON");
-          console.log(followIndex);
           toCurrentPosition(followIndex);
         }
         else {
@@ -2746,14 +2735,10 @@ function getGroundStations(groundStations) {
               highlightedItems.push(pickList.objects[p].userObject);
 
               //Populate Info window with proper data
-              myFuncCalls++;
-              console.log(myFuncCalls);
               var position = pickList.objects[p].position;
                 satIndex = everyCurrentPosition.indexOf(position);
                 gsIndex = groundStation.indexOf(position);
-              console.log(position);
               orbitsLayer.enabled = true;
-
               if (satIndex > -1) {
                 endHoverOrbit();
                 orbitsHoverLayer.enabled = false;
@@ -2821,7 +2806,6 @@ function getGroundStations(groundStations) {
       wwd.redraw();
 
         $('#customSat').click(function () {
-          console.log(satIndex);
           addCustomSat(satIndex);
         });
         $('#addStation').click(function () {
