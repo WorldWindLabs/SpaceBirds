@@ -2210,6 +2210,7 @@ function getGroundStations(groundStations) {
             labelElement.text("Name: " + item.label);
             $("#gsOrgLog").children().remove();
             customYearCon = true;
+            customGSLayer.removeAllRenderables();
             for (var i = 0; i < satNum; i += 1) {
               if (gsOrg[i] === item.label) {
                 addCustomGS(i);
@@ -2428,6 +2429,8 @@ function getGroundStations(groundStations) {
         $('#timeEvent').jqxSlider('setValue', 0);
       });
 
+      $('#orbitValue').html(new Date(now.getTime() + 98 * 60000));
+      $('#orbitValueMin').html("Date of future orbit path endpoint");
       //Orbit length/time slider
       $("#orbitEvent").jqxSlider({
         theme: 'shinyblack',
@@ -2436,11 +2439,26 @@ function getGroundStations(groundStations) {
         min: 0,
         ticksFrequency: 1440,
         width: "viewport",
-        showButtons: false
+        showButtons: true
       });
       $('#orbitEvent').bind('change', function (event) {
         $('#orbitValue').html(new Date(now.getTime() + event.args.value * 60000));
-        $('#orbitValueMin').html(event.args.value + "mins");
+      });
+
+      $('#orbitValue2').html(new Date(now.getTime() - 98 * 60000));
+      $('#orbitValueMin2').html("Date of past orbit path endpoint");
+      //Orbit length/time slider
+      $("#orbitEvent2").jqxSlider({
+        theme: 'shinyblack',
+        value: 98,
+        max: 10080,
+        min: 0,
+        ticksFrequency: 1440,
+        width: "viewport",
+        showButtons: true
+      });
+      $('#orbitEvent2').bind('change', function (event) {
+        $('#orbitValue2').html(new Date(now.getTime() - event.args.value * 60000));
       });
 
       $("#yearRangeSlider").jqxSlider({
@@ -2566,13 +2584,14 @@ function getGroundStations(groundStations) {
         endOrbit();
         startOrbit = window.setInterval(function () {
           var orbitRange = $('#orbitEvent').jqxSlider('value');
+          var orbitRangePast = $('#orbitEvent2').jqxSlider('value');
           var timeSlide = $('#timeEvent').jqxSlider('value');
 
           orbitsLayer.removeAllRenderables();
           var now = new Date();
           var pastOrbit = [];
           var futureOrbit = [];
-          for (var i = -orbitRange; i <= orbitRange; i++) {
+          for (var i = -orbitRangePast; i <= orbitRange; i++) {
             var time = new Date(now.getTime() + (i * 60000) + (timeSlide * 60000));
             try {
               var position = getPosition(satellite.twoline2satrec(satData[index].TLE_LINE1, satData[index].TLE_LINE2), time);
@@ -2666,7 +2685,6 @@ function getGroundStations(groundStations) {
       var highlightedItems = [];
       var satIndex;
       var gsIndex;
-      var myFuncCalls = 0;
 
       var handleClick = function (recognizer) {
         // The input argument is either an Event or a TapRecognizer. Both have the same properties for determining
@@ -2690,7 +2708,13 @@ function getGroundStations(groundStations) {
           $('#mesh').text('HORIZON OFF');
           $('#orbit').text('ORBIT OFF');
           $('#collada').text('3D MODEL OFF');
-
+          endFollow();
+          endOrbit();
+          endMesh();
+          endHoverOrbit();
+          endExtra();
+          satIndex = null;
+          gsIndex = null;
         }
         highlightedItems = [];
 
@@ -2705,13 +2729,6 @@ function getGroundStations(groundStations) {
 
         // If only one thing is picked and it is the terrain, tell the world window to go to the picked location.
         if (pickList.objects.length == 1 && pickList.objects[0].isTerrain) {
-          endFollow();
-          endOrbit();
-          endMesh();
-          endHoverOrbit();
-          endExtra();
-          satIndex = null;
-          gsIndex = null;
           var toggleButtons = document.getElementById('buttonToggle');
           toggleButtons.style.display = "none";
           var groundPosition = pickList.objects[0].position;
@@ -2796,6 +2813,21 @@ function getGroundStations(groundStations) {
           }
         }
       };
+
+      $('#end').click(function(){
+        var toggleButtons = document.getElementById('buttonToggle');
+        toggleButtons.style.display = "none";
+        orbitsHoverLayer.removeAllRenderables();
+        modelLayer.removeAllRenderables();
+        orbitsHoverLayer.enabled = true;
+        endFollow();
+        endOrbit();
+        endMesh();
+        endHoverOrbit();
+        endExtra();
+        satIndex = null;
+        gsIndex = null;
+      });
 
       // Listen for mouse clicks.
       var clickRecognizer = new WorldWind.ClickRecognizer(wwd, handleClick);
