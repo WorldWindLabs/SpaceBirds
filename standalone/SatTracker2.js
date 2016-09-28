@@ -2673,13 +2673,15 @@ function getGroundStations(groundStations) {
 
       //create 3D collada model
       var createCollada = function (index) {
-        var satPos = everyCurrentPosition[index];
-        var colladaLoader = new WorldWind.ColladaLoader(satPos);
-        colladaLoader.init({dirPath: 'assets/collada-models/'});
-        colladaLoader.load('ISS.dae', function (scene) {
-          scene.scale = 10000;
-          modelLayer.addRenderable(scene);
-        });
+        if (satNames[index] === "ISS (ZARYA)") {
+          var satPos = everyCurrentPosition[index];
+          var colladaLoader = new WorldWind.ColladaLoader(satPos);
+          colladaLoader.init({dirPath: 'assets/collada-models/'});
+          colladaLoader.load('ISS.dae', function (scene) {
+            scene.scale = 10000;
+            modelLayer.addRenderable(scene);
+          });
+        }
       };
 
       var highlightedItems = [];
