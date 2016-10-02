@@ -343,51 +343,23 @@ function getGroundStations(groundStations) {
 
       //Switch between Main Layers: regular and custom
     var allLayersOff = function () {
-      if (leoSatLayer.enabled === true) {
-        leoSatCustom.enabled = true;
-      }
-      if (meoSatLayer.enabled === true) {
-        meoSatCustom.enabled = true;
-      }
-      if (heoSatLayer.enabled === true) {
-        heoSatCustom.enabled = true;
-      }
-      if (geoSatLayer.enabled === true) {
-        geoSatCustom.enabled = true;
-      }
-      if (unclassifiedSatLayer.enabled === true) {
-        unclassifiedSatCustom.enabled = true;
-      }
-      if (leoRocketLayer.enabled === true) {
-        leoRocketCustom.enabled = true;
-      }
-      if (meoRocketLayer.enabled === true) {
-        meoRocketCustom.enabled = true;
-      }
-      if (heoRocketLayer.enabled === true) {
-        heoRocketCustom.enabled = true;
-      }
-      if (geoRocketLayer.enabled === true) {
-        geoRocketCustom.enabled = true;
-      }
-      if (unclassifiedRocketLayer.enabled === true) {
-        unclassifiedRocketCustom.enabled = true;
-      }
-      if (leoDebrisLayer.enabled === true) {
-        leoDebrisCustom.enabled = true;
-      }
-      if (meoDebrisLayer.enabled === true) {
-        meoDebrisCustom.enabled = true;
-      }
-      if (heoDebrisLayer.enabled === true) {
-        heoDebrisCustom.enabled = true;
-      }
-      if (geoDebrisLayer.enabled === true) {
-        geoDebrisCustom.enabled = true;
-      }
-      if (unclassifiedDebrisLayer.enabled === true) {
-        unclassifiedDebrisCustom.enabled = true;
-      }
+        leoSatCustom.enabled = leoSatLayer.enabled;
+      console.log(leoSatLayer.enabled);
+        console.log(leoSatCustom.enabled);
+        meoSatCustom.enabled = meoSatLayer.enabled;
+        heoSatCustom.enabled = heoSatLayer.enabled;
+        geoSatCustom.enabled = heoSatLayer.enabled;
+        unclassifiedSatCustom.enabled = unclassifiedSatLayer.enabled;
+        leoRocketCustom.enabled = leoRocketLayer.enabled;
+        meoRocketCustom.enabled = meoRocketLayer.enabled;
+        heoRocketCustom.enabled = heoRocketLayer.enabled;
+        geoRocketCustom.enabled = geoRocketLayer.enabled;
+        unclassifiedRocketCustom.enabled = unclassifiedRocketLayer.enabled;
+        leoDebrisCustom.enabled = leoDebrisLayer.enabled;
+        meoDebrisCustom.enabled = meoDebrisLayer.enabled;
+        heoDebrisCustom.enabled = heoDebrisLayer.enabled;
+        geoDebrisCustom.enabled = geoDebrisLayer.enabled;
+        unclassifiedDebrisCustom.enabled = unclassifiedDebrisLayer.enabled;
 
       leoSatLayer.enabled = false;
       meoSatLayer.enabled = false;
@@ -1603,16 +1575,11 @@ function getGroundStations(groundStations) {
     //custom toggle
     var customYearCon = false;
     $('#custom').click(function () {
-      if ($(this).text() == "CUSTOM OFF") {
-        $(this).text("CUSTOM ON");
-       // $('#yearRangeSlider').jqxSlider({ values: [1958, 2016] });
-        allLayersOff();
-      } else {
-        $(this).text("CUSTOM OFF");
+      if ($(this).text() == "CUSTOM ON") {
         customYearCon = false;
-        //clearAllCustomLayers();
-       // $('#yearRangeSlider').jqxSlider({ values: [1958, 2016] });
         allCustomOff();
+      } else {
+        allLayersOff();
       }
     });
     //gs toggle
