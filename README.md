@@ -1,20 +1,20 @@
-##Link to the application:
+## Link to the application:
 <p align="center">
 <a href="http://worldwind.arc.nasa.gov/spacebirds/"><img src="https://github.com/NASAWorldWindResearch/SpaceBirds/blob/master/spacebirdsheader.png" alt="Click to begin"/></a>
 </p>
 
 
 
-##Video Tutorial: 
+## Video Tutorial: 
 <p align="center">
 <a href="https://www.youtube.com/watch?v=ojp8Tqf2j0k"><img src="https://img.youtube.com/vi/ojp8Tqf2j0k/0.jpg" alt="SpaceBirds video tutorial"/></a>
 </p>
 
-##SpaceBirds: The World of Satellites at your Fingertips
+## SpaceBirds: The World of Satellites at your Fingertips
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/NASA_logo.svg/200px-NASA_logo.svg.png" height="100px" /><img src="http://oykun.com/images/journal-header-whitespace.png" width="30px" /><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/ESA_logo_simple.svg/200px-ESA_logo_simple.svg.png" height="100px" />
 
-##Sections:
+## Sections:
 
 * [Introduction](#introduction)
 * [Application Walk-Through](#application-walk-through)
@@ -26,7 +26,7 @@
     5. [Ground Stations](#ground-stations)
     6. [Time Control](#time-control)
 
-##Introduction
+## Introduction
 There is an amazing amount of objects orbiting our planet, from the International Space Station to random debris, both organic and inorganic. For most, it is difficult to imagine this amount of objects floating around us, as well as their placement and trajectories.
 
 SpaceBirds, a new innovative application intended as both a visual and educational application as well as a powerful tracking tool, can be used by professionals, students, and enthusiasts alike. The app is developed using NASA Web World Wind, and consists of an easy to use interface that allows the user to display all known tracked orbital objects and ground stations, and display their relative information, such as type, orbital period, low, medium, and high earth orbit, country of origin, and use, all in a 3D environment.
@@ -65,9 +65,9 @@ The application is still in its alpha stage as it still contains some bugs and i
 <img src="http://i.imgur.com/trhnhue.png"/>
 </p>
 
-##Application Walk-Through:
+## Application Walk-Through:
 
-###Clicking on an object
+### Clicking on an object
 
 * A wide range of information about the clicked object is displayed in the right-hand column of the app, including its name, type, position, velocity, etc. 
 * A "Horizon" circle is drawn on the globe which accurately represents the view (coverage area) of the particular satellite.
@@ -80,23 +80,23 @@ The application is still in its alpha stage as it still contains some bugs and i
     * Toggling the *Model On* button controls whether or not the 3D model of the object is displayed (Note that the model is only visible if the object is zoomed into).
     * Clicking on the *Add to Custom* button adds the object to your own Custom Group, which you can view separately by turning "Custom On" in the "Type" window in the left-hand column.
  
-###Searching for a satellite
+### Searching for a satellite
 
 From the Search bar on the left-hand column, either type in the name of a satellite or select one from the drop-down menu. This will navigate the globe to center your view around this satellite, and it will also select that Satellite, which activates the same functions mentioned above for clicking on a satellite. 
 
-###Categorizing by Type
+### Categorizing by Type
 
 Using the window on the left-hand column titled "Type", you can choose what type of objects you wish to be displayed in view around the globe. Those types include payloads, rocket bodies, or debris, as well as your own custom list.
 
-###Categorizing by Orbit Range
+### Categorizing by Orbit Range
 
 Using the window in the left-hand column titled "Orbit Range", you can select one or more of the following orbit ranges to display satellites that correspond to them: Low Earth Orbit, Medium Earth Orbit, Geosynchronous, High Earth Orbit, and Unclassified. You can also use the slider placed here in order to control the length of the orbit that will be plotted around a selected object. Sliding to the right increases the length of the orbit. The date at the bottom of the slider shows the end date and time at which the future (green) orbit stops. The "mins" represent how many minutes of travel will the orbit be drawn for on each sides past, and present.
 
-###Ground Stations
+### Ground Stations
 
 Using the window titled "Ground Stations", you can search for a certain ground station by name, turn ground stations on and off, add the horizon of the view of a ground station or clear it. 
 
-###Time Control
+### Time Control
 
 The Slider at the bottom of the screen allows you to change the date and time to a past or future value, and thereby change the entire view of everything around the globe accurately to that specific time. 
 
