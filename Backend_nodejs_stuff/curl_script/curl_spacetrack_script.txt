@@ -1,10 +1,4 @@
 Run this from a bash command line:
 
-cybermegacat@yahoo.com.mx
-*85*y64spacetrack*
-
-
-
-
-curl --limit-rate 100K -c cookies.txt -b cookies.txt -k https://www.space-track.org/ajaxauth/login -d 'identity=cybermegacat@yahoo.com.mx&password=*85*y64spacetrack*&query=https://www.space-track.org/basicspacedata/query/class/tle_latest/ORDINAL/1/EPOCH/>now-30/orderby/NORAD_CAT_ID asc/metadata/false' > 'C:/Users/Administrator/WebstormProjects/Backend stuff/TLE.json'
+curl --limit-rate 100K -c cookies.txt -b cookies.txt -k https://www.space-track.org/ajaxauth/login -d 'identity=INSERT_EMAIL_HERE&password=INSERT_PASSWORD_HERE&query=https://www.space-track.org/basicspacedata/query/class/tle_latest/ORDINAL/1/EPOCH/>now-30/orderby/NORAD_CAT_ID asc/metadata/false' > '[path to run filtering script]/PruebaTLE.json'
 
