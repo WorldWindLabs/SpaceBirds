@@ -1,6 +1,6 @@
 ## Link to the application:
 <p align="center">
-[<img src="spacebirdsheader.png">](https://worldwind.arc.nasa.gov/spacebirds/)
+<a href="https://worldwind.arc.nasa.gov/spacebirds/"><img src="spacebirdsheader.png"></a>
 </p>
 
 
