@@ -84,16 +84,16 @@ define([
 
             AbstractShape.call(this, attributes);
 
-            // Private. Documentation is with the defined property below.
+            // Private. docs is with the defined property below.
             this._positions = positions;
 
-            // Private. Documentation is with the defined property below.
+            // Private. docs is with the defined property below.
             this._pathType = WorldWind.GREAT_CIRCLE;
 
-            // Private. Documentation is with the defined property below.
+            // Private. docs is with the defined property below.
             this._terrainConformance = 10;
 
-            // Private. Documentation is with the defined property below.
+            // Private. docs is with the defined property below.
             this._numSubSegments = 10;
 
             this.referencePosition = this.determineReferencePosition(this._positions);
