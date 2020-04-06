@@ -1,6 +1,6 @@
 ## Link to the application:
 <p align="center">
-<a href="http://worldwind.arc.nasa.gov/spacebirds/"><img src="https://github.com/NASAWorldWindResearch/SpaceBirds/blob/master/spacebirdsheader.png" alt="Click to begin"/></a>
+[http://worldwind.arc.nasa.gov/spacebirds/](spacebirdsheader.png)
 </p>
 
 
