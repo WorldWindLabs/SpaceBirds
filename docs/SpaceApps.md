@@ -43,8 +43,8 @@ The query being requested to Spacetrack's API is:
 
 ### Rendering the orbital objects in WorldWind
 
-Remember that using NASA WorldWind is not mandatory for you to participate in the Orbital Scrap Metal SpaceApps challenge. It is recommended that beginners create 2D games, or if you're familiar with a 3D game engine, you might prefer to use that instead with the real-world satellite data.
+Remember that using NASA WorldWind is not mandatory for you to participate in the **Orbital Scrap Metal SpaceApps challenge**. It is recommended that beginner teams create 2D games, or if you're familiar with a 3D game engine, you might prefer to use that instead with the real-world satellite data that you acquired.
 
-That being said, if your interests lie alongside virtual terrestrial globes, Geospatial Information Systems (GIS) or
+That being said, if your interests lie alongside virtual terrestrial globes, Geospatial Information Systems (GIS), mapping applications in general (for instance, like the applications that real satellite controllers use at NASA and other space agencies) here is the description of how the satellite TLE data is translated into terms of latitude, longitude and altitude.
 
 ### Additional resources
