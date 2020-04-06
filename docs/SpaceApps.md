@@ -1,4 +1,4 @@
-##Hi SpaceApps participants!
+## Hi SpaceApps participants!
 
 As part of the SpaceApps hackathon, SpaceBirds is given as a resource for the [Orbital Scrap Metal](https://2019.spaceappschallenge.org/challenges/stars/orbital-scrap-metal-the-video-game/details) challenge since 2019.
 
@@ -8,7 +8,7 @@ Parts of SpaceBirds may prove useful for you in order to understand how the orbi
 
 You can also learn what are the categories of orbiting objects, and how to define and distinguish *orbital debris* among them. The definition may not be as clear-cut as you initially thought!
 
-Since one of the requirements of the **Orbital Scrap Metal** challenge is to have real-world satellite information, SpaceBirds may prove you useful into how to request and obtain such information from an automated system. This is a very useful skill for any aspiring programmer that goes way beyond satellite tracking. Pretty much every online service that you use makes use of such automated systems.
+Since one of the requirements of the **Orbital Scrap Metal** challenge is to have real-world satellite information, SpaceBirds may prove you useful into how to request and obtain such information from an automated system. This is a very useful skill for any aspiring programmer. Pretty much every online service that you use makes use of such automated systems, and NASA has an assortment of these for many kinds of space data, as can be seen [here](https://api.nasa.gov/).
 
 ## Sections:
 
