@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<html lang="en">
+<head>
+    <!--NOTE: Most Web World Wind examples use jquery, Bootstrap and requirejs but those technologies are NOT-->
+    <!--required by Web World Wind. See SimplestExample.html for an example of using Web World Wind without them.-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
+    <!--jQuery-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <!--Bootstrap-->
+    <!-- <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
+
+
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/simple-sidebar.css">
+    <link rel="stylesheet" href="assets/thirdparty/css/main.css"/>
+    <link rel="stylesheet" href="perfectscrollbar/perfect-scrollbar.min.css"/>
+
+    <link rel="stylesheet" href="jqwidgets/styles/jqx.base.css" type="text/css"/>
+    <link rel="stylesheet" href="jqwidgets/styles/jqx.shinyblack.css" type="text/css"/>
+    <link rel="stylesheet" href="styles/bulma.css"/>
+    <script type="text/javascript" src="jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="jqwidgets/jqxcombobox.js"></script>
+    <script src="perfectscrollbar/perfect-scrollbar.jquery.min.js"></script>
+
+    <script type="text/javascript" src="jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="jqwidgets/jqxslider.js"></script>
+
+    <!--Title for Tab-->
+    <title>SPACEBIRDS</title>
+    <link rel="shortcut icon" href="assets/images/spacebirdlogo_dark.png"/>
+</head>
+
+<body style="background-image: url('assets/images/space.jpeg');">
+
+<!--custom status-->
+<div class="coolLogo" style="color: #d9d9d9; display: inline; position: absolute; z-index: 1; color: white;"
+     id="customStatus">
+
+</div>
+
+<!--time bar-->
+<div id="timeBar">
+    <div style="color: white; font-size:20px; text-align: left; right: 650px" id="timeValue"></div>
+    <div class="coolLogo" style="color: white; text-align: left">TIME CONTROL
+        <button style="font-size:65%; width: 65px; height: 25px; max-height:25px; background-color: rgba(255,255,255,0.2); color: white; padding: 0.1em 0.1em 0.1em 0.1em; border: 1px solid white"
+                id="timeReset">RESET TIME
+        </button>
+        <button style="font-size:75%; width: 65px; height: 25px; max-height:25px; background-color: rgba(255,255,255,0.2); color: white; padding: 0.1em 0.1em 0.1em 0.1em; border: 1px solid white">
+            <a href="javascript:toggleRepresentation();" id="representation" style="color: white">3D</a>
+        </button>
+        <a href="#" style="align-content: right;">
+        <span style="float: right;display: none" id="buttonToggle">
+             <button style="font-size:60%; width: 80px; height: 25px; max-height:25px; background-color: rgba(255,255,255,0.2); color: white; padding: 0.1em 0.1em 0.1em 0.1em; border: 1px solid white"
+                     id="end">END FOLLOW</button>
+            <button style="font-size:60%; width: 80px; height: 25px; max-height:25px; background-color: rgba(255,255,255,0.2); color: white; padding: 0.1em 0.1em 0.1em 0.1em; border: 1px solid white"
+                    id="follow">FOLLOW ON</button>
+            <button style="font-size:60%; width: 70px; height: 25px; max-height:25px; background-color: rgba(255,255,255,0.2); color: white; padding: 0.1em 0.1em 0.1em 0.1em; border: 1px solid white"
+                    id="mesh">HORIZON OFF</button>
+            <button style="font-size:60%; width: 70px; height: 25px; max-height:25px; background-color: rgba(255,255,255,0.2); color: white; padding: 0.1em 0.1em 0.1em 0.1em; border: 1px solid white"
+                    id="orbit">ORBIT OFF</button>
+            <button style="font-size:60%; width: 70px; height: 25px; max-height:25px; background-color: rgba(255,255,255,0.2); color: white; padding: 0.1em 0.1em 0.1em 0.1em; border: 1px solid white"
+                    id="collada">MODEL OFF</button>
+            <button style="font-size:55%; width: 70px; height: 25px; max-height:25px; background-color: rgba(255,255,255,0.2); color: white; padding: 0.1em 0.1em 0.1em 0.1em; border: 1px solid white"
+                    id="customSat">ADD TO CUSTOM</button>
+        </span>
+            <span style="float: right;display: none; padding-right: 8px" id="gsButtonToggle">
+             <button id="addStation"
+                     style="font-size:55%; width: 70px; height: 25px; max-height:25px; background-color: rgba(255,255,255,0.2); color: white; padding: 0.1em 0.1em 0.1em 0.1em; border: 1px solid white">
+                            ADD CUSTOM GS
+             </button>
+        </span>
+        </a>
+    </div>
+    <div style="color: white;" id='timeEvent'></div>
+</div>
+
+
+<div id="globe">
+    <canvas id="canvasOne" style="width: 100%; height:100%;">
+        Your browser does not support HTML5 Canvas.
+    </canvas>
+    <!--Menu-->
+    <div id="wrapper">
+        <div id="sidebar-wrapper">
+            <br/>
+
+            <div class="coolLogo" style="font-size:27px; color: white;">
+                <img src="assets/images/spacebirdlogo.png" height="10%" width="10%">
+                <p style="font-size: 25px; display: inline">
+                    SPACEBIRDS
+                    <!-- <span style="font-size: 8px !important;">
+                      0.6
+                    </span> -->
+                <div id="min_button"
+                     style="right: 10px!important;cursor:pointer;font-size:35px; display: inline; position: absolute">
+                    -
+                </div>
+                </p>
+            </div>
+            <div id="box" class="sidebar-nav">
+                <nav class="panel" style="left: 10px;right: 10px; position: relative; width: 230px">
+                    <h3 class="panel-heading coolLogo" style="color: #d9d9d9">
+                        SEARCH <u>
+                        <div id="min_button2"
+                             style="right: 10px!important;cursor:pointer;font-size:35px; display: inline; position: absolute">
+                            +
+                        </div>
+                    </u>
+                    </h3>
+                    <div id="searchStack" style="display: none">
+                        <div style="width: 100%" id='nameSearch'></div>
+                        <div style="width: 100%;font-size: 12px; font-family: Verdana;" id="nameLog"></div>
+                        <div style="width: 100%" id='ownerSearch'></div>
+                        <div style="width: 100%;font-size: 12px; font-family: Verdana;" id="ownerLog"></div>
+                        <div style="width: 100%" id='siteSearch'></div>
+                        <div style="width: 100%;font-size: 12px; font-family: Verdana;" id="siteLog"></div>
+                        <div style="width: 100%" id='statusSearch'></div>
+                        <div style="width: 100%;font-size: 12px; font-family: Verdana;" id="statusLog"></div>
+                        <div style="width: 100%" id='yearSearch'></div>
+                        <div style="width: 100%;font-size: 12px; font-family: Verdana;" id="yearLog"></div>
+                        <div>YEAR SLIDER</div>
+                        <div style="width: 100%" class="panel-block is-active;" id='yearRangeSlider'></div>
+                        <a id="custom" class="panel-block" style="color: #d9d9d9">
+                            CUSTOM OFF
+                        </a>
+                        <a id="clearCustom" class="panel-block" style="color: #d9d9d9">
+                            CLEAR CUSTOM
+                        </a>
+                    </div>
+                </nav>
+
+                <nav class="panel" style="left: 10px;right: 10px; position: relative; width: 230px;color: #d9d9d9">
+                    <h3 class="panel-heading coolLogo" style="color: #d9d9d9">
+                        TYPE
+                        <u>
+                            <div id="min_button3"
+                                 style="right: 10px!important;cursor:pointer;font-size:35px; display: inline; position: absolute">
+                                +
+                            </div>
+                        </u>
+                    </h3>
+                    <div id="typeStack" style="display: none">
+                        <a id="allSats" class="panel-block is-active" style="color: #d9d9d9">ALL OFF</a>
+                        <a id="payloads" class="panel-block" style="color: #d9d9d9">PAYLOADS ON</a>
+                        <a id="rockets" class="panel-block" style="color: #d9d9d9">
+                            ROCKETS ON
+                        </a>
+                        <a id="debris" class="panel-block" style="color: #d9d9d9">
+                            DEBRIS OFF
+                        </a>
+                    </div>
+                </nav>
+
+                <nav class="panel" style="left: 10px;right: 10px; position: relative; width: 230px">
+                    <h3 class="panel-heading coolLogo" style="color: #d9d9d9">
+                        ORBIT RANGE
+                        <u>
+                            <div id="min_button4"
+                                 style="right: 10px!important;cursor:pointer;font-size:35px; display: inline; position: absolute">
+                                +
+                            </div>
+                        </u>
+                    </h3>
+                    <div id="orbitStack" style="display: none">
+                        <a style="width: 100%;" id='orbitEvent' class="panel-block is-active">
+                        </a>
+                        <p style="color: #d9d9d9; font-size:10px; width: 100%;" id="orbitValue"></p>
+                        <p style="color: #d9d9d9; font-size:10px; width: 100%;" id="orbitValueMin"></p>
+                        <a style="width: 100%;" id='orbitEvent2' class="panel-block is-active">
+                        </a>
+                        <p style="color: #d9d9d9; font-size:10px; width: 100%;" id="orbitValue2"></p>
+                        <p style="color: #d9d9d9; font-size:10px; width: 100%;" id="orbitValueMin2"></p>
+                        <a id="leo" class="panel-block is-active" style="color: #d9d9d9">
+                            LEO ON
+                        </a>
+                        <a id="meo" class="panel-block" style="color: #d9d9d9">
+                            MEO ON
+                        </a>
+                        <a id="geo" class="panel-block" style="color: #d9d9d9">
+                            GEO ON
+                        </a>
+                        <a id="heo" class="panel-block" style="color: #d9d9d9">
+                            HEO ON
+                        </a>
+                        <a id="unclassified" class="panel-block" style="color: #d9d9d9">
+                            UNCLASSIFIED ON
+                        </a>
+                    </div>
+                </nav>
+
+                <nav class="panel" style="left: 10px;right: 10px; position: relative; width: 230px">
+                    <h3 class="panel-heading coolLogo" style="color: #d9d9d9; font-size: 15px">
+                        GROUNDSTATIONS
+                        <u>
+                            <div id="min_button5"
+                                 style="right: 10px!important;cursor:pointer;font-size:35px; display: inline; position: absolute">
+                                +
+                            </div>
+                        </u>
+                    </h3>
+                    <div id="gsStack" style="display: none">
+                        <div style="width: 100%;font-size: 12px; font-family: Verdana;" id='gsNameSearch'></div>
+                        <div style="width: 100%;font-size: 12px; font-family: Verdana;" id="gsNameLog"></div>
+                        <div style="width: 100%;font-size: 12px; font-family: Verdana;" id='gsOrgSearch'></div>
+                        <div style="width: 100%;font-size: 12px; font-family: Verdana;" id="gsOrgLog"></div>
+                        <a id="gStations" class="panel-block is-active" style="color: #d9d9d9">
+                            GS OFF
+                        </a>
+                        <a id="customGS" class="panel-block" style="color: #d9d9d9">
+                            CUSTOM GS OFF
+                        </a>
+                        <a id="clearStations" class="panel-block" style="color: #d9d9d9">
+                            CLEAR CUSTOM GS
+                        </a>
+                    </div>
+                </nav>
+
+                <nav class="panel" style="left: 10px;right: 10px; position: relative; width: 230px">
+                    <h3 class="panel-heading coolLogo" style="color: #d9d9d9">
+                        GENERAL
+                        <u>
+                            <div id="min_button6"
+                                 style="right: 10px!important;cursor:pointer;font-size:35px; display: inline; position: absolute">
+                                +
+                            </div>
+                        </u>
+                    </h3>
+                    <div id="generalStack" style="display: none">
+                        <a href="about.html" class="panel-block is-active" style="color: #d9d9d9">
+                            ABOUT
+                        </a>
+                        <a id="menu-toggle-right" class="panel-block" style="color: #d9d9d9">
+                            <span id="infoSidebar">INFORMATION PANEL</span>
+                        </a>
+                    </div>
+                </nav>
+
+                <br/>
+
+            </div>
+
+        </div>
+
+    </div>
+    <!--Information Sidebar-->
+    <div id="wrapper-right">
+        <div id="sidebar-wrapper-right" style="background-color: transparent">
+            <div class="coolLogo" style="font-size:27px; color: white;">
+                <p style="font-size: 25px; display: inline">
+                    INFORMATION
+                <div id="min_button_right"
+                     style="right: 10px!important;cursor:pointer;font-size:35px; display: inline; position: absolute">
+                    -
+                </div>
+                </p>
+            </div>
+            <div id="box_right" class="sidebar-nav">
+                <p style="color: white;">OBJECTS TRACKED: <span id="tracked"></span></p>
+                <nav class="panel"
+                     style="left: 0px; right: 10px; position: relative; width: 230px; color: #d9d9d9">
+                    <h3 class="panel-heading coolLogo" style="color: #d9d9d9">
+                        GENERAL
+                        <u>
+                            <div id="min_button7"
+                                 style="right: 10px!important;cursor:pointer;font-size:35px; display: inline; position: absolute">
+                                +
+                            </div>
+                        </u>
+                    </h3>
+                    <div id="infoStack" style="display: none">
+                        <a class="panel-block is-active" style="color: #d9d9d9">
+                            NAME:
+                            <span style="color: #d9d9d9" id="name"></span>
+                        </a>
+                        <a class="panel-block is-active" style="color: #d9d9d9">
+                            TYPE:
+                            <span style="color: #d9d9d9" id="type"></span>
+                        </a>
+                        <a class="panel-block is-active" style="color: #d9d9d9">
+                            SOURCE:
+                            <span style="color: #d9d9d9" id="owner"></span>
+                        </a>
+                        <a class="panel-block is-active" style="color: #d9d9d9">
+                            ID:
+                            <span style="color: #d9d9d9" id="id"></span>
+                        </a>
+                        <a class="panel-block is-active" style="color: #d9d9d9">
+                            LAUNCH SITE:
+                            <span style="color: #d9d9d9" id="launch"></span>
+                        </a>
+                        <a class="panel-block is-active" style="color: #d9d9d9">
+                            STATUS:
+                            <span style="color: #d9d9d9" id="operation"></span>
+                        </a>
+                    </div>
+                </nav>
+
+                <nav class="panel"
+                     style="left: 0px; right: 10px; position: relative; width: 230px; color: #d9d9d9">
+                    <h3 class="panel-heading coolLogo" style="color: #d9d9d9">
+                        POSITION
+                        <u>
+                            <div id="min_button8"
+                                 style="right: 10px!important;cursor:pointer;font-size:35px; display: inline; position: absolute">
+                                +
+                            </div>
+                        </u>
+                    </h3>
+                    <div id="positionStack" style="display: none">
+                        <a class="panel-block is-active" style="color: #d9d9d9">
+                            ORBIT TYPE:
+                            <span style="color: #d9d9d9" id="orbitType"></span>
+                        </a>
+                        <a class="panel-block is-active" style="color: #d9d9d9">
+                            LATITUDE:
+                            <span style="color: #d9d9d9" id="latitude"></span>
+                        </a>
+                        <a class="panel-block is-active" style="color: #d9d9d9">
+                            LONGITUDE:
+                            <span style="color: #d9d9d9" id="longitude"></span>
+                        </a>
+                        <a class="panel-block is-active" style="color: #d9d9d9">
+                            ALTITUDE:
+                            <span style="color: #d9d9d9" id="altitude"></span>
+                        </a>
+                    </div>
+                </nav>
+
+                <nav class="panel"
+                     style="left: 0px; right: 10px; position: relative; width: 230px; color: #d9d9d9">
+                    <h3 class="panel-heading coolLogo" style="color: #d9d9d9">
+                        EXTRA DATA
+                        <u>
+                            <div id="min_button9"
+                                 style="right: 10px!important;cursor:pointer;font-size:35px; display: inline; position: absolute">
+                                +
+                            </div>
+                        </u>
+                    </h3>
+                    <div id="extraStack" style="display: none">
+                        <a class="panel-block is-active" style="color: #d9d9d9">
+                            INCLINE:
+                            <span style="color: #d9d9d9" id="inclination"></span>
+                        </a>
+                        <a class="panel-block is-active" style="color: #d9d9d9">
+                            ECCENTRICITY:
+                            <span style="color: #d9d9d9" id="eccentricity"></span>
+                        </a>
+                        <a class="panel-block is-active" style="color: #d9d9d9">
+                            MEAN MOTION:
+                            <span style="color: #d9d9d9" id="revDay"></span>
+                        </a>
+                        <a class="panel-block is-active" style="color: #d9d9d9">
+                            VELOCITY:
+                            <span style="color: #d9d9d9" id="velocity"></span>
+                        </a>
+                        <a class="panel-block is-active" style="color: #d9d9d9">
+                            APOGEE:
+                            <span style="color: #d9d9d9" id="apogee"></span>
+                        </a>
+                        <a class="panel-block is-active" style="color: #d9d9d9">
+                            PERIGEE:
+                            <span style="color: #d9d9d9" id="perigee"></span>
+                        </a>
+                        <a class="panel-block is-active" style="color: #d9d9d9">
+                            PERIOD:
+                            <span style="color: #d9d9d9" id="period"></span>
+                        </a>
+                        <a class="panel-block is-active" style="color: #d9d9d9">
+                            SEMI-MAJOR:
+                            <span style="color: #d9d9d9" id="majorAxis"></span>
+                        </a>
+                        <a class="panel-block is-active" style="color: #d9d9d9">
+                            SEMI-MINOR::
+                            <span style="color: #d9d9d9" id="minorAxis"></span>
+                        </a>
+                    </div>
+
+                </nav>
+            <br/>
+
+            <br/>
+
+        </div>
+
+    </div>
+</div>
+<br>
+</div>
+</body>
+<script>
+    $("#menu-toggle").click(function (e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+    $("#menu-toggle-right").click(function (e) {
+        e.preventDefault();
+        $("#wrapper-right").toggleClass("toggled");
+    });
+</script>
+<script src="util/worldwindlib.js"></script>
+<script src="util/LayerManager.js"></script>
+<script src="util/Satellite.js"></script>
+<script src="SpaceBirds.js"></script>
+</html>
