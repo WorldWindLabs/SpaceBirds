@@ -110,7 +110,7 @@ define([
                 this._boundariesSpecifiedSimply = true;
             }
 
-            // Private. Documentation is with the defined property below and the constructor description above.
+            // Private. docs is with the defined property below and the constructor description above.
             this._boundaries = boundaries;
 
             this._textureCoordinates = null;

@@ -106,10 +106,10 @@ define([
 
             AbstractMesh.call(this, attributes);
 
-            // Private. Documentation is with the defined property below and the constructor description above.
+            // Private. docs is with the defined property below and the constructor description above.
             this._positions = positions;
 
-            // Private. Documentation is with the defined property below and the constructor description above.
+            // Private. docs is with the defined property below and the constructor description above.
             this._indices = indices;
 
             this.referencePosition = this._positions[0];

@@ -65,7 +65,7 @@ define([
              */
             this.pickTransparentImagePixels = true;
 
-            // Private. Documentation is with the defined property below.
+            // Private. docs is with the defined property below.
             this._altitudeScale = 1;
         };
 
