@@ -1,6 +1,7 @@
 api-doc/
 WebWorldWind.zip
 node_modules/
+.idea/
 .DS_Store
 *.iml
 *.xml

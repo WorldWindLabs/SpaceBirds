@@ -6,5 +6,6 @@ As of March 23rd 2020, this comprises NNNN objects, between payloads (operationa
 
 Data is retrieved and cross-referenced with http://celestrak.com/
 
+The query being requested to Spacetrack's API is:
 
 `https://www.space-track.org/basicspacedata/query/class/tle_latest/ORDINAL/1/EPOCH/>now-30/orderby/NORAD_CAT_ID asc/metadata/false`
