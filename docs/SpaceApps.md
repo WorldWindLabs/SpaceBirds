@@ -1,14 +1,14 @@
 ## Hi SpaceApps participants!
 
-As part of the SpaceApps hackathon, SpaceBirds is given as a resource for the [Orbital Scrap Metal](https://2019.spaceappschallenge.org/challenges/stars/orbital-scrap-metal-the-video-game/details) challenge since 2019.
+As part of the [SpaceApps](https://www.spaceappschallenge.org/) hackathon, SpaceBirds is given as a resource for the [Orbital Scrap Metal](https://2019.spaceappschallenge.org/challenges/stars/orbital-scrap-metal-the-video-game/details) challenge since 2019.
 
-SpaceBirds is a web application that displays all the objects tracked in Earth orbit in real time. It's built with the [NASA WorldWind 3D globe web library](https://github.com/NASAWorldWind/WebWorldWind) and it obtains the information of all the orbiting objects from a service set up by the US government.
+SpaceBirds is a web application that displays all the objects tracked in Earth orbit in real time. It's built with the [NASA WorldWind 3D globe web library](https://github.com/NASAWorldWind/WebWorldWind) and it obtains the information of all the orbiting objects from a data source set up by the US government.
 
-Parts of SpaceBirds may prove useful for you in order to understand how the orbiting objects' information is obtained and shown in an application in real time, and at the same time, it can teach you one thing or two about how satellites orbit the Earth and how can we know their current, past, and present position at any given time.
+Parts of SpaceBirds may prove useful for you in order to understand how the orbiting objects' information is obtained and shown in an application in real time, and at the same time, it can teach you one thing or two about how satellites orbit the Earth and how can we know their current, past, and present position at any given time. If you want a challenge, you can attempt to *gamify* SpaceBirds itself to convert it into an orbital debris poaching videogame.
 
-You can also learn what are the categories of orbiting objects, and how to define and distinguish *orbital debris* among them. The definition may not be as clear-cut as you initially thought!
+You can also learn what are the categories of orbiting objects, and how to define and distinguish **orbital debris** among them. The definition may not be as clear-cut as you initially thought!
 
-Since one of the requirements of the **Orbital Scrap Metal** challenge is to have real-world satellite information, SpaceBirds may prove you useful into how to request and obtain such information from an automated system. This is a very useful skill for any aspiring programmer. Pretty much every online service that you use makes use of such automated systems, and NASA has an assortment of these for many kinds of space data, as can be seen [here](https://api.nasa.gov/).
+Since one of the requirements of the **Orbital Scrap Metal** challenge is to have real-world satellite information, SpaceBirds may prove you useful into how to request and obtain such information from an automated system. This is a very useful skill for any aspiring programmer. Pretty much every online service that you use makes use of such automated systems, and NASA has an assortment of these for many kinds of space and planetary data, as can be seen [here](https://api.nasa.gov/).
 
 ## Sections:
 
@@ -45,6 +45,6 @@ The query being requested to Spacetrack's API is:
 
 Remember that using NASA WorldWind is not mandatory for you to participate in the **Orbital Scrap Metal SpaceApps challenge**. It is recommended that beginner teams create 2D games, or if you're familiar with a 3D game engine, you might prefer to use that instead with the real-world satellite data that you acquired.
 
-That being said, if your interests lie alongside virtual terrestrial globes, Geospatial Information Systems (GIS), mapping applications in general (for instance, like the applications that real satellite controllers use at NASA and other space agencies) here is the description of how the satellite TLE data is translated into terms of latitude, longitude and altitude.
+That being said, if your interests lie alongside virtual terrestrial globes, general mapping applications, and Geospatial Information Systems (for instance, like the applications that real satellite controllers use at NASA and other space agencies) here is the description of how the satellite TLE data is translated into terms of latitude, longitude and altitude.
 
 ### Additional resources

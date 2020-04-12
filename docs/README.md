@@ -103,13 +103,13 @@ The Slider at the bottom of the screen allows you to change the date and time to
 
 ***
 
-**Organization:** NASA Ames Research Center (PX)
+**Organization:** [NASA Ames Research Center (PX)](https://www.nasa.gov/ames)
 
-**Tutor:** Yann Voumard
+**Tutor:** [Yann Voumard](https://www.linkedin.com/in/yann-voumard/)
 
-**Authors:** Miguel Del Castillo, Bert Stewart, Julija Semenenko
+**Authors:** [Miguel Del Castillo](), [Bert Stewart](https://www.linkedin.com/in/bert-stewart-96a90873/), [Julija Semenenko](https://www.linkedin.com/in/julija-semenenko-2788a6b1/)
 
-**Developers:** Farah Salah, Enika Biswas, Nidhi Jain, Jenipher Gonzalez, Nancy Hernandez
+**Developers:** [Farah Salah](https://www.linkedin.com/in/farahsalah/), [Enika Biswas](https://www.linkedin.com/in/enika-b-529187126/), [Nidhi Jain](https://www.linkedin.com/in/nidhi-j-77600b101/), [Jenipher Gonzalez](https://www.linkedin.com/in/jenipher-gonz%C3%A1lez-bb897053/), [Nancy Hernandez](https://www.linkedin.com/in/nancy-hernandez-gonzalez/)
 
-**Acknowledgements:** Benjamin Chang, Gabriel Militão, Khaled Sharif
+**Acknowledgements:** [Benjamin Chang](https://www.linkedin.com/in/b-chang/), [Gabriel Militão](https://www.linkedin.com/in/gabriel-milit%C3%A3o-60a61656/), [Khaled Sharif](https://www.linkedin.com/in/khsharif/)
 
