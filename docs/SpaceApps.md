@@ -22,6 +22,7 @@ If you're familiarized with HTML and JavaScript, you're good to go to modify Spa
 * [JavaScript basics](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/JavaScript_basics)
 * [Getting Started with Web WorldWind](http://worldwind-start.surge.sh/)
 * [Code examples for Web WorldWind](https://worldwind.arc.nasa.gov/web/examples/)
+* [Interacting with WorldWind with the mouse](https://files.worldwind.arc.nasa.gov/artifactory/apps/web/examples/PlacemarksAndPicking.html)
 * [Git - the simple guide](https://rogerdudler.github.io/git-guide/)
 
 Parts of SpaceBirds may prove useful for you in order to understand how the orbiting objects' information is obtained and shown in an application in real time, and at the same time, it can teach you one thing or two about how satellites orbit the Earth and how can we know their current, past, and present position at any given time. If you want a challenge, you can attempt to *gamify* SpaceBirds itself to convert it into an orbital debris poaching videogame.
