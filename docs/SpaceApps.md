@@ -1,8 +1,14 @@
+## How to run
+* Download and install [NodeJS](https://nodejs.org/en/download/)
+* Open a command line and run `npm install http-server -g` to install a development web server
+* Open a command line in the root folder of this project and run:
+  `http-server -o http://127.0.0.1:8080/index.html`
+
 ## Hi SpaceApps participants!
 
 As part of the [SpaceApps](https://www.spaceappschallenge.org/) hackathon, SpaceBirds is given as a resource for the [Orbital Scrap Metal](https://2020.spaceappschallenge.org/challenges/sustain/orbital-scrap-metal-the-video-game-v20/details) challenge since 2019.
 
-[SpaceBirds](https://worldwind.arc.nasa.gov/spacebirds/) is a web application that displays all the objects tracked in Earth orbit in real time. It's based around the [NASA WorldWind 3D globe web library](https://worldwind.arc.nasa.gov/web) and the [Satellite.js](https://github.com/shashwatak/satellite-js) library.  It obtains the information of all the orbiting objects from a [public data source](https://www.space-track.org/) set up by the US government. If you want to see SpaceBirds source code, check [this point in the history](https://github.com/WorldWindLabs/SpaceBirds/tree/59b4790296e4c6c610145dd5f4119521012cf8d6) of the repository. In its current state, the repository contains a minimal satellite tracker to help you get you going with your project if you choose to leverage the geospatial power of NASA WorldWind. WorldWind is designed to be relatively easy to use, even for coders not too familiarized with web development. You can browse code examples for WorldWind [in here](https://worldwind.arc.nasa.gov/web/examples/).
+[SpaceBirds](https://worldwind.arc.nasa.gov/spacebirds/) is a web application that displays all the objects tracked in Earth orbit in real time. You can see a demo on its usage here. It's based around the [NASA WorldWind 3D globe web library](https://worldwind.arc.nasa.gov/web) and the [Satellite.js](https://github.com/shashwatak/satellite-js) library.  It obtains the information of all the orbiting objects from a [public data source](https://www.space-track.org/) set up by the US government. If you want to see SpaceBirds source code, check [this point in the history](https://github.com/WorldWindLabs/SpaceBirds/tree/59b4790296e4c6c610145dd5f4119521012cf8d6) of the repository. In its current state, the repository contains a minimal satellite tracker to help you get you going with your project if you choose to leverage the geospatial power of NASA WorldWind. WorldWind is designed to be relatively easy to use, even for coders not too familiarized with web development. You can browse code examples for WorldWind [in here](https://worldwind.arc.nasa.gov/web/examples/).
 
 If you're familiarized with HTML and JavaScript, you're good to go to modify SpaceBirds and use WorldWind. Being familiar with Git is not required, but it will help you to organize your coding and share the workload with your team members. Here are some good resources to get started:
 * [HTML Introduction](https://www.w3schools.com/html/html_intro.asp)
@@ -13,10 +19,12 @@ Parts of SpaceBirds may prove useful for you in order to understand how the orbi
 
 You can also learn what are the categories of orbiting objects, and how to define and distinguish **orbital debris** among them. The definition may not be as clear-cut as you initially thought!
 
-One of the requirements of the **Orbital Scrap Metal** challenge is to have real-world satellite information. You can find an up-to-date dataset of all on-orbit objects in the `satellite_data` folder, in three different file formats. This dataset is useful regardless of if you base your project on SpaceBirds or not. If you're tackling the Orbital Scrap Metal challenge using other tools (*e.g*. a 2D solution, Unity, *et cetera*), these datasets will prove useful for you.
+One of the requirements of the **Orbital Scrap Metal** challenge is to have real-world satellite information. You can find an up-to-date dataset of all on-orbit objects in the [`satellite_data` folder](/satellite_data/), in three different file formats. This dataset is useful regardless of if you base your project on SpaceBirds or not. If you're tackling the Orbital Scrap Metal challenge using other tools (*e.g*. a 2D solution, Unity, *et cetera*), these datasets will prove useful for you.
 
 ## Sections:
 
+
+- [How to run](#how-to-run)
 - [Hi SpaceApps participants!](#hi-spaceapps-participants)
 - [Sections:](#sections)
   - [Satellite data basics](#satellite-data-basics)
