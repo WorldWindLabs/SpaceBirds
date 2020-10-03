@@ -83,8 +83,8 @@ function getPosition(satrec, time) {
 // Two Line Element set to plot the orbit and current position of a satelite.
 // Note that we could be reading thousands of these from one
 // of the 'all_on-orbit_bodies' files in the data folder.
-var tle_line_1 = '1 39634U 14016A   15092.10425777 -.00000062  00000-0 -35354-5 0  9992'
-var tle_line_2 = '2 39634  98.1809 100.2577 0001271  80.6097 279.5256 14.59197994 52994'
+var tle_line_1 = '1 25544U 98067A   20277.45255787  .00002170  00000-0  47783-4 0  9994'
+var tle_line_2 = '2 25544  51.6442 172.7662 0001229  98.7431 246.4350 15.48827376248796'
 
 var satrec = satellite.twoline2satrec(tle_line_1, tle_line_2);
 
@@ -136,7 +136,7 @@ orbitLayer.addRenderable(futureOrbitPath);
 
 // Satellite
 var placemarkAttributes = new WorldWind.PlacemarkAttributes(null);
-placemarkAttributes.imageSource = "resources/icons/satellite.png";
+placemarkAttributes.imageSource = "resources/icons/space-station.png";
 placemarkAttributes.imageScale = 1;
 placemarkAttributes.imageOffset = new WorldWind.Offset(
     WorldWind.OFFSET_FRACTION, 0.5,
@@ -156,7 +156,7 @@ var placemark = new WorldWind.Placemark(currentPosition);
 updateLatitudeLongitudeAltitude(currentPosition);
 
 placemark.altitudeMode = WorldWind.RELATIVE_TO_GROUND;
-placemark.label = "Sentinel 1A";
+placemark.label = "ISS (Zarya)";
 placemark.attributes = placemarkAttributes;
 placemark.highlightAttributes = highlightPlacemarkAttributes;
 
@@ -255,7 +255,7 @@ function toggleRepresentation() {
 
 // Help
 function openHelp() {
-    alert("This tool shows the current location of Sentinel 1A and its ground stations. An orbit in the past (red) and one in the future (green) are also displayed.\n\nRepresentation: 3D or 2D\nFollow: On or Off. When on, the position is locked on the satellite, but zooming in and out is still possible.");
+    alert("This tool shows the current location of the ISS and some ground stations. An orbit in the past (red) and one in the future (green) are also displayed.\n\nRepresentation: 3D or 2D\nFollow: On or Off. When on, the position is locked on the satellite, but zooming in and out is still possible.");
 }
 
 // Convert degrees to text
