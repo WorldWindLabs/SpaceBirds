@@ -83,8 +83,9 @@ That being said, if your interests lie alongside virtual terrestrial globes, gen
 
 ### Additional resources
 
-3D models for the ISS and Sentinel-1A from ESA are included in the [resources folder](/resources/).
-A file with data on groundstations is included in the [data folder](/data/).
+WorldWind-compatible 3D models for the ISS and Sentinel-1A from ESA are included in the [resources folder](/resources/). A code example on how to display them can be seen [here](https://github.com/NASAWorldWind/WebWorldWind/blob/develop/examples/Collada.js), with its live example [here](https://github.com/NASAWorldWind/WebWorldWind/blob/develop/examples/Collada.js).
+
+A file with data on groundstations is included in the [data folder](/data/). The source of this file is [JSatTrack](https://github.com/sgano/JSatTrak/tree/svn/trunk/data/groundstations) from [Shawn Gano](https://github.com/sgano).
 
 ### Image references
 1. https://solarsystem.nasa.gov/basics/chapter5-1/
