@@ -37,11 +37,11 @@ In this case, we're focusing on artificial satellites that orbit the Earth. This
 
 One of the most recurring questions about SpaceBirds and other satellite tracker applications is "Does it obtain constant updates on where the satellites are located?"
 
-For a simple (but still pretty accurate!) satellite tracker like this one, we don't need the satellites themselves to constantly inform us of their current location. Since they move throughout space more or less unimpeded once they're launched, we can estimate their future (or past) locations if we have their location, heading and speed at a given time.
+For a simple (but still pretty accurate!) satellite tracker like this one, we don't need the satellites themselves to constantly inform us of their current location. Since they move throughout space more or less unimpeded once they're launched, and assuming that its orbit hasn't changed due to external influence (due to maneuvers from its operator, crash with debris, solar wind, *etc.*) we can estimate their future (or past) locations if we have their location, heading and speed at a given time.
 
 <p align="center">
 <img src="images/05-Geostationary Sat-Ani.gif" alt="Spacecraft in geostationary orbit"/>
-</p>[1]
+</p>
 
 To characterize the motion of an orbiting object, the six [Keplerian elements](https://solarsystem.nasa.gov/basics/chapter5-1/) are regularly used. For our purposes, these orbital elements describe the ellipse that the object follows while going around the Earth. If we then know the position of the object over that ellipse at any given time, we can know its past and future positions with a good degree of certainty if nothing is changing its speed or heading.
 
@@ -49,9 +49,9 @@ Back in the late 60s, NASA and NORAD came up with a computer-readable format to 
 
 <p align="center">
 <img src="images/2line.gif" alt="TLE fields explanation"/>
-</p>[2]
+</p>
 
-We can feed the TLE to a software function called a [propagator](https://en.wikipedia.org/wiki/Simplified_perturbations_models), which plots the orbit and estimates the position of the object at any given time. This estimation becomes less accurate the further we project it in time: The farthest in the past or in the future we estimate its position compared to the time of acquisition of the TLE, the less accurate the prediction becomes. For this reason, TLEs must be updated regularly in order to maintain our tracking within acceptable accuracy.
+We can feed the TLE to a software function called a [propagator](https://en.wikipedia.org/wiki/Simplified_perturbations_models), which plots the orbit and estimates the position of the object at any given time. This estimation becomes less accurate the further we project it in time: The farthest in the past or in the future we estimate its position compared to the time of acquisition of the TLE, the less accurate the prediction becomes. Additionally, TLEs don't account for deliberate or accidental orbital changes. For these reasons, TLEs must be updated regularly in order to maintain our tracking within acceptable accuracy.
 
 The [Satellite.js](https://github.com/shashwatak/satellite-js) library contains functions that propagate the orbit given a TLE. Given any date, they also return the position of a satellite in terms of latitude, longitude, and altitude. Since any geospatial visualization library operates around geographic coordinates, we can finally feed this information into something like [NASA WorldWind](https://worldwind.arc.nasa.gov/).
 
