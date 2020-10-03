@@ -18,11 +18,11 @@ var bmngLayer = new WorldWind.BMNGLayer();
 var atmosphereLayer = new WorldWind.AtmosphereLayer();
 var starfieldLayer = new WorldWind.StarFieldLayer();
 
-// Ground Stations Layer
+// Deep Space Network ground stations Layer
 var groundStations = [
-    {name: 'Matera, Italy', latitude: 40.65, longitude: 16.7},
-    {name: 'Svalbard, Norway', latitude: 78.2306, longitude: 15.3894},
-    {name: 'Maspalomas, Spain', latitude: 27.7629, longitude: -15.6338},
+    {name: 'Goldstone, USA', latitude: 35.1603, longitude: -116.8736},
+    {name: 'Canberra, Australia', latitude: -35.2236, longitude: 148.9831},
+    {name: 'Madrid, Spain', latitude: 40.2403, longitude: -4.2514},
 ];
 
 var placemarkAttributes = new WorldWind.PlacemarkAttributes(null);
