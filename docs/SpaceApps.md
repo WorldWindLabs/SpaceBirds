@@ -1,7 +1,6 @@
 - [Hi SpaceApps participants!](#hi-spaceapps-participants)
   - [Satellite orbital data basics](#satellite-orbital-data-basics)
   - [Data retrieval](#data-retrieval)
-  - [Rendering the orbital objects in WorldWind](#rendering-the-orbital-objects-in-worldwind)
   - [Additional resources](#additional-resources)
   - [Image references](#image-references)
 
@@ -80,12 +79,6 @@ https://www.space-track.org/basicspacedata/query/class/gp/decay_date/null-val/ep
 https://www.space-track.org/basicspacedata/query/class/gp/decay_date/null-val/epoch/%3Enow-30/orderby/norad_cat_id/format/3le
 
 As mentioned previously, you can find a copy of the data of those queries in the [data folder](/data/). As of **October 2nd 2020**, this comprises **19,824 on-orbit objects** with a radar cross-section (RCS) equal or above 5 cm; between payloads (operational and derelict), spent rocket stages, general space debris, and objects still waiting for classification.
-
-### Rendering the orbital objects in WorldWind
-
-That being said, if your interests lie alongside virtual terrestrial globes, general mapping applications, and Geospatial Information Systems (for instance, like the applications that real satellite controllers use at NASA and other space agencies) here is the description of how the satellite TLE data is translated into terms of latitude, longitude and altitude.
-
-*to be completed...*
 
 ### Additional resources
 
