@@ -67,6 +67,12 @@ The query being requested to Space-track's API is:
 
 https://www.space-track.org/basicspacedata/query/class/gp/decay_date/null-val/epoch/%3Enow-30/orderby/norad_cat_id/format/json
 
+According to Space-track's documentation:
+
+>  Is an efficient listing of the newest SGP4 keplerian element set for each man-made earth-orbiting object tracked by the 18th Space Control Squadron. It is designed to accommodate the expanded satellite catalog’s 9-digit identifiers.
+
+[More information can be found here.](https://www.space-track.org/documentation#/api)
+
 Remember to log into Space-track first to obtain the results of these queries. The same dataset can be retrieved with different formats, changing the last field. Give it a try:
 
 https://www.space-track.org/basicspacedata/query/class/gp/decay_date/null-val/epoch/%3Enow-30/orderby/norad_cat_id/format/csv
@@ -83,7 +89,7 @@ That being said, if your interests lie alongside virtual terrestrial globes, gen
 
 ### Additional resources
 
-WorldWind-compatible 3D models for the ISS and Sentinel-1A from ESA are included in the [resources folder](/resources/). A code example on how to display them can be seen [here](https://github.com/NASAWorldWind/WebWorldWind/blob/develop/examples/Collada.js), with its live example [here](https://github.com/NASAWorldWind/WebWorldWind/blob/develop/examples/Collada.js).
+WorldWind-compatible 3D models for the ISS and Sentinel-1A from ESA are included in the [resources folder](/resources/). A code example on how to display them can be seen [here](https://github.com/NASAWorldWind/WebWorldWind/blob/develop/examples/Collada.js), with its live example [here](https://files.worldwind.arc.nasa.gov/artifactory/apps/web/examples/Collada.html).
 
 A file with data on groundstations is included in the [data folder](/data/). The source of this file is [JSatTrack](https://github.com/sgano/JSatTrak/tree/svn/trunk/data/groundstations) from [Shawn Gano](https://github.com/sgano).
 

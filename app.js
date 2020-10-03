@@ -1,5 +1,5 @@
-// This is a minimal satellite tracker web app built around Web WorldWind and Satellite.js
-// based around Yann Voumard's work: https://github.com/AkeluX
+// This is a minimal satellite tracker web app built around Web WorldWind and Satellite.js,
+// and based on Yann Voumard's work: https://github.com/AkeluX
 
 // Update latitude, longitude and altitude in the DOM
 var latitudePlaceholder = document.getElementById('latitude');
@@ -112,6 +112,7 @@ pathAttributes.outlineColor = WorldWind.Color.RED;
 pathAttributes.interiorColor = new WorldWind.Color(1, 0, 0, 0.5);
 
 var pastOrbitPath = new WorldWind.Path(pastOrbit);
+pastOrbitPath.useSurfaceShapeFor2D = true;
 pastOrbitPath.altitudeMode = WorldWind.RELATIVE_TO_GROUND;
 pastOrbitPath.attributes = pathAttributes;
 
@@ -120,6 +121,7 @@ pathAttributes.outlineColor = WorldWind.Color.GREEN;
 pathAttributes.interiorColor = new WorldWind.Color(0, 1, 0, 0.5);
 
 var futureOrbitPath = new WorldWind.Path(futureOrbit);
+futureOrbitPath.useSurfaceShapeFor2D = true;
 futureOrbitPath.altitudeMode = WorldWind.RELATIVE_TO_GROUND;
 futureOrbitPath.attributes = pathAttributes;
 
@@ -138,7 +140,7 @@ placemarkAttributes.imageOffset = new WorldWind.Offset(
 placemarkAttributes.imageColor = WorldWind.Color.WHITE;
 placemarkAttributes.labelAttributes.offset = new WorldWind.Offset(
     WorldWind.OFFSET_FRACTION, 0.5,
-    WorldWind.OFFSET_FRACTION, 1.0);
+    WorldWind.OFFSET_FRACTION, 1.5);
 placemarkAttributes.labelAttributes.color = WorldWind.Color.WHITE;
 
 var highlightPlacemarkAttributes = new WorldWind.PlacemarkAttributes(placemarkAttributes);
@@ -167,7 +169,7 @@ wwd.addLayer(groundStationsLayer);
 wwd.addLayer(orbitLayer);
 wwd.addLayer(satelliteLayer);
 
-//Responsive altitude on devices
+// Responsive altitude for mobile devices
 if (screen.width > 900 ) {
   wwd.navigator.range = 4e7;
 } else {
@@ -185,7 +187,7 @@ map.projection = new WorldWind.ProjectionEquirectangular();
 wwd.navigator.lookAtLocation = new WorldWind.Location(currentPosition.latitude,
                                                       currentPosition.longitude);
 
-// Draw
+// Refresh WorldWindow to reflect changes so far
 wwd.redraw();
 
 // Update Satellite Position
