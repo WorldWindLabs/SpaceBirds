@@ -41,15 +41,15 @@ var groundStationsLayer = new WorldWind.RenderableLayer("Ground Stations");
 
 for(var i = 0, len = groundStations.length; i < len; i++) {
     var groundStation = groundStations[i];
-    
+
     var placemark = new WorldWind.Placemark(new WorldWind.Position(groundStation.latitude,
                                                                    groundStation.longitude,
                                                                    1e3));
-    
+
     placemark.altitudeMode = WorldWind.RELATIVE_TO_GROUND;
     placemark.label = groundStation.name;
     placemark.attributes = placemarkAttributes;
-    
+
     groundStationsLayer.addRenderable(placemark);
 }
 
@@ -57,26 +57,26 @@ for(var i = 0, len = groundStations.length; i < len; i++) {
 
 function getPosition(satrec, time) {
     var position_and_velocity = satellite.propagate(satrec,
-                                                    time.getUTCFullYear(), 
+                                                    time.getUTCFullYear(),
                                                     time.getUTCMonth() + 1,
                                                     time.getUTCDate(),
-                                                    time.getUTCHours(), 
-                                                    time.getUTCMinutes(), 
+                                                    time.getUTCHours(),
+                                                    time.getUTCMinutes(),
                                                     time.getUTCSeconds());
     var position_eci = position_and_velocity["position"];
-    
-    var gmst = satellite.gstime (time.getUTCFullYear(), 
+
+    var gmst = satellite.gstime (time.getUTCFullYear(),
                                            time.getUTCMonth() + 1,
                                            time.getUTCDate(),
-                                           time.getUTCHours(), 
-                                           time.getUTCMinutes(), 
+                                           time.getUTCHours(),
+                                           time.getUTCMinutes(),
                                            time.getUTCSeconds());
-    
+
     var position_gd = satellite.eciToGeodetic (position_eci, gmst);
     var latitude    = satellite.degreesLat(position_gd["latitude"]);
     var longitude   = satellite.degreesLong(position_gd["longitude"]);
     var altitude    = position_gd["height"] * 1000;
-    
+
     return new WorldWind.Position(latitude, longitude, altitude);
 }
 
@@ -90,9 +90,9 @@ var futureOrbit = [];
 var currentPosition = null;
 for(var i = -98; i <= 98; i++) {
     var time = new Date(now.getTime() + i*60000);
-    
+
     var position = getPosition(satrec, time)
-    
+
     if(i < 0) {
         pastOrbit.push(position);
     } else if(i > 0) {
@@ -148,12 +148,12 @@ var satelliteLayer = new WorldWind.RenderableLayer("Satellite");
 
 var placemark = new WorldWind.Placemark(currentPosition);
 updateLatitudeLongitudeAltitude(currentPosition);
-    
+
 placemark.altitudeMode = WorldWind.RELATIVE_TO_GROUND;
 placemark.label = "Sentinel 1A";
 placemark.attributes = placemarkAttributes;
 placemark.highlightAttributes = highlightPlacemarkAttributes;
-    
+
 satelliteLayer.addRenderable(placemark);
 
 // Update WorldWindow
@@ -166,6 +166,13 @@ wwd.addLayer(starfieldLayer);
 wwd.addLayer(groundStationsLayer);
 wwd.addLayer(orbitLayer);
 wwd.addLayer(satelliteLayer);
+
+//Responsive altitude on devices
+if (screen.width > 900 ) {
+  wwd.navigator.range = 4e7;
+} else {
+  wwd.navigator.range = 1e7;
+}
 
 // Globe
 var globe = wwd.globe;
@@ -188,13 +195,13 @@ window.setInterval(function() {
     currentPosition.latitude = position.latitude;
     currentPosition.longitude = position.longitude;
     currentPosition.altitude = position.altitude;
-    
+
     updateLatitudeLongitudeAltitude(currentPosition);
 
     if(follow) {
         toCurrentPosition();
     }
-    
+
     wwd.redraw();
 }, 5000);
 
@@ -236,7 +243,7 @@ function toggleRepresentation() {
         wwd.globe = map;
         representationPlaceholder.textContent = '2D';
     }
-    
+
     wwd.redraw();
 }
 
@@ -253,20 +260,20 @@ function degreesToText(deg, letters) {
     } else {
         letter = letters[0]
     }
-    
+
     var position = Math.abs(deg);
-    
+
     var degrees = Math.floor(position);
-    
+
     position -= degrees;
     position *= 60;
-    
+
     var minutes = Math.floor(position);
-    
+
     position -= minutes;
     position *= 60;
-    
+
     var seconds = Math.floor(position * 100) / 100;
-    
+
     return degrees + "° " + minutes + "' " + seconds + "\" " + letter;
 }
