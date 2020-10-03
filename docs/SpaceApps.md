@@ -12,10 +12,12 @@ Since one of the requirements of the **Orbital Scrap Metal** challenge is to hav
 
 ## Sections:
 
-* [Satellite data basics](#satellite-data-basics)
-* [Data retrieval](#data-retrieval)
-* [Rendering the orbital objects in WorldWind](#rendering-the-orbital-objects-in-worldwind)
-* [Additional resources](#additional-resources)
+- [Hi SpaceApps participants!](#hi-spaceapps-participants)
+- [Sections:](#sections)
+  - [Satellite data basics](#satellite-data-basics)
+  - [Data retrieval](#data-retrieval)
+  - [Rendering the orbital objects in WorldWind](#rendering-the-orbital-objects-in-worldwind)
+  - [Additional resources](#additional-resources)
 
 ### Satellite data basics
 
