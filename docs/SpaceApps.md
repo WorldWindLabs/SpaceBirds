@@ -52,9 +52,9 @@ For a simple (but still pretty accurate!) satellite tracker like this one, we do
 
 To characterize the motion of an orbiting object, the six [Keplerian elements](https://solarsystem.nasa.gov/basics/chapter5-1/) are regularly used. For our purposes, these orbital elements describe the ellipse that the object follows while going around the Earth. If we then know the position of the object over that ellipse at any given time, we can know its past and future positions with a good degree of certainty if nothing is changing its speed or heading.
 
-Back in the late 60s, NASA and NORAD came up with a computer-readable format to encode the orbital parameters of any Earth-orbiting object: [The Two Line Element set](https://en.wikipedia.org/wiki/Two-line_element_set) (or TLE). For our purposes it is not needed for you to understand everything about it, but here is is an explanation of the information contained in a TLE:
+Back in the late 60s, NASA and NORAD came up with a computer-readable format to encode the orbital parameters of any Earth-orbiting object: [The Two Line Element set](https://en.wikipedia.org/wiki/Two-line_element_set) (or TLE). For our purposes it is not needed to understand everything about it, but here is is an explanation of the information contained in a TLE:
 
-![TLE fields](./images/2line.gif)
+![TLE fields](./images/2line.gif#center)
 
 *to be updated...*
 
