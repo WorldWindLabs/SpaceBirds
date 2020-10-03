@@ -1,41 +1,18 @@
-// (c) Copyright 2015 Yann Voumard. All Rights Reserved.
+// This is a minimal satellite tracker web app built around Web WorldWind and Satellite.js
+// based around Yann Voumard's work: https://github.com/AkeluX
 
+// Update latitude, longitude and altitude in the DOM
 var latitudePlaceholder = document.getElementById('latitude');
 var longitudePlaceholder = document.getElementById('longitude');
 var altitudePlaceholder = document.getElementById('altitude');
 
-function deg2text(deg, letters) {
-    var letter;
-    if(deg < 0) {
-        letter = letters[1]
-    } else {
-        letter = letters[0]
-    }
-    
-    var position = Math.abs(deg);
-    
-    var degrees = Math.floor(position);
-    
-    position -= degrees;
-    position *= 60;
-    
-    var minutes = Math.floor(position);
-    
-    position -= minutes;
-    position *= 60;
-    
-    var seconds = Math.floor(position * 100) / 100;
-    
-    return degrees + "° " + minutes + "' " + seconds + "\" " + letter;
-}
-
-function updateLLA(position) {
-    latitudePlaceholder.textContent = deg2text(position.latitude, 'NS');
-    longitudePlaceholder.textContent = deg2text(position.longitude, 'EW');
+function updateLatitudeLongitudeAltitude(position) {
+    latitudePlaceholder.textContent = degreesToText(position.latitude, 'NS');
+    longitudePlaceholder.textContent = degreesToText(position.longitude, 'EW');
     altitudePlaceholder.textContent = (Math.round(position.altitude / 10) / 100) + "km";
 }
 
-// Base Layers
+// WorldWind's base Layers
 var bmngOneImageLayer = new WorldWind.BMNGOneImageLayer();
 var bmngLayer = new WorldWind.BMNGLayer();
 var atmosphereLayer = new WorldWind.AtmosphereLayer();
@@ -170,7 +147,7 @@ highlightPlacemarkAttributes.imageScale = 1.2;
 var satelliteLayer = new WorldWind.RenderableLayer("Satellite");
 
 var placemark = new WorldWind.Placemark(currentPosition);
-updateLLA(currentPosition);
+updateLatitudeLongitudeAltitude(currentPosition);
     
 placemark.altitudeMode = WorldWind.RELATIVE_TO_GROUND;
 placemark.label = "Sentinel 1A";
@@ -179,7 +156,7 @@ placemark.highlightAttributes = highlightPlacemarkAttributes;
     
 satelliteLayer.addRenderable(placemark);
 
-// WWD
+// Update WorldWindow
 var wwd = new WorldWind.WorldWindow("wwd");
 wwd.drawContext.clearColor = WorldWind.Color.colorFromBytes(0,0,0,0);
 wwd.addLayer(bmngOneImageLayer);
@@ -212,7 +189,7 @@ window.setInterval(function() {
     currentPosition.longitude = position.longitude;
     currentPosition.altitude = position.altitude;
     
-    updateLLA(currentPosition);
+    updateLatitudeLongitudeAltitude(currentPosition);
 
     if(follow) {
         toCurrentPosition();
@@ -266,4 +243,30 @@ function toggleRepresentation() {
 // Help
 function openHelp() {
     alert("This tool shows the current location of Sentinel 1A and its ground stations. An orbit in the past (red) and one in the future (green) are also displayed.\n\nRepresentation: 3D or 2D\nFollow: On or Off. When on, the position is locked on the satellite, but zooming in and out is still possible.");
+}
+
+// Convert degrees to text
+function degreesToText(deg, letters) {
+    var letter;
+    if(deg < 0) {
+        letter = letters[1]
+    } else {
+        letter = letters[0]
+    }
+    
+    var position = Math.abs(deg);
+    
+    var degrees = Math.floor(position);
+    
+    position -= degrees;
+    position *= 60;
+    
+    var minutes = Math.floor(position);
+    
+    position -= minutes;
+    position *= 60;
+    
+    var seconds = Math.floor(position * 100) / 100;
+    
+    return degrees + "° " + minutes + "' " + seconds + "\" " + letter;
 }
