@@ -1,52 +1,30 @@
 <!DOCTYPE html>
-<html>
-    <head lang="en">
-        <meta charset="UTF-8">
-        <title>Simple Sentinel-1A Tracker</title>
-        <style type="text/css">
-        body {
-            margin: 0;
-            font-family: Arial;
-            color: #FFF;
-            background: #000;
-        }
-        h1 {
-            margin-top: .5em;
-            margin-bottom: 0;
-            text-align: center;
-        }
-        p {
-            margin-top: 0;
-            margin-bottom: .5em;
-            text-align: center;
-            font-size: .8em;
-            color: #FFF;
-        }
-        a {
-            color: lightblue;
-        }
-        a:hover {
-            text-decoration: none;
-        }
-        canvas {
-            margin: .5em 0;
-        }
-        </style>
-    </head>
-    <body>
-        <div style="width: 700px; margin: 0 auto;">
-            <header>
-                    <h1>Simple Sentinel-1A Tracker</h1>
-                    <p>Latitude: <span id="latitude"></span> | Longitude: <span id="longitude"></span> | Altitude: <span id="altitude"></span></p>
-                    <p><a href="javascript:openHelp();">Help</a> | Representation: <a href="javascript:toggleRepresentation();" id="representation">3D</a> | Follow: <a href="javascript:toggleFollow();" id="follow">Off</a></p>
-            </header>
-            <canvas id="wwd" height="500" width="700">
-                Your browser does not support HTML5 Canvas.
-            </canvas>
-            <footer><p>Built with <a href="https://worldwind.arc.nasa.gov/web/">Web WorldWind</a>, <a href="https://github.com/shashwatak/satellite-js">Satellite JS</a> and icons made by <a href="http://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a>.</p></footer>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    <title>Simple Sentinel-1A Tracker</title>
+    <link href="style.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximun-scale=1.0, minimun-scale=1.0">
+  </head>
+  <body>
+    <div class="container">
+      <header style="z-index:1 !important;">
+        <div class="ghost-box">
+          <h1>Simple Sentinel-1A Tracker</h1>
+          <p>Latitude: <span id="latitude"></span> | Longitude: <span id="longitude"></span> | Altitude: <span id="altitude"></span></p>
+          <p><a href="javascript:openHelp();">Help</a> | Representation: <a href="javascript:toggleRepresentation();" id="representation">3D</a> | Follow: <a href="javascript:toggleFollow();" id="follow">Off</a></p>
         </div>
-        <script src="libraries/worldwind.js"></script>
-        <script src="libraries/satellite.js"></script>
-        <script src="app.js"></script>
-    </body>
+      </header>
+      <canvas id="wwd" class="balloon align-self-center">
+              Your browser does not support HTML5 Canvas.
+      </canvas>
+      <footer>
+          <p class="ghost-box">Built with <a href="https://worldwind.arc.nasa.gov/web/">Web WorldWind</a>, <a href="https://github.com/shashwatak/satellite-js">Satellite JS</a> and icons made by <a href="http://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a>.</p>
+      </footer>
+    </div>
+    <script src="libraries/worldwind.js"></script>
+    <script src="libraries/satellite.js"></script>
+    <script src="app.js"></script>
+
+  </body>
 </html>
