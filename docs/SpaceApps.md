@@ -14,12 +14,14 @@ As part of the [SpaceApps](https://www.spaceappschallenge.org/) hackathon, Space
 
 Remember that using SpaceBirds or NASA WorldWind is not mandatory for you to participate in the **Orbital Scrap Metal challenge**. It is recommended that beginner teams create 2D games, or if you're familiar with a 3D game engine, you might prefer to use that instead. Try to stick with the tools and languages that you're familiar with.
 
-In its current state, this repository contains a minimal satellite tracker to help you get you going with your project if you choose to leverage the geospatial power of NASA WorldWind. WorldWind is designed to be relatively easy to use, even for coders not too familiarized with web development. You can browse code examples for WorldWind [in here](https://worldwind.arc.nasa.gov/web/examples/).
+In its current state, this repository contains a minimal satellite tracker to help you get you going with your project if you choose to leverage the geospatial power of NASA WorldWind. WorldWind is designed to be relatively easy to use, even for coders not too familiarized with web development.
 
 If you're familiarized with HTML and JavaScript, you're good to go to modify SpaceBirds and use WorldWind. Being familiar with [Git](https://git-scm.com/) is not required, but it will help you to organize your coding and share the workload with your team members. Here are some good resources to get you started:
 
 * [HTML Introduction](https://www.w3schools.com/html/html_intro.asp)
 * [JavaScript basics](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/JavaScript_basics)
+* [Getting Started with Web WorldWind](http://worldwind-start.surge.sh/)
+* [Code examples for Web WorldWind](https://worldwind.arc.nasa.gov/web/examples/)
 * [Git - the simple guide](https://rogerdudler.github.io/git-guide/)
 
 Parts of SpaceBirds may prove useful for you in order to understand how the orbiting objects' information is obtained and shown in an application in real time, and at the same time, it can teach you one thing or two about how satellites orbit the Earth and how can we know their current, past, and present position at any given time. If you want a challenge, you can attempt to *gamify* SpaceBirds itself to convert it into an orbital debris poaching videogame.
