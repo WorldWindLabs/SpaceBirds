@@ -1,5 +1,3 @@
-## Sections:
-- [Sections:](#sections)
 - [How to run](#how-to-run)
 - [Hi SpaceApps participants!](#hi-spaceapps-participants)
 - [How this project works](#how-this-project-works)
@@ -20,6 +18,8 @@
 
 As part of the [SpaceApps](https://www.spaceappschallenge.org/) hackathon, SpaceBirds is given as a resource for the [Orbital Scrap Metal](https://2020.spaceappschallenge.org/challenges/sustain/orbital-scrap-metal-the-video-game-v20/details) challenge since 2019.
 
+**One of the requirements of the Orbital Scrap Metal challenge is to have real-world satellite information.** You can find an up-to-date dataset of all on-orbit objects in the [data folder](/data/), in three different file formats. These datasets may prove useful for you regardless of your software tools of choice.
+
 [SpaceBirds](https://worldwind.arc.nasa.gov/spacebirds/) is a web application that displays all the objects tracked in Earth orbit in real time. You can see a demo on its usage here. It's based around the [NASA WorldWind 3D globe web library](https://worldwind.arc.nasa.gov/web) and the [Satellite.js](https://github.com/shashwatak/satellite-js) library.  It obtains the information of all the orbiting objects from a [public data source](https://www.space-track.org/) set up by the US government. If you want to see SpaceBirds source code, check [this point in the history](https://github.com/WorldWindLabs/SpaceBirds/tree/59b4790296e4c6c610145dd5f4119521012cf8d6) of the repository. 
 
 Remember that using NASA WorldWind is not mandatory for you to participate in the **Orbital Scrap Metal challenge**. It is recommended that beginner teams create 2D games, or if you're familiar with a 3D game engine, you might prefer to use that instead with the real-world satellite data that you acquired. Try to stick with the tools and languages that you're familiar with.
@@ -36,8 +36,6 @@ Parts of SpaceBirds may prove useful for you in order to understand how the orbi
 
 You can also learn what are the categories of orbiting objects, and how to define and distinguish **orbital debris** among them. The definition may not be as clear-cut as you initially thought!
 
-**One of the requirements of the Orbital Scrap Metal challenge is to have real-world satellite information.** You can find an up-to-date dataset of all on-orbit objects in the [data folder](/data/), in three different file formats. This dataset is useful regardless of if you base your project on SpaceBirds or not. These datasets may prove useful for you regardless of your software tools of choice.
-
 ## How this project works
 
 ### Satellite orbital data basics
@@ -52,11 +50,11 @@ One of the most recurring questions about SpaceBirds and other satellite tracker
 
 For a simple (but still pretty accurate!) satellite tracker like this one, we don't need the satellites themselves to constantly inform us of their current location. Since they move throughout space more or less unimpeded once they're launched, we can estimate their future (or past) locations if we have their location, heading and speed at a given time.
 
-
-
 To characterize the motion of an orbiting object, the six [Keplerian elements](https://solarsystem.nasa.gov/basics/chapter5-1/) are regularly used. For our purposes, these orbital elements describe the ellipse that the object follows while going around the Earth. If we then know the position of the object over that ellipse at any given time, we can know its past and future positions with a good degree of certainty if nothing is changing its speed or heading.
 
-Back in the late 60s, NASA and NORAD came up with a computer-readable format to encode the orbital parameters of any Earth-orbiting object: [The Two Line Element set](https://en.wikipedia.org/wiki/Two-line_element_set) (or TLE). For our purposes it is not needed for you to understand everything about it, but here is is an explanation of the information contained in a TLE.
+Back in the late 60s, NASA and NORAD came up with a computer-readable format to encode the orbital parameters of any Earth-orbiting object: [The Two Line Element set](https://en.wikipedia.org/wiki/Two-line_element_set) (or TLE). For our purposes it is not needed for you to understand everything about it, but here is is an explanation of the information contained in a TLE:
+
+![TLE fields](./images/2line.gif)
 
 *to be updated...*
 
