@@ -133,8 +133,8 @@ var placemarkAttributes = new WorldWind.PlacemarkAttributes(null);
 placemarkAttributes.imageSource = "resources/icons/satellite.png";
 placemarkAttributes.imageScale = 1;
 placemarkAttributes.imageOffset = new WorldWind.Offset(
-    WorldWind.OFFSET_FRACTION, 0.3,
-    WorldWind.OFFSET_FRACTION, 0.0);
+    WorldWind.OFFSET_FRACTION, 0.5,
+    WorldWind.OFFSET_FRACTION, 0.5);
 placemarkAttributes.imageColor = WorldWind.Color.WHITE;
 placemarkAttributes.labelAttributes.offset = new WorldWind.Offset(
     WorldWind.OFFSET_FRACTION, 0.5,
