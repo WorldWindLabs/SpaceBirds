@@ -80,8 +80,12 @@ function getPosition(satrec, time) {
     return new WorldWind.Position(latitude, longitude, altitude);
 }
 
+// Two Line Element set to plot the orbit and current position of a satelite.
+// Note that we could be reading thousands of these from one
+// of the 'all_on-orbit_bodies' files in the data folder.
 var tle_line_1 = '1 39634U 14016A   15092.10425777 -.00000062  00000-0 -35354-5 0  9992'
 var tle_line_2 = '2 39634  98.1809 100.2577 0001271  80.6097 279.5256 14.59197994 52994'
+
 var satrec = satellite.twoline2satrec(tle_line_1, tle_line_2);
 
 var now = new Date();
