@@ -173,6 +173,10 @@ wwd.addLayer(groundStationsLayer);
 wwd.addLayer(orbitLayer);
 wwd.addLayer(satelliteLayer);
 
+// Assign current date and time to these layers to enable Earth's night-side effects.
+starfieldLayer.time = now;
+atmosphereLayer.time = now;
+
 // Responsive altitude for mobile devices
 if (screen.width > 900 ) {
   wwd.navigator.range = 4e7;
