@@ -167,7 +167,7 @@ var wwd = new WorldWind.WorldWindow("wwd");
 wwd.drawContext.clearColor = WorldWind.Color.colorFromBytes(0,0,0,0);
 wwd.addLayer(bmngOneImageLayer);
 wwd.addLayer(bmngLayer);
-wwd.addLayer(atmosphereLayer);
+// wwd.addLayer(atmosphereLayer);
 wwd.addLayer(starfieldLayer);
 wwd.addLayer(groundStationsLayer);
 wwd.addLayer(orbitLayer);
