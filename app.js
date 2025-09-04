@@ -20,9 +20,9 @@ var starfieldLayer = new WorldWind.StarFieldLayer();
 
 // Deep Space Network ground stations Layer
 var groundStations = [
-    {name: 'Goldstone, USA', latitude: 35.1603, longitude: -116.8736},
-    {name: 'Canberra, Australia', latitude: -35.2236, longitude: 148.9831},
-    {name: 'Madrid, Spain', latitude: 40.2403, longitude: -4.2514},
+    {name: 'Lunar groundstation Alpha', latitude: 35.1603, longitude: -116.8736},
+    {name: 'Lunar groundstation Bravo', latitude: -35.2236, longitude: 148.9831},
+    {name: 'Lunar groundstation Charlie', latitude: 40.2403, longitude: -4.2514},
 ];
 
 var placemarkAttributes = new WorldWind.PlacemarkAttributes(null);
@@ -156,7 +156,7 @@ var placemark = new WorldWind.Placemark(currentPosition);
 updateLatitudeLongitudeAltitude(currentPosition);
 
 placemark.altitudeMode = WorldWind.RELATIVE_TO_GROUND;
-placemark.label = "ISS (Zarya)";
+placemark.label = "Lunar Gateway";
 placemark.attributes = placemarkAttributes;
 placemark.highlightAttributes = highlightPlacemarkAttributes;
 
@@ -183,6 +183,136 @@ if (screen.width > 900 ) {
 } else {
   wwd.navigator.range = 1e7;
 }
+
+// Call this after you create the WorldWindow, e.g. after:
+//   var wwd = new WorldWind.WorldWindow("canvasOne");
+async function useMoonWmsAsBase(wwd, {
+  service = "https://planetarymaps.usgs.gov/cgi-bin/mapserv?map=/maps/earth/moon_simp_cyl.map",
+  layerName = "LROC_WAC",           // you can also try "LRO_WAC_GLOBAL" on some mirrors
+  version = "1.3.0",
+  title = "Moon (LROC WAC, USGS)"
+} = {}) {
+  // 1) Try to retrieve WMS capabilities and construct the layer the "WebWW way".
+  try {
+    const caps = await WorldWind.WmsLayerCapabilities.retrieve(service);
+    const named = caps.getNamedLayer(layerName);
+    if (!named) {
+      console.warn(`WMS layer "${layerName}" not found in capabilities; falling back to manual config.`);
+      throw new Error("Missing named layer");
+    }
+
+    // Build a config object from the capabilities and tweak a few things.
+    const cfg = WorldWind.WmsLayer.formLayerConfiguration(named);
+    cfg.title = title;
+    cfg.version = version;
+    // Ensure full coverage & sane tile pyramid on a simple cyl dataset.
+    cfg.sector = WorldWind.Sector.FULL_SPHERE;
+    cfg.levelZeroDelta = new WorldWind.Location(36, 36);
+    cfg.numLevels = Math.max(cfg.numLevels || 8, 8);
+    cfg.size = 256;
+    cfg.coordinateSystem = cfg.coordinateSystem || "EPSG:4326";
+    cfg.transparent = false;  // opaque basemap
+
+    const moonLayer = new WorldWind.WmsLayer(cfg);
+    moonLayer.enabled = true;
+
+    // 2) Disable the usual terrestrial basemaps so the Moon imagery is visible.
+    for (const L of wwd.layers) {
+      // Typical stock base imagery layers to hide:
+      if (
+        L instanceof WorldWind.BMNGLayer ||
+        L instanceof WorldWind.BMNGLandsatLayer ||
+        L.displayName?.toLowerCase().includes("bing") ||
+        L.displayName?.toLowerCase().includes("blue marble") ||
+        L.displayName?.toLowerCase().includes("landsat")
+      ) {
+        L.enabled = false;
+      }
+    }
+
+    // 3) Add the lunar WMS imagery as the new base.
+    wwd.addLayer(moonLayer);
+
+    // 4) Redraw.
+    wwd.redraw();
+    console.log("Moon WMS basemap enabled:", title);
+    return;
+  } catch (e) {
+    // If capabilities fetch fails (network/CORS), do a manual WMS layer.
+    console.warn("Falling back to manual WMS layer:", e);
+
+    const manualCfg = {
+      title,
+      service,
+      layerNames: layerName,
+      version,
+      sector: WorldWind.Sector.FULL_SPHERE,
+      levelZeroDelta: new WorldWind.Location(36, 36),
+      numLevels: 8,
+      size: 256,
+      imageFormat: "image/png",
+      coordinateSystem: "EPSG:4326",
+      transparent: false
+    };
+
+    // WmsLayer also accepts a plain config object:
+    const moonLayer = new WorldWind.WmsLayer(manualCfg);
+    moonLayer.enabled = true;
+
+    for (const L of wwd.layers) {
+      if (
+        L instanceof WorldWind.BMNGLayer ||
+        L instanceof WorldWind.BMNGLandsatLayer ||
+        L.displayName?.toLowerCase().includes("bing") ||
+        L.displayName?.toLowerCase().includes("blue marble") ||
+        L.displayName?.toLowerCase().includes("landsat")
+      ) {
+        L.enabled = false;
+      }
+    }
+
+    wwd.addLayer(moonLayer);
+    wwd.redraw();
+  }
+}
+
+// Example usage (after your WorldWindow is constructed):
+// var wwd = new WorldWind.WorldWindow("canvasOne");
+// ... your existing code ...
+useMoonWmsAsBase(wwd, {
+  service: "https://planetarymaps.usgs.gov/cgi-bin/mapserv?map=/maps/earth/moon_simp_cyl.map",
+  layerName: "LROC_WAC",
+  version: "1.3.0",
+  title: "Moon (LROC WAC, USGS)"
+});
+
+function switchEllipsoidToEarth(wwd) {
+  const g = wwd.globe;
+  if (!g) return;
+  g.equatorialRadius = 6378137.0;     // WGS-84 a
+  g.polarRadius = 6356752.3142;       // WGS-84 b
+  const f = 1.0 / 298.257223563;      // WGS-84 flattening
+  g.eccentricitySquared = (2 * f) - (f * f);
+
+  // Restore a normal elevation model if you want:
+  // g.elevationModel = new WorldWind.EarthElevationModel(); // if available in your build
+
+  if (wwd.navigator) {
+    const nav = wwd.navigator;
+    if (typeof nav.range === "number") {
+      nav.range = 3.0 * g.equatorialRadius;
+      nav.minRange = 10.0;
+      nav.maxRange = 20.0 * g.equatorialRadius;
+    }
+    if (typeof nav.altitude === "number") {
+      nav.altitude = 2.0e6;
+      nav.minAltitude = 10.0;
+      nav.maxAltitude = 2.0e7;
+    }
+  }
+  wwd.redraw();
+}
+
 
 // Globe
 var globe = wwd.globe;
